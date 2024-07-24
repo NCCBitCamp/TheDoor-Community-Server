@@ -14,9 +14,9 @@
     <div class="content">
         <div class="title_area">어떤 것이 궁금하신가요?</div>
         <div class="image-container">
-            <a href="helpFaQ_purchase.jsp"><img src="${pageContext.request.contextPath}/static/images/help/gyul_new.png" class="image_button" alt="Gyul Image"></a>
-            <a href="helpFaQ_account.jsp"><img src="${pageContext.request.contextPath}/static/images/help/gye_new.png" class="image_button" alt="Gye Image"></a>
-            <a href="helpFaQ_etc.jsp"><img src="${pageContext.request.contextPath}/static/images/help/etc_new.png" class="image_button" alt="Etc Image"></a>
+            <a href="/board/help-faq-purchase.do"><img src="${pageContext.request.contextPath}/static/images/help/gyul_new.png" class="image_button" alt="Gyul Image"></a>
+            <a href="/board/help-faq-account.do"><img src="${pageContext.request.contextPath}/static/images/help/gye_new.png" class="image_button" alt="Gye Image"></a>
+            <a href="/board/help-faq-etc.do"><img src="${pageContext.request.contextPath}/static/images/help/etc_new.png" class="image_button" alt="Etc Image"></a>
         </div>
         <div class="semi_title" style="text-align: center;">
             <p>저희 더 도어즈 팀은 여러분들의 궁금증을 풀어드리기 위하여</p>

@@ -20,10 +20,10 @@
 
         <div id="selectArea">
             <ul>
-                <li><a href="myPageInfo.html">개인정보</a></li>
-                <li><a href="myPageRank.html">My 랭킹</a></li>
-                <li><a href="myPagePost.html">내가 쓴 글</a></li>
-                <li><a href="myPageAlert.html">알림</a></li>
+                <li><a href="/myPage/info.do">개인정보</a></li>
+                <li><a href="/myPage/rank.do">My 랭킹</a></li>
+                <li><a href="/myPage/post.do">내가 쓴 글</a></li>
+                <li><a href="/myPage/alert.do">알림</a></li>
             </ul>
         </div>
 
