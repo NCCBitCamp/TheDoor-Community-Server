@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/guide.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>

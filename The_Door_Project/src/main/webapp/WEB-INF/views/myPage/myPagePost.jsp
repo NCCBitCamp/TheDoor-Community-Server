@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPagePost.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPagePost.css">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -20,10 +20,10 @@
 
         <div id="selectArea">
             <ul>
-                <li><a href="myPageInfo.html">개인정보</a></li>
-                <li><a href="myPageRank.html">My 랭킹</a></li>
-                <li><a href="myPagePost.html">내가 쓴 글</a></li>
-                <li><a href="myPageAlert.html">알림</a></li>
+                <li><a href="/myPage/info.do">개인정보</a></li>
+                <li><a href="/myPage/rank.do">My 랭킹</a></li>
+                <li><a href="/myPage/post.do">내가 쓴 글</a></li>
+                <li><a href="/myPage/alert.do">알림</a></li>
             </ul>
         </div>
 

@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/newsDetail.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/news/newsDetail.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -19,7 +20,7 @@
                 공지사항 내용이 여기에 들어갑니다.
             </div>
             <div class="btn-container">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='newsModify.jsp'">수정하기</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/news-modify.do'">수정하기</button>
             </div>
         </main>
     </div>
