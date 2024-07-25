@@ -4,11 +4,13 @@ import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class FreeBoardDao {
     private SqlSessionTemplate mybatis;
 
