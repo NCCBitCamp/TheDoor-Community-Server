@@ -5,8 +5,6 @@ public class PageDto {
     private int startPage;
     // 표출되는 끝 페이지 번호
     private int endPage;
-    // 이전, 다음 버튼 표출 여부
-    private boolean prev, next;
     // 총 게시글의 갯수
     private int total;
     // Creteria 객체
@@ -31,10 +29,6 @@ public class PageDto {
             this.endPage = realEndPage;
         }
         
-        // 이전, 다음 버튼 표출 여부
-        this.prev = this.cri.getPageNum() > 1;
-        this.next = this.cri.getPageNum() < this.endPage;
-        
     }
 
     public int getStartPage() {
@@ -51,22 +45,6 @@ public class PageDto {
 
     public void setEndPage(int endPage) {
         this.endPage = endPage;
-    }
-
-    public boolean isPrev() {
-        return prev;
-    }
-
-    public void setPrev(boolean prev) {
-        this.prev = prev;
-    }
-
-    public boolean isNext() {
-        return next;
-    }
-
-    public void setNext(boolean next) {
-        this.next = next;
     }
 
     public int getTotal() {
@@ -90,8 +68,6 @@ public class PageDto {
         return "PageDto{" +
                 "startPage=" + startPage +
                 ", endPage=" + endPage +
-                ", prev=" + prev +
-                ", next=" + next +
                 ", total=" + total +
                 ", cri=" + cri +
                 '}';
