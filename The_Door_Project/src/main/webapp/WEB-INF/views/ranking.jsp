@@ -17,8 +17,8 @@
         </div>
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead>
-                <tr>
+                <thead class="thead">
+                <tr class="text-center">
                     <th style="width: 5%;">등수</th>
                     <th style="width: 15%;">아이디</th>
                     <th style="width: 60%;">남긴 메시지</th>
