@@ -52,69 +52,6 @@
                     <td>2022.01.01</td>
                     <td>100</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="title"><a href="communityDetailhtml">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
                 </tbody>
             </table>
             <br>
