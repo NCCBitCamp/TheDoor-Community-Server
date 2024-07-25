@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RankDao">
+    <select id="getRankList" parameterType="cri" resultType="rank">
+        SELECT U.NICKNAME
+             , R.COMMENT
+             , R.DATE
+             , R.TIME
+            FROM RANKING R
+            JOIN USER U
+              ON R.RANK_ID = U.USER_ID
+        ORDER BY R.TIME ASC
+        LIMIT #{amount} OFFSET #{startNum}
+    </select>
+
+    <select id="getRankTotalCnt" resultType="int">
+        SELECT COUNT(*)
+            FROM RANKING R
+            JOIN USER U
+              ON R.RANK_ID = U.USER_ID
+    </select>
+</mapper>
