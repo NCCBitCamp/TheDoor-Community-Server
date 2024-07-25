@@ -3,90 +3,22 @@ package com.bit.springboard.dto;
 import java.time.LocalDateTime;
 
 public class BoardDto {
-    private String type = "free";
-    private int id;
-    private String title;
-    private String content;
-    private int WRITER_ID;
-    private String nickname;
-    private LocalDateTime date;
-    private int cnt;
+    private int board_id; // 게시판 아이디
+    private String title; // 게시글 제목
+    private String content; // 게시글 내용
+    private int WRITER_ID; // 회원 아이디
+    private LocalDateTime date; // 게시글 작성일
+    private int cnt; // 게시글 조회수
 
-    public int getId() {
-        return id;
-    }
+//****************************************************** + 파일 관련
+    private int file_id; // 파일 아이디
+    private String filename; // 파일 이름
+    private String fileoriginname; // 파일 명
+    private String filepath; // 파일 경로
+    private String filetype; // 파일 타입
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+//****************************************************** + 질문 FaQ 게시판
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getWRITER_ID() {
-        return WRITER_ID;
-    }
-
-    public void setWRITER_ID(int WRITER_ID) {
-        this.WRITER_ID = WRITER_ID;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public int getCnt() {
-        return cnt;
-    }
-
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "BoardDto{" +
-                "type='" + type + '\'' +
-                ", id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", WRITER_ID=" + WRITER_ID +
-                ", nickname='" + nickname + '\'' +
-                ", date=" + date +
-                ", cnt=" + cnt +
-                '}';
-    }
 }
