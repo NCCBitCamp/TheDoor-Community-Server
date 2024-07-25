@@ -1,17 +1,19 @@
 package com.bit.springboard.dto;
 
+import java.time.LocalDateTime;
+
 // DTO(Data Transfer Object): 데이터를 전송하는 객체
 //                            화면에서 넘어오는 데이터를 받아서 DB 까지 전달하거나
 //                            컨트롤러에서 화면으로 데이터를 전송할 때 사용하는 객체
 //                            VO(Value Object)랑 쓰임새가 비슷하다.
 public class MemberDto {
-    private int id;
-    private String username;
-    private String password;
-    private String nickname;
-    private String email;
-    private String tel;
-    private String role;
+    private int id; // 회원아이디
+    private String username; // 아이디
+    private String password; // 회원 비밀번호
+    private String nickname; // 닉네임
+    private String email; // 이메일
+    private LocalDateTime birth; // 생년월일
+    private String role; // 어드민 인지아닌지
 
     public int getId() {
         return id;
@@ -53,12 +55,12 @@ public class MemberDto {
         this.email = email;
     }
 
-    public String getTel() {
-        return tel;
+    public LocalDateTime getBirth() {
+        return birth;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setBirth(LocalDateTime birth) {
+        this.birth = birth;
     }
 
     public String getRole() {
@@ -77,7 +79,7 @@ public class MemberDto {
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
-                ", tel='" + tel + '\'' +
+                ", birth=" + birth +
                 ", role='" + role + '\'' +
                 '}';
     }
