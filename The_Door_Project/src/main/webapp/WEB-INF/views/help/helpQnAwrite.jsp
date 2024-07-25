@@ -50,7 +50,7 @@
             </div>
             <div class="form-buttons">
                 <button type="submit">작성완료</button>
-                <a href="helpQnA.jsp"><button type="button" onclick="window.history.back();">작성취소</button></a>
+                <a href="/board/help-qna.do"><button type="button" onclick="window.history.back();">작성취소</button></a>
             </div>
         </div>
     </div>

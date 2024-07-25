@@ -31,19 +31,19 @@
         </div>
 
         <div class="container-fluid">
-            <a href="WEB-INF/views/news/news.jsp" class="button">
+            <a href="/board/news-list.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/noticeBtn.png" alt="Image 1">
                 <div class="overlay"></div>
             </a>
-            <a href="WEB-INF/views/community/community.jsp" class="button">
+            <a href="/board/free-list.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/communityBtn.png" alt="Image 2">
                 <div class="overlay"></div>
             </a>
-            <a href="WEB-INF/views/help/help.jsp" class="button">
+            <a href="/board/help-main.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/helpBtn.png" alt="Image 3">
                 <div class="overlay"></div>
             </a>
-            <a href="WEB-INF/views/myPage/mypageInfo.jsp" class="button">
+            <a href="/myPage/info.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/myPageBtn.png" alt="Image 4">
                 <div class="overlay"></div>
             </a>

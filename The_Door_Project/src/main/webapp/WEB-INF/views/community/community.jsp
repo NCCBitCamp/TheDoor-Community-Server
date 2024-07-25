@@ -47,7 +47,7 @@
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
+                    <td class="title"><a href="/board/free-detail.do">게시물 제목</a></td>
                     <td>작성자</td>
                     <td>2022.01.01</td>
                     <td>100</td>
@@ -83,7 +83,7 @@
                     </ul>
                 </nav>
                 <div class="post-container">
-                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='communityWrite.html'">글 등록</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/free-write.do'">글 등록</button>
                 </div>
             </div>
         </div>

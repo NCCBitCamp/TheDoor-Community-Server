@@ -93,7 +93,7 @@
             </ul>
         </div>
         <div class="write-post-button">
-            <a href="helpQnAwrite.jsp"><button>글쓰기</button></a>
+            <a href="/board/help-qna-write.do"><button>글쓰기</button></a>
         </div>
         <div class="pagination">
             <a href="#">&laquo;</a>

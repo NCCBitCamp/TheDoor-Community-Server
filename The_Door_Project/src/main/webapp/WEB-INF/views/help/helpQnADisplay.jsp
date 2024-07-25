@@ -55,7 +55,7 @@
                 <p id="attachment" style="margin-top: 10px;"><a href="#">첨부파일 예시</a></p>
             </div>
             <div class="post-buttons">
-                <a href="helpQnA.jsp"><button type="button" onclick="window.history.back();">뒤로가기</button></a>
+                <a href="/board/help-qna.do"><button type="button" onclick="window.history.back();">뒤로가기</button></a>
             </div>
         </div>
     </div>
