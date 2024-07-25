@@ -54,8 +54,12 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="post-container">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/free-write.do'">글 등록</button>
+            </div>
             <br>
             <div>
+
                 <!-- 페이지네이션 -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
@@ -82,9 +86,6 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="post-container">
-                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/free-write.do'">글 등록</button>
-                </div>
             </div>
         </div>
         <div class="footer">
