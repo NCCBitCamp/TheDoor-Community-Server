@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/ranking.css">
@@ -17,8 +18,8 @@
         </div>
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead>
-                <tr>
+                <thead class="thead">
+                <tr class="text-center">
                     <th style="width: 5%;">등수</th>
                     <th style="width: 15%;">아이디</th>
                     <th style="width: 60%;">남긴 메시지</th>
@@ -107,16 +108,13 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                <li class="page-item"><a class="page-link" href="#">7</a></li>
-                <li class="page-item"><a class="page-link" href="#">8</a></li>
-                <li class="page-item"><a class="page-link" href="#">9</a></li>
-                <li class="page-item"><a class="page-link" href="#">10</a></li>
+                <c:forEach begin="${page.startPage}"
+                           end="${page.endPage}"
+                           var="number">
+                    <li class="page-item">
+                        <a class="page-link link-secondary" href="${number}">${number}</a>
+                    </li>
+                </c:forEach>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
