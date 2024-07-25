@@ -24,12 +24,12 @@ public class BoardController {
         this.applicationContext = applicationContext;
     }
 
-    @RequestMapping("free-list.do")
+    @RequestMapping("/free-list.do")
     public String freeListView() {
         return "community/community";
     }
 
-    @RequestMapping("news-list.do")
+    @RequestMapping("/news-list.do")
     public String noticeListView() {
         return "news/news";
     }
