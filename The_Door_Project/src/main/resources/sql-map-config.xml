@@ -13,10 +13,14 @@
                    alias="rank"/>
         <typeAlias type="com.bit.springboard.dto.Criteria"
                    alias="cri"/>
+        <typeAlias type="com.bit.springboard.dto.MemberDto"
+                   alias="member"/>
     </typeAliases>
 
     <!--사용할 Sql Mapper 등록-->
     <mappers>
         <mapper resource="mappings/ranking-mapper.xml"/>
+        <mapper resource="mappings/member-mapper.xml"/>
+
     </mappers>
 </configuration>
