@@ -34,67 +34,67 @@ public class BoardController {
         return "news/news";
     }
 
-    @GetMapping("free-detail.do")
+    @GetMapping("/free-detail.do")
     public String freeDetailView() {
         return "community/communityDetail";
     }
 
-    @GetMapping("news-detail.do")
+    @GetMapping("/news-detail.do")
     public String newsDetailView() {
         return "news/newsDetail";
     }
 
-    @GetMapping("free-write.do")
+    @GetMapping("/free-write.do")
     public String freeWriteView() {
         return "community/communityWrite";
     }
 
-    @GetMapping("news-write.do")
+    @GetMapping("/news-write.do")
     public String newsWriteView() {
         return "news/newsWrite";
     }
 
-    @GetMapping("free-modify.do")
+    @GetMapping("/free-modify.do")
     public String freeModifyView() {
         return "community/communityModify";
     }
 
-    @GetMapping("news-modify.do")
+    @GetMapping("/news-modify.do")
     public String newsModifyView() {
         return "news/newsModify";
     }
 
-    @RequestMapping("help-main.do")
+    @RequestMapping("/help-main.do")
     public String helpMainView() {
         return "help/help";
     }
 
-    @RequestMapping("help-faq.do")
+    @RequestMapping("/help-faq.do")
     public String helpFaQView() {
         return "help/helpFaQ";
     }
 
-    @RequestMapping("help-qna.do")
+    @RequestMapping("/help-qna.do")
     public String helpQnAView() {
         return "help/helpQnA";
     }
 
-    @RequestMapping("help-faq-purchase.do")
+    @RequestMapping("/help-faq-purchase.do")
     public String helpFaQPurchaseView() {
         return "help/helpFaQ_purchase";
     }
 
-    @RequestMapping("help-faq-account.do")
+    @RequestMapping("/help-faq-account.do")
     public String helpFaQAccountView() {
         return "help/helpFaQ_account";
     }
 
-    @RequestMapping("help-faq-etc.do")
+    @RequestMapping("/help-faq-etc.do")
     public String helpFaQEtcView() {
         return "help/helpFaQ_etc";
     }
 
-    @RequestMapping("help-qna-write.do")
+    @RequestMapping("/help-qna-write.do")
     public String helpQnAWriteView() {
         return "help/helpQnAWrite";
     }
