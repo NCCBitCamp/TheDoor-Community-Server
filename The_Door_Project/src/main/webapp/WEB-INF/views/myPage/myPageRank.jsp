@@ -10,7 +10,7 @@
         <div><img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg"></div>
 
         <div id="profileArea">
-            <img src="${pageContext.request.contextPath}/static/images/profileImg.png" class="profileImg">
+            <img src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg">
             <p class="emphaFont">닉네임123</p>
         </div>
 
