@@ -10,7 +10,7 @@
     </select>
 
     <select id="login" parameterType="member" resultType="member">
-        SELECT USER_ID, PASSWORD
+        SELECT *
         FROM USER
         WHERE USER_ID = #{user_id}
           AND PASSWORD = #{password}

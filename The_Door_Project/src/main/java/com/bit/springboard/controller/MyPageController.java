@@ -10,11 +10,10 @@ public class MyPageController {
     public String myPageInfoView() {
         return "myPage/myPageInfo";
     }
+  
+    @RequestMapping("rank.do")
+    public String myPageRankView() { return "myPage/myPageRank"; }
 
-    @RequestMapping("/rank.do")
-    public String myPageRankView() {
-        return "myPage/myPageRank";
-    }
 
     @RequestMapping("/post.do")
     public String myPagePostView() {
