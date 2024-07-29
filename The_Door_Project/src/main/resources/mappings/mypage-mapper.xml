@@ -8,7 +8,7 @@
     <select id="myInfo" parameterType="string" resultType="member">
         SELECT USER_ID, USERNAME, EMAIL, NICKNAME, BIRTH
         FROM USER
-        WHERE NICKNAME = #{nickname}
+        WHERE USER_ID = #{user_id}
     </select>
 
 <!--    내 정보 변경-->
