@@ -70,10 +70,8 @@ $(() => {
             type: "post",
             data: $("#join-form").serialize(),
             success: (map) => {
-                console.log(map);
 
                 if (map.nicknameCheckNum === 0) {
-                    console.log("nicknameCheckNum-true");
                     nicknameCheck = true;
                     nicknameDiv.style.border = '0px';
                     nicknameInput.classList.remove('errorPlaceholder');
@@ -98,11 +96,6 @@ $(() => {
 
     $("#join-form").on("submit", (e) => {
         if (!idCheck || !nicknameCheck || !passwordCheck || !usernameCheck) {
-            alert("ㄴㄴ");
-            console.log(idCheck);
-            console.log(nicknameCheck);
-            console.log("passwordCheck = " + passwordCheck);
-            console.log(usernameCheck);
             e.preventDefault();
             return;
         }
@@ -147,12 +140,12 @@ const birthdayPattern = /^(19[0-9][0-9]|20[0-9][0-9])(0[1-9]|1[0-2])(0[1-9]|[12]
 
 // input태그
 const idInput = document.getElementById('user_id');
-const pw1Input = document.getElementById('pw1');
+const pw1Input = document.getElementById('password');
 const pw2Input = document.getElementById('pw2');
 const nicknameInput = document.getElementById('nickname');
 const emailInput = document.getElementById('email');
-const nameInput = document.getElementById('name');
-const birthdayInput = document.getElementById('birthday');
+const nameInput = document.getElementById('username');
+const birthdayInput = document.getElementById('birth');
 
 // div박스
 const idDiv = document.getElementById('divId');
@@ -172,7 +165,6 @@ const liMsg2 = document.getElementById('liMsg2');
 // ---------- //
 idInput.addEventListener('focus', idClick);
 
-// 클릭 :: 포커스
 function idClick() {
     idDiv.style.border = '2px solid #ddd';
     idInput.style.color = '#fff';
@@ -298,7 +290,6 @@ function pw2Check() {
         pw2Input.classList.remove('errorPlaceholder');
         pw2Input.style.color = '#fff';
         passwordCheck = true;
-        console.log("passwordCheck-true");
     }
 }
 
@@ -306,7 +297,6 @@ function pw2Check() {
 // 닉네임 메소드 //
 // ---------- //
 nicknameInput.addEventListener('focus', nicknameClick);
-// nicknameInput.addEventListener('blur', nicknameBlur);
 
 function nicknameClick() {
     nicknameDiv.style.border = '2px solid #ddd';
@@ -315,33 +305,6 @@ function nicknameClick() {
     nicknameInput.placeholder = '닉네임';
     liMsg2.textContent = '사용할 수 없는 닉네임입니다.';
 }
-
-// function nicknameBlur() {
-//     const inputValue = this.value;
-//
-//     if (nicknamePattern.test(nicknameInput.value)) {
-//         nicknameDiv.style.border = '0px';
-//         nicknameInput.classList.remove('errorPlaceholder');
-//         nicknameInput.style.color = '#fff';
-//         divMsg2.style.visibility = 'hidden';
-//         nicknameCheck = true;
-//
-//         // 닉네임 중복일 때
-//     } else if (!nicknameCheck) {
-//         divMsg2.style.visibility = 'visible';
-//         nicknameInput.style.color = '#fbc70e';
-//         nicknameDiv.style.border = '2px solid #fbc70e';
-//         nicknameInput.placeholder = '닉네임은 필수 정보입니다.';
-//         nicknameInput.classList.add('errorPlaceholder');
-//         nicknameCheck = false;
-//     } else {
-//         nicknameDiv.style.border = '2px solid #fbc70e';
-//         nicknameInput.style.color = '#fbc70e';
-//         nicknameInput.placeholder = '닉네임은 필수 정보입니다.';
-//         nicknameInput.classList.add('errorPlaceholder');
-//         nicknameCheck = false;
-//     }
-// }
 
 // ---------- //
 // 이메일 메소드 //
@@ -388,7 +351,6 @@ function nameBlur() {
         nameInput.classList.remove('errorPlaceholder');
         nameInput.style.color = '#fff';
         usernameCheck = true;
-        console.log("usernameCheck-true");
 
 
     } else {

@@ -25,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Map<String, Integer> userIdCheck(String userId) {
         int userIdCheck = memberDao.userIdCheck(userId);
-        System.out.println(userIdCheck);
 
         Map<String, Integer> forJsonMap = new HashMap<>();
 
@@ -37,7 +36,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Map<String, Integer> nicknameCheck(String nickname) {
         int nicknameCheck = memberDao.nicknameCheck(nickname);
-        System.out.println("nicknameCheck = " + nicknameCheck);
 
         Map<String, Integer> forJsonMap = new HashMap<>();
 
@@ -48,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void join(MemberDto memberDto) {
-
+        memberDao.join(memberDto);
     }
 
 

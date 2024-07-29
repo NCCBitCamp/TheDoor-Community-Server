@@ -28,4 +28,19 @@
         WHERE USER_ID = #{user_id}
     </select>
 
+    <insert id="join" parameterType="member">
+        INSERT INTO USER(USER_ID,
+                         PASSWORD,
+                         NICKNAME,
+                         EMAIL,
+                         USERNAME,
+                         BIRTH)
+        VALUES (#{user_id},
+                #{password},
+                #{nickname},
+                #{email},
+                #{username},
+                #{birth})
+    </insert>
+
 </mapper>

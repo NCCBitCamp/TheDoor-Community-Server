@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Member;
+
 @Repository
 public class MemberDao {
     private SqlSessionTemplate sqlSessionTemplate;
@@ -31,4 +33,9 @@ public class MemberDao {
     public int nicknameCheck(String nickname) {
         return sqlSessionTemplate.selectOne("MemberDaoMapper.nicknameCheck", nickname); // <= 오른쪽 매개변수가 mapper.xml #{변수명}과 일치해야한다.
     }
+
+    public void join(MemberDto memberDto) {
+        sqlSessionTemplate.insert("MemberDaoMapper.join", memberDto);
+    }
+
 }

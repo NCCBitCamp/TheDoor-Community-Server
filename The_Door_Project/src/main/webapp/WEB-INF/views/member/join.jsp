@@ -7,7 +7,7 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <div class="content">
     <div class="form-list">
-        <form id="join-form" action="/member/joinComplete.do" method="post">
+        <form id="join-form" action="/member/join.do" method="post">
             <!-- 아이디 -->
             <div class="divError" id="divId">
                 <input type="text" id="user_id" name="user_id" placeholder="아이디" class="input" maxlength="20"
@@ -17,7 +17,7 @@
 
             <!-- 비밀번호 -->
             <div class="divError" id="divPw1">
-                <input type="password" id="pw1" name="pw1" placeholder="비밀번호" class="input" maxlength="16"
+                <input type="password" id="password" name="password" placeholder="비밀번호" class="input" maxlength="16"
                        autocomplete="new-password" aria-autocomplete="list" autocomplete='off'>
                 <div id="eyeBtn">　</div>
             </div>
@@ -42,13 +42,13 @@
 
             <!-- 이름 -->
             <div class="divError" id="divUsername">
-                <input type="text" id="name" name="name" placeholder="이름" class="input" maxlength="20"
+                <input type="text" id="username" name="username" placeholder="이름" class="input" maxlength="20"
                        autocomplete='off'>
             </div>
 
             <!-- 생년월일 -->
             <div class="divError" id="divBirthday">
-                <input type="text" id="birthday" name="birthday" placeholder="생년월일 8자리" class="input" maxlength="10"
+                <input type="text" id="birth" name="birth" placeholder="생년월일 8자리" class="input" maxlength="10"
                        autocomplete='off'>
             </div>
 
