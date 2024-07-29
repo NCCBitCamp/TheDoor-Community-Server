@@ -31,4 +31,19 @@ public class RankServiceImpl implements RankService {
     public int getRankTotalCnt() {
         return rankDao.getRankTotalCnt();
     }
+
+    @Override
+    public RankDto getMyTopRanktheHostel(RankDto rankDto) {
+        return rankDao.getMyTopRanktheHostel(rankDto);
+    }
+
+    @Override
+    public RankDto getMyTopRankbitCamp(RankDto rankDto) {
+        return rankDao.getMyTopRankbitCamp(rankDto);
+    }
+
+    @Override
+    public RankDto getMyTopRankrozerStone(RankDto rankDto) {
+        return rankDao.getMyTopRankrozerStone(rankDto);
+    }
 }
