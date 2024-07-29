@@ -19,4 +19,9 @@ public class MyPageDao {
         return mybatis.selectOne("MyPageDao.myInfo",userId);
     }
 
+    public void modifyInfo(MemberDto memberDto){
+
+        mybatis.update("MyPageDao.modifyInfo",memberDto);
+        System.out.println("modifyInfo 완료");
+    }
 }
