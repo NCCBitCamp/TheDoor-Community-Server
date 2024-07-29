@@ -15,7 +15,7 @@ public class MyPageDao {
 
     public MemberDto myInfo(String userId){
 
-        return mybatis.selectOne("myPageDao.myInfo",userId);
+        return mybatis.selectOne("MyPageDao.myInfo",userId);
     }
 
 }

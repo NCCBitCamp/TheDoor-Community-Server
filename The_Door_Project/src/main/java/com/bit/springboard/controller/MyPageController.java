@@ -23,8 +23,9 @@ public class MyPageController {
     }
 
     @RequestMapping("/info.do")
-    public String myPageInfoView(@ModelAttribute("personalInfo") MemberDto memberDto, HttpSession session) {
+    public String myPageInfoView(MemberDto memberDto, HttpSession session, Model model) {
         MemberDto personalInfo = mypageService.getInfo(memberDto);
+        model.addAttribute("personalInfo", personalInfo);
 
 
         return "myPage/myPageInfo";
