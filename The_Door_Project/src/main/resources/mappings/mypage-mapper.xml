@@ -6,7 +6,7 @@
 
 <!--    기존 정보 호출-->
     <select id="myInfo" parameterType="string" resultType="member">
-        SELECT USER_ID, USERNAME, EMAIL, NICKNAME, BIRTH
+        SELECT USER_ID, USERNAME, EMAIL, NICKNAME, BIRTH as BIRTHDAY, ID,PASSWORD,ROLE
         FROM USER
         WHERE USER_ID = #{user_id}
     </select>

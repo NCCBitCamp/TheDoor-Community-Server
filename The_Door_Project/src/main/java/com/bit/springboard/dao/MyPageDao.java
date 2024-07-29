@@ -14,6 +14,7 @@ public class MyPageDao {
     public MyPageDao(SqlSessionTemplate sqlSessionTemplate){this.mybatis = sqlSessionTemplate;}
 
     public MemberDto myInfo(String userId){
+        System.out.println("MyPageDao myInfo:");
 
         return mybatis.selectOne("MyPageDao.myInfo",userId);
     }
