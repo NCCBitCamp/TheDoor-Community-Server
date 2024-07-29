@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageInfo.css">
@@ -13,7 +14,7 @@
             <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
             <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
               
-            <p class="emphaFont">닉네임123</p>
+            <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
         
         <div id="selectArea">
@@ -70,8 +71,8 @@
                         </div>
                         <div>
                             <label for="newPWCK">비밀번호 재입력</label><br>
-                            <p></p>
                             <input id="newPWCK" type="text">
+                            <p id="passwordConfirm"></p>
                         </div>
                         <div>
                             <label for="userEmail">이메일</label><br>
@@ -97,18 +98,24 @@
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 
 <script>
-    $(() => {
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const newPW = document.getElementById("newPW");
+        const pwRetry = document.getElementById("newPWCK");
+        const passwordConfirm = document.getElementById("passwordConfirm");
 
-        // 비밀번호 일치 시키기
-        let passwordConfirm = false;
+        function checkPasswordMatch() {
+            if (newPW.value === pwRetry.value) {
+                passwordConfirm.textContent = "비밀번호가 일치합니다.";
+                passwordConfirm.style.color = "green";
+            } else {
+                passwordConfirm.textContent = "비밀번호가 일치하지 않습니다.";
+                passwordConfirm.style.color = "red";
+            }
+        }
 
-
-        let newPW = document.getElementById("newPW");
-        let pwRetry = document.getElementById("newPWCK");
-
-
-
-    })
+        newPW.addEventListener('input', checkPasswordMatch);
+        pwRetry.addEventListener('input', checkPasswordMatch);
+    });
 
 
 </script>
