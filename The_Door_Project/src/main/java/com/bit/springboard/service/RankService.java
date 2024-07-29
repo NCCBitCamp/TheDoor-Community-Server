@@ -10,4 +10,9 @@ public interface RankService {
     List<RankDto> getRankList(Criteria cri);
 
     int getRankTotalCnt();
+
+    RankDto getMyTopRanktheHostel(RankDto rankDto);
+    RankDto getMyTopRankbitCamp(RankDto rankDto);
+    RankDto getMyTopRankrozerStone(RankDto rankDto);
+
 }
