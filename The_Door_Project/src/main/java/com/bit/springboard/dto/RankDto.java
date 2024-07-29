@@ -10,6 +10,7 @@ public class RankDto {
     private String gametype; // 기록 게임
     private String comment; // 한마디
     private String nickname;
+    private int rank;
 
 //****************************************************** + 인게임 랭크
     private String username; // 닉네임
@@ -76,6 +77,14 @@ public class RankDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override

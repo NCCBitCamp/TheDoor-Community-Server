@@ -21,4 +21,43 @@
             JOIN USER U
               ON R.RANK_ID = U.USER_ID
     </select>
+
+    <select id="getMyTopRanktheHostel" resultType="rank">
+        SELECT U.NICKNAME,
+               R.COMMENT,
+               R.DATE,
+               R.TIME,
+               ROW_NUMBER() OVER (ORDER BY R.TIME ASC) as `rank`
+        FROM RANKING R
+                 JOIN USER U ON R.RANK_ID = U.USER_ID
+        WHERE R.GAME = 'theHostel'
+        ORDER BY R.TIME ASC
+            LIMIT 1
+    </select>
+
+    <select id="getMyTopRankbitCamp" resultType="rank">
+        SELECT U.NICKNAME,
+               R.COMMENT,
+               R.DATE,
+               R.TIME,
+               ROW_NUMBER() OVER (ORDER BY R.TIME ASC) as `rank`
+        FROM RANKING R
+                 JOIN USER U ON R.RANK_ID = U.USER_ID
+        WHERE R.GAME = 'bitCamp'
+        ORDER BY R.TIME ASC
+            LIMIT 1
+    </select>
+
+    <select id="getMyTopRankrozerStone" resultType="rank">
+        SELECT U.NICKNAME,
+               R.COMMENT,
+               R.DATE,
+               R.TIME,
+               ROW_NUMBER() OVER (ORDER BY R.TIME ASC) as `rank`
+        FROM RANKING R
+                 JOIN USER U ON R.RANK_ID = U.USER_ID
+        WHERE R.GAME = 'rozerStone'
+        ORDER BY R.TIME ASC
+            LIMIT 1
+    </select>
 </mapper>

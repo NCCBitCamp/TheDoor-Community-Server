@@ -43,10 +43,17 @@ public class MemberController {
 
             loginMember.setPassword("");
             session.setAttribute("loginMember", loginMember);
-            return "/myPage/myPageInfo";
+            return "redirect:/";
         } catch (Exception e) {
             model.addAttribute("loginFailMsg", e.getMessage());
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/logout.do")
+    public String logout(HttpSession session) {
+        session.invalidate();
+
+        return "redirect:/member/login.do";
     }
 }

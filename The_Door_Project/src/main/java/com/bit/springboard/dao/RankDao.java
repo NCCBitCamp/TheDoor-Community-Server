@@ -30,4 +30,16 @@ public class RankDao {
     public int getRankTotalCnt() {
         return mybatis.selectOne("RankDao.getRankTotalCnt");
     }
+
+    public RankDto getMyTopRanktheHostel(RankDto rankDto) {
+        return mybatis.selectOne("RankDao.getMyTopRanktheHostel", rankDto);
+    }
+
+    public RankDto getMyTopRankbitCamp(RankDto rankDto) {
+        return mybatis.selectOne("RankDao.getMyTopRankbitCamp", rankDto);
+    }
+
+    public RankDto getMyTopRankrozerStone(RankDto rankDto) {
+        return mybatis.selectOne("RankDao.getMyTopRankrozerStone", rankDto);
+    }
 }
