@@ -31,6 +31,10 @@ public class MyPageController {
     public String myPageInfoView(HttpSession session, Model model) {
         MemberDto memberDto = (MemberDto)session.getAttribute("loginMember");
         
+        if(loginMember == null) {
+            return "redirect:/member/login.do";
+        }
+
         MemberDto personalInfo = mypageService.getInfo(memberDto);
         model.addAttribute("personalInfo", personalInfo);
 
@@ -38,11 +42,25 @@ public class MyPageController {
     }
 
     @RequestMapping("/altMyInfo.do")
-    public String myPageInfoAlt(){return "myPage/myPageInfo";}
+    public String myPageInfoAlt(HttpSession session){
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        if(loginMember == null) {
+            return "redirect:/member/login.do";
+        }
+
+        return "myPage/myPageInfo";
+    }
 
   
     @RequestMapping("rank.do")
-    public String myPageRankView(Model model, RankDto rankDto) {
+    public String myPageRankView(Model model, RankDto rankDto, HttpSession session) {
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        if(loginMember == null) {
+            return "redirect:/member/login.do";
+        }
+
         model.addAttribute("myTopRanktheHostel", rankService.getMyTopRanktheHostel(rankDto));
         model.addAttribute("myTopRankbitCamp", rankService.getMyTopRankbitCamp(rankDto));
         model.addAttribute("myTopRankrozerStone", rankService.getMyTopRankrozerStone(rankDto));
@@ -51,12 +69,24 @@ public class MyPageController {
 
 
     @RequestMapping("post.do")
-    public String myPagePostView() {
+    public String myPagePostView(HttpSession session) {
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        if(loginMember == null) {
+            return "redirect:/member/login.do";
+        }
+
         return "myPage/myPagePost";
     }
 
     @RequestMapping("alert.do")
-    public String myPageAlertView() {
+    public String myPageAlertView(HttpSession session) {
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        if(loginMember == null) {
+            return "redirect:/member/login.do";
+        }
+
         return "myPage/myPageAlert";
     }
 }
