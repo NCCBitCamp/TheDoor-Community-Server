@@ -99,7 +99,7 @@ public class BoardController {
         return "help/helpQnAWrite";
     }
 
-    @GetMapping("post.do")
+    @GetMapping("/post.do")
     public String postView(HttpSession session) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
 
@@ -110,7 +110,7 @@ public class BoardController {
         return "board/post";
     }
 
-    @PostMapping("post.do")
+    @PostMapping("/post.do")
     public String post(BoardDto boardDto, MultipartFile[] uploadFiles) {
         if(boardDto.getType().equals("free")) {
             boardService = applicationContext.getBean("freeBoardServiceImpl", BoardService.class);
@@ -129,7 +129,7 @@ public class BoardController {
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
     }
 
-    @PostMapping("modify.do")
+    @PostMapping("/modify.do")
     public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
                          @RequestParam(name = "originFiles", required = false) String originFiles) {
         System.out.println(originFiles);
@@ -150,7 +150,7 @@ public class BoardController {
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
     }
 
-    @GetMapping("delete.do")
+    @GetMapping("/delete.do")
     public String delete(BoardDto boardDto) {
         if(boardDto.getType().equals("free")) {
             boardService = applicationContext.getBean("freeBoardServiceImpl", BoardService.class);
