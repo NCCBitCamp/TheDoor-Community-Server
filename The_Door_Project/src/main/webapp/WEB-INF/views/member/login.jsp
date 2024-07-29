@@ -9,8 +9,8 @@
         <h1>LOGIN</h1>
         <div id="loginBox">
             <div class="inputBox">
-                <label id="idLabel" for="username">아이디</label>
-                <input type="text" class="id" id="username" name="username" required maxlength="30" autocomplete="off">
+                <label id="idLabel" for="user_id">아이디</label>
+                <input type="text" class="id" id="user_id" name="user_id" required maxlength="30" autocomplete="off">
             </div>
 
             <div class="inputBox">

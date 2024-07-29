@@ -9,4 +9,17 @@
             WHERE USER_ID = #{user_id}
     </select>
 
+    <select id="login" parameterType="member" resultType="member">
+        SELECT USER_ID, PASSWORD
+        FROM USER
+        WHERE USER_ID = #{user_id}
+          AND PASSWORD = #{password}
+    </select>
+
+    <select id="usernameCheck" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
 </mapper>
