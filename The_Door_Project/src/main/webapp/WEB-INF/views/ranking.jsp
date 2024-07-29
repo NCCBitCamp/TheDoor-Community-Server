@@ -46,19 +46,19 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="first">
+                    <a class="page-link" href="${page.startPage}" aria-label="first">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <c:forEach begin="${page.startPage}"
                            end="${page.endPage}"
                            var="number">
-                    <li class="page-item">
-                        <a class="page-link link-secondary" href="${number}">${number}</a>
+                    <li class="page-item ${page.cri.pageNum == number ? 'active' : ''}">
+                        <a class="page-link" href="${number}">${number}</a>
                     </li>
                 </c:forEach>
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="last">
+                    <a class="page-link" href="${page.endPage}" aria-label="last">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -72,12 +72,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(".pagination a").on("click", (e) => {
+        var amount = "${page.cri.amount}";
+        $(".pagination a").on("click", function(e) {
             e.preventDefault();
-
-            $("input[name='pageNum']").val($(e.target).attr("href"));
-
-            window.location.href="/main/ranking.do?pageNum=${page.cri.pageNum}&amount=${page.cri.amount}";
+            var pageNum = $(this).attr("href");
+            window.location.href = "/main/ranking.do?pageNum=" + pageNum + "&amount=" + amount;
         });
     </script>
     </body>
