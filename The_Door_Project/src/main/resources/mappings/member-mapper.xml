@@ -6,7 +6,13 @@
     <select id="userIdCheck" parameterType="string" resultType="int">
         SELECT COUNT(*)
              FROM USER
-            WHERE USER_ID = #{user_id}
+            WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="nicknameCheck" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+             FROM USER
+            WHERE NICKNAME = #{nickname}
     </select>
 
     <select id="login" parameterType="member" resultType="member">
@@ -21,5 +27,20 @@
         FROM USER
         WHERE USER_ID = #{user_id}
     </select>
+
+    <insert id="join" parameterType="member">
+        INSERT INTO USER(USER_ID,
+                         PASSWORD,
+                         NICKNAME,
+                         EMAIL,
+                         USERNAME,
+                         BIRTH)
+        VALUES (#{user_id},
+                #{password},
+                #{nickname},
+                #{email},
+                #{username},
+                #{birth})
+    </insert>
 
 </mapper>

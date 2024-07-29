@@ -1,10 +1,113 @@
 
+// ----------- //
+// 아이디 중복검사 //
+// ----------- //
+let idCheck = false;
+let nicknameCheck = false;
+let passwordCheck = false;
+let usernameCheck = false;
+
+$(() => {
+
+    $("#user_id").on('blur', (e) => {
+
+        // 공백 및 정규식 처리
+        if ($("#user_id").val() === '' || !idPattern.test($("#user_id").val())) {
+            idCheck = false;
+            idDiv.style.border = '2px solid #fbc70e';
+            idInput.style.color = '#fbc70e';
+            idInput.placeholder = '아이디는 필수 정보입니다.';
+            idInput.classList.add('errorPlaceholder');
+            divMsg1.style.visibility = 'visible';
+            liMsg1.textContent = '아이디는5~20자의 영문 소문자, 숫자만 사용 가능합니다.';
+            return;
+        }
+
+        $.ajax({
+            url: "/member/userIdCheck.do",
+            type: "post",
+            data: $("#join-form").serialize(),
+            success: (map) => {
+
+                if (map.userIdCheckNum === 0) {
+                    idCheck = true;
+                    divMsg1.style.visibility = 'hidden';
+                    idDiv.style.border = '0px';
+                    idInput.classList.remove('errorPlaceholder');
+                    idInput.style.color = '#fff';
+                    return;
+                } else {
+                    // 여기에 실패 조건 작성하기
+                    idCheck = false;
+                    divMsg1.style.visibility = 'visible';
+                    idDiv.style.border = '2px solid #fbc70e';
+                    idInput.style.color = '#fbc70e';
+                    idInput.placeholder = '아이디는 필수 정보입니다.';
+                    idInput.classList.add('errorPlaceholder');
+                    liMsg1.textContent = '사용할 수 없는 아이디입니다.';
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+
+    $("#nickname").on('blur', (e) => {
+
+        if ($("#nickname").val() === '' || !nicknamePattern.test($("#nickname").val())) {
+            nicknameCheck = false;
+            divMsg2.style.visibility = 'visible';
+            nicknameInput.style.color = '#fbc70e';
+            nicknameDiv.style.border = '2px solid #fbc70e';
+            nicknameInput.placeholder = '닉네임은 필수 정보입니다.';
+            nicknameInput.classList.add('errorPlaceholder');
+            return;
+        }
+
+        $.ajax({
+            url: "/member/nicknameCheck.do",
+            type: "post",
+            data: $("#join-form").serialize(),
+            success: (map) => {
+
+                if (map.nicknameCheckNum === 0) {
+                    nicknameCheck = true;
+                    nicknameDiv.style.border = '0px';
+                    nicknameInput.classList.remove('errorPlaceholder');
+                    nicknameInput.style.color = '#fff';
+                    divMsg2.style.visibility = 'hidden';
+                    return;
+                } else {
+                    // 여기에 실패 조건 작성하기
+                    nicknameInput.style.color = '#fbc70e';
+                    nicknameDiv.style.border = '2px solid #fbc70e';
+                    nicknameInput.placeholder = '닉네임은 필수 정보입니다.';
+                    nicknameInput.classList.add('errorPlaceholder');
+                    divMsg2.style.visibility = 'visible';
+                    nicknameCheck = false;
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+
+    $("#join-form").on("submit", (e) => {
+        if (!idCheck || !nicknameCheck || !passwordCheck || !usernameCheck) {
+            e.preventDefault();
+            return;
+        }
+    });
+});
+
+
 // 비밀번호 숨김 및 표시
 const eyeBtn = document.querySelector('#eyeBtn');
-const pwInput = document.querySelector('#pw1');
+const pwInput = document.querySelector('#password');
 const backImage = document.querySelector('.content');
 const boxShadow = document.querySelector('.form-list');
-// box-shadow: 0px 5px 5px 0px;
 
 let eyeKey = false;
 
@@ -30,18 +133,19 @@ eyeBtn.addEventListener('click', (e) => {
 // 정규식 //
 //--------//
 const idPattern = /^[a-z0-9]{5,20}$/;
-const pwPattern = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-const namePattern = /^[가-힣a-zA-Z]{2,20}$/;
+const pwPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+const namePattern = /^[가-힣a-zA-Z]{2,15}$/;
+const nicknamePattern = /^[ㄱ-힣A-Za-z\d]{2,15}$/;
 const birthdayPattern = /^(19[0-9][0-9]|20[0-9][0-9])(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 
 // input태그
-const idInput = document.getElementById('id');
-const pw1Input = document.getElementById('pw1');
+const idInput = document.getElementById('user_id');
+const pw1Input = document.getElementById('password');
 const pw2Input = document.getElementById('pw2');
 const nicknameInput = document.getElementById('nickname');
 const emailInput = document.getElementById('email');
-const nameInput = document.getElementById('name');
-const birthdayInput = document.getElementById('birthday');
+const nameInput = document.getElementById('username');
+const birthdayInput = document.getElementById('birth');
 
 // div박스
 const idDiv = document.getElementById('divId');
@@ -60,49 +164,12 @@ const liMsg2 = document.getElementById('liMsg2');
 // 아이디 메소드 //
 // ---------- //
 idInput.addEventListener('focus', idClick);
-idInput.addEventListener('blur', idBlur);
 
-// 클릭 :: 포커스
 function idClick() {
     idDiv.style.border = '2px solid #ddd';
     idInput.style.color = '#fff';
     idInput.classList.remove('errorPlaceholder');
     idInput.placeholder = '아이디';
-}
-
-// 아무값도 입력하지 않았을 때
-function idBlur() {
-    const inputValue = this.value;
-
-
-    // 아이디 중복체크 실패했을 때 // 수정할 때 아래 && 뒤에도 수정해야함.
-    if (idInput.value === 'bitcamp') {
-        divMsg1.style.visibility = 'visible';
-        idDiv.style.border = '2px solid #fbc70e';
-        idInput.style.color = '#fbc70e';
-        idInput.placeholder = '아이디는 필수 정보입니다.';
-        idInput.classList.add('errorPlaceholder');
-        liMsg1.textContent = '사용할 수 없는 아이디입니다.';
-
-    }
-    // 공백과 정규식에 맞지 않는 값 처리
-    if (idInput.value == '' || !idPattern.test(inputValue)) {
-        idDiv.style.border = '2px solid #fbc70e';
-        idInput.style.color = '#fbc70e';
-        idInput.placeholder = '아이디는 필수 정보입니다.';
-        idInput.classList.add('errorPlaceholder');
-        divMsg1.style.visibility = 'visible';
-        liMsg1.textContent = '아이디는5~20자의 영문 소문자, 숫자만 사용 가능합니다.';
-    }
-
-    // 아이디 중복체크 통과 했을 때 //
-    if (idPattern.test(inputValue) && idInput.value !== 'bitcamp') {
-        divMsg1.style.visibility = 'hidden';
-        idDiv.style.border = '0px';
-        idInput.classList.remove('errorPlaceholder');
-        idInput.style.color = '#fff';
-
-    }
 }
 
 // ------------ //
@@ -201,6 +268,7 @@ function pw2Blur() {
         pw2Input.style.color = '#fbc70e';
         pw2Input.placeholder = '비밀번호를 확인해 주세요.';
         pw2Input.classList.add('errorPlaceholder');
+        passwordCheck = false;
     }
 
     if (pw2Input.value == pw1Input.value && pwPattern.test(inputValue)) {
@@ -209,6 +277,7 @@ function pw2Blur() {
         pw2Input.style.color = '#fff';
         divMsg2.style.visibility = 'hidden';
         liMsg2.textContent = '사용할 수 없는 닉네임입니다.';
+        passwordCheck = true;
     }
 }
 
@@ -220,6 +289,7 @@ function pw2Check() {
         pw2Div.style.border = '0px';
         pw2Input.classList.remove('errorPlaceholder');
         pw2Input.style.color = '#fff';
+        passwordCheck = true;
     }
 }
 
@@ -227,8 +297,6 @@ function pw2Check() {
 // 닉네임 메소드 //
 // ---------- //
 nicknameInput.addEventListener('focus', nicknameClick);
-nicknameInput.addEventListener('blur', nicknameBlur);
-// nicknameInput.addEventListener('input', nickcnameCheck);
 
 function nicknameClick() {
     nicknameDiv.style.border = '2px solid #ddd';
@@ -238,38 +306,11 @@ function nicknameClick() {
     liMsg2.textContent = '사용할 수 없는 닉네임입니다.';
 }
 
-function nicknameBlur() {
-    const inputValue = this.value;
-
-    // 닉네임 중복체크
-    if (namePattern.test(inputValue) && nicknameInput.value !== '고기천') {
-        nicknameDiv.style.border = '0px';
-        nicknameInput.classList.remove('errorPlaceholder');
-        nicknameInput.style.color = '#fff';
-        divMsg2.style.visibility = 'hidden';
-
-        // 닉네임 중복일 때
-    } else if (nicknameInput.value === '고기천') {
-        divMsg2.style.visibility = 'visible';
-        nicknameInput.style.color = '#fbc70e';
-        nicknameDiv.style.border = '2px solid #fbc70e';
-        nicknameInput.placeholder = '닉네임은 필수 정보입니다.';
-        nicknameInput.classList.add('errorPlaceholder');
-
-    } else {
-        nicknameDiv.style.border = '2px solid #fbc70e';
-        nicknameInput.style.color = '#fbc70e';
-        nicknameInput.placeholder = '닉네임은 필수 정보입니다.';
-        nicknameInput.classList.add('errorPlaceholder');
-    }
-}
-
 // ---------- //
 // 이메일 메소드 //
 // ---------- //
 emailInput.addEventListener('focus', emailClick);
 emailInput.addEventListener('blur', emailBlur);
-// emailInput.addEventListener('input', emailCheck);
 
 function emailClick() {
     emailDiv.style.border = '2px solid #ddd';
@@ -294,7 +335,6 @@ function emailBlur() {
 // ---------- //
 nameInput.addEventListener('focus', nameClick);
 nameInput.addEventListener('blur', nameBlur);
-// nameInput.addEventListener('input', nameCheck);
 
 function nameClick() {
     nameDiv.style.border = '2px solid #ddd';
@@ -310,11 +350,16 @@ function nameBlur() {
         nameDiv.style.border = '0px';
         nameInput.classList.remove('errorPlaceholder');
         nameInput.style.color = '#fff';
+        usernameCheck = true;
+
+
     } else {
         nameDiv.style.border = '2px solid #fbc70e';
         nameInput.style.color = '#fbc70e';
         nameInput.placeholder = '이름은 필수 정보입니다.';
         nameInput.classList.add('errorPlaceholder');
+        usernameCheck = false;
+
     }
 }
 
@@ -324,7 +369,6 @@ function nameBlur() {
 // ----------- //
 birthdayInput.addEventListener('focus', birthdayClick);
 birthdayInput.addEventListener('blur', birthdayBlur);
-// birthdayInput.addEventListener('input', birthdayCheck);
 
 function birthdayClick() {
     birthdayDiv.style.border = '2px solid #ddd';
@@ -345,3 +389,4 @@ function birthdayBlur() {
         birthdayInput.classList.add('errorPlaceholder');
     }
 }
+
