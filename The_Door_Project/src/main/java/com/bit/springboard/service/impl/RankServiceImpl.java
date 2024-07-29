@@ -7,9 +7,7 @@ import com.bit.springboard.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class RankServiceImpl implements RankService {
@@ -33,17 +31,17 @@ public class RankServiceImpl implements RankService {
     }
 
     @Override
-    public RankDto getMyTopRanktheHostel(RankDto rankDto) {
-        return rankDao.getMyTopRanktheHostel(rankDto);
+    public RankDto getMyTopRanktheHostel(String userId) {
+        return rankDao.getMyTopRanktheHostel(userId);
     }
 
     @Override
-    public RankDto getMyTopRankbitCamp(RankDto rankDto) {
-        return rankDao.getMyTopRankbitCamp(rankDto);
+    public RankDto getMyTopRankbitCamp(String userId) {
+        return rankDao.getMyTopRankbitCamp(userId);
     }
 
     @Override
-    public RankDto getMyTopRankrozerStone(RankDto rankDto) {
-        return rankDao.getMyTopRankrozerStone(rankDto);
+    public RankDto getMyTopRankrozerStone(String userId) {
+        return rankDao.getMyTopRankrozerStone(userId);
     }
 }

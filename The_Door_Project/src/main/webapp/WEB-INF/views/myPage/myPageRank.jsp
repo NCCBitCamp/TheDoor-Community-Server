@@ -28,7 +28,7 @@
         <div class="ticket-container">
             <div class="ticket hostel_ticket" onclick="flipTicket(this)">
                 <div class="ticket-content">
-                    <p class="record">${myTopRanktheHostel.rank}위</p>
+                    <p class="record">${myTopRanktheHostel.rank+1}위</p>
                     <p class="player">${myTopRanktheHostel.nickname}</p>
                     <p class="comment">${myTopRanktheHostel.comment}</p>
                     <c:set var="originalDateTime" value="${myTopRanktheHostel.date}" />
@@ -43,7 +43,7 @@
         
             <div class="ticket bit_ticket" onclick="flipTicket(this)">
                 <div class="ticket-content">
-                    <p class="record">${myTopRankbitCamp.rank}위</p>
+                    <p class="record">${myTopRankbitCamp.rank+1}위</p>
                     <p class="player">${myTopRankbitCamp.nickname}</p>
                     <p class="comment">${myTopRankbitCamp.comment}</p>
                     <c:set var="originalDateTime" value="${myTopRankbitCamp.date}" />
@@ -58,7 +58,7 @@
         
             <div class="ticket rozer_ticket" onclick="flipTicket(this)">
                 <div class="ticket-content">
-                    <p class="record">${myTopRankrozerStone.rank}위</p>
+                    <p class="record">${myTopRankrozerStone.rank+1}위</p>
                     <p class="player">${myTopRankrozerStone.nickname}</p>
                     <p class="comment">${myTopRankrozerStone.comment}</p>
                     <c:set var="originalDateTime" value="${myTopRankrozerStone.date}" />

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class RankDto {
     private int id; // 기록 아이디
-    private int RANK_ID; // 회원 아이디
+    private String RANK_ID; // 회원 아이디
     private LocalDateTime date; // 기록 날짜
     private int time; // 기록 시간
     private String gametype; // 기록 게임
@@ -23,11 +23,11 @@ public class RankDto {
         this.id = id;
     }
 
-    public int getRANK_ID() {
+    public String getRANK_ID() {
         return RANK_ID;
     }
 
-    public void setRANK_ID(int RANK_ID) {
+    public void setRANK_ID(String RANK_ID) {
         this.RANK_ID = RANK_ID;
     }
 
