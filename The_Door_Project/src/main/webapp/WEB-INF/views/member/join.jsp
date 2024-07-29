@@ -73,7 +73,7 @@
 <%--            type: "post",--%>
 <%--            contentType: "x-www-form-urlencoded",--%>
 <%--            data: $("#join-form").serialize(),--%>
-<%--            success: (map) => {--%>git
+<%--            success: (map) => {--%>
 <%--                --%>
 <%--                const jsonMap = JSON.parse(map);--%>
 <%--                --%>
