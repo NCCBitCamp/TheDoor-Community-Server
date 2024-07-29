@@ -3,8 +3,8 @@
 <%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/ranking.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/ranking.css">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -43,7 +43,7 @@
                 </tbody>
             </table>
         </div>
-        <nav aria-label="Page navigation">
+        <nav aria-label="Page navigation" id="custom-pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
                     <a class="page-link" href="${page.startPage}" aria-label="first">
@@ -53,7 +53,7 @@
                 <c:forEach begin="${page.startPage}"
                            end="${page.endPage}"
                            var="number">
-                    <li class="page-item ${page.cri.pageNum == number ? 'active' : ''}">
+                    <li class="page-item ${page.cri.pageNum == number ? 'current-page' : ''}">
                         <a class="page-link" href="${number}">${number}</a>
                     </li>
                 </c:forEach>
