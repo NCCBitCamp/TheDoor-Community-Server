@@ -9,7 +9,7 @@ import java.util.Map;
 public interface RankService {
     List<RankDto> getRankList(Criteria cri);
 
-    int getRankTotalCnt();
+    int getRankTotalCnt(String gametype);
 
     RankDto getMyTopRanktheHostel(RankDto rankDto);
     RankDto getMyTopRankbitCamp(RankDto rankDto);

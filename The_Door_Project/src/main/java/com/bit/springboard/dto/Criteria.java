@@ -7,6 +7,15 @@ public class Criteria {
     private int amount;
     // 시작 게시글 번호
     private int startNum;
+    private String gametype;
+
+    public String getGameType() {
+        return gametype;
+    }
+
+    public void setGameType(String gametype) {
+        this.gametype = gametype;
+    }
 
     public Criteria() {
         this(1, 10);

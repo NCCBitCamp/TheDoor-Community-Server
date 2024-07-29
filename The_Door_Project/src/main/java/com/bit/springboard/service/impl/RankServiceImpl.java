@@ -28,8 +28,8 @@ public class RankServiceImpl implements RankService {
     }
 
     @Override
-    public int getRankTotalCnt() {
-        return rankDao.getRankTotalCnt();
+    public int getRankTotalCnt(String gametype) {
+        return rankDao.getRankTotalCnt(gametype);
     }
 
     @Override
