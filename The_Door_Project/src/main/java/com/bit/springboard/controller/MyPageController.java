@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
     @Autowired
     private RankService rankService;
-    
+    @Autowired
     private MyPageService mypageService;
 
     @Autowired
@@ -28,14 +28,14 @@ public class MyPageController {
     }
 
     @RequestMapping("/info.do")
-    public String myPageInfoView(MemberDto memberDto, HttpSession session, Model model) {
-        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-
+    public String myPageInfoView(HttpSession session, Model model) {
+        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+        
         if(loginMember == null) {
             return "redirect:/member/login.do";
         }
 
-        MemberDto personalInfo = mypageService.getInfo(memberDto);
+        MemberDto personalInfo = mypageService.getInfo(loginMember);
         model.addAttribute("personalInfo", personalInfo);
 
         return "myPage/myPageInfo";

@@ -11,7 +11,7 @@ public class MemberDto {
     private String nickname;
     private String email;
     private String username;
-    private String birthday;
+    private String birth;
     private String role;
 
     public int getId() {
@@ -22,12 +22,12 @@ public class MemberDto {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getPassword() {
@@ -54,28 +54,28 @@ public class MemberDto {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class MemberDto {
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
-                ", birthday='" + birthday + '\'' +
+                ", birth='" + birth + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

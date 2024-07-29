@@ -3,6 +3,7 @@ package com.bit.springboard.service.impl;
 import com.bit.springboard.dao.MemberDao;
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.MemberService;
+import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,32 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void join(MemberDto memberDto) {
-
-    }
-
-    @Override
     public Map<String, Integer> userIdCheck(String userId) {
-        return Map.of();
+        int userIdCheck = memberDao.userIdCheck(userId);
+
+        Map<String, Integer> forJsonMap = new HashMap<>();
+
+        forJsonMap.put("userIdCheckNum", userIdCheck);
+
+        return forJsonMap;
     }
 
     @Override
-    public String nicknameCheck(String nickname) {
-        return "";
+    public Map<String, Integer> nicknameCheck(String nickname) {
+        int nicknameCheck = memberDao.nicknameCheck(nickname);
+
+        Map<String, Integer> forJsonMap = new HashMap<>();
+
+        forJsonMap.put("nicknameCheckNum", nicknameCheck);
+
+        return forJsonMap;
     }
+
+    @Override
+    public void join(MemberDto memberDto) {
+        memberDao.join(memberDto);
+    }
+
 
     @Override
     public List<MemberDto> getMembers() {
@@ -45,6 +59,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberDto getMemberByUsername(String username) {
         return null;
     }
+
 
     @Override
     public MemberDto login(MemberDto memberDto) {

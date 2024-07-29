@@ -10,7 +10,7 @@ public interface MemberService {
 
     Map<String, Integer> userIdCheck(String userId);
 
-    String nicknameCheck(String nickname);
+    Map<String, Integer> nicknameCheck(String nickname);
 
     List<MemberDto> getMembers();
 
