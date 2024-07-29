@@ -50,7 +50,8 @@ public class FreeBoardDao {
     public void post(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
         System.out.println("FreeBoardDao의 post 메소드 실행");
 
-        mybatis.insert(/*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/"FreeBoardDao.post", boardDto);
+        /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
+        mybatis.insert("FreeBoardDao.post", boardDto);
 
         System.out.println("insert 실행 후 id값: " + boardDto.getId());
 

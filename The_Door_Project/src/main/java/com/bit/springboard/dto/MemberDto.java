@@ -82,7 +82,7 @@ public class MemberDto {
     public String toString() {
         return "MemberDto{" +
                 "id=" + id +
-                ", user_id='" + user_id + '\'' +
+                ", userId='" + user_id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +

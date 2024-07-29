@@ -23,7 +23,7 @@ public class MainController {
         this.rankService = rankService;
     }
 
-    @RequestMapping("ranking.do")
+    @RequestMapping("/ranking.do")
     public String rankingView(Model model, Criteria cri) {
         model.addAttribute("rankList", rankService.getRankList(cri));
 
@@ -34,7 +34,7 @@ public class MainController {
         return "ranking";
     }
 
-    @RequestMapping("guide.do")
+    @RequestMapping("/guide.do")
     public String guideView() {
         return "guide";
     }

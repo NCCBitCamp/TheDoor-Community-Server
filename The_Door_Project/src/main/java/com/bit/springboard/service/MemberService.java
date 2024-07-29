@@ -17,4 +17,6 @@ public interface MemberService {
     MemberDto getMemberByUsername(String username);
 
     MemberDto login(MemberDto memberDto);
+
+    String usernameCheck(String username);
 }

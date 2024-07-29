@@ -31,7 +31,15 @@
                 <a href="/board/help-main.do">Help</a>
             </div>
             <div class="auth-links">
-                <a href="/member/login.do">로그인</a> / <a href="/member/join.do">회원가입</a>
+
+                <c:choose>
+                    <c:when test="${loginMember eq null}">
+                        <a href="/member/login.do">로그인</a> / <a href="/member/join.do">회원가입</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/myPage/info.do">${loginMember.nickname}</a> / <a href="/member/logout.do">로그아웃</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

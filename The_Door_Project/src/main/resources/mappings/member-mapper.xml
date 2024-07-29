@@ -15,4 +15,17 @@
             WHERE NICKNAME = #{nickname}
     </select>
 
+    <select id="login" parameterType="member" resultType="member">
+        SELECT *
+        FROM USER
+        WHERE USER_ID = #{user_id}
+          AND PASSWORD = #{password}
+    </select>
+
+    <select id="usernameCheck" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
 </mapper>

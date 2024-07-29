@@ -42,7 +42,7 @@
 
             <!-- 이름 -->
             <div class="divError" id="divUsername">
-                <input type="text" id="name" name="name" placeholder="이름" class="input" maxlength="15"
+                <input type="text" id="name" name="name" placeholder="이름" class="input" maxlength="20"
                        autocomplete='off'>
             </div>
 

@@ -2,13 +2,14 @@ package com.bit.springboard.controller;
 
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.Map;
 
 @Controller
@@ -17,7 +18,9 @@ public class MemberController {
     private MemberService memberService;
 
     @Autowired
-    public MemberController(MemberService memberService) {this.memberService = memberService;}
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @RequestMapping("join.do")
     public String joinView() { return "member/join"; }
@@ -42,11 +45,23 @@ public class MemberController {
         return memberService.nicknameCheck(memberDto.getNickname());
     }
 
+    @PostMapping("/login.do")
+    public String login(MemberDto memberDto, Model model, HttpSession session) {
+        try {
+            MemberDto loginMember = memberService.login(memberDto);
+            loginMember.setPassword("");
+            session.setAttribute("loginMember", loginMember);
+            return "redirect:/";
+        } catch (Exception e) {
+            model.addAttribute("loginFailMsg", e.getMessage());
+            return "redirect:/";
+        }
+    }
 
+    @GetMapping("/logout.do")
+    public String logout(HttpSession session) {
+        session.invalidate();
 
-
-
-
-
-
+        return "redirect:/member/login.do";
+    }
 }
