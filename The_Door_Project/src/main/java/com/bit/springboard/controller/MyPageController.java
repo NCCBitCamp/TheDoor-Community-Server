@@ -1,5 +1,8 @@
 package com.bit.springboard.controller;
 
+import com.bit.springboard.dto.Criteria;
+import com.bit.springboard.dto.RankDto;
+import com.bit.springboard.service.RankService;
 import com.bit.springboard.dao.MyPageDao;
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.MemberService;
@@ -14,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
-
+    @Autowired
+    private RankService rankService;
+    
     private MyPageService mypageService;
 
     @Autowired
-    public MyPageController(MyPageService myPageService) {
-        this.mypageService = myPageService;
+    public MyPageController(RankService rankService) {
+        this.rankService = rankService;
     }
 
     @RequestMapping("/info.do")
@@ -27,19 +32,21 @@ public class MyPageController {
         MemberDto personalInfo = mypageService.getInfo(memberDto);
         model.addAttribute("personalInfo", personalInfo);
 
-
         return "myPage/myPageInfo";
     }
 
     @RequestMapping("/altMyInfo.do")
     public String myPageInfoAlt(){return "myPage/myPageInfo";}
 
-
-
+  
     @RequestMapping("rank.do")
-    public String myPageRankView() {
+    public String myPageRankView(Model model, RankDto rankDto) {
+        model.addAttribute("myTopRanktheHostel", rankService.getMyTopRanktheHostel(rankDto));
+        model.addAttribute("myTopRankbitCamp", rankService.getMyTopRankbitCamp(rankDto));
+        model.addAttribute("myTopRankrozerStone", rankService.getMyTopRankrozerStone(rankDto));
         return "myPage/myPageRank";
     }
+
 
     @RequestMapping("post.do")
     public String myPagePostView() {

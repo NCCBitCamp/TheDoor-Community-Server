@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageRank.css">
@@ -26,33 +28,45 @@
         <div class="ticket-container">
             <div class="ticket hostel_ticket" onclick="flipTicket(this)">
                 <div class="ticket-content">
-                    <p class="record">15위</p>
-                    <p class="player">John Doe</p>
-                    <p class="comment">Great game!</p>
-                    <p class="date">24-07-10</p>
-                    <p class="time">19:11</p>
+                    <p class="record">${myTopRanktheHostel.rank}위</p>
+                    <p class="player">${myTopRanktheHostel.nickname}</p>
+                    <p class="comment">${myTopRanktheHostel.comment}</p>
+                    <c:set var="originalDateTime" value="${myTopRanktheHostel.date}" />
+                    <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
+                    <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
+                    <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
+                    <p class="date">${shortYear}</p>
+                    <p class="time">${myTopRanktheHostel.time}</p>
                 </div>
                 <div class="ticket-back hostel_ticket-back"></div>
             </div>
         
             <div class="ticket bit_ticket" onclick="flipTicket(this)">
                 <div class="ticket-content">
-                    <p class="record">2위</p>
-                    <p class="player">Jane Smith</p>
-                    <p class="comment">Challenging!</p>
-                    <p class="date">24-07-11</p>
-                    <p class="time">20:15</p>
+                    <p class="record">${myTopRankbitCamp.rank}위</p>
+                    <p class="player">${myTopRankbitCamp.nickname}</p>
+                    <p class="comment">${myTopRankbitCamp.comment}</p>
+                    <c:set var="originalDateTime" value="${myTopRankbitCamp.date}" />
+                    <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
+                    <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
+                    <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
+                    <p class="date">${shortYear}</p>
+                    <p class="time">${myTopRankbitCamp.time}</p>
                 </div>
                 <div class="ticket-back bit_ticket-back"></div>
             </div>
         
             <div class="ticket rozer_ticket" onclick="flipTicket(this)">
                 <div class="ticket-content">
-                    <p class="record">20위</p>
-                    <p class="player">Alice Brown</p>
-                    <p class="comment">Exciting!</p>
-                    <p class="date">24-07-12</p>
-                    <p class="time">21:20</p>
+                    <p class="record">${myTopRankrozerStone.rank}위</p>
+                    <p class="player">${myTopRankrozerStone.nickname}</p>
+                    <p class="comment">${myTopRankrozerStone.comment}</p>
+                    <c:set var="originalDateTime" value="${myTopRankrozerStone.date}" />
+                    <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
+                    <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
+                    <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
+                    <p class="date">${shortYear}</p>
+                    <p class="time">${myTopRankrozerStone.time}</p>
                 </div>
                 <div class="ticket-back rozer_ticket-back"></div>
             </div>
