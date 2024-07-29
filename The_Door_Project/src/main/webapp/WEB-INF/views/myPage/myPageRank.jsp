@@ -11,7 +11,7 @@
 
         <div id="profileArea">
             <img src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg">
-            <p class="emphaFont">닉네임123</p>
+            <p class="emphaFont">${loginMember.nickname}</p>
         </div>
 
         <div id="selectArea">

@@ -12,9 +12,7 @@ public class MyPageController {
     }
 
     @RequestMapping("rank.do")
-    public String myPageRankView() {
-        return "myPage/myPageRank";
-    }
+    public String myPageRankView() { return "myPage/myPageRank"; }
 
     @RequestMapping("post.do")
     public String myPagePostView() {
