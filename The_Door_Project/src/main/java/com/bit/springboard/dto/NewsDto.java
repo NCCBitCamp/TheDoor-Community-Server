@@ -1,11 +1,11 @@
 package com.bit.springboard.dto;
 
-public class NewsPageDto {
+public class NewsDto {
     private int endPage;
     private Criteria cri;
     private int total;
 
-    public NewsPageDto(Criteria cri, int total) {
+    public NewsDto(Criteria cri, int total) {
         this.cri = cri;
         this.total = total;
 

@@ -43,7 +43,7 @@
                 <img src="${pageContext.request.contextPath}/static/images/index/helpBtn.png" alt="Image 3">
                 <div class="overlay"></div>
             </a>
-            <a href="WEB-INF/views/myPage/mypageInfo.jsp" class="button">
+            <a href="/myPage/info.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/myPageBtn.png" alt="Image 4">
                 <div class="overlay"></div>
             </a>

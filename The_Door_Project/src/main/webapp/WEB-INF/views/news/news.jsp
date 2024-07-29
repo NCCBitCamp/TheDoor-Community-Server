@@ -37,75 +37,13 @@
                 <div class="card-body">
                     <h5 class="card-title">공지사항</h5>
                     <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
-                <div class="card-body">
-                    <h5 class="card-title">공지사항</h5>
-                    <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="newsDetail.html" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
+                    <a href="/board/news-detail.do" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
                 </div>
             </div>
         </div>
-
+        <div class="post-container" id="postContainer">
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/news-write.do'">공지사항 등록</button>
+        </div>
         <div>
             <!-- 페이지네이션 -->
             <nav aria-label="Page navigation">
@@ -132,9 +70,6 @@
                     </li>
                 </ul>
             </nav>
-            <div class="post-container" id="postContainer">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='newsWrite.html'">공지사항 등록</button>
-            </div>
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>

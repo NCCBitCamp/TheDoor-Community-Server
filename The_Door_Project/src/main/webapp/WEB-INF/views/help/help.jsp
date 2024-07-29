@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/help/help.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -20,8 +21,8 @@
         <div class="commentbox3"></div>
         <!--이 코멘트 박스들에는 조회수가 가장 높은 FaQ 3개를 올려주는 기능-->
         <div class="button_area">
-            <div class="faq_button"><a href="helpFaQ.jsp">FAQ 바로가기</a></div>
-            <div class="qna_button"><a href="helpQnA.jsp">QnA 바로가기</a></div>
+            <div class="faq_button"><a href="/board/help-faq.do">FAQ 바로가기</a></div>
+            <div class="qna_button"><a href="/board/help-qna.do">QnA 바로가기</a></div>
         </div>
     </div>
     <div class="content-footer-gap"></div>

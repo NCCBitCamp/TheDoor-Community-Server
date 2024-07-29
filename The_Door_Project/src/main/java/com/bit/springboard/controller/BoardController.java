@@ -24,32 +24,82 @@ public class BoardController {
         this.applicationContext = applicationContext;
     }
 
-    @RequestMapping("free-list.do")
+    @RequestMapping("/free-list.do")
     public String freeListView() {
         return "community/community";
     }
 
-    @RequestMapping("news-list.do")
+    @RequestMapping("/news-list.do")
     public String noticeListView() {
         return "news/news";
     }
 
-    @GetMapping("free-detail.do")
+    @GetMapping("/free-detail.do")
     public String freeDetailView() {
         return "community/communityDetail";
     }
 
-    @GetMapping("news-detail.do")
+    @GetMapping("/news-detail.do")
     public String newsDetailView() {
         return "news/newsDetail";
     }
 
-    @RequestMapping("help-main.do")
+    @GetMapping("/free-write.do")
+    public String freeWriteView() {
+        return "community/communityWrite";
+    }
+
+    @GetMapping("/news-write.do")
+    public String newsWriteView() {
+        return "news/newsWrite";
+    }
+
+    @GetMapping("/free-modify.do")
+    public String freeModifyView() {
+        return "community/communityModify";
+    }
+
+    @GetMapping("/news-modify.do")
+    public String newsModifyView() {
+        return "news/newsModify";
+    }
+
+    @RequestMapping("/help-main.do")
     public String helpMainView() {
         return "help/help";
     }
 
-    @GetMapping("post.do")
+    @RequestMapping("/help-faq.do")
+    public String helpFaQView() {
+        return "help/helpFaQ";
+    }
+
+    @RequestMapping("/help-qna.do")
+    public String helpQnAView() {
+        return "help/helpQnA";
+    }
+
+    @RequestMapping("/help-faq-purchase.do")
+    public String helpFaQPurchaseView() {
+        return "help/helpFaQ_purchase";
+    }
+
+    @RequestMapping("/help-faq-account.do")
+    public String helpFaQAccountView() {
+        return "help/helpFaQ_account";
+    }
+
+    @RequestMapping("/help-faq-etc.do")
+    public String helpFaQEtcView() {
+        return "help/helpFaQ_etc";
+    }
+
+    @RequestMapping("/help-qna-write.do")
+    public String helpQnAWriteView() {
+        return "help/helpQnAWrite";
+    }
+
+    @GetMapping("/post.do")
     public String postView(HttpSession session) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
 
@@ -60,7 +110,7 @@ public class BoardController {
         return "board/post";
     }
 
-    @PostMapping("post.do")
+    @PostMapping("/post.do")
     public String post(BoardDto boardDto, MultipartFile[] uploadFiles) {
         if(boardDto.getType().equals("free")) {
             boardService = applicationContext.getBean("freeBoardServiceImpl", BoardService.class);
@@ -79,7 +129,7 @@ public class BoardController {
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
     }
 
-    @PostMapping("modify.do")
+    @PostMapping("/modify.do")
     public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
                          @RequestParam(name = "originFiles", required = false) String originFiles) {
         System.out.println(originFiles);
@@ -100,7 +150,7 @@ public class BoardController {
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
     }
 
-    @GetMapping("delete.do")
+    @GetMapping("/delete.do")
     public String delete(BoardDto boardDto) {
         if(boardDto.getType().equals("free")) {
             boardService = applicationContext.getBean("freeBoardServiceImpl", BoardService.class);

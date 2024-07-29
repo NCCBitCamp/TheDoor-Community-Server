@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPageInfo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageInfo.css">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
     <div class="content">
         <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
         <div id="profileArea">
-            <img src="${pageContext.request.contextPath}/static/images/profileImg.png" class="profileImg">
+            <img src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg">
             
             <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
             <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
@@ -18,10 +18,10 @@
         
         <div id="selectArea">
                 <ul>
-                    <li><a href="myPageInfo.html">개인정보</a></li>
-                    <li><a href="myPageRank.html">My 랭킹</a></li>
-                    <li><a href="myPagePost.jsp">내가 쓴 글</a></li>
-                    <li><a href="myPageAlert.jsp">알림</a></li>
+                    <li><a href="/myPage/info.do">개인정보</a></li>
+                    <li><a href="/myPage/rank.do">My 랭킹</a></li>
+                    <li><a href="/myPage/post.do">내가 쓴 글</a></li>
+                    <li><a href="/myPage/alert.do">알림</a></li>
                 </ul>
 
             <div id="userInfo">            

@@ -47,78 +47,19 @@
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="title"><a href="communityDetailhtml">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td class="title"><a href="communityDetail.html">게시물 제목</a></td>
+                    <td class="title"><a href="/board/free-detail.do">게시물 제목</a></td>
                     <td>작성자</td>
                     <td>2022.01.01</td>
                     <td>100</td>
                 </tr>
                 </tbody>
             </table>
+            <div class="post-container">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/free-write.do'">글 등록</button>
+            </div>
             <br>
             <div>
+
                 <!-- 페이지네이션 -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
@@ -145,9 +86,6 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="post-container">
-                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='communityWrite.html'">글 등록</button>
-                </div>
             </div>
         </div>
         <div class="footer">
