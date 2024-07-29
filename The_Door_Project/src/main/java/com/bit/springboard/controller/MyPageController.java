@@ -28,12 +28,13 @@ public class MyPageController {
     }
 
     @RequestMapping("/info.do")
-    public String myPageInfoView(@ModelAttribute("personalInfo") MemberDto memberDto, HttpSession session) {
+    public String myPageInfoView(MemberDto memberDto, HttpSession session, Model model) {
         MemberDto personalInfo = mypageService.getInfo(memberDto);
+        model.addAttribute("personalInfo", personalInfo);
+
         return "myPage/myPageInfo";
     }
 
-  
     @RequestMapping("/altMyInfo.do")
     public String myPageInfoAlt(){return "myPage/myPageInfo";}
 
@@ -47,12 +48,12 @@ public class MyPageController {
     }
 
 
-    @RequestMapping("/post.do")
+    @RequestMapping("post.do")
     public String myPagePostView() {
         return "myPage/myPagePost";
     }
 
-    @RequestMapping("/alert.do")
+    @RequestMapping("alert.do")
     public String myPageAlertView() {
         return "myPage/myPageAlert";
     }

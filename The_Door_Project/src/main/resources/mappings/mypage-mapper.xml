@@ -5,7 +5,7 @@
 <mapper namespace="MyPageDao">
 
 <!--    기존 정보 호출-->
-    <select id="myInfo" parameterType="member" resultType="member">
+    <select id="myInfo" parameterType="string" resultType="member">
         SELECT USER_ID, USERNAME, EMAIL, NICKNAME, BIRTH
         FROM USER
         WHERE NICKNAME = #{nickname}
