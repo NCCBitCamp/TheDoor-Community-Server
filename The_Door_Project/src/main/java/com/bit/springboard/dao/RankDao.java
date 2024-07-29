@@ -30,15 +30,15 @@ public class RankDao {
         return mybatis.selectOne("RankDao.getRankTotalCnt", gametype);
     }
 
-    public RankDto getMyTopRanktheHostel(RankDto rankDto) {
-        return mybatis.selectOne("RankDao.getMyTopRanktheHostel", rankDto);
+    public RankDto getMyTopRanktheHostel(String userId) {
+        return mybatis.selectOne("RankDao.getMyTopRanktheHostel", userId);
     }
 
-    public RankDto getMyTopRankbitCamp(RankDto rankDto) {
-        return mybatis.selectOne("RankDao.getMyTopRankbitCamp", rankDto);
+    public RankDto getMyTopRankbitCamp(String userId) {
+        return mybatis.selectOne("RankDao.getMyTopRankbitCamp", userId);
     }
 
-    public RankDto getMyTopRankrozerStone(RankDto rankDto) {
-        return mybatis.selectOne("RankDao.getMyTopRankrozerStone", rankDto);
+    public RankDto getMyTopRankrozerStone(String userId) {
+        return mybatis.selectOne("RankDao.getMyTopRankrozerStone", userId);
     }
 }

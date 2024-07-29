@@ -11,8 +11,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/myPage")
@@ -50,7 +52,6 @@ public class MyPageController {
         return "myPage/myPageRank";
     }
 
-//
   
     @RequestMapping("rank.do")
     public String myPageRankView(Model model, RankDto rankDto, HttpSession session) {
@@ -60,13 +61,11 @@ public class MyPageController {
             return "redirect:/member/login.do";
         }
 
-        model.addAttribute("myTopRanktheHostel", rankService.getMyTopRanktheHostel(rankDto));
-        model.addAttribute("myTopRankbitCamp", rankService.getMyTopRankbitCamp(rankDto));
-        model.addAttribute("myTopRankrozerStone", rankService.getMyTopRankrozerStone(rankDto));
+        model.addAttribute("myTopRanktheHostel", rankService.getMyTopRanktheHostel(loginMember.getUser_id()));
+        model.addAttribute("myTopRankbitCamp", rankService.getMyTopRankbitCamp(loginMember.getUser_id()));
+        model.addAttribute("myTopRankrozerStone", rankService.getMyTopRankrozerStone(loginMember.getUser_id()));
         return "myPage/myPageRank";
     }
-
-//
 
     @RequestMapping("post.do")
     public String myPagePostView(HttpSession session) {
@@ -79,7 +78,6 @@ public class MyPageController {
         return "myPage/myPagePost";
     }
 
-//
 
     @RequestMapping("alert.do")
     public String myPageAlertView(HttpSession session) {
