@@ -21,6 +21,7 @@
     <mappers>
         <mapper resource="mappings/ranking-mapper.xml"/>
         <mapper resource="mappings/member-mapper.xml"/>
+        <mapper resource="mappings/mypage-mapper.xml"/>
 
     </mappers>
 </configuration>

@@ -32,27 +32,27 @@
                     <div>
                         <label for="fixUserId">아이디</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserId" type="text" value="백앤드로 데이터 받아 고정하기" readonly>
+                        <input class="fixedUserInfo" id="fixUserId" type="text" value="${personalInfo.userId}" readonly>
                     </div>
                     <div>
                         <label for="fixUserName">이름</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserName" type="text" value="백앤드로 데이터 받아 고정하기" readonly>
+                        <input class="fixedUserInfo" id="fixUserName" type="text" value="${personalInfo.username}" readonly>
                     </div>
                     <div>
                         <label for="fixUserEmail">이메일</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserEmail" type="text" value="백앤드로 데이터 받아 고정하기" readonly>
+                        <input class="fixedUserInfo" id="fixUserEmail" type="text" value="${personalInfo.email}" readonly>
                     </div>
                     <div>
                         <label for="fixUserNick">닉네임</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserNick" type="text" value="백앤드로 데이터 받아 고정하기" readonly>
+                        <input class="fixedUserInfo" id="fixUserNick" type="text" value="${personalInfo.nickname}" readonly>
                     </div>
                     <div>
                         <label for="fixUserBirth">생년월일</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserBirth" type="text" value="백앤드로 데이터 받아 고정하기" readonly>
+                        <input class="fixedUserInfo" id="fixUserBirth" type="text" value="${personalInfo.birth}" readonly>
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
                     <legend class="emphaFont">회원정보 변경</legend>
                     <hr>
                     <br>
-                    <form action="#" method="post">
+                    <form action="/myPage/altMyInfo.do" method="post">
                         <div>
                             <label for="newPW">비밀번호</label><br>
                             <p></p>
