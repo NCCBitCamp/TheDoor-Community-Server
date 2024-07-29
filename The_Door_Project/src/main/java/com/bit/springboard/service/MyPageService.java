@@ -8,7 +8,7 @@ public interface MyPageService {
     MemberDto getInfo(MemberDto memberDto);
 
     // 변경할 유저 정보 (password, email, nickname) 빈칸이면 기존유지? 빈칸불가?
-    MemberDto altInfo(MemberDto memberDto);
+    void modifyInfo(MemberDto memberDto);
 
 
 }

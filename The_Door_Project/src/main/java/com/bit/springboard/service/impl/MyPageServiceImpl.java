@@ -20,7 +20,7 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public MemberDto altInfo(MemberDto memberDto) {
-        return null;
+    public void modifyInfo(MemberDto memberDto) {
+        myPageDao.modifyInfo(memberDto);
     }
 }
