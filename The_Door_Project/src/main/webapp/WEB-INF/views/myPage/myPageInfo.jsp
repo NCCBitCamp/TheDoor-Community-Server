@@ -60,11 +60,13 @@
                     <legend class="emphaFont">회원정보 변경</legend>
                     <hr>
                     <br>
-                    <form action="/myPage/altMyInfo.do" method="post">
+                    <form action="/myPage/modifyMyInfo.do" method="post">
+                        <input name="id" value="${personalInfo.id}" type="hidden">
+
                         <div>
                             <label for="newPW">비밀번호</label><br>
                             <p></p>
-                            <input id="newPW" type="text">
+                            <input id="newPW" type="text" name="password">
                         </div>
                         <div>
                             <label for="newPWCK">비밀번호 재입력</label><br>
@@ -74,12 +76,12 @@
                         <div>
                             <label for="userEmail">이메일</label><br>
                             <p></p>
-                            <input id="userEmail" type="email">
+                            <input id="userEmail" type="email" name="email">
                         </div>
                         <div>
                             <label for="userNickName">닉네임</label><br>
                             <p></p>
-                            <input id="userNickName" type="text">
+                            <input id="userNickName" type="text" name="nickname">
                         </div>
                         <br>
                         <br>
@@ -94,5 +96,21 @@
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 
+<script>
+    $(() => {
+
+        // 비밀번호 일치 시키기
+        let passwordConfirm = false;
+
+
+        let newPW = document.getElementById("newPW");
+        let pwRetry = document.getElementById("newPWCK");
+
+
+
+    })
+
+
+</script>
 </body>
 </html>

@@ -12,10 +12,10 @@
     </select>
 
 <!--    내 정보 변경-->
-    <update id="altInfo" parameterType="member">
+    <update id="modifyInfo" parameterType="member">
         UPDATE USER
         SET PASSWORD = #{password}, EMAIL = #{email}, NICKNAME = #{nickname}
-        WHERE USER_ID = #{user_id}
+        WHERE ID = #{id}
     </update>
 
 
