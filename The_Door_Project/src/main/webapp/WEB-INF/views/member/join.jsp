@@ -7,10 +7,10 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <div class="content">
     <div class="form-list">
-        <form action="/member/joinComplete.do" method="post">
+        <form id="join-form" action="/member/joinComplete.do" method="post">
             <!-- 아이디 -->
             <div class="divError" id="divId">
-                <input type="text" id="id" name="id" placeholder="아이디" class="input" maxlength="20"
+                <input type="text" id="user_id" name="user_id" placeholder="아이디" class="input" maxlength="20"
                        autocapitalize="off" autocomplete='off'>
                 <!-- <button type="button" class="check-btn">중복확인</button> -->
             </div>
@@ -30,7 +30,7 @@
 
             <!-- 닉네임 -->
             <div class="divError" id="divNickname">
-                <input type="text" id="nickname" name="nickname" placeholder="닉네임" class="input" maxlength="20"
+                <input type="text" id="nickname" name="nickname" placeholder="닉네임" class="input" maxlength="15"
                        autocomplete='off'>
             </div>
 
@@ -42,7 +42,7 @@
 
             <!-- 이름 -->
             <div class="divError" id="divUsername">
-                <input type="text" id="name" name="name" placeholder="이름" class="input" maxlength="20"
+                <input type="text" id="name" name="name" placeholder="이름" class="input" maxlength="15"
                        autocomplete='off'>
             </div>
 
@@ -66,26 +66,9 @@
         </form>
     </div>
 </div>
-<%--<script>--%>
-<%--    $(() => {--%>
-<%--        $.ajax({--%>
-<%--            url: "/member/userIdCheck.do", // <= Controller에 만들어야 함.--%>
-<%--            type: "post",--%>
-<%--            contentType: "x-www-form-urlencoded",--%>
-<%--            data: $("#join-form").serialize(),--%>
-<%--            success: (map) => {--%>git
-<%--                --%>
-<%--                const jsonMap = JSON.parse(map);--%>
-<%--                --%>
-<%--                if(jsonMap.userIdCheckNum === 0) {--%>
-<%--                    if()--%>
-<%--                }--%>
-<%--            }--%>
-<%--            --%>
-<%--            --%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
+<script>
+
+</script>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 <script src="${pageContext.request.contextPath}/static/js/join.js"></script>
 </body>

@@ -3,13 +3,19 @@ package com.bit.springboard.service.impl;
 import com.bit.springboard.dao.MemberDao;
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.MemberService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class MemberServiceImpl implements MemberService {
     private MemberDao memberDao;
+
+    public MemberServiceImpl(MemberDao memberDao) {
+        this.memberDao = memberDao;
+    }
 
     @Override
     public Map<String, Integer> userIdCheck(String userId) {
@@ -18,11 +24,18 @@ public class MemberServiceImpl implements MemberService {
 
         Map<String, Integer> forJsonMap = new HashMap<>();
 
-        if(userIdCheck == 0) {
-            forJsonMap.put("userIdCheckNum", 0);
-        } else {
-            forJsonMap.put("userIdCheckNum", 5);
-        }
+        forJsonMap.put("userIdCheckNum", userIdCheck);
+
+        return forJsonMap;
+    }
+    @Override
+    public Map<String, Integer> nicknameCheck(String nickname) {
+        int nicknameCheck = memberDao.nicknameCheck(nickname);
+        System.out.println("nicknameCheck = " + nicknameCheck);
+
+        Map<String, Integer> forJsonMap = new HashMap<>();
+
+        forJsonMap.put("nicknameCheckNum", nicknameCheck);
 
         return forJsonMap;
     }
@@ -32,10 +45,6 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
-    @Override
-    public String nicknameCheck(String nickname) {
-        return "";
-    }
 
     @Override
     public List<MemberDto> getMembers() {

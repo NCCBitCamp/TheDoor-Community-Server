@@ -6,7 +6,13 @@
     <select id="userIdCheck" parameterType="string" resultType="int">
         SELECT COUNT(*)
              FROM USER
-            WHERE USER_ID = #{user_id}
+            WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="nicknameCheck" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+             FROM USER
+            WHERE NICKNAME = #{nickname}
     </select>
 
 </mapper>
