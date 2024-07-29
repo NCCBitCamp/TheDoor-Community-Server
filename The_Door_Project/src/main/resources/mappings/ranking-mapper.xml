@@ -4,22 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="RankDao">
     <select id="getRankList" parameterType="cri" resultType="rank">
-        SELECT U.NICKNAME
-             , R.COMMENT
-             , R.DATE
-             , R.TIME
-            FROM RANKING R
-            JOIN USER U
-              ON R.RANK_ID = U.USER_ID
+        SELECT U.NICKNAME,
+        R.COMMENT,
+        R.DATE,
+        R.TIME,
+        R.GAME
+        FROM RANKING R
+        JOIN USER U
+          ON R.RANK_ID = U.USER_ID
+        <where>
+            <if test="gametype != null and gametype != ''">
+                R.GAME = #{gametype}
+            </if>
+        </where>
         ORDER BY R.TIME ASC
         LIMIT #{amount} OFFSET #{startNum}
     </select>
 
-    <select id="getRankTotalCnt" resultType="int">
+    <select id="getRankTotalCnt" parameterType="string" resultType="int">
         SELECT COUNT(*)
-            FROM RANKING R
-            JOIN USER U
-              ON R.RANK_ID = U.USER_ID
+        FROM RANKING R
+        JOIN USER U
+          ON R.RANK_ID = U.USER_ID
+        WHERE R.GAME = #{gametype}
     </select>
 
     <select id="getMyTopRanktheHostel" resultType="rank">

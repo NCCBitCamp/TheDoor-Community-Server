@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class RankDao {
@@ -27,8 +26,8 @@ public class RankDao {
         return rankDtoList;
     }
 
-    public int getRankTotalCnt() {
-        return mybatis.selectOne("RankDao.getRankTotalCnt");
+    public int getRankTotalCnt(String gametype) {
+        return mybatis.selectOne("RankDao.getRankTotalCnt", gametype);
     }
 
     public RankDto getMyTopRanktheHostel(RankDto rankDto) {
