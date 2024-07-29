@@ -105,7 +105,7 @@ $(() => {
 
 // 비밀번호 숨김 및 표시
 const eyeBtn = document.querySelector('#eyeBtn');
-const pwInput = document.querySelector('#pw1');
+const pwInput = document.querySelector('#password');
 const backImage = document.querySelector('.content');
 const boxShadow = document.querySelector('.form-list');
 
