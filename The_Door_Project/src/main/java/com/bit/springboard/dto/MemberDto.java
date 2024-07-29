@@ -6,11 +6,12 @@ package com.bit.springboard.dto;
 //                            VO(Value Object)랑 쓰임새가 비슷하다.
 public class MemberDto {
     private int id;
-    private String username;
+    private String userId; //
     private String password;
     private String nickname;
     private String email;
-    private String tel;
+    private String username;
+    private String birthday;
     private String role;
 
     public int getId() {
@@ -53,14 +54,6 @@ public class MemberDto {
         this.email = email;
     }
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
     public String getRole() {
         return role;
     }
@@ -69,15 +62,32 @@ public class MemberDto {
         this.role = role;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "MemberDto{" +
                 "id=" + id +
+                ", userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
-                ", tel='" + tel + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

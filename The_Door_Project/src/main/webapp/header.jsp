@@ -31,7 +31,7 @@
                 <a href="/board/help-main.do">Help</a>
             </div>
             <div class="auth-links">
-                <a href="">로그인</a> / <a href="">회원가입</a>
+                <a href="/member/login.do">로그인</a> / <a href="/member/join.do">회원가입</a>
             </div>
         </div>
     </div>
