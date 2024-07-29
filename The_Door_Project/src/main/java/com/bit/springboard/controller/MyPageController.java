@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
     @Autowired
     private RankService rankService;
-    
+    @Autowired
     private MyPageService mypageService;
 
     @Autowired

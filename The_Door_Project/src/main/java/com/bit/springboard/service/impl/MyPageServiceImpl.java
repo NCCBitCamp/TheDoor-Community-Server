@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MyPageServiceImpl implements MyPageService {
+
     private MyPageDao myPageDao;
 
     @Autowired
@@ -15,9 +16,9 @@ public class MyPageServiceImpl implements MyPageService {
 
     @Override
     public MemberDto getInfo(MemberDto memberDto) {
-        System.out.println(myPageDao.myInfo("testuser"));
-        return myPageDao.myInfo("testuser");
-//        return myPageDao.myInfo(memberDto.getNickname());
+        System.out.println(myPageDao.myInfo("user"));
+        return myPageDao.myInfo("user");
+//        return myPageDao.myInfo(memberDto.getUser_id());
     }
 
     @Override

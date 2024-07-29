@@ -32,7 +32,7 @@
                     <div>
                         <label for="fixUserId">아이디</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserId" type="text" value="${personalInfo.userId}" readonly>
+                        <input class="fixedUserInfo" id="fixUserId" type="text" value="${personalInfo.user_id}" readonly>
                     </div>
                     <div>
                         <label for="fixUserName">이름</label>
@@ -52,7 +52,7 @@
                     <div>
                         <label for="fixUserBirth">생년월일</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserBirth" type="text" value="${personalInfo.birth}" readonly>
+                        <input class="fixedUserInfo" id="fixUserBirth" type="text" value="${personalInfo.birthday}" readonly>
                     </div>
                 </div>
 
