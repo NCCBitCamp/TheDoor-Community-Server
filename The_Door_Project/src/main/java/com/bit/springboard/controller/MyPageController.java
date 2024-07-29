@@ -28,9 +28,9 @@ public class MyPageController {
     }
 
     @RequestMapping("/info.do")
-    public String myPageInfoView(MemberDto memberDto, HttpSession session, Model model) {
-        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-
+    public String myPageInfoView(HttpSession session, Model model) {
+        MemberDto memberDto = (MemberDto)session.getAttribute("loginMember");
+        
         if(loginMember == null) {
             return "redirect:/member/login.do";
         }

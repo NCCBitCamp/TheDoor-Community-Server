@@ -16,9 +16,7 @@ public class MyPageServiceImpl implements MyPageService {
 
     @Override
     public MemberDto getInfo(MemberDto memberDto) {
-        System.out.println(myPageDao.myInfo("user"));
-        return myPageDao.myInfo("user");
-//        return myPageDao.myInfo(memberDto.getUser_id());
+        return myPageDao.myInfo(memberDto.getUser_id());
     }
 
     @Override
