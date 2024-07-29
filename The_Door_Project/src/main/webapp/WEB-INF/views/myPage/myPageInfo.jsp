@@ -52,7 +52,7 @@
                     <div>
                         <label for="fixUserBirth">생년월일</label>
                         <p></p>
-                        <input class="fixedUserInfo" id="fixUserBirth" type="text" value="${personalInfo.birthday}" readonly>
+                        <input class="fixedUserInfo" id="fixUserBirth" type="text" value="${personalInfo.birth}" readonly>
                     </div>
                 </div>
 
