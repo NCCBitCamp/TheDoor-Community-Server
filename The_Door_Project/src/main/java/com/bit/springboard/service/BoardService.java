@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface BoardService {
+    void post(BoardDto boardDto, MultipartFile[] uploadFiles);
+
     void write(BoardDto boardDto, MultipartFile[] uploadFiles);
 
     void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles);

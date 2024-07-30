@@ -11,7 +11,7 @@
         <!--헤더이미지-->
         <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
 
-        <!-- 현재 선택된 뉴스 네비게이션과 검색창 -->
+        <!-- 현재 선택된 커뮤니티의 네비게이션과 검색창 부분-->
         <div class="search-container">
             <span class="current-nav">자유게시판</span>
             <form class="form-inline" id="search-form" action="/community/community-list.do" method="post">
@@ -38,12 +38,13 @@
                                 </c:if>>작성자</option>
                     </select>
                 </div>
+
+                <!--게시글 검색 부분-->
                 <input class="form-control mr-sm-2" type="text" name="searchKeyword" value="${searchMap.searchKeyword}" placeholder="검색" aria-label="Search">
                 <div class="input-group-append">
                     <i class="bi bi-search" id="search-icon"></i>
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="btnSearch">검색</button>
                 </div>
-                <!-- </div> -->
             </form>
         </div>
 
@@ -74,6 +75,8 @@
                     </c:forEach>
                 </tbody>
             </table>
+
+            <!--커뮤니티의 글 등록 부분(로그인해야지만 등록버튼나오게)-->
             <c:if test="${loginMember ne null}">
                 <div class="post-container">
                     <button type="button" class="btn btn-outline-secondary" onclick="location.href='/community/communityWrite.do'">글 등록</button>
@@ -112,14 +115,8 @@
                 </nav>
             </div>
         </div>
-        <div class="footer">
-            <div class="footer-content">
-                <a href="https://general-pet-cfa.notion.site/2-76644680bfca465e854f0e78a85e3630?pvs=4">
-                    <p>더 도어 게임즈가 궁금하신가요?</p>
-                </a>
-                <p>©The Door Games</p>
-            </div>
-        </div>
+
+        <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
     </div>
 
     <!-- JavaScript 추가 -->
