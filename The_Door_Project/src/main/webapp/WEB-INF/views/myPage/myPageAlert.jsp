@@ -16,7 +16,7 @@
             <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
             <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
 
-            <p class="emphaFont">닉네임123</p>
+            <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
 
         <div id="selectArea">

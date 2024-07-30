@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPagePost.css">
@@ -16,7 +17,7 @@
             <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
             <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
 
-            <p class="emphaFont">닉네임123</p>
+            <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
 
         <div id="selectArea">
@@ -39,36 +40,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>35430</td>
-                    <td>우리 팀 대 성공함... 프로젝트 자랑 보실?</td>
-                    <td>닉네임123</td>
-                    <td>456789</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td>요세하녕안</td>
-                    <td>닉네임123</td>
-                    <td>5234</td>
-                </tr>
+                    <c:forEach var="contents" items="${myWrite}">
+                        <tr>
+                            <td>${contents.id}</td>
+                            <td><a href="/myPage/info.do">${contents.title}</a></td>
+                            <td>${contents.WRITER_ID}</td>
+                            <td>${contents.cnt}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
