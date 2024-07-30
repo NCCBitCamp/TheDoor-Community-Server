@@ -117,6 +117,11 @@ public class BoardController {
         } else if(boardDto.getType().equals("news")) {
             boardService = applicationContext.getBean("noticeServiceImpl", BoardService.class);
         } // FAQ 쪽 게시판 관련 코드 추가
+        if(boardDto.getType().equals("qna")) {
+            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+        } else if(boardDto.getType().equals("faq")) {
+            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+        }
 
         boardService.post(boardDto, uploadFiles);
 
@@ -126,7 +131,13 @@ public class BoardController {
             return "redirect:/news/news-list.do";
         }
 
-        return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
+        if (boardDto.getType().equals("faq")) {
+            return "redirect:/help/help-faq.do";
+        } else if (boardDto.getType().equals("qna")) {
+            return "redirect:/help/help-qna.do";
+        }
+
+        return "0";
     }
 
     @PostMapping("/modify.do")
@@ -138,6 +149,11 @@ public class BoardController {
         } else if(boardDto.getType().equals("news")) {
             boardService = applicationContext.getBean("noticeServiceImpl", BoardService.class);
         } // FAQ 쪽 게시판 관련 코드 추가
+        if(boardDto.getType().equals("qna")) {
+            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+        } else if(boardDto.getType().equals("faq")) {
+            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+        }
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
@@ -145,6 +161,12 @@ public class BoardController {
             return "redirect:/community/free-list.do"; // 요청을 redirect로 보내지 않으면 post.do 라는 요청이 남아있어서 새로고침하면 post 요청이 다시감.
         } else if(boardDto.getType().equals("news")) {
             return "redirect:/news/news-list.do";
+        }
+
+        if(boardDto.getType().equals("faq")) {
+            return "redirect:/help/help-faq.do";
+        } else if (boardDto.getType().equals("qna")) {
+            return "redirect:/help/help-qna.do";
         }
 
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
@@ -158,12 +180,23 @@ public class BoardController {
             boardService = applicationContext.getBean("noticeServiceImpl", BoardService.class);
         } // FAQ 쪽 게시판 관련 코드 추가
 
+        if (boardDto.getType().equals("faq")) {
+            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+        } else if (boardDto.getType().equals("qna")) {
+            boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        }
+
         boardService.delete(boardDto.getId());
 
         if(boardDto.getType().equals("free")) {
             return "redirect:/community/free-list.do"; // 요청을 redirect로 보내지 않으면 post.do 라는 요청이 남아있어서 새로고침하면 post 요청이 다시감.
         } else if(boardDto.getType().equals("news")) {
             return "redirect:/news/news-list.do";
+        }
+        if(boardDto.getType().equals("faq")) {
+            return "redirect:/help/help-faq.do";
+        } else if (boardDto.getType().equals("qna")) {
+            return "redirect:/help/help-qna.do";
         }
 
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
