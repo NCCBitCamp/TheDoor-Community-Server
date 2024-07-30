@@ -1,6 +1,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/member/login.css">
+</head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <div class="content">
@@ -33,7 +37,4 @@
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 <script src="${pageContext.request.contextPath}/static/js/login.js"></script>
 </body>
-<head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/member/login.css">
-</head>
 </html>
