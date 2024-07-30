@@ -19,6 +19,14 @@
     </update>
 
 
-<!--    -->
+<!--    내가 쓴 글 리스트로 가져오기-->
+    <select id="myWrite" parameterType="string" resultType="board">
+        SELECT C.ID, C.TITLE, C.WRITER_ID, C.CNT
+        FROM COMMUNITY C
+        JOIN USER U
+            ON C.WRITER_ID = U.USER_ID
+        WHERE C.WRITER_ID = #{user_id}
+        ORDER BY C.ID DESC
+    </select>
 
 </mapper>
