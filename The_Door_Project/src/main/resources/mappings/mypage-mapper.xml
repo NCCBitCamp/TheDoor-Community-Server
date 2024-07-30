@@ -27,6 +27,7 @@
             ON C.WRITER_ID = U.USER_ID
         WHERE C.WRITER_ID = #{user_id}
         ORDER BY C.ID DESC
+        LIMIT 10 OFFSET 3
     </select>
 
 <!--    내가 쓴 글에 달린 댓글 리스트로 가져오기-->

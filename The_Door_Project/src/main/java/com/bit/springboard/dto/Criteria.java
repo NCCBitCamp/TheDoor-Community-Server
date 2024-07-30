@@ -8,6 +8,15 @@ public class Criteria {
     // 시작 게시글 번호
     private int startNum;
     private String gametype;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getGameType() {
         return gametype;
