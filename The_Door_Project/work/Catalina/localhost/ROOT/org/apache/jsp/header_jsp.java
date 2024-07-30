@@ -162,7 +162,7 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"nav-links\">\r\n");
       out.write("                <a href=\"/main/guide.do\">Guide</a>\r\n");
       out.write("                <a href=\"/board/news-list.do\">News</a>\r\n");
-      out.write("                <a href=\"/board/free-list.do\">Community</a>\r\n");
+      out.write("                <a href=\"/board/community-list.do\">Community</a>\r\n");
       out.write("                <a href=\"/main/ranking.do\">Ranking</a>\r\n");
       out.write("                <a href=\"/board/help-main.do\">Help</a>\r\n");
       out.write("            </div>\r\n");

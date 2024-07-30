@@ -165,7 +165,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("/static/images/index/noticeBtn.png\" alt=\"Image 1\">\r\n");
       out.write("                <div class=\"overlay\"></div>\r\n");
       out.write("            </a>\r\n");
-      out.write("            <a href=\"/board/free-list.do\" class=\"button\">\r\n");
+      out.write("            <a href=\"/board/community-list.do\" class=\"button\">\r\n");
       out.write("                <img src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${pageContext.request.contextPath}", java.lang.String.class, (jakarta.servlet.jsp.PageContext)_jspx_page_context, null));
       out.write("/static/images/index/communityBtn.png\" alt=\"Image 2\">\r\n");
