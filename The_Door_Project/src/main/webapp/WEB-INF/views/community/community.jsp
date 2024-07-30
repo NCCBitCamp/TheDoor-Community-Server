@@ -40,6 +40,7 @@
                 </div>
                 <input class="form-control mr-sm-2" type="text" name="searchKeyword" value="${searchMap.searchKeyword}" placeholder="검색" aria-label="Search">
                 <div class="input-group-append">
+                    <i class="bi bi-search" id="search-icon"></i>
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="btnSearch">검색</button>
                 </div>
                 <!-- </div> -->
@@ -61,48 +62,52 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${communityList}" var="community">
-                        <tr onclick="location.href='/board/update-cnt.do?id=${freeBoard.id}&type=community'">
-                            <td>{freeBoard.id</td>
-                            <td class="title"><a href="/board/free-detail.do">${freeBoard.title}</a></td>
-                            <td>{freeBoard.nickname}</td>
+                        <tr onclick="location.href='/board/update-cnt.do?id=${community.id}&type=community'">
+                            <td>{community.id</td>
+                            <td class="title"><a href="/board/free-detail.do">${community.title}</a></td>
+                            <td>{community.nickname}</td>
                             <td>
-                                <javatime:format value="${freeBoard.regdate}" pattern="yyyy-MM-dd"/>
+                                <javatime:format value="${community.date}" pattern="yyyy-MM-dd"/>
                             </td>
-                            <td>${freeBoard.cnt}</td>
+                            <td>${community.cnt}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <div class="post-container">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/community-write.do'">글 등록</button>
-            </div>
+            <c:if test="${loginMember ne null}">
+                <div class="post-container">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/community/communityWrite.do'">글 등록</button>
+                </div>
+            </c:if>
             <br>
             <div>
 
                 <!-- 페이지네이션 -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                        <li class="page-item"><a class="page-link" href="#">8</a></li>
-                        <li class="page-item"><a class="page-link" href="#">9</a></li>
-                        <li class="page-item"><a class="page-link" href="#">10</a></li>
+                        <c:if test="${page.prev}">
+                            <li class="page-item">
+                                <a class="page-link" href="${page.cri.pageNum - 1}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
 
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <c:forEach begin="#{page.startpage}"
+                                   end="#{page.endpage}"
+                                   var="number">
+                            <li class="page-item">
+                                <a class="page-link link-secondary" href="${number}">${number}</a>
+                            </li>
+                        </c:forEach>
+
+                        <c:if test="${page.next}">
+                            <li class="page-item">
+                                <a class="page-link" href="${page.cri.pageNum + 1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
@@ -119,14 +124,26 @@
 
     <!-- JavaScript 추가 -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.news-navbar .nav-item');
-            const currentNav = document.querySelector('.current-nav span');
+        $(() => {
+            $("#search-icon").on("click", (e) => {
+                $("input[name='pageNum']").val(1);
+                $("#search-form").submit();
+            });
 
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    currentNav.textContent = this.textContent;
-                });
+            $("input[name='searchKeyword']").on("keypress", (e) => {
+                if(e.key === 'Enter') {
+                    $("input[name='pageNum']").val(1);
+                }
+            });
+
+            $(".pagination a").on("click", (e) => {
+                e.preventDefault();
+
+                // console.log($(e.target).attr("href"));
+
+                $("input[name='pageNum']").val($(e.target).attr("href"));
+
+                $("#search-form").submit();
             });
         });
     </script>
