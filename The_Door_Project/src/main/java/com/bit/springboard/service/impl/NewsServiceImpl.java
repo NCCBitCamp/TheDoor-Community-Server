@@ -6,6 +6,7 @@ import com.bit.springboard.dto.BoardFileDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class NewsServiceImpl implements BoardService {
     private NewsDao newsDao;
 
+    @Autowired
     public NewsServiceImpl(NewsDao newsDao) {
         this.newsDao = newsDao;
     }
@@ -25,11 +27,6 @@ public class NewsServiceImpl implements BoardService {
 
     @Override
     public void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles) {
-
-    }
-
-    @Override
-    public void plusCnt(int id) {
 
     }
 
@@ -56,5 +53,10 @@ public class NewsServiceImpl implements BoardService {
     @Override
     public List<BoardFileDto> getBoardFileList(int id) {
         return List.of();
+    }
+
+    @Override
+    public void updateCnt(int id) {
+        newsDao.updateCnt(id);
     }
 }
