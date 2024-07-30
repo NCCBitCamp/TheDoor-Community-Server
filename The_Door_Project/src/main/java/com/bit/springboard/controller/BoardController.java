@@ -80,12 +80,6 @@ public class BoardController {
         return "community/communityWrite";
     }
 
-<<<<<<< soomin
-    @PostMapping("/community-write.do")
-    public String communityWrite(BoardDto boardDto, MultipartFile[] uploadFiles) {
-        if(boardDto.getType().equals("community"))
-            boardService = applicationContext.getBean("CommunityServiceImpl", BoardService.class);
-=======
     @PostMapping("/post.do")
     public String post(BoardDto boardDto, MultipartFile[] uploadFiles) {
         if(boardDto.getType().equals("free")) {
@@ -98,14 +92,11 @@ public class BoardController {
         } else if(boardDto.getType().equals("faq")) {
             boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
         }
->>>>>>> main
 
         boardService.post(boardDto, uploadFiles);
 
         return "redirect:/community/community-list.do";
 
-<<<<<<< soomin
-=======
         if (boardDto.getType().equals("faq")) {
             return "redirect:/help/help-faq.do";
         } else if (boardDto.getType().equals("qna")) {
@@ -113,21 +104,13 @@ public class BoardController {
         }
 
         return "0";
->>>>>>> main
-    }
+
 
     @PostMapping("/modify.do")
     public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
                          @RequestParam(name = "originFiles", required = false) String originFiles) {
         System.out.println(originFiles);
-<<<<<<< soomin
-        if(boardDto.getType().equals("community"))
-            boardService = applicationContext.getBean("CommunityServiceImpl", BoardService.class);
 
-        boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
-
-        return "redirect:/community/community-list.do"; // 요청을 redirect로 보내지 않으면 post.do 라는 요청이 남아있어서 새로고침하면 post 요청이 다시감.
-=======
         if(boardDto.getType().equals("free")) {
             boardService = applicationContext.getBean("freeBoardServiceImpl", BoardService.class);
         } else if(boardDto.getType().equals("news")) {
@@ -154,7 +137,7 @@ public class BoardController {
         }
 
         return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
->>>>>>> main
+
     }
 
     @GetMapping("/delete.do")
@@ -170,18 +153,7 @@ public class BoardController {
 
         boardService.delete(boardDto.getId());
 
-<<<<<<< soomin
-        return "redirect:/community/community-list.do"; // 요청을 redirect로 보내지 않으면 post.do 라는 요청이 남아있어서 새로고침하면 post 요청이 다시감.
 
-    }
-
-    @GetMapping("update-cnt.do")
-    public String updateCnt(BoardDto boardDto) {
-        if (boardDto.getType().equals("community"))
-            boardService = applicationContext.getBean("CommunityServiceImpl", BoardService.class);
-
-        boardService.updateCnt(boardDto.getId());
-=======
         if(boardDto.getType().equals("free")) {
             return "redirect:/community/free-list.do"; // 요청을 redirect로 보내지 않으면 post.do 라는 요청이 남아있어서 새로고침하면 post 요청이 다시감.
         } else if(boardDto.getType().equals("news")) {
@@ -192,7 +164,6 @@ public class BoardController {
         } else if (boardDto.getType().equals("qna")) {
             return "redirect:/help/help-qna.do";
         }
->>>>>>> main
 
         return "redirect:/community/community-list.do?id=" + boardDto.getId(); // 요청을 redirect로 보내지 않으면 post.do 라는 요청이 남아있어서 새로고침하면 post 요청이 다시감.
     }
