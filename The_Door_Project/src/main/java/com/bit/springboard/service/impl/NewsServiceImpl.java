@@ -27,7 +27,7 @@ public class NewsServiceImpl implements BoardService {
     }
 
     @Override
-    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
+    public void post(BoardDto boardDto, MultipartFile[] uploadFiles) {
         List<BoardFileDto> boardFileDtoList = new ArrayList<>();
 
         if(uploadFiles != null && uploadFiles.length > 0) {
