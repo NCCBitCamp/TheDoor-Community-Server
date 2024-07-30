@@ -41,12 +41,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="comment" items="${getComments}">
+                <c:forEach var="comment" items="${getComments}" varStatus="status">
                     <tr>
                         <td>${comment.title}</td>
                         <td>${comment.content}</td>
                         <td>${comment.WRITER_ID}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime}"/></td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>

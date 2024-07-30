@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -90,9 +91,11 @@ public class MyPageController {
 
         List<CommentDto> getCommentList = mypageService.getComment(loginMember);
 
+        List<Date> dateList = new ArrayList<>();
         getCommentList.forEach(comment -> {
-            model.addAttribute("convertedTime", convertToDate(comment.getDate()));
+            dateList.add(convertToDate(comment.getDate()));
         });
+        model.addAttribute("convertedTime", dateList);
 
         model.addAttribute("getComments", getCommentList);
 

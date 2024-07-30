@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Repository
@@ -31,12 +31,7 @@ public class MyPageDao {
     }
 
     public List<CommentDto> getComment(String userId){
-        List<CommentDto> commentList = new ArrayList<>();
-        commentList = mybatis.selectList("MyPageDao.getComments",userId);
-
-        System.out.println(commentList);
-
-        return commentList;
+        return mybatis.selectList("MyPageDao.getComments",userId);
     }
 
 
