@@ -1,7 +1,6 @@
 package com.bit.springboard.controller;
 
 import com.bit.springboard.dto.BoardDto;
-import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.RankDto;
 import com.bit.springboard.service.RankService;
 import com.bit.springboard.dto.MemberDto;
@@ -69,6 +68,7 @@ public class MyPageController {
     @RequestMapping("post.do")
     public String myPagePostView(HttpSession session, Model model) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        model.addAttribute("personalInfo", loginMember);
 
         List<BoardDto> myWrite = mypageService.getMyWrite(loginMember);
 
@@ -86,8 +86,9 @@ public class MyPageController {
 
 
     @RequestMapping("alert.do")
-    public String myPageAlertView(HttpSession session) {
+    public String myPageAlertView(HttpSession session, Model model) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        model.addAttribute("personalInfo", loginMember);
 
         if(loginMember == null) {
             return "redirect:/member/login.do";
