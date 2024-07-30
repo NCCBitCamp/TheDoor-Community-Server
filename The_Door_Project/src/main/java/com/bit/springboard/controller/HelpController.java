@@ -73,21 +73,15 @@ public class HelpController {
 
     @PostMapping("/post.do")
     public String post(BoardDto boardDto, MultipartFile[] uploadFiles) {
-        // 게시판 타입에 따른 동적 의존성 주입
-        // FAQ 쪽 게시판 관련 코드 추가
-        if(boardDto.getType().equals("help-qna")) {
-            boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-        } else if(boardDto.getType().equals("help-faq")) {
-            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
-        }
+
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+
 
         boardService.post(boardDto, uploadFiles);
 
-        if (boardDto.getType().equals("help-faq")) {
-            return "redirect:/help/help-faq.do";
-        } else {
-            return "redirect:/help/help-qna.do";
-        }
+
+        return "redirect:/help/help-qna.do";
+
 
     }
 
@@ -95,42 +89,26 @@ public class HelpController {
     public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
                          @RequestParam(name = "originFiles", required = false) String originFiles) {
         System.out.println(originFiles);
-        // FAQ 쪽 게시판 관련 코드 추가
-        if(boardDto.getType().equals("help-qna")) {
-            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
-        } else if(boardDto.getType().equals("help-faq")) {
-            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
-        }
+
+        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
-        if(boardDto.getType().equals("help-faq")) {
-            return "redirect:/help/help-faq.do";
-        } else if (boardDto.getType().equals("help-qna")) {
-            return "redirect:/help/help-qna.do";
-        }
+        return "redirect:/help/help-qna.do";
 
-        return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
+
     }
 
     @GetMapping("/delete.do")
     public String delete(BoardDto boardDto) {
-        // FAQ 쪽 게시판 관련 코드 추가
 
-        if (boardDto.getType().equals("help-faq")) {
-            boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
-        } else if (boardDto.getType().equals("help-qna")) {
-            boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-        }
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+
 
         boardService.delete(boardDto.getId());
 
-        if(boardDto.getType().equals("help-faq")) {
-            return "redirect:/help/help-faq.do";
-        } else if (boardDto.getType().equals("help-qna")) {
-            return "redirect:/help/help-qna.do";
-        }
 
-        return "0"; // FAQ 쪽 게시판 관련 조건문 추가해서 return 하기
+        return "redirect:/help/help-qna.do";
+
     }
 }
