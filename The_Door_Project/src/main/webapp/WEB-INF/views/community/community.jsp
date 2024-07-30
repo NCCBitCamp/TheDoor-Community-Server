@@ -14,20 +14,33 @@
         <!-- 현재 선택된 뉴스 네비게이션과 검색창 -->
         <div class="search-container">
             <span class="current-nav">자유게시판</span>
-            <form class="form-inline">
-                <!-- <div class="input-group"> -->
-                <!-- <div class="input-group-prepend"> -->
+            <form class="form-inline" id="search-form" action="/community/community-list.do" method="post">
+                <input type="hidden" name="pageNum" value="${page.cri.pageNum}">
+                <input type="hidden" name="amount" value="${page.cri.amount}">
                 <div>
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">제목</button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">제목</a></li>
-                        <li><a class="dropdown-item" href="#">내용</a></li>
-                        <li><a class="dropdown-item" href="#">작성자</a></li>
-                    </ul>
+                    <select class="form-select" name="searchCondition">
+                        <option value="all"
+                                <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
+                                    selected
+                                </c:if>>전체</option>
+                        <option value="title"
+                                <c:if test="${searchMap.searchCondition == 'title'}">
+                                    selected
+                                </c:if>>제목</option>
+                        <option value="content"
+                                <c:if test="${searchMap.searchCondition == 'content'}">
+                                    selected
+                                </c:if>>내용</option>
+                        <option value="writer"
+                                <c:if test="${searchMap.searchCondition == 'writer'}">
+                                    selected
+                                </c:if>>작성자</option>
+                    </select>
                 </div>
-                <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="Search">
+                <input class="form-control mr-sm-2" type="text" name="searchKeyword" value="${searchMap.searchKeyword}" placeholder="검색" aria-label="Search">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">검색</button>
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="btnSearch">검색</button>
                 </div>
                 <!-- </div> -->
             </form>
@@ -47,7 +60,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${freeBoardList}" var="freeboard">
+                    <c:forEach items="${communityList}" var="community">
                         <tr onclick="location.href='/board/update-cnt.do?id=${freeBoard.id}&type=community'">
                             <td>{freeBoard.id</td>
                             <td class="title"><a href="/board/free-detail.do">${freeBoard.title}</a></td>

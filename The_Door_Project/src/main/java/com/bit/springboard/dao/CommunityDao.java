@@ -28,7 +28,7 @@ public class CommunityDao {
             "                                   , C.CNT" +
             "                                  FROM COMMUNITY C" +
             "                                  JOIN USER U" +
-            "                                    ON C.WRITER_ID = U.ID";
+            "                                    ON C.WRITER_ID = U.NICKNAME";
     // 게시글 삭제
     private final String DELETE = "DELETE FROM COMMUNITY" +
             "                           WHERE ID = ?";
@@ -39,11 +39,11 @@ public class CommunityDao {
             "                                   , C.CONTENT" +
             "                                   , C.WRITER_ID" +
             "                                   , U.NICKNAME" +
-            "                                   , C.REGDATE" +
+            "                                   , C.DATE" +
             "                                   , C.CNT" +
-            "                                  FROM COMMUNITY F" +
+            "                                  FROM COMMUNITY C" +
             "                                  JOIN USER U" +
-            "                                    ON C.WRITER_ID = U.ID" +
+            "                                    ON C.WRITER_ID = U.NICKNAME" +
             "                                  WHERE C.ID = ?";
 
     // 자유게시글 등록
