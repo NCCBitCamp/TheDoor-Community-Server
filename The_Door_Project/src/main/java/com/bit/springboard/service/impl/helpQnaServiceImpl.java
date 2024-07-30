@@ -57,6 +57,11 @@ public class helpQnaServiceImpl implements BoardService {
     }
 
     @Override
+    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
+
+    }
+
+    @Override
     public void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles) {
         // JSON String 형태의 originFiles를 List<BoardFileDto> 형태로 변환
         List<BoardFileDto> originFileList = new ArrayList<>();
@@ -156,5 +161,10 @@ public class helpQnaServiceImpl implements BoardService {
     @Override
     public List<BoardFileDto> getBoardFileList(int id) {
         return helpQnaDao.getBoardFileList(id);
+    }
+
+    @Override
+    public void updateCnt(int id) {
+
     }
 }
