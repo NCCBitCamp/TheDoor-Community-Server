@@ -74,7 +74,6 @@ public class HelpQnaDao {
 
         mybatis.update("HelpQnaDao.modify", boardDto);
 
-        // 파일
         if(uFileList.size() > 0) {
             uFileList.forEach(boardFileDto -> {
                 if(boardFileDto.getFilestatus().equals("I")) {

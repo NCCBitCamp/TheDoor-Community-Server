@@ -26,7 +26,7 @@
             <div class="nav-links">
                 <a href="/main/guide.do">Guide</a>
                 <a href="/board/news-list.do">News</a>
-                <a href="/board/free-list.do">Community</a>
+                <a href="/board/community-list.do">Community</a>
                 <a href="/main/ranking.do">Ranking</a>
                 <a href="/board/help-main.do">Help</a>
             </div>

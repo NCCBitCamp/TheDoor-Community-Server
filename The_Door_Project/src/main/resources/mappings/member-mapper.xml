@@ -43,4 +43,11 @@
                 #{birth})
     </insert>
 
+    <select id="idSearch" parameterType="member" resultType="String">
+        SELECT USER_ID
+             FROM USER
+            WHERE USERNAME = #{username}
+              AND EMAIL = #{email}
+    </select>
+
 </mapper>

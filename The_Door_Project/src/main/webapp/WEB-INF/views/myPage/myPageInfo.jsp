@@ -77,17 +77,17 @@
                         <div>
                             <label for="userEmail">이메일</label><br>
                             <p></p>
-                            <input id="userEmail" type="email" name="email">
+                            <input id="userEmail" type="email" name="email" value="${personalInfo.email}">
                         </div>
                         <div>
                             <label for="userNickName">닉네임</label><br>
                             <p></p>
-                            <input id="userNickName" type="text" name="nickname">
+                            <input id="userNickName" type="text" name="nickname" value="${personalInfo.nickname}">
                         </div>
                         <br>
                         <br>
                         <div>
-                            <input type="submit" value="변경하기" style="background-color: black; color: white; font-weight: bold;">
+                            <input id="submitBtn" type="submit" value="변경하기" style="background-color: black; color: white; font-weight: bold;">
                         </div>
                     </form>
                 </div>
@@ -102,22 +102,37 @@
         const newPW = document.getElementById("newPW");
         const pwRetry = document.getElementById("newPWCK");
         const passwordConfirm = document.getElementById("passwordConfirm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        var passConfirm = false;
+
+        if (newPW.value === "" || newPW.value === null){
+            submitBtn.disabled = !passConfirm;
+        }
 
         function checkPasswordMatch() {
             if (newPW.value === pwRetry.value) {
                 passwordConfirm.textContent = "비밀번호가 일치합니다.";
                 passwordConfirm.style.color = "green";
+                passConfirm = true;
             } else {
                 passwordConfirm.textContent = "비밀번호가 일치하지 않습니다.";
                 passwordConfirm.style.color = "red";
+                passConfirm = false;
             }
+            submitBtn.disabled = !passConfirm;
+
+
         }
 
         newPW.addEventListener('input', checkPasswordMatch);
         pwRetry.addEventListener('input', checkPasswordMatch);
+
+
     });
 
 
 </script>
+<%--ajax써서 json 변환해서 값 받기--%>
 </body>
 </html>

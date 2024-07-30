@@ -6,7 +6,7 @@ public class QnaDto {
     private LocalDateTime fdate;
     private String subject;
     private boolean answer;
-
+    
     public LocalDateTime getFdate() {
         return fdate;
     }

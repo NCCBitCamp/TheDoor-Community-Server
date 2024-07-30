@@ -14,9 +14,9 @@ public interface BoardService {
 
     void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles);
 
-    void plusCnt(int id);
-
     void delete(int id);
+
+    void updateCnt(int id);
 
     List<BoardDto> getBoardList(Map<String, String> searchMap, Criteria cri);
 
@@ -25,4 +25,5 @@ public interface BoardService {
     int getBoardTotalCnt(Map<String, String> searchMap);
 
     List<BoardFileDto> getBoardFileList(int id);
+
 }

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommunityDao">
+    <insert id="write" parameterType="community">
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT IFNULL(MAX(ID), 1) FROM COMMUNITY
+        </selectKey>
+        INSERT INTO COMMUNITY(
+            TITLE,
+            CONTENT,
+            WRITER_ID
+        ) VALUES(
+            #{title},
+            #{content},
+                (
+                    SELECT U.ID
+                    FROM USER U
+                    WHERE U.NICKNAME = #{nickname}
+                )
+        )
+    </insert>
+
+    <update id="modify" parameterType="community">
+        UPDATE COMMUNITY
+        SET
+            TITLE = #{title},
+            CONTENT = #{content},
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM COMMUNITY
+        WHERE ID = #{id}
+    </delete>
+
+    <update id="updateCnt" parameterType="int">
+        UPDATE COMMUNITY
+        SET
+            CNT = CNT + 1
+        WHERE ID = #{id}
+    </update>
+
+    <select id="getBoardList" parameterType="map" resultType="board">
+        SELECT C.ID
+        , C.TITLE
+        , C.CONTENT
+        , C.WRITER_ID
+        , U.NICKNAME
+        , C.DATE
+        , C.CNT
+        FROM COMMUNITY C
+        JOIN USER U
+        ON C.WRITER_ID = U.NICKNAME
+        -- mybatis의 동적 쿼리 사용
+        WHERE 1=1
+        <if test="search.searchKeyword != null and search.searchKeyword != ''">
+            <if test="search.searchCondition == 'all'">
+                AND (C.TITLE LIKE CONCAT('%', #{search.searchKeyword}, '%')
+                OR C.CONTENT LIKE CONCAT('%', #{search.searchKeyword}, '%')
+                OR U.NICKNAME LIKE CONCAT('%', #{search.searchKeyword}, '%'))
+            </if>
+            <if test="search.searchCondition == 'title'">
+                AND C.TITLE LIKE CONCAT('%', #{search.searchKeyword}, '%')
+            </if>
+            <if test="search.searchCondition == 'content'">
+                AND C.CONTENT LIKE CONCAT('%', #{search.searchKeyword}, '%')
+            </if>
+            <if test="search.searchCondition == 'writer'">
+                AND U.NICKNAME LIKE CONCAT('%', #{search.searchKeyword}, '%')
+            </if>
+        </if>
+        ORDER BY C.ID DESC
+        LIMIT #{cri.amount} OFFSET #{cri.startNum}
+    </select>
+
+    <select id="getBoard" parameterType="int" resultType="board">
+        SELECT C.ID
+             , C.TITLE
+             , C.CONTENT
+             , C.WRITER_ID
+             , U.NICKNAME
+             , C.DATE
+             , C.CNT
+        FROM COMMUNITY C
+                 JOIN USER U
+                   ON C.WRITER_ID = U.NICKNAME
+        WHERE C.ID = #{id}
+    </select>
+
+    <select id="getBoardTotalCnt" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+            FROM COMMUNITY C
+            JOIN USER U
+            ON C.WRITER_ID = U.NICKNAME
+        WHERE 1=1
+        <if test="searchKeyword != null and searchKeyword != ''">
+            <if test="searchCondition == 'all'">
+                AND (
+                C.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+                OR C.CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+                OR U.NICKNAME LIKE CONCAT('%', #{searchKeyword}, '%')
+                )
+            </if>
+            <if test="searchCondition == 'title'">
+                AND C.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+            </if>
+            <if test="searchCondition == 'content'">
+                AND C.CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+            </if>
+            <if test="searchCondition == 'writer'">
+                AND U.NICKNAME LIKE CONCAT('%', #{searchKeyword}, '%')
+            </if>
+        </if>
+    </select>
+
+    <insert id="uploadFiles" parameterType="list">
+        INSERT INTO COMMUNITY_FILE (
+        BOARD_ID,
+        FILENAME,
+        FILEORIGINNAME,
+        FILEPATH,
+        FILETYPE
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.board_id},
+            #{item.filename},
+            #{item.fileoriginname},
+            #{item.filepath},
+            #{item.filetype}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getFreeBoardFileList" parameterType="int" resultType="boardFile">
+        SELECT ID
+             , BOARD_ID
+             , FILENAME
+             , FILEORIGINNAME
+             , FILEPATH
+             , FILETYPE
+        FROM COMMUNITY_FILE
+            WHERE BOARD_ID = #{id}
+    </select>
+
+    <delete id="deleteFiles" parameterType="int">
+        DELETE FROM COMMUNITY_FILE
+        WHERE BOARD_ID = #{id}
+    </delete>
+
+    <insert id="postBoardFileOne" parameterType="boardFile">
+        INSERT INTO COMMUNITY_FILE(
+            BOARD_ID,
+            FILENAME,
+            FILEORIGINNAME,
+            FILEPATH,
+            FILETYPE
+        ) VALUES (
+                     #{board_id},
+                     #{filename},
+                     #{fileoriginname},
+                     #{filepath},
+                     #{filetype}
+                 )
+    </insert>
+
+    <update id="modifyBoardFileOne" parameterType="boardFile">
+        UPDATE COMMUNITY_FILE
+            SET
+                FILENAME = #{filename},
+                FILEORIGINNAME = #{fileoriginname},
+                FILEPATH = #{filepath},
+                FILETYPE = #{filetype}
+            WHERE ID = #{id}
+              AND BOARD_ID = #{board_id}
+    </update>
+
+    <delete id="deleteBoardFileOne" parameterType="boardFile">
+        DELETE FROM COMMUNITY_FILE
+        WHERE ID = #{id}
+          AND BOARD_ID = #{board_id}
+    </delete>
+</mapper>
