@@ -2,6 +2,7 @@ package com.bit.springboard.service.impl;
 
 import com.bit.springboard.dao.MyPageDao;
 import com.bit.springboard.dto.BoardDto;
+import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.BoardService;
 import com.bit.springboard.service.MyPageService;
@@ -34,5 +35,11 @@ public class MyPageServiceImpl implements MyPageService {
     public List<BoardDto> getMyWrite(MemberDto memberDto) {
         System.out.println(myPageDao.myWrite(memberDto.getUser_id()));
         return myPageDao.myWrite(memberDto.getUser_id());
+    }
+
+    @Override
+    public List<CommentDto> getComment(MemberDto memberDto) {
+        System.out.println(myPageDao.getComment(memberDto.getUser_id()));
+        return myPageDao.getComment(memberDto.getUser_id());
     }
 }
