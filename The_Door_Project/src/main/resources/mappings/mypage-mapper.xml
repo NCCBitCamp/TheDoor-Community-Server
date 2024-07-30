@@ -29,4 +29,19 @@
         ORDER BY C.ID DESC
     </select>
 
+<!--    내가 쓴 글에 달린 댓글 리스트로 가져오기-->
+    <select id="getComments" parameterType="string" resultType="comment">
+        SELECT COMMU.TITLE, C.CONTENT, C.WRITER_ID, C.DATE ,C.ID,C.BOARD_ID
+        FROM COMMENT C
+                 JOIN
+             (SELECT CO.ID, CO.TITLE, CO.WRITER_ID, CO.CNT
+              FROM COMMUNITY CO
+                       JOIN USER U
+                            ON CO.WRITER_ID = U.USER_ID
+              WHERE CO.WRITER_ID = #{user_id}
+             )AS COMMU
+             ON C.BOARD_ID = COMMU.ID
+        ORDER BY C.DATE DESC
+    </select>
+
 </mapper>
