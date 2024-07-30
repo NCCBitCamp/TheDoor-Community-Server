@@ -38,4 +38,7 @@ public class MemberDao {
         sqlSessionTemplate.insert("MemberDaoMapper.join", memberDto);
     }
 
+    public String idSearchDao(MemberDto memberDto) {
+      return sqlSessionTemplate.selectOne("MemberDaoMapper.idSearch", memberDto);
+    }
 }

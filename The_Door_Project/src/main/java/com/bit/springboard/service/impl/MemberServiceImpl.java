@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,5 +99,16 @@ public class MemberServiceImpl implements MemberService {
         }
         System.out.println(jsonString);
         return jsonString;
+    }
+
+    @Override
+    public Map<String, String> idSearch(MemberDto memberDto) {
+        String idSearch = memberDao.idSearchDao(memberDto);
+
+        Map<String, String> forJsonMap = new HashMap<>();
+
+        forJsonMap.put("idSearchMapKey", idSearch);
+
+        return forJsonMap;
     }
 }

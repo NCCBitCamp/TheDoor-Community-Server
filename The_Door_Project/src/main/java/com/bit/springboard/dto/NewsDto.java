@@ -1,47 +1,82 @@
 package com.bit.springboard.dto;
 
+import java.time.LocalDateTime;
+
 public class NewsDto {
-    private int endPage;
-    private Criteria cri;
-    private int total;
+    private int id;
+    private String title;
+    private String content;
+    private int WRITER_ID;
+    private String nickname;
+    private LocalDateTime date;
+    private int cnt;
 
-    public NewsDto(Criteria cri, int total) {
-        this.cri = cri;
-        this.total = total;
-
-        this.endPage = (int)(Math.ceil((total / 1.0) / cri.getAmount()));
+    public int getId() {
+        return id;
     }
 
-    public int getEndPage() {
-        return endPage;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEndPage(int endPage) {
-        this.endPage = endPage;
+    public String getTitle() {
+        return title;
     }
 
-    public Criteria getCri() {
-        return cri;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setCri(Criteria cri) {
-        this.cri = cri;
+    public String getContent() {
+        return content;
     }
 
-    public int getTotal() {
-        return total;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public int getWRITER_ID() {
+        return WRITER_ID;
+    }
+
+    public void setWRITER_ID(int WRITER_ID) {
+        this.WRITER_ID = WRITER_ID;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public int getCnt() {
+        return cnt;
+    }
+
+    public void setCnt(int cnt) {
+        this.cnt = cnt;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override
     public String toString() {
-        return "NoticePageDto{" +
-                "endPage=" + endPage +
-                ", cri=" + cri +
-                ", total=" + total +
+        return "BoardDto{" +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", WRITER_ID=" + WRITER_ID +
+                ", nickname='" + nickname + '\'' +
+                ", date=" + date +
+                ", cnt=" + cnt +
                 '}';
     }
 }
