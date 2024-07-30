@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -56,10 +57,6 @@ public class MyPageController {
         if(loginMember == null) {
             return "redirect:/member/login.do";
         }
-
-        model.addAttribute("myTopRanktheHostel", rankService.getMyTopRanktheHostel(loginMember.getUser_id()));
-        model.addAttribute("myTopRankbitCamp", rankService.getMyTopRankbitCamp(loginMember.getUser_id()));
-        model.addAttribute("myTopRankrozerStone", rankService.getMyTopRankrozerStone(loginMember.getUser_id()));
 
         List<RankDto> myTopRanks = rankService.getMyTopRank(loginMember.getUser_id());
         System.out.println("Query result: " + myTopRanks);

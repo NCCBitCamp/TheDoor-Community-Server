@@ -29,72 +29,6 @@
         WHERE R.GAME = #{gametype}
     </select>
 
-    <select id="getMyTopRanktheHostel" parameterType="string" resultType="rank">
-        SELECT AA.*
-        FROM ranking RNK
-                 JOIN (
-            SELECT R.ID
-                 , R.RANK_ID
-                 , U.NICKNAME
-                 , R.DATE
-                 , R.TIME
-                 , R.GAME
-                 , R.COMMENT
-                 , ROW_NUMBER() OVER (ORDER BY R.TIME ASC) AS "rank"
-            FROM RANKING R
-                     JOIN USER U
-                          ON R.RANK_ID = U.USER_ID
-            WHERE R.GAME = 'theHostel'
-            ORDER BY R.TIME ASC) AA
-                      ON RNK.RANK_ID = AA.RANK_ID
-        WHERE RNK.RANK_ID = #{userId}
-            LIMIT 1;
-    </select>
-
-    <select id="getMyTopRankbitCamp" parameterType="string" resultType="rank">
-        SELECT AA.*
-        FROM ranking RNK
-                 JOIN (
-            SELECT R.ID
-                 , R.RANK_ID
-                 , U.NICKNAME
-                 , R.DATE
-                 , R.TIME
-                 , R.GAME
-                 , R.COMMENT
-                 , ROW_NUMBER() OVER (ORDER BY R.TIME ASC) AS "rank"
-            FROM RANKING R
-                     JOIN USER U
-                          ON R.RANK_ID = U.USER_ID
-            WHERE R.GAME = 'bitCamp'
-            ORDER BY R.TIME ASC) AA
-                      ON RNK.RANK_ID = AA.RANK_ID
-        WHERE RNK.RANK_ID = #{userId}
-            LIMIT 1;
-    </select>
-
-    <select id="getMyTopRankrozerStone" parameterType="String" resultType="rank">
-        SELECT AA.*
-        FROM ranking RNK
-                 JOIN (
-            SELECT R.ID
-                 , R.RANK_ID
-                 , U.NICKNAME
-                 , R.DATE
-                 , R.TIME
-                 , R.GAME
-                 , R.COMMENT
-                 , ROW_NUMBER() OVER (ORDER BY R.TIME ASC) AS "rank"
-            FROM RANKING R
-                     JOIN USER U
-                          ON R.RANK_ID = U.USER_ID
-            WHERE R.GAME = 'rozerStone'
-            ORDER BY R.TIME ASC) AA
-                      ON RNK.RANK_ID = AA.RANK_ID
-        WHERE RNK.RANK_ID = #{userId}
-            LIMIT 1;
-    </select>
-
     <select id="getMyTopRank" parameterType="string" resultType="rank">
         SELECT BB.*
         FROM (
@@ -124,6 +58,4 @@
                       ON BB.GAMETYPE = CC.GAMETYPE
                           AND BB.TIME = CC.TIME;
     </select>
-
-
 </mapper>

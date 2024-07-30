@@ -79,33 +79,6 @@
                 </c:choose>
             </c:forEach>
         </div>
-
-    <%--            <c:choose>--%>
-<%--                <c:when test="${myTopRank != null and myTopRank.gametype eq 'rozerStone'}">--%>
-<%--                    <div class="ticket rozer_ticket" onclick="flipTicket(this)">--%>
-<%--                        <div class="ticket-content">--%>
-<%--                            <p class="record">${myTopRank.rank + 1}위</p>--%>
-<%--                            <p class="player">${myTopRank.nickname}</p>--%>
-<%--                            <p class="comment">${myTopRank.comment}</p>--%>
-<%--                            <c:set var="originalDateTime" value="${myTopRank.date}" />--%>
-<%--                            <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />--%>
-<%--                            <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />--%>
-<%--                            <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />--%>
-<%--                            <p class="date">${shortYear}</p>--%>
-<%--                            <p class="time">${myTopRank.time}</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="ticket-back rozer_ticket-back"></div>--%>
-<%--                    </div>--%>
-<%--                </c:when>--%>
-<%--                <c:otherwise>--%>
-<%--                    <c:out value="${myTopRank}" default="No data found" />--%>
-<%--                </c:otherwise>--%>
-<%--            </c:choose>--%>
-
-
-
-
-
         </div>
         </div>  
     </div>

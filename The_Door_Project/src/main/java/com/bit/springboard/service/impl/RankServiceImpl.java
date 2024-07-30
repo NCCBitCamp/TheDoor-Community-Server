@@ -30,20 +30,6 @@ public class RankServiceImpl implements RankService {
         return rankDao.getRankTotalCnt(gametype);
     }
 
-    @Override
-    public RankDto getMyTopRanktheHostel(String userId) {
-        return rankDao.getMyTopRanktheHostel(userId);
-    }
-
-    @Override
-    public RankDto getMyTopRankbitCamp(String userId) {
-        return rankDao.getMyTopRankbitCamp(userId);
-    }
-
-    @Override
-    public RankDto getMyTopRankrozerStone(String userId) {
-        return rankDao.getMyTopRankrozerStone(userId);
-    }
 
     @Override
     public List<RankDto> getMyTopRank(String userId) {
