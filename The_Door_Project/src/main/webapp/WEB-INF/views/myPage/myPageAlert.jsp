@@ -43,8 +43,8 @@
                 <tbody>
                 <c:forEach var="comment" items="${getComments}" varStatus="status">
                     <tr>
-                        <td>${comment.title}</td>
-                        <td>${comment.content}</td>
+                        <td><a href="/myPage/info.do">${comment.title}</a></td>
+                        <td><a href="/myPage/info.do">${comment.content}</a></td>
                         <td>${comment.WRITER_ID}</td>
                         <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>
                     </tr>
