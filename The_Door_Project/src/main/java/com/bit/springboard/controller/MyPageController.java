@@ -1,5 +1,6 @@
 package com.bit.springboard.controller;
 
+import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.RankDto;
 import com.bit.springboard.service.RankService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/myPage")
@@ -68,8 +71,15 @@ public class MyPageController {
     }
 
     @RequestMapping("post.do")
-    public String myPagePostView(HttpSession session) {
+    public String myPagePostView(HttpSession session, Model model) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        List<BoardDto> myWrite = mypageService.getMyWrite(loginMember);
+
+        System.out.println("myWrite : ");
+        System.out.println(myWrite);
+
+        model.addAttribute("myWrite", myWrite);
 
         if(loginMember == null) {
             return "redirect:/member/login.do";

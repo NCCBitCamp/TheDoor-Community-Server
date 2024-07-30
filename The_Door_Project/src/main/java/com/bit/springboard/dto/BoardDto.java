@@ -7,7 +7,7 @@ public class BoardDto {
     private int id;
     private String title;
     private String content;
-    private int WRITER_ID;
+    private String WRITER_ID;
     private String nickname;
     private LocalDateTime date;
     private int cnt;
@@ -36,11 +36,11 @@ public class BoardDto {
         this.content = content;
     }
 
-    public int getWRITER_ID() {
+    public String getWRITER_ID() {
         return WRITER_ID;
     }
 
-    public void setWRITER_ID(int WRITER_ID) {
+    public void setWRITER_ID(String WRITER_ID) {
         this.WRITER_ID = WRITER_ID;
     }
 
