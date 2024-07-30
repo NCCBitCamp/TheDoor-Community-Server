@@ -13,7 +13,7 @@ public interface MemberService {
 
     Map<String, Integer> nicknameCheck(String nickname);
 
-    Map<String, String> idSearch(MemberDto memberDto);
+    String idSearch(MemberDto memberDto);
 
     List<MemberDto> getMembers();
 

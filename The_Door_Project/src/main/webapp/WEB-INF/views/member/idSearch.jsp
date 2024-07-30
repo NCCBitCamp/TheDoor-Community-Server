@@ -6,7 +6,7 @@
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
-<form id="idSearch-form" action="/member/idSearch.do" method="post">
+<form id="idSearch-form" action="/member/idSearched.do" method="post">
     <div class="content">
 
         <h1>아이디 찾기</h1>
