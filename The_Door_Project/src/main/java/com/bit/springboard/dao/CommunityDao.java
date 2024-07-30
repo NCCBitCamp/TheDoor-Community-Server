@@ -19,39 +19,12 @@ public class CommunityDao {
         this.mybatis = sqlSessionTemplate;
     }
 
-    private final String GET_BOARD_LIST = "SELECT C.ID" +
-            "                                   , C.TITLE" +
-            "                                   , C.CONTENT" +
-            "                                   , C.WRITER_ID" +
-            "                                   , U.NICKNAME" +
-            "                                   , C.DATE" +
-            "                                   , C.CNT" +
-            "                                  FROM COMMUNITY C" +
-            "                                  JOIN USER U" +
-            "                                    ON C.WRITER_ID = U.ID";
-    // 게시글 삭제
-    private final String DELETE = "DELETE FROM COMMUNITY" +
-            "                           WHERE ID = ?";
-
-    // 특정 id의 게시글 하나만 조회
-    private final String GET_BOARD = "SELECT C.ID" +
-            "                                   , C.TITLE" +
-            "                                   , C.CONTENT" +
-            "                                   , C.WRITER_ID" +
-            "                                   , U.NICKNAME" +
-            "                                   , C.REGDATE" +
-            "                                   , C.CNT" +
-            "                                  FROM COMMUNITY F" +
-            "                                  JOIN USER U" +
-            "                                    ON C.WRITER_ID = U.ID" +
-            "                                  WHERE C.ID = ?";
-
     // 자유게시글 등록
-    public void freeWrite(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
-        System.out.println("CommunityDao의 freeWrite 메소드 실행");
+    public void write(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
+        System.out.println("CommunityDao의 write 메소드 실행");
 
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
-        mybatis.insert("CommunityDao.freeWrite", boardDto);
+        mybatis.insert("CommunityDao.communityWrite", boardDto);
 
         System.out.println("insert 실행 후 id값: " + boardDto.getId());
 
@@ -61,7 +34,7 @@ public class CommunityDao {
             mybatis.insert("CommunityDao.uploadFiles", boardFileDtoList);
         }
 
-        System.out.println("CommunityDao의 freeWrite 메소드 실행 종료");
+        System.out.println("CommunityDao의 communityWrite 메소드 실행 종료");
     }
 
     // 게시글 수정하기

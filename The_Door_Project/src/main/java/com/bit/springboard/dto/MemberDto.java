@@ -78,6 +78,8 @@ public class MemberDto {
         this.role = role;
     }
 
+
+
     @Override
     public String toString() {
         return "MemberDto{" +

@@ -21,8 +21,8 @@
         <div class="commentbox3"></div>
         <!--이 코멘트 박스들에는 조회수가 가장 높은 FaQ 3개를 올려주는 기능-->
         <div class="button_area">
-            <div class="faq_button"><a href="/board/help-faq.do">FAQ 바로가기</a></div>
-            <div class="qna_button"><a href="/board/help-qna.do">QnA 바로가기</a></div>
+            <div class="faq_button"><a href="/helpboard/help-faq.do">FAQ 바로가기</a></div>
+            <div class="qna_button"><a href="/helpboard/help-qna.do">QnA 바로가기</a></div>
         </div>
     </div>
     <div class="content-footer-gap"></div>

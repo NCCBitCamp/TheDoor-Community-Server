@@ -1,5 +1,7 @@
 package com.bit.springboard.controller;
 
+import com.bit.springboard.dto.BoardDto;
+import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.RankDto;
 import com.bit.springboard.service.RankService;
 import com.bit.springboard.dto.MemberDto;
@@ -11,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,11 +48,9 @@ public class MyPageController {
     }
 
     @RequestMapping("/modifyMyInfo.do")
-    public String myPageInfoModify(@ModelAttribute("user") MemberDto newMemberDto, HttpSession session){
-//        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-        System.out.println(newMemberDto);
+    public String myPageInfoModify(MemberDto newMemberDto){
         mypageService.modifyInfo(newMemberDto);
-        return "myPage/myPageRank";
+        return "redirect:/myPage/info.do";
     }
 
   
@@ -59,14 +63,18 @@ public class MyPageController {
         }
 
         List<RankDto> myTopRanks = rankService.getMyTopRank(loginMember.getUser_id());
-        System.out.println("Query result: " + myTopRanks);
         model.addAttribute("myTopRanks", myTopRanks);
         return "myPage/myPageRank";
     }
 
     @RequestMapping("post.do")
-    public String myPagePostView(HttpSession session) {
+    public String myPagePostView(HttpSession session, Model model) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        model.addAttribute("personalInfo", loginMember);
+
+        List<BoardDto> myWrite = mypageService.getMyWrite(loginMember);
+
+        model.addAttribute("myWrite", myWrite);
 
         if(loginMember == null) {
             return "redirect:/member/login.do";
@@ -77,8 +85,19 @@ public class MyPageController {
 
 
     @RequestMapping("alert.do")
-    public String myPageAlertView(HttpSession session) {
+    public String myPageAlertView(HttpSession session, Model model) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        model.addAttribute("personalInfo", loginMember);
+
+        List<CommentDto> getCommentList = mypageService.getComment(loginMember);
+
+        List<Date> dateList = new ArrayList<>();
+        getCommentList.forEach(comment -> {
+            dateList.add(convertToDate(comment.getDate()));
+        });
+        model.addAttribute("convertedTime", dateList);
+
+        model.addAttribute("getComments", getCommentList);
 
         if(loginMember == null) {
             return "redirect:/member/login.do";
@@ -86,4 +105,10 @@ public class MyPageController {
 
         return "myPage/myPageAlert";
     }
+
+
+    private Date convertToDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
 }

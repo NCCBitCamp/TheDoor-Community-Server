@@ -16,6 +16,8 @@ public interface BoardService {
 
     void delete(int id);
 
+    void updateCnt(int id);
+
     List<BoardDto> getBoardList(Map<String, String> searchMap, Criteria cri);
 
     BoardDto getBoard(int id);
@@ -24,5 +26,4 @@ public interface BoardService {
 
     List<BoardFileDto> getBoardFileList(int id);
 
-    void updateCnt(int id);
 }

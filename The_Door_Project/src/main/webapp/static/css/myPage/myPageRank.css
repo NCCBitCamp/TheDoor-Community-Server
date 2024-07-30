@@ -89,6 +89,8 @@
     margin-right: 40px;
     position: relative;
     transition: transform 0.3s; /* Add transition for hover effect */
+    backface-visibility: hidden; /* Prevent blurriness during animation */
+    will-change: transform; /* Optimize animation performance */
 }
 
 .ticket:hover {

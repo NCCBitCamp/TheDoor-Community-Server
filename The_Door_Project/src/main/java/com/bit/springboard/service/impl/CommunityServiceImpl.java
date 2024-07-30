@@ -58,6 +58,6 @@ public class CommunityServiceImpl implements BoardService {
 
     @Override
     public void updateCnt(int id) {
-        communityDao.updateCnt(id);
+
     }
 }

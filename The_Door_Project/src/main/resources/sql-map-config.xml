@@ -18,6 +18,10 @@
                    alias="cri"/>
         <typeAlias type="com.bit.springboard.dto.MemberDto"
                    alias="member"/>
+        <typeAlias type="com.bit.springboard.dto.BoardDto"
+                   alias="board"/>
+        <typeAlias type="com.bit.springboard.dto.CommentDto"
+                   alias="comment"/>
     </typeAliases>
 
     <!--사용할 Sql Mapper 등록-->

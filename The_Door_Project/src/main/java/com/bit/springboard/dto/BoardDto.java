@@ -3,11 +3,10 @@ package com.bit.springboard.dto;
 import java.time.LocalDateTime;
 
 public class BoardDto {
-    private String type = "community";
     private int id;
     private String title;
     private String content;
-    private int WRITER_ID;
+    private String WRITER_ID;
     private String nickname;
     private LocalDateTime date;
     private int cnt;
@@ -36,11 +35,11 @@ public class BoardDto {
         this.content = content;
     }
 
-    public int getWRITER_ID() {
+    public String getWRITER_ID() {
         return WRITER_ID;
     }
 
-    public void setWRITER_ID(int WRITER_ID) {
+    public void setWRITER_ID(String WRITER_ID) {
         this.WRITER_ID = WRITER_ID;
     }
 
@@ -68,18 +67,9 @@ public class BoardDto {
         this.nickname = nickname;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
         return "BoardDto{" +
-                "type='" + type + '\'' +
                 ", id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +

@@ -1,0 +1,98 @@
+/* h1 {
+    width: 193px;
+    height: 76px;
+    margin-bottom: 2rem;
+    margin-top: 0px;
+    position: relative;
+    font-size: 4rem;
+    color: #F9F3F3;
+} */
+
+.content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url(/static/images/member/loginBackground.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#searchBox {
+    position: relative;
+    width: 19rem;
+    height: 18rem;
+    background-color: #424141;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*box-shadow: 0px 4px 4px 0px;*/
+}
+
+.inputBox {
+    flex-direction: column ; /* 세로 정렬 */
+    display : flex;
+    outline: none;
+    color: #F9F3F3;
+    box-shadow: none;
+    outline: none;
+}
+
+#nameLabel {
+    font-size: 1.2ch;
+    padding-bottom: 1ch;
+    text-align: left;
+    color: #fff;
+}
+#emailLabel {
+    font-size: 1.1ch;
+    padding-bottom: 1ch;
+    text-align: left;
+}
+
+.username {
+    width: 278px;
+    height: 56px;
+    background-color: #272727;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 0px;
+}
+.email {
+    width: 278px;
+    height: 56px;
+    background-color: #272727;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    border: none;
+}
+
+.username, .email {
+    width: 240px;
+    height: 40px;
+    padding: 10px;
+    background-color: #272727;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+}
+
+.searchbtn {
+    width: 240px;
+    height: 40px;
+    background-color: #FBC70E;
+    border-radius: 10px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+/*.email, .username, #searchBox, #searchBtn {*/
+/*    box-shadow: none !important;*/
+/*}*/
