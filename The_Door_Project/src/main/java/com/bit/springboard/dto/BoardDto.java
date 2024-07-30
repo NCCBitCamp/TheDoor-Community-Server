@@ -3,7 +3,6 @@ package com.bit.springboard.dto;
 import java.time.LocalDateTime;
 
 public class BoardDto {
-    private String type = "community";
     private int id;
     private String title;
     private String content;
@@ -68,18 +67,9 @@ public class BoardDto {
         this.nickname = nickname;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
         return "BoardDto{" +
-                "type='" + type + '\'' +
                 ", id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +

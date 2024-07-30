@@ -22,7 +22,7 @@ public class CommunityServiceImpl implements BoardService {
     }
 
     @Override
-    public void post(BoardDto boardDto, MultipartFile[] uploadFiles) {
+    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
 
     }
 
@@ -58,6 +58,6 @@ public class CommunityServiceImpl implements BoardService {
 
     @Override
     public void updateCnt(int id) {
-        communityDao.updateCnt(id);
+
     }
 }

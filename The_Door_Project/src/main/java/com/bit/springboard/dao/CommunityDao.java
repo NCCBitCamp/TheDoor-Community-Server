@@ -47,11 +47,11 @@ public class CommunityDao {
             "                                  WHERE C.ID = ?";
 
     // 자유게시글 등록
-    public void freeWrite(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
-        System.out.println("CommunityDao의 freeWrite 메소드 실행");
+    public void communityWrite(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
+        System.out.println("CommunityDao의 communityWrite 메소드 실행");
 
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
-        mybatis.insert("CommunityDao.freeWrite", boardDto);
+        mybatis.insert("CommunityDao.communityWrite", boardDto);
 
         System.out.println("insert 실행 후 id값: " + boardDto.getId());
 
@@ -61,7 +61,7 @@ public class CommunityDao {
             mybatis.insert("CommunityDao.uploadFiles", boardFileDtoList);
         }
 
-        System.out.println("CommunityDao의 freeWrite 메소드 실행 종료");
+        System.out.println("CommunityDao의 communityWrite 메소드 실행 종료");
     }
 
     // 게시글 수정하기
