@@ -44,7 +44,7 @@ public class CommunityController {
     public String communityWrite(BoardDto boardDto, MultipartFile[] uploadFiles) {
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
-        boardService.write(boardDto, uploadFiles);
+        boardService.post(boardDto, uploadFiles);
 
         return "redirect:/community/community.do";
     }

@@ -41,7 +41,7 @@ public class NewsController {
     public String newsWrite(BoardDto boardDto, MultipartFile[] uploadFiles) {
         boardService = applicationContext.getBean("newsServiceImpl", BoardService.class);
 
-        boardService.write(boardDto, uploadFiles);
+        boardService.post(boardDto, uploadFiles);
 
         return "redirect:/news/news.do";
     }
