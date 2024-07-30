@@ -83,17 +83,17 @@ public class MemberController {
         return "member/idSearch";
     }
 
-    @GetMapping("/idSearched.do")
-    public String idSearchedView() {
+    @PostMapping("/idSearched.do")
+    public String idSearchedView(MemberDto memberDto, Model model) {
+        System.out.println(memberDto);
+
+        model.addAttribute("user_id",memberService.idSearch(memberDto));
+
         return "member/idSearched";
     }
 
-    @PostMapping("/idSearch.do")
-    public String idSearch(MemberDto memberDto) {
-        System.out.println(memberDto);
-        Map<String, String> userSearchedId = new HashMap<>();
-
-        userSearchedId = memberService.idSearch(memberDto);
-        return "member/idSearched";
+    @RequestMapping("/login-help.do")
+    public String loginHelpView() {
+        return "/member/loginHelp";
     }
 }

@@ -12,7 +12,7 @@
         <h1>아이디 찾기</h1>
         <div id="searchBox">
             <div>
-                <h2 class="showId"> 조회된 결과 띄우기 </h2>
+                <h2 class="showId">${user_id}</h2>
             </div>
 
             <div class="loginBox">

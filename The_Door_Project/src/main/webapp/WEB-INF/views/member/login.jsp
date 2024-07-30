@@ -21,7 +21,7 @@
                 <label id="pwLabel" style="color:#FFF;">비밀번호</label>
                 <input type="password" class="password" id="password" name="password" required maxlength="30">
                 <div id="pwBtn">　</div>
-                <label id=pwFind style="color: #898686;" onclick="location.href='/member/idSearch.do'">로그인에 어려움이 있나요?</label>
+                <label id=pwFind style="color: #898686;" onclick="location.href='/member/login-help.do'">로그인에 어려움이 있나요?</label>
             </div>
 
             <div class="login">
