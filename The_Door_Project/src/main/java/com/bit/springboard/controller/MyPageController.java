@@ -25,6 +25,7 @@ public class MyPageController {
         this.rankService = rankService;
     }
 
+
     @RequestMapping("/info.do")
     public String myPageInfoView(HttpSession session, Model model) {
         MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
@@ -39,15 +40,12 @@ public class MyPageController {
         return "myPage/myPageInfo";
     }
 
-    @RequestMapping("/altMyInfo.do")
-    public String myPageInfoAlt(HttpSession session){
-        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-
-        if(loginMember == null) {
-            return "redirect:/member/login.do";
-        }
-
-        return "myPage/myPageInfo";
+    @RequestMapping("/modifyMyInfo.do")
+    public String myPageInfoModify(@ModelAttribute("user") MemberDto newMemberDto, HttpSession session){
+//        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        System.out.println(newMemberDto);
+        mypageService.modifyInfo(newMemberDto);
+        return "myPage/myPageRank";
     }
 
   
@@ -79,6 +77,7 @@ public class MyPageController {
 
         return "myPage/myPagePost";
     }
+
 
     @RequestMapping("alert.do")
     public String myPageAlertView(HttpSession session) {

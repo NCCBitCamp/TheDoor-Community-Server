@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageInfo.css">
@@ -13,7 +14,7 @@
             <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
             <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
               
-            <p class="emphaFont">닉네임123</p>
+            <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
         
         <div id="selectArea">
@@ -60,31 +61,33 @@
                     <legend class="emphaFont">회원정보 변경</legend>
                     <hr>
                     <br>
-                    <form action="/myPage/altMyInfo.do" method="post">
+                    <form action="/myPage/modifyMyInfo.do" method="post">
+                        <input name="id" value="${personalInfo.id}" type="hidden">
+
                         <div>
                             <label for="newPW">비밀번호</label><br>
                             <p></p>
-                            <input id="newPW" type="text">
+                            <input id="newPW" type="text" name="password">
                         </div>
                         <div>
                             <label for="newPWCK">비밀번호 재입력</label><br>
-                            <p></p>
                             <input id="newPWCK" type="text">
+                            <p id="passwordConfirm"></p>
                         </div>
                         <div>
                             <label for="userEmail">이메일</label><br>
                             <p></p>
-                            <input id="userEmail" type="email">
+                            <input id="userEmail" type="email" name="email" value="${personalInfo.email}">
                         </div>
                         <div>
                             <label for="userNickName">닉네임</label><br>
                             <p></p>
-                            <input id="userNickName" type="text">
+                            <input id="userNickName" type="text" name="nickname" value="${personalInfo.nickname}">
                         </div>
                         <br>
                         <br>
                         <div>
-                            <input type="submit" value="변경하기" style="background-color: black; color: white; font-weight: bold;">
+                            <input id="submitBtn" type="submit" value="변경하기" style="background-color: black; color: white; font-weight: bold;">
                         </div>
                     </form>
                 </div>
@@ -94,5 +97,42 @@
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const newPW = document.getElementById("newPW");
+        const pwRetry = document.getElementById("newPWCK");
+        const passwordConfirm = document.getElementById("passwordConfirm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        var passConfirm = false;
+
+        if (newPW.value === "" || newPW.value === null){
+            submitBtn.disabled = !passConfirm;
+        }
+
+        function checkPasswordMatch() {
+            if (newPW.value === pwRetry.value) {
+                passwordConfirm.textContent = "비밀번호가 일치합니다.";
+                passwordConfirm.style.color = "green";
+                passConfirm = true;
+            } else {
+                passwordConfirm.textContent = "비밀번호가 일치하지 않습니다.";
+                passwordConfirm.style.color = "red";
+                passConfirm = false;
+            }
+            submitBtn.disabled = !passConfirm;
+
+
+        }
+
+        newPW.addEventListener('input', checkPasswordMatch);
+        pwRetry.addEventListener('input', checkPasswordMatch);
+
+
+    });
+
+
+</script>
+<%--ajax써서 json 변환해서 값 받기--%>
 </body>
 </html>
