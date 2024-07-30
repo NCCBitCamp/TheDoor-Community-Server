@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,6 +21,7 @@
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">제목</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">제목</a></li>
+                        <li><a class="dropdown-item" href="#">내용</a></li>
                         <li><a class="dropdown-item" href="#">작성자</a></li>
                     </ul>
                 </div>
@@ -45,17 +47,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td class="title"><a href="/board/free-detail.do">게시물 제목</a></td>
-                    <td>작성자</td>
-                    <td>2022.01.01</td>
-                    <td>100</td>
-                </tr>
+                    <c:forEach items="${freeBoardList}" var="freeboard">
+                        <tr onclick="location.href='/board/update-cnt.do?id=${freeBoard.id}&type=community'">
+                            <td>{freeBoard.id</td>
+                            <td class="title"><a href="/board/free-detail.do">${freeBoard.title}</a></td>
+                            <td>{freeBoard.nickname}</td>
+                            <td>
+                                <javatime:format value="${freeBoard.regdate}" pattern="yyyy-MM-dd"/>
+                            </td>
+                            <td>${freeBoard.cnt}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
             <div class="post-container">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/free-write.do'">글 등록</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/community-write.do'">글 등록</button>
             </div>
             <br>
             <div>

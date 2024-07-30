@@ -1,10 +1,11 @@
 package com.bit.springboard.service.impl;
 
-import com.bit.springboard.dao.FreeBoardDao;
+import com.bit.springboard.dao.CommunityDao;
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,11 +13,21 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class FreeBoardServiceImpl implements BoardService {
-    private FreeBoardDao freeBoardDao;
+public class CommunityServiceImpl implements BoardService {
+    private CommunityDao communityDao;
+
+    @Autowired
+    public CommunityServiceImpl(CommunityDao communityDao) {
+        this.communityDao = communityDao;
+    }
 
     @Override
     public void post(BoardDto boardDto, MultipartFile[] uploadFiles) {
+
+    }
+
+    @Override
+    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
 
     }
 
@@ -53,5 +64,10 @@ public class FreeBoardServiceImpl implements BoardService {
     @Override
     public List<BoardFileDto> getBoardFileList(int id) {
         return List.of();
+    }
+
+    @Override
+    public void updateCnt(int id) {
+
     }
 }

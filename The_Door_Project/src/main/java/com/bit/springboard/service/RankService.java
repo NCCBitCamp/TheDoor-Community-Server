@@ -10,8 +10,5 @@ public interface RankService {
 
     int getRankTotalCnt(String gametype);
 
-    RankDto getMyTopRanktheHostel(String userId);
-    RankDto getMyTopRankbitCamp(String userId);
-    RankDto getMyTopRankrozerStone(String userId);
-
+    List<RankDto> getMyTopRank(String userId);
 }

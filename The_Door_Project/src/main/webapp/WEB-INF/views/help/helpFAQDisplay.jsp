@@ -56,7 +56,7 @@
                 <p id="attachment" style="margin-top: 10px;"><a href="#">첨부파일 예시</a></p>
             </div>
             <div class="post-buttons">
-                <a href="/board/help-faq.do"><button type="button" onclick="window.history.back();">메뉴가기</button></a>
+                <a href="/helpboard/help-faq.do"><button type="button" onclick="window.history.back();">메뉴가기</button></a>
             </div>
         </div>
     </div>
