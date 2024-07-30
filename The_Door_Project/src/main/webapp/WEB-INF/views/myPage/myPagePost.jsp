@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPagePost.css">
@@ -39,36 +40,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>35430</td>
-                    <td>우리 팀 대 성공함... 프로젝트 자랑 보실?</td>
-                    <td>닉네임123</td>
-                    <td>456789</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td>요세하녕안</td>
-                    <td>닉네임123</td>
-                    <td>5234</td>
-                </tr>
+                    <c:forEach var="contents" items="${myWrite}">
+                        <tr>
+                            <td>${contents.id}</td>
+                            <td>${contents.title}</td>
+                            <td>${contents.WRITER_ID}</td>
+                            <td>${contents.cnt}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
