@@ -22,7 +22,7 @@ public class CommunityServiceImpl implements BoardService {
     }
 
     @Override
-    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
+    public void post(BoardDto boardDto, MultipartFile[] uploadFiles) {
 
     }
 
