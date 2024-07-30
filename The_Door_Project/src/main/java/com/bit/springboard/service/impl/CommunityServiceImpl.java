@@ -27,17 +27,7 @@ public class CommunityServiceImpl implements BoardService {
     }
 
     @Override
-    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
-
-    }
-
-    @Override
     public void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles) {
-
-    }
-
-    @Override
-    public void plusCnt(int id) {
 
     }
 

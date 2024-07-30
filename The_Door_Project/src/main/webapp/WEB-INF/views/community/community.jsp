@@ -11,25 +11,40 @@
         <!--헤더이미지-->
         <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
 
-        <!-- 현재 선택된 뉴스 네비게이션과 검색창 -->
+        <!-- 현재 선택된 커뮤니티의 네비게이션과 검색창 부분-->
         <div class="search-container">
             <span class="current-nav">자유게시판</span>
-            <form class="form-inline">
-                <!-- <div class="input-group"> -->
-                <!-- <div class="input-group-prepend"> -->
+            <form class="form-inline" id="search-form" action="/community/community-list.do" method="post">
+                <input type="hidden" name="pageNum" value="${page.cri.pageNum}">
+                <input type="hidden" name="amount" value="${page.cri.amount}">
                 <div>
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">제목</button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">제목</a></li>
-                        <li><a class="dropdown-item" href="#">내용</a></li>
-                        <li><a class="dropdown-item" href="#">작성자</a></li>
-                    </ul>
+                    <select class="form-select" name="searchCondition">
+                        <option value="all"
+                                <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
+                                    selected
+                                </c:if>>전체</option>
+                        <option value="title"
+                                <c:if test="${searchMap.searchCondition == 'title'}">
+                                    selected
+                                </c:if>>제목</option>
+                        <option value="content"
+                                <c:if test="${searchMap.searchCondition == 'content'}">
+                                    selected
+                                </c:if>>내용</option>
+                        <option value="writer"
+                                <c:if test="${searchMap.searchCondition == 'writer'}">
+                                    selected
+                                </c:if>>작성자</option>
+                    </select>
                 </div>
-                <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="Search">
+
+                <!--게시글 검색 부분-->
+                <input class="form-control mr-sm-2" type="text" name="searchKeyword" value="${searchMap.searchKeyword}" placeholder="검색" aria-label="Search">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">검색</button>
+                    <i class="bi bi-search" id="search-icon"></i>
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="btnSearch">검색</button>
                 </div>
-                <!-- </div> -->
             </form>
         </div>
 
@@ -47,73 +62,85 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${freeBoardList}" var="freeboard">
-                        <tr onclick="location.href='/board/update-cnt.do?id=${freeBoard.id}&type=community'">
-                            <td>{freeBoard.id</td>
-                            <td class="title"><a href="/board/free-detail.do">${freeBoard.title}</a></td>
-                            <td>{freeBoard.nickname}</td>
+                    <c:forEach items="${communityList}" var="community">
+                        <tr onclick="location.href='/board/update-cnt.do?id=${community.id}&type=community'">
+                            <td>{community.id</td>
+                            <td class="title"><a href="/board/free-detail.do">${community.title}</a></td>
+                            <td>{community.nickname}</td>
                             <td>
-                                <javatime:format value="${freeBoard.regdate}" pattern="yyyy-MM-dd"/>
+                                <javatime:format value="${community.date}" pattern="yyyy-MM-dd"/>
                             </td>
-                            <td>${freeBoard.cnt}</td>
+                            <td>${community.cnt}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <div class="post-container">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/community-write.do'">글 등록</button>
-            </div>
+
+            <!--커뮤니티의 글 등록 부분(로그인해야지만 등록버튼나오게)-->
+            <c:if test="${loginMember ne null}">
+                <div class="post-container">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/community/communityWrite.do'">글 등록</button>
+                </div>
+            </c:if>
             <br>
             <div>
 
                 <!-- 페이지네이션 -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                        <li class="page-item"><a class="page-link" href="#">8</a></li>
-                        <li class="page-item"><a class="page-link" href="#">9</a></li>
-                        <li class="page-item"><a class="page-link" href="#">10</a></li>
+                        <c:if test="${page.prev}">
+                            <li class="page-item">
+                                <a class="page-link" href="${page.cri.pageNum - 1}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
 
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <c:forEach begin="#{page.startpage}"
+                                   end="#{page.endpage}"
+                                   var="number">
+                            <li class="page-item">
+                                <a class="page-link link-secondary" href="${number}">${number}</a>
+                            </li>
+                        </c:forEach>
+
+                        <c:if test="${page.next}">
+                            <li class="page-item">
+                                <a class="page-link" href="${page.cri.pageNum + 1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
         </div>
-        <div class="footer">
-            <div class="footer-content">
-                <a href="https://general-pet-cfa.notion.site/2-76644680bfca465e854f0e78a85e3630?pvs=4">
-                    <p>더 도어 게임즈가 궁금하신가요?</p>
-                </a>
-                <p>©The Door Games</p>
-            </div>
-        </div>
+
+        <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
     </div>
 
     <!-- JavaScript 추가 -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.news-navbar .nav-item');
-            const currentNav = document.querySelector('.current-nav span');
+        $(() => {
+            $("#search-icon").on("click", (e) => {
+                $("input[name='pageNum']").val(1);
+                $("#search-form").submit();
+            });
 
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    currentNav.textContent = this.textContent;
-                });
+            $("input[name='searchKeyword']").on("keypress", (e) => {
+                if(e.key === 'Enter') {
+                    $("input[name='pageNum']").val(1);
+                }
+            });
+
+            $(".pagination a").on("click", (e) => {
+                e.preventDefault();
+
+                // console.log($(e.target).attr("href"));
+
+                $("input[name='pageNum']").val($(e.target).attr("href"));
+
+                $("#search-form").submit();
             });
         });
     </script>
