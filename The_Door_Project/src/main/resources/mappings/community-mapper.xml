@@ -179,7 +179,7 @@
 
     <delete id="deleteBoardFileOne" parameterType="boardFile">
         DELETE FROM COMMUNITY_FILE
-        WHERE ID = #{id}E
+        WHERE ID = #{id}
           AND BOARD_ID = #{board_id}
     </delete>
 </mapper>
