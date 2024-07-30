@@ -21,6 +21,7 @@
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">제목</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">제목</a></li>
+                        <li><a class="dropdown-item" href="#">내용</a></li>
                         <li><a class="dropdown-item" href="#">작성자</a></li>
                     </ul>
                 </div>
