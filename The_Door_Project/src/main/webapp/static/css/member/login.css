@@ -46,7 +46,6 @@ h1 {
 .inputBox {
     flex-direction: column ; /* 세로 정렬 */
     display : flex;
-    outline: none;
     color: #F9F3F3;
     box-shadow: none;
     outline: none;
@@ -93,7 +92,7 @@ h1 {
     height: 18px;
     position: absolute;
     right: 2.5rem;
-    top: 9.1rem;
+    top: 9.3rem;
     background-image: url(/static/images/member/hidePassword.png);
     background-repeat: no-repeat;
     background-size: cover;

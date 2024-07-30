@@ -1,12 +1,12 @@
-/* h1 {
-    width: 193px;
-    height: 76px;
+h1 {
+    width: 14rem;
+    height: 60px;
     margin-bottom: 2rem;
     margin-top: 0px;
     position: relative;
-    font-size: 4rem;
+    font-size: 3rem;
     color: #F9F3F3;
-} */
+}
 
 .content {
     height: 100vh;
@@ -20,7 +20,9 @@
     background-size: cover;
     background-position: center;
 }
-
+.search {
+    margin-top: 30px;
+}
 #searchBox {
     position: relative;
     width: 19rem;
@@ -31,7 +33,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*box-shadow: 0px 4px 4px 0px;*/
+    box-shadow: 0px 4px 4px 0px;
 }
 
 .inputBox {
@@ -40,6 +42,13 @@
     outline: none;
     color: #F9F3F3;
     box-shadow: none;
+}
+[type] {
+    color: #F9F3F3;
+    outline: none;
+}
+input {
+    box-shadow: none !important; /* 모든 그림자 제거 */
     outline: none;
 }
 
