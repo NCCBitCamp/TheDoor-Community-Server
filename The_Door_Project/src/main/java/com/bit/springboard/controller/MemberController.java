@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -34,10 +35,14 @@ public class MemberController {
     }
 
     @GetMapping("/login.do")
-    public String loginView() { return "member/login"; }
+    public String loginView() {
+        return "member/login";
+    }
 
     @RequestMapping("/joinComplete.do")
-    public String joinComplete() { return "member/joinComplete";}
+    public String joinComplete() {
+        return "member/joinComplete";
+    }
 
     @PostMapping("/userIdCheck.do")
     @ResponseBody
@@ -71,5 +76,24 @@ public class MemberController {
         session.invalidate();
 
         return "redirect:/member/login.do";
+    }
+
+    @GetMapping("/idSearch.do")
+    public String idSearchView() {
+        return "member/idSearch";
+    }
+
+    @GetMapping("/idSearched.do")
+    public String idSearchedView() {
+        return "member/idSearched";
+    }
+
+    @PostMapping("/idSearch.do")
+    public String idSearch(MemberDto memberDto) {
+        System.out.println(memberDto);
+        Map<String, String> userSearchedId = new HashMap<>();
+
+        userSearchedId = memberService.idSearch(memberDto);
+        return "member/idSearched";
     }
 }
