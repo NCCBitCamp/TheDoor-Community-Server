@@ -44,4 +44,9 @@ public class RankServiceImpl implements RankService {
     public RankDto getMyTopRankrozerStone(String userId) {
         return rankDao.getMyTopRankrozerStone(userId);
     }
+
+    @Override
+    public List<RankDto> getMyTopRank(String userId) {
+        return rankDao.getMyTopRank(userId);
+    }
 }

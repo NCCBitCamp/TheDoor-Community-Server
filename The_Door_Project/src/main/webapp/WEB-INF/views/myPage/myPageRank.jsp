@@ -26,50 +26,87 @@
         </div>
 
         <div class="ticket-container">
-            <div class="ticket hostel_ticket" onclick="flipTicket(this)">
-                <div class="ticket-content">
-                    <p class="record">${myTopRanktheHostel.rank+1}위</p>
-                    <p class="player">${myTopRanktheHostel.nickname}</p>
-                    <p class="comment">${myTopRanktheHostel.comment}</p>
-                    <c:set var="originalDateTime" value="${myTopRanktheHostel.date}" />
-                    <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
-                    <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
-                    <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
-                    <p class="date">${shortYear}</p>
-                    <p class="time">${myTopRanktheHostel.time}</p>
-                </div>
-                <div class="ticket-back hostel_ticket-back"></div>
-            </div>
-        
-            <div class="ticket bit_ticket" onclick="flipTicket(this)">
-                <div class="ticket-content">
-                    <p class="record">${myTopRankbitCamp.rank+1}위</p>
-                    <p class="player">${myTopRankbitCamp.nickname}</p>
-                    <p class="comment">${myTopRankbitCamp.comment}</p>
-                    <c:set var="originalDateTime" value="${myTopRankbitCamp.date}" />
-                    <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
-                    <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
-                    <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
-                    <p class="date">${shortYear}</p>
-                    <p class="time">${myTopRankbitCamp.time}</p>
-                </div>
-                <div class="ticket-back bit_ticket-back"></div>
-            </div>
-        
-            <div class="ticket rozer_ticket" onclick="flipTicket(this)">
-                <div class="ticket-content">
-                    <p class="record">${myTopRankrozerStone.rank+1}위</p>
-                    <p class="player">${myTopRankrozerStone.nickname}</p>
-                    <p class="comment">${myTopRankrozerStone.comment}</p>
-                    <c:set var="originalDateTime" value="${myTopRankrozerStone.date}" />
-                    <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
-                    <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
-                    <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
-                    <p class="date">${shortYear}</p>
-                    <p class="time">${myTopRankrozerStone.time}</p>
-                </div>
-                <div class="ticket-back rozer_ticket-back"></div>
-            </div>
+            <c:forEach var="rank" items="${myTopRanks}">
+                <c:choose>
+                    <c:when test="${rank.gametype eq 'theHostel'}">
+                        <div class="ticket hostel_ticket" onclick="flipTicket(this)">
+                            <div class="ticket-content">
+                                <p class="record">${rank.rank}위</p>
+                                <p class="player">${rank.nickname}</p>
+                                <p class="comment">${rank.comment}</p>
+                                <c:set var="originalDateTime" value="${rank.date}" />
+                                <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
+                                <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
+                                <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
+                                <p class="date">${shortYear}</p>
+                                <p class="time">${rank.time}</p>
+                            </div>
+                            <div class="ticket-back hostel_ticket-back"></div>
+                        </div>
+                    </c:when>
+                    <c:when test="${rank.gametype eq 'bitCamp'}">
+                        <div class="ticket bit_ticket" onclick="flipTicket(this)">
+                            <div class="ticket-content">
+                                <p class="record">${rank.rank}위</p>
+                                <p class="player">${rank.nickname}</p>
+                                <p class="comment">${rank.comment}</p>
+                                <c:set var="originalDateTime" value="${rank.date}" />
+                                <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
+                                <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
+                                <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
+                                <p class="date">${shortYear}</p>
+                                <p class="time">${rank.time}</p>
+                            </div>
+                            <div class="ticket-back bit_ticket-back"></div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="ticket rozer_ticket" onclick="flipTicket(this)">
+                            <div class="ticket-content">
+                                <p class="record">${rank.rank}위</p>
+                                <p class="player">${rank.nickname}</p>
+                                <p class="comment">${rank.comment}</p>
+                                <c:set var="originalDateTime" value="${rank.date}" />
+                                <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />
+                                <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />
+                                <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />
+                                <p class="date">${shortYear}</p>
+                                <p class="time">${rank.time}</p>
+                            </div>
+                            <div class="ticket-back rozer_ticket-back"></div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+
+    <%--            <c:choose>--%>
+<%--                <c:when test="${myTopRank != null and myTopRank.gametype eq 'rozerStone'}">--%>
+<%--                    <div class="ticket rozer_ticket" onclick="flipTicket(this)">--%>
+<%--                        <div class="ticket-content">--%>
+<%--                            <p class="record">${myTopRank.rank + 1}위</p>--%>
+<%--                            <p class="player">${myTopRank.nickname}</p>--%>
+<%--                            <p class="comment">${myTopRank.comment}</p>--%>
+<%--                            <c:set var="originalDateTime" value="${myTopRank.date}" />--%>
+<%--                            <c:set var="dateOnly" value="${fn:substringBefore(originalDateTime, 'T')}" />--%>
+<%--                            <c:set var="formattedDate" value="${fn:replace(dateOnly, '-', '-')}" />--%>
+<%--                            <c:set var="shortYear" value="${fn:substring(formattedDate, 2, 10)}" />--%>
+<%--                            <p class="date">${shortYear}</p>--%>
+<%--                            <p class="time">${myTopRank.time}</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="ticket-back rozer_ticket-back"></div>--%>
+<%--                    </div>--%>
+<%--                </c:when>--%>
+<%--                <c:otherwise>--%>
+<%--                    <c:out value="${myTopRank}" default="No data found" />--%>
+<%--                </c:otherwise>--%>
+<%--            </c:choose>--%>
+
+
+
+
+
+        </div>
         </div>  
     </div>
 

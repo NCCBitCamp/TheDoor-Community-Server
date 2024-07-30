@@ -14,4 +14,5 @@ public interface RankService {
     RankDto getMyTopRankbitCamp(String userId);
     RankDto getMyTopRankrozerStone(String userId);
 
+    List<RankDto> getMyTopRank(String userId);
 }
