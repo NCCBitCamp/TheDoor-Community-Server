@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class FreeBoardDao {
+public class CommunityDao {
     private SqlSessionTemplate mybatis;
 
     @Autowired
-    public FreeBoardDao(SqlSessionTemplate sqlSessionTemplate) {
+    public CommunityDao(SqlSessionTemplate sqlSessionTemplate) {
         this.mybatis = sqlSessionTemplate;
     }
 
@@ -47,88 +47,88 @@ public class FreeBoardDao {
             "                                  WHERE C.ID = ?";
 
     // 자유게시글 등록
-    public void post(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
-        System.out.println("FreeBoardDao의 post 메소드 실행");
+    public void freeWrite(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
+        System.out.println("CommunityDao의 freeWrite 메소드 실행");
 
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
-        mybatis.insert("FreeBoardDao.post", boardDto);
+        mybatis.insert("CommunityDao.freeWrite", boardDto);
 
         System.out.println("insert 실행 후 id값: " + boardDto.getId());
 
         if(boardFileDtoList.size() > 0) {
             boardFileDtoList.forEach(boardFileDto -> boardFileDto.setBoard_id(boardDto.getId()));
 
-            mybatis.insert("FreeBoardDao.uploadFiles", boardFileDtoList);
+            mybatis.insert("CommunityDao.uploadFiles", boardFileDtoList);
         }
 
-        System.out.println("FreeBoardDao의 post 메소드 실행 종료");
+        System.out.println("CommunityDao의 freeWrite 메소드 실행 종료");
     }
 
     // 게시글 수정하기
     public void modify(BoardDto boardDto, List<BoardFileDto> uFileList) {
-        System.out.println("FreeBoardDao의 modify 메소드 실행");
+        System.out.println("CommunityDao의 modify 메소드 실행");
 
-        mybatis.update("FreeBoardDao.modify", boardDto);
+        mybatis.update("CommunityDao.modify", boardDto);
 
         if(uFileList.size() > 0) {
             uFileList.forEach(boardFileDto -> {
                 if(boardFileDto.getFilestatus().equals("I")) {
-                    mybatis.insert("FreeBoardDao.postBoardFileOne", boardFileDto);
+                    mybatis.insert("CommunityDao.postBoardFileOne", boardFileDto);
                 } else if(boardFileDto.getFilestatus().equals("U")) {
-                    mybatis.update("FreeBoardDao.modifyBoardFileOne", boardFileDto);
+                    mybatis.update("CommunityDao.modifyBoardFileOne", boardFileDto);
                 } else if(boardFileDto.getFilestatus().equals("D")) {
-                    mybatis.delete("FreeBoardDao.deleteBoardFileOne", boardFileDto);
+                    mybatis.delete("CommunityDao.deleteBoardFileOne", boardFileDto);
                 }
             });
         }
 
-        System.out.println("FreeBoardDao의 modify 메소드 실행 종료");
+        System.out.println("CommunityDao의 modify 메소드 실행 종료");
     }
 
     public List<BoardDto> getBoardList(Map<String, Object> paramMap) {
-        System.out.println("FreeBoardDao의 getBoardList 메소드 실행");
+        System.out.println("CommunityDao의 getBoardList 메소드 실행");
 
         List<BoardDto> boardDtoList = new ArrayList<>();
 
         // SqlSessionTemplate의 selectList메소드 사용
-        boardDtoList = mybatis.selectList("FreeBoardDao.getBoardList", paramMap);
+        boardDtoList = mybatis.selectList("CommunityDao.getBoardList", paramMap);
 
-        System.out.println("FreeBoardDao의 getBoardList 메소드 실행 종료");
+        System.out.println("CommunityDao의 getBoardList 메소드 실행 종료");
         return boardDtoList;
     }
 
     public void delete(int id) {
-        System.out.println("FreeBoardDao의 delete 메소드 실행");
+        System.out.println("CommunityDao의 delete 메소드 실행");
 
-        mybatis.delete("FreeBoardDao.deleteFiles", id);
+        mybatis.delete("CommunityDao.deleteFiles", id);
 
-        mybatis.delete("FreeBoardDao.delete", id);
+        mybatis.delete("CommunityDao.delete", id);
 
-        System.out.println("FreeBoardDao의 delete 메소드 실행 종료");
+        System.out.println("CommunityDao의 delete 메소드 실행 종료");
     }
 
     public BoardDto getBoard(int id) {
-        System.out.println("FreeBoardDao의 getBoard 메소드 실행");
+        System.out.println("CommunityDao의 getBoard 메소드 실행");
 
         BoardDto boardDto = new BoardDto();
 
         // SqlSessionTemplate의 selectOne메소드 사용
-        boardDto = mybatis.selectOne("FreeBoardDao.getBoard", id);
+        boardDto = mybatis.selectOne("CommunityDao.getBoard", id);
 
-        System.out.println("FreeBoardDao의 getBoard 메소드 실행 종료");
+        System.out.println("CommunityDao의 getBoard 메소드 실행 종료");
         return boardDto;
     }
 
     public void updateCnt(int id) {
-        mybatis.update("FreeBoardDao.updateCnt", id);
+        mybatis.update("CommunityDao.updateCnt", id);
     }
 
     public int getBoardTotalCnt(Map<String, String> searchMap) {
-        return mybatis.selectOne("FreeBoardDao.getBoardTotalCnt", searchMap);
+        return mybatis.selectOne("CommunityDao.getBoardTotalCnt", searchMap);
     }
 
     public List<BoardFileDto> getFreeBoardFileList(int id) {
-        return mybatis.selectList("FreeBoardDao.getFreeBoardFileList", id);
+        return mybatis.selectList("CommunityDao.getFreeBoardFileList", id);
     }
 }
 

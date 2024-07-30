@@ -20,7 +20,7 @@
                  내용이 여기에 들어갑니다.
             </div>
             <div class="btn-container mt-4">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/free-modify.do?boardNo=1'">수정하기</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/community-modify.do?boardNo=1'">수정하기</button>
             </div>
         </main>
     </div>

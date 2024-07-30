@@ -3,7 +3,7 @@ package com.bit.springboard.dto;
 import java.time.LocalDateTime;
 
 public class BoardDto {
-    private String type = "free";
+    private String type = "community";
     private int id;
     private String title;
     private String content;
