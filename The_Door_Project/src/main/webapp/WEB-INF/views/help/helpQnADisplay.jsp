@@ -15,6 +15,7 @@
     </div>
     <div class="content-top-gap"></div> <!-- 상단 여백 -->
     <div class="content">
+        <form id="modify-form" action="/helpboard/modify.do" method="post" enctype="multipart/form-data">
         <div class="post-container">
             <div class="post-title">
                 <input type="text" id="title" name="title" value="${qa.title}" required>
@@ -107,6 +108,7 @@
                 </c:if>
             </div>
         </div>
+        </form>
     </div>
     <div class="content-bottom-gap"></div> <!-- 하단 여백 -->
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
