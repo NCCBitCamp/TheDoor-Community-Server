@@ -15,9 +15,9 @@
             #{title},
             #{content},
                 (
-                    SELECT U.ID
+                    SELECT U.USER_ID
                         FROM USER U
-                        WHERE U.USER_ID = #{user_id}
+                        WHERE U.NICKNAME = #{nickname}
                 )
         )
     </insert>
@@ -52,7 +52,7 @@
             , C.CNT
             FROM COMMUNITY C
             JOIN USER U
-                ON C.WRITER_ID = U.NICKNAME
+              ON C.WRITER_ID = U.USER_ID
         -- mybatis의 동적 쿼리 사용
         WHERE 1=1
         <if test="search.searchKeyword != null and search.searchKeyword != ''">
@@ -84,16 +84,16 @@
              , C.DATE
              , C.CNT
         FROM COMMUNITY C
-                 JOIN USER U
-                   ON C.WRITER_ID = U.NICKNAME
-        WHERE C.ID = #{id}
+            JOIN USER U
+              ON C.WRITER_ID = U.USER_ID
+            WHERE C.ID = #{id}
     </select>
 
     <select id="getBoardTotalCnt" parameterType="map" resultType="int">
         SELECT COUNT(*)
             FROM COMMUNITY C
             JOIN USER U
-            ON C.WRITER_ID = U.NICKNAME
+              ON C.WRITER_ID = U.USER_ID
         WHERE 1=1
         <if test="searchKeyword != null and searchKeyword != ''">
             <if test="searchCondition == 'all'">

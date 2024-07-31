@@ -144,7 +144,9 @@ public class CommunityServiceImpl implements BoardService {
 
     @Override
     public BoardDto getBoard(int id) {
-        return communityDao.getBoard(id);
+        BoardDto boardDto = communityDao.getBoard(id);
+        List<BoardFileDto> files = communityDao.getFreeBoardFileList(id);
+        return boardDto; // 파일 리스트는 따로 전달
     }
 
     @Override

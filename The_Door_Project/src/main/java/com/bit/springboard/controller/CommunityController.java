@@ -1,9 +1,6 @@
 package com.bit.springboard.controller;
 
-import com.bit.springboard.dto.BoardDto;
-import com.bit.springboard.dto.Criteria;
-import com.bit.springboard.dto.MemberDto;
-import com.bit.springboard.dto.PageDto;
+import com.bit.springboard.dto.*;
 import com.bit.springboard.service.BoardService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/community")
 public class CommunityController {
-    private BoardService boardService;
     private ApplicationContext applicationContext;
+    private BoardService boardService;
 
     @Autowired
     public CommunityController(ApplicationContext applicationContext) {
@@ -77,11 +75,12 @@ public class CommunityController {
     }
 
     @GetMapping("/communityDetail.do")
-    public String communityDetailView(BoardDto boardDto, Model model) {
-        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
+    public String communityDetailView(@RequestParam("id") int id, Model model) {
+        BoardDto board = boardService.getBoard(id);
+        List<BoardFileDto> fileList = boardService.getBoardFileList(id);
 
-        model.addAttribute("community", boardService.getBoard(boardDto.getId()));
-        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+        model.addAttribute("community", board);
+        model.addAttribute("fileList", fileList);
 
         return "/community/communityDetail";
     }
