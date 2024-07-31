@@ -69,7 +69,7 @@ public class NewsController {
         // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
         model.addAttribute("page", new PageDto(cri, total));
 
-        return "news/news.do";
+        return "news/news";
     }
 
     @RequestMapping("/newsDetail.do")
