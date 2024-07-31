@@ -28,7 +28,7 @@
                 <a href="/news/news.do">News</a>
                 <a href="/community/community.do">Community</a>
                 <a href="/main/ranking.do">Ranking</a>
-                <a href="/board/help-main.do">Help</a>
+                <a href="/helpboard/help-main.do">Help</a>
             </div>
             <div class="auth-links">
 

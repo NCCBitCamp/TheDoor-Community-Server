@@ -23,11 +23,6 @@
 //    }
 //
 //    @Override
-//    public void write(BoardDto boardDto, MultipartFile[] uploadFiles) {
-//
-//    }
-//
-//    @Override
 //    public void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles) {
 //
 //    }
@@ -67,11 +62,6 @@
 //    @Override
 //    public List<BoardFileDto> getBoardFileList(int id) {
 //        return HelpFaqDao.getFaqBoardFileList(id);
-//    }
-//
-//    @Override
-//    public void updateCnt(int id) {
-//
 //    }
 //
 //

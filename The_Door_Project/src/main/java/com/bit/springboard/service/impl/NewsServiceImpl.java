@@ -57,6 +57,11 @@ public class NewsServiceImpl implements BoardService {
     }
 
     @Override
+    public void plusCnt(int id) {
+
+    }
+
+    @Override
     public void delete(int id) {
 
     }

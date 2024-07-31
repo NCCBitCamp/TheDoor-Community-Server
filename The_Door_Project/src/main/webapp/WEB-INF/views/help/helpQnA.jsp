@@ -12,12 +12,22 @@
         <p class="head_area_title">QNA</p>
     </div>
     <div class="search_area">
-        <select>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="title+content">제목+내용</option>
+        <select name="searchCondition">
+            <option value="title"
+                    <c:if test="${searchMap.searchCondition == 'title'}">
+                        selected
+                    </c:if>>제목</option>
+            <option value="content"
+                    <c:if test="${searchMap.searchCondition == 'content'}">
+                        selected
+                    </c:if>>내용</option>
+            <option value="all"
+                    <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
+                        selected
+                    </c:if>>제목+내용</option>
         </select>
-        <input type="text" placeholder="검색어를 입력하세요"><button class="search_button">검색</button>
+        <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
+        <button type="submit" class="search_button">검색</button>
     </div>
     <div class="content">
         <div class="board">
@@ -25,84 +35,40 @@
             <ul class="posts" id="postsList">
                 <!-- 게시글이 여기에 추가됩니다 -->
                 <li>
-                    <div class="post-info">
-                        <h3>오랫동안 접속하지 않았더니 계정이 사라졌어요</h3>
-                        <p>다시 만드세요</p>
+                    <c:forEach items="${qnaBoardList}" var="qnaBoard">
+                    <div class="post-info" onclick="location.href='/board/update-cnt.do?id=${qnaBoard.id}&type=qna'">
+
+                        <h3>${qnaBoard.title}</h3>
+                        <p>${qnaBoard.content}</p>
                         <span class="post-date">2024-07-18</span>
                     </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
+                    <div>
+                        <javatime:format value="${freeBoard.regdate}" pattern="yyyy-MM-dd"/>
                     </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>제 계정이 중고거래 사이트에 올라갔는데 회수 가능할까요?</h3>
-                        <p>될가요?</p>
-                        <span class="post-date">2024-07-17</span>
+                    <div class="count">
+                        조회수 : ${freeBoard.cnt}
                     </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>모르는 계정이 생겼어요!</h3>
-                        <p>ㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋ</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
+                    </c:forEach>
                 </li>
             </ul>
         </div>
-        <div class="write-post-button">
-            <a href="/helpboard/help-qna-write.do"><button>글쓰기</button></a>
-        </div>
+        <c:if test="${loginMember ne null}">
+            <div class="write-post-button">
+                <button type="button" onclick="location.href='/helpboard/help-qna-write.do'">글쓰기</button>
+            </div>
+        </c:if>
         <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
+            <c:if test="${page.prev}">
+                <a href="${page.cri.pageNum - 1}">&laquo;</a>
+            </c:if>
+            <c:forEach begin="${page.startPage}"
+                       end="${page.endPage}"
+                       var="number">
+                <a href="${number}">${number}</a>
+            </c:forEach>
+            <c:if test="${page.next}">
+                <a href="${page.cri.pageNum + 1}">&raquo;</a>
+            </c:if>
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
@@ -111,6 +77,28 @@
             setTimeout(function() {
                 document.querySelector('.semi_title').classList.add('fade-in');
             }, 500); // 0.5초 후 페이드인
+        });
+        $(() => {
+            $("#search-icon").on("click", (e) => {
+                $("input[name='pageNum']").val(1);
+                $("#search-form").submit();
+            });
+
+            $("input[name='searchKeyword']").on("keypress", (e) => {
+                if(e.key === 'Enter') {
+                    $("input[name='pageNum']").val(1);
+                }
+            });
+
+            $(".pagination a").on("click", (e) => {
+                e.preventDefault();
+
+                // console.log($(e.target).attr("href"));
+
+                $("input[name='pageNum']").val($(e.target).attr("href"));
+
+                $("#search-form").submit();
+            });
         });
     </script>
 </body>

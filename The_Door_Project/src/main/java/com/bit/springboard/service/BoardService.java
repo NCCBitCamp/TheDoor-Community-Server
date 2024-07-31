@@ -14,6 +14,8 @@ public interface BoardService {
 
     void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles);
 
+    void plusCnt(int id);
+
     void delete(int id);
 
     void updateCnt(int id);
