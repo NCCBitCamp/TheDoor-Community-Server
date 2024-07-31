@@ -31,11 +31,15 @@ public class MyPageDao {
         return mybatis.selectList("MyPageDao.myWrite", cri);
     }
 
-    public List<CommentDto> getComment(String userId){
-        return mybatis.selectList("MyPageDao.getComments",userId);
+    public List<CommentDto> getComment(Criteria cri){
+        return mybatis.selectList("MyPageDao.getComments",cri);
     }
 
     public int getTotalMyPage(String userId){
         return mybatis.selectOne("MyPageDao.myWriteNum", userId);
+    }
+
+    public int getCommentsNum(String userId) {
+        return mybatis.selectOne("MyPageDao.getCommentsNum", userId);
     }
 }

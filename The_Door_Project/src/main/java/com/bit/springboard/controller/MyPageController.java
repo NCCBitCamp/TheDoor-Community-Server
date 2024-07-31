@@ -5,10 +5,12 @@ import com.bit.springboard.service.RankService;
 import com.bit.springboard.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -88,11 +90,27 @@ public class MyPageController {
 
 
     @RequestMapping("alert.do")
-    public String myPageAlertView(HttpSession session, Model model) {
-        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-        model.addAttribute("personalInfo", loginMember);
+    public String myPageAlertView(
+            HttpSession session,
+            @RequestParam(value = "lastDate", required = false) LocalDateTime lastDate,
+            @RequestParam(value = "lastId", required = false) Integer lastId,
+            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+            Model model, Criteria cri) {
 
-        List<CommentDto> getCommentList = mypageService.getComment(loginMember);
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        if(loginMember == null) {
+            return "redirect:/member/login.do";
+        }
+
+        model.addAttribute("personalInfo", loginMember);
+        cri.setUserId(loginMember.getUser_id());
+        cri.setLastDate(lastDate);
+        cri.setLastId(lastId);
+        cri.setPageNum(pageNum);
+
+
+        List<CommentDto> getCommentList = mypageService.getComment(cri);
 
         List<Date> dateList = new ArrayList<>();
         getCommentList.forEach(comment -> {
@@ -102,9 +120,8 @@ public class MyPageController {
 
         model.addAttribute("getComments", getCommentList);
 
-        if(loginMember == null) {
-            return "redirect:/member/login.do";
-        }
+        int total = mypageService.getCommentsNum(loginMember);
+        model.addAttribute("page", new PageDto(cri, total));
 
         return "myPage/myPageAlert";
     }

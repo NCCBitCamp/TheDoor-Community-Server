@@ -1,5 +1,8 @@
 package com.bit.springboard.dto;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class Criteria {
     // 현재 페이지 번호
     private int pageNum;
@@ -9,6 +12,22 @@ public class Criteria {
     private int startNum;
     private String gametype;
     private String userId;
+    private LocalDateTime lastDate;
+    private Integer lastId;
+
+    public LocalDateTime getLastDate() {
+        return lastDate;
+    }
+    public void setLastDate(LocalDateTime lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public Integer getLastId() {
+        return lastId;
+    }
+    public void setLastId(Integer lastId) {
+        this.lastId = lastId;
+    }
 
     public String getUserId() {
         return userId;
