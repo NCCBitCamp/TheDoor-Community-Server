@@ -24,7 +24,7 @@
                     </span>
             </div>
         </div>
-        <div class="helpBox" onclick="location.href='#'">
+        <div class="helpBox" onclick="location.href='/mail/confirm.do?email=byungju98@naver.com'">
             <div class="box-content d-flex align-items-center">
                     <span>
                         <img src="${pageContext.request.contextPath}/static/images/member/password.svg" alt="passwordLogo" class="help-logo2">
