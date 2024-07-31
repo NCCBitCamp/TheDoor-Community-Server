@@ -37,7 +37,7 @@
                 <div class="card-body">
                     <h5 class="card-title">공지사항</h5>
                     <p class="card-text">작성일: yyyy-MM-dd</p>
-                    <a href="/board/news-detail.do" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
+                    <a href="/news/newsDetail.do" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
                 </div>
             </div>
         </div>

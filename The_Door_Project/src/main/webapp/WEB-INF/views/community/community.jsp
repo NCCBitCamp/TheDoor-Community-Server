@@ -1,9 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/community/community.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -14,12 +17,11 @@
         <!-- 현재 선택된 커뮤니티의 네비게이션과 검색창 부분-->
         <div class="search-container">
             <span class="current-nav">자유게시판</span>
-            <form class="form-inline" id="search-form" action="/community/community-list.do" method="post">
+            <form class="form-inline" id="search-form" action="/community/community.do" method="post">
                 <input type="hidden" name="pageNum" value="${page.cri.pageNum}">
                 <input type="hidden" name="amount" value="${page.cri.amount}">
                 <div>
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">제목</button>
-                    <select class="form-select" name="searchCondition">
+                    <select class="btn btn-outline-secondary dropdown-toggle" name="searchCondition" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <option value="all"
                                 <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
                                     selected
@@ -63,10 +65,12 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${communityList}" var="community">
-                        <tr onclick="location.href='/board/update-cnt.do?id=${community.id}&type=community'">
-                            <td>{community.id</td>
-                            <td class="title"><a href="/board/free-detail.do">${community.title}</a></td>
-                            <td>{community.nickname}</td>
+                        <tr>
+                            <td>${community.id}</td>
+                            <td class="title">
+                                <a href="/community/updateCnt.do?id=${community.id}">${community.title}</a>
+                            </td>
+                            <td>${community.nickname}</td>
                             <td>
                                 <javatime:format value="${community.date}" pattern="yyyy-MM-dd"/>
                             </td>
@@ -84,20 +88,19 @@
             </c:if>
             <br>
             <div>
-
                 <!-- 페이지네이션 -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         <c:if test="${page.prev}">
                             <li class="page-item">
                                 <a class="page-link" href="${page.cri.pageNum - 1}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
+                                    &laquo;
                                 </a>
                             </li>
                         </c:if>
 
-                        <c:forEach begin="#{page.startpage}"
-                                   end="#{page.endpage}"
+                        <c:forEach begin="${page.startPage}"
+                                   end="${page.endPage}"
                                    var="number">
                             <li class="page-item">
                                 <a class="page-link link-secondary" href="${number}">${number}</a>
@@ -107,7 +110,7 @@
                         <c:if test="${page.next}">
                             <li class="page-item">
                                 <a class="page-link" href="${page.cri.pageNum + 1}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
+                                    &raquo;
                                 </a>
                             </li>
                         </c:if>
