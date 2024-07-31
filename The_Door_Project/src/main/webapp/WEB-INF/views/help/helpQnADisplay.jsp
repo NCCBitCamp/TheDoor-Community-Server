@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/help/helpQnADisplay.css">
@@ -101,7 +103,7 @@
                 <a href="/helpboard/help-qna.do"><button type="button" onclick="window.history.back();">뒤로가기</button></a>
                 <c:if test="${loginMember ne null and loginMember.id eq qa.WRITER_ID}">
                         <button type="submit" id="btn-update" >수정</button>
-                        <button type="button" id="btn-delete" onclick="location.href='/board/delete.do?id=${qa.id}'">삭제</button>
+                        <button type="button" id="btn-delete" onclick="location.href='/helpboard/delete.do?id=${qa.id}'">삭제</button>
                 </c:if>
             </div>
         </div>
