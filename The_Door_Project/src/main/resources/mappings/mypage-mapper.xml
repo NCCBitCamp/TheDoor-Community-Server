@@ -20,14 +20,23 @@
 
 
 <!--    내가 쓴 글 리스트로 가져오기-->
-    <select id="myWrite" parameterType="string" resultType="board">
+    <select id="myWrite" parameterType="cri" resultType="board">
         SELECT C.ID, C.TITLE, C.WRITER_ID, C.CNT
         FROM COMMUNITY C
         JOIN USER U
             ON C.WRITER_ID = U.USER_ID
-        WHERE C.WRITER_ID = #{user_id}
+        WHERE C.WRITER_ID = #{userId}
         ORDER BY C.ID DESC
-        LIMIT 10 OFFSET 3
+        LIMIT #{amount} OFFSET ${startNum}
+    </select>
+
+<!--    내가 쓴 글 리스트의 수 가져오기-->
+    <select id="myWriteNum" parameterType="string" resultType="int">
+        SELECT COUNT(C.ID)
+        FROM COMMUNITY C
+        JOIN USER U
+            ON C.WRITER_ID = U.USER_ID
+        WHERE C.WRITER_ID = #{user_id}
     </select>
 
 <!--    내가 쓴 글에 달린 댓글 리스트로 가져오기-->
