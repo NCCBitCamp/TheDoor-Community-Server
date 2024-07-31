@@ -22,6 +22,7 @@ public class NewsDao {
     // 자유게시글 등록
     public void write(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
+        System.out.println("NewsDao의 post 메소드 실행");
         mybatis.insert("NewsDao.write", boardDto);
 
         System.out.println("insert 실행 후 id값: " + boardDto.getId());
@@ -31,6 +32,7 @@ public class NewsDao {
 
             mybatis.insert("NewsDao.uploadFiles", boardFileDtoList);
         }
+        System.out.println("NewsDao의 post 메소드 실행 종료");
     }
 
     // 게시글 수정하기
@@ -51,7 +53,7 @@ public class NewsDao {
             });
         }
 
-        System.out.println("CommunityDao의 modify 메소드 실행 종료");
+        System.out.println("NewsDao의 modify 메소드 실행 종료");
     }
 
     public List<BoardDto> getBoardList(Map<String, Object> paramMap) {
@@ -59,11 +61,9 @@ public class NewsDao {
 
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        // SqlSessionTemplate의 selectList메소드 사용
-        boardDtoList = mybatis.selectList("NewsDao.getBoardList", paramMap);
-
         System.out.println("NewsDao의 getBoardList 메소드 실행 종료");
-        return boardDtoList;
+
+        return mybatis.selectList("NewsDao.getBoardList", paramMap);
     }
 
     public void delete(int id) {
@@ -81,11 +81,8 @@ public class NewsDao {
 
         BoardDto boardDto = new BoardDto();
 
-        // SqlSessionTemplate의 selectOne메소드 사용
-        boardDto = mybatis.selectOne("NewsDao.getBoard", id);
-
         System.out.println("NewsDao의 getBoard 메소드 실행 종료");
-        return boardDto;
+        return mybatis.selectOne("NewsDao.getBoard", id);
     }
 
     public void updateCnt(int id) {
@@ -96,8 +93,8 @@ public class NewsDao {
         return mybatis.selectOne("NewsDao.getBoardTotalCnt", searchMap);
     }
 
-    public List<BoardFileDto> getFreeBoardFileList(int id) {
-        return mybatis.selectList("NewsDao.getFreeBoardFileList", id);
+    public List<BoardFileDto> getBoardFileList(int id) {
+        return mybatis.selectList("NewsDao.getBoardFileList", id);
     }
 
 

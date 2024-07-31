@@ -31,7 +31,7 @@
         </div>
 
         <div class="container-fluid">
-            <a href="/community/news.do" class="button">
+            <a href="/news/news.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/noticeBtn.png" alt="Image 1">
                 <div class="overlay"></div>
             </a>
