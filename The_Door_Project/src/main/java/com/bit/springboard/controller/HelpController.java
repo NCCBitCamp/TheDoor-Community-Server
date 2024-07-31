@@ -129,7 +129,7 @@ public class HelpController {
         boardService.post(boardDto, uploadFiles);
 
 
-        return "redirect:/help/help-qna.do";
+        return "redirect:/helpboard/help-qna.do";
 
 
     }
