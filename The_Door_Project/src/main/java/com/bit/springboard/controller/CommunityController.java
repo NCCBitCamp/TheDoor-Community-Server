@@ -63,6 +63,8 @@ public class CommunityController {
                                   @RequestParam(name = "originFiles", required = false) String originFiles) {
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
+        System.out.println(boardDto);
+
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
         return "redirect:/community/communityDetail.do?id=" + boardDto.getId();

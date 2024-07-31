@@ -14,7 +14,7 @@
         <!-- 자유게시판 상세 내용 -->
         <main class="container mt-5 mb-5">
             <div class="community-header">
-                <div class="community-title"><${community.title}></div>
+                <div class="community-title">&lt;${community.title}&gt;</div>
                 <div class="community-writer">작성자: ${community.nickname}</div>
             </div>
             <div class="community-content">
