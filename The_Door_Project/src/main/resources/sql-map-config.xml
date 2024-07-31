@@ -24,6 +24,8 @@
                    alias="news"/>
         <typeAlias type="com.bit.springboard.dto.BoardFileDto"
                    alias="boardFile"/>
+        <typeAlias type="com.bit.springboard.dto.CommentDto"
+                   alias="comment"/>
     </typeAliases>
 
     <!--사용할 Sql Mapper 등록-->

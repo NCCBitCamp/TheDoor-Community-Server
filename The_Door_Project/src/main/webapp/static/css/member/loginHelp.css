@@ -36,8 +36,11 @@ h1 {
     box-shadow: 0px 0.25rem 0.25rem 0px;
     transition: transform 0.3s ease; /* 애니메이션 효과 추가 */
     cursor: pointer;
-    overflow: hidden;
-    box-sizing: border-box;
+    box-sizing: border-box; /* 박스 크기 계산을 보더와 패딩을 포함하도록 설정 */
+    overflow: hidden; /* 내용이 잘리지 않도록 설정 */
+    padding: 10px; /* 박스 확장 시 여유 공간 확보 */
+    backface-visibility: hidden; /* 애니메이션 동안 내용 흐림 방지 */
+    will-change: transform; /* 애니메이션 성능 최적화 */
 }
 
 .helpBox:hover {

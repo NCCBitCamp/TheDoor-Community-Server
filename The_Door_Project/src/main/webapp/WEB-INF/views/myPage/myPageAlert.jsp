@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageAlert.css">
@@ -16,7 +18,7 @@
             <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
             <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
 
-            <p class="emphaFont">닉네임123</p>
+            <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
 
         <div id="selectArea">
@@ -39,36 +41,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>우리팀 대..</td>
-                    <td>ㅋㅋㅋ귀엽네 인증좀 해보고 썰 풀어봐</td>
-                    <td>ㄱ</td>
-                    <td>2분전</td>
-                </tr>
-                <tr>
-                    <td>어쩌라고..</td>
-                    <td>어쩌라고</td>
-                    <td>ㅁ</td>
-                    <td>10분전</td>
-                </tr>
-                <tr>
-                    <td>강사님한...</td>
-                    <td>됩니다.</td>
-                    <td>ㅁ</td>
-                    <td>7.7</td>
-                </tr>
-                <tr>
-                    <td>의자좀 고..</td>
-                    <td>ㄹㅇㅋㅋ</td>
-                    <td>ㅊ</td>
-                    <td>6.15</td>
-                </tr>
-                <tr>
-                    <td>요세하녕안</td>
-                    <td>ㄵ</td>
-                    <td>ㅎ</td>
-                    <td>6.15</td>
-                </tr>
+                <c:forEach var="comment" items="${getComments}" varStatus="status">
+                    <tr>
+                        <td><a href="/myPage/info.do">${comment.title}</a></td>
+                        <td><a href="/myPage/info.do">${comment.content}</a></td>
+                        <td>${comment.WRITER_ID}</td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -113,4 +93,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     </body>
+<script>
+    <%--console.log(${getComents});--%>
+</script>
 </html>
