@@ -119,8 +119,9 @@
 }
 
 .emphaFont {
-    font-size: 1.25rem;
+    font-size: x-large;
     font-weight: bold;
+    margin-top: 2.2vh;
 }
 
 #submitBtn {
