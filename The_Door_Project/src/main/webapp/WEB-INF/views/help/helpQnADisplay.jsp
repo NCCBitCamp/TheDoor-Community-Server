@@ -80,7 +80,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <img id="img${file.id}"
-                                             src="/static/images/defaultFileImg.png"
+                                             src="/static/images/logo.png"
                                              class="upload-file"
                                              alt="${file.fileoriginname}"
                                              onclick="fileClick(${file.id})">
