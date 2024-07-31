@@ -30,6 +30,8 @@ public class CommunityServiceImpl implements BoardService {
     public void post(BoardDto boardDto, MultipartFile[] uploadFiles) {
         List<BoardFileDto> boardFileDtoList = new ArrayList<>();
 
+        Arrays.stream(uploadFiles).forEach(multipartFile -> System.out.println(multipartFile.getOriginalFilename()));
+
         if(uploadFiles != null && uploadFiles.length > 0) {
             // 업로드 폴더 지정헤주기
             String attachPath = "C:/tmp/upload/";
@@ -121,7 +123,6 @@ public class CommunityServiceImpl implements BoardService {
                 }
             });
         }
-        boardDto.setDate(LocalDateTime.now());
         communityDao.modify(boardDto, uFileList);
     }
 

@@ -83,9 +83,9 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${loginMember ne null and loginMember.id eq community.WRITER_ID}">
+                <c:if test="${loginMember ne null and loginMember.user_id eq community.writer_id}">
                     <div class="btn-container mt-3 mb-5">
-                        <button type="submit" id="btn-update" class="btn btn-outline-secondary" onclick="location.href='/community/communityModify.do?id=${community.id}'">수정</button>
+                        <button type="submit" id="btn-update" class="btn btn-outline-secondary" onclick="location.href='/community/communityDetail.do?id=${community.id}'">수정</button>
                         <button type="button" id="btn-delete" class="btn btn-outline-secondary ml-2" onclick="location.href='/community/delete.do?id=${community.id}'">삭제</button>
                     </div>
                 </c:if>

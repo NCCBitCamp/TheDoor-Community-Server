@@ -13,7 +13,7 @@
             <h4>자유게시판 글쓰기</h4>
         </div>
         <div class="container mt-3">
-            <form id="writeForm" action="/community/communityWrite.do" method="post">
+            <form id="writeForm" action="/community/communityWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">제목</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
