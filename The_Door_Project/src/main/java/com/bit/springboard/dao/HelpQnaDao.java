@@ -123,7 +123,7 @@ public class HelpQnaDao {
         return boardDto;
     }
 
-    public void updateCnt(int id) {
+    public static void updateCnt(int id) {
         mybatis.update("HelpQnaDao.updateCnt", id);
     }
 

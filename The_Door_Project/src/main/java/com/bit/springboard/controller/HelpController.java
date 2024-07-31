@@ -1,17 +1,22 @@
 package com.bit.springboard.controller;
 
 import com.bit.springboard.dto.BoardDto;
+import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.MemberDto;
+import com.bit.springboard.dto.PageDto;
 import com.bit.springboard.service.BoardService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/helpboard")
@@ -59,6 +64,47 @@ public class HelpController {
     public String helpQnAWriteView() {
         return "help/helpQnAwrite";
     }
+
+    @RequestMapping("/qna-list.do")
+    public String freeListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+        System.out.println(cri);
+        // System.out.println(searchMap);
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+
+        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri));
+        model.addAttribute("searchMap", searchMap);
+
+        // 게시글의 총 개수
+        int total = boardService.getBoardTotalCnt(searchMap);
+
+        // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
+        model.addAttribute("page", new PageDto(cri, total));
+
+        return "board/helpQnA";
+    }
+
+    @GetMapping("update-cnt.do")
+    public String updateCnt(BoardDto boardDto) {
+
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+
+        boardService.updateCnt(boardDto.getId());
+
+        return "redirect:/board/help-qna.do?id=" + boardDto.getId();
+
+    }
+
+    @GetMapping("/help-qna-display.do")
+    public String qnaDetailView(/*HttpServletRequest request*//*@RequestParam("id") int id*/BoardDto boardDto, Model model) {
+//        int id = Integer.valueOf(request.getParameter("id"));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+//        boardService.updateCnt(boardDto.getId());
+        model.addAttribute("qnaboard", boardService.getBoard(boardDto.getId()));
+        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+
+        return "board/helpQnADisplay";
+    }
+
 
     @GetMapping("/post.do")
     public String postView(HttpSession session) {
