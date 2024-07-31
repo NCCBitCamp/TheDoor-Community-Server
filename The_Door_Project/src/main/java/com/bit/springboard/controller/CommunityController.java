@@ -1,9 +1,6 @@
 package com.bit.springboard.controller;
 
-import com.bit.springboard.dto.BoardDto;
-import com.bit.springboard.dto.Criteria;
-import com.bit.springboard.dto.MemberDto;
-import com.bit.springboard.dto.PageDto;
+import com.bit.springboard.dto.*;
 import com.bit.springboard.service.BoardService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/community")
 public class CommunityController {
-    private BoardService boardService;
     private ApplicationContext applicationContext;
+    private BoardService boardService;
 
     @Autowired
     public CommunityController(ApplicationContext applicationContext) {
@@ -37,11 +35,12 @@ public class CommunityController {
             return "redirect:/member/login.do";
         }
 
-        return "community/communityWrite";
+        return "/community/communityWrite";
     }
 
     @PostMapping("/communityWrite.do")
     public String communityWrite(BoardDto boardDto, MultipartFile[] uploadFiles) {
+        // 의존성주입
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
         boardService.post(boardDto, uploadFiles);
@@ -56,12 +55,12 @@ public class CommunityController {
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
-        return "redirect:/community/community.do";
+        return "redirect:/community/communityDetail.do?id=" + boardDto.getId();
     }
 
     @RequestMapping("/community.do")
     public String communityListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
-        boardService = applicationContext.getBean("communitySeviceImpl", BoardService.class);
+        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
         model.addAttribute("communityList", boardService.getBoardList(searchMap, cri));
         model.addAttribute("searchMap", searchMap);
@@ -72,17 +71,18 @@ public class CommunityController {
         // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
         model.addAttribute("page", new PageDto(cri, total));
 
-        return "community/community.do";
+        return "/community/community";
     }
 
-    @RequestMapping("/communityDetail.do")
-    public String communityDetailView(BoardDto boardDto, Model model) {
-        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
+    @GetMapping("/communityDetail.do")
+    public String communityDetailView(@RequestParam("id") int id, Model model) {
+        BoardDto board = boardService.getBoard(id);
+        List<BoardFileDto> fileList = boardService.getBoardFileList(id);
 
-        model.addAttribute("community", boardService.getBoard(boardDto.getId()));
-        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+        model.addAttribute("community", board);
+        model.addAttribute("fileList", fileList);
 
-        return "community/communityDetail";
+        return "/community/communityDetail";
     }
 
     @GetMapping("/delete.do")
@@ -100,7 +100,7 @@ public class CommunityController {
 
         boardService.updateCnt(boardDto.getId());
 
-        return "redirect:/community/community.do?id=" + boardDto.getId();
+        return "redirect:/community/communityDetail.do?id=" + boardDto.getId();
     }
 
 }

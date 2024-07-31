@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,14 +14,27 @@
         <!-- 자유게시판 상세 내용 -->
         <main class="container mt-5 mb-5">
             <div class="community-header">
-                <div class="community-title">자유게시판 제목</div>
-                <div class="community-writer">작성자: 글쓴이</div>
+                <div class="community-title"><${community.title}></div>
+                <div class="community-writer">작성자: ${community.nickname}</div>
             </div>
             <div class="community-content">
-                 내용이 여기에 들어갑니다.
+                ${community.content}
+            </div>
+            <div class="file-list mt-5 mb-5">
+                <h5> [첨부 파일] </h5>
+                <c:forEach var="file" items="${fileList}">
+                    <c:if test="${file.filetype.startsWith('image')}">
+                        <img src="${pageContext.request.contextPath}/upload/${file.filename}" alt="${file.fileoriginname}" style="max-width: 100%; height: auto;">
+                    </c:if>
+                    <c:if test="${!file.filetype.startsWith('image')}">
+                        <a href="${pageContext.request.contextPath}/upload/${file.filename}" download="${file.fileoriginname}">
+                                ${file.fileoriginname}
+                        </a>
+                    </c:if>
+                </c:forEach>
             </div>
             <div class="btn-container mt-4">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/community-modify.do?boardNo=1'">수정하기</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/community/communityModify.do?id=${community.id}'">수정하기</button>
             </div>
         </main>
     </div>

@@ -31,11 +31,11 @@
         </div>
 
         <div class="container-fluid">
-            <a href="/board/news-list.do" class="button">
+            <a href="/community/news.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/noticeBtn.png" alt="Image 1">
                 <div class="overlay"></div>
             </a>
-            <a href="/board/community-list.do" class="button">
+            <a href="/community/community.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/communityBtn.png" alt="Image 2">
                 <div class="overlay"></div>
             </a>

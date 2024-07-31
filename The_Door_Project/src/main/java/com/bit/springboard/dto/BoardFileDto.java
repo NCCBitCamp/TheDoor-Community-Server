@@ -10,6 +10,7 @@ public class BoardFileDto {
     private String filestatus;
     private String newfilename;
 
+
     public int getId() {
         return id;
     }
