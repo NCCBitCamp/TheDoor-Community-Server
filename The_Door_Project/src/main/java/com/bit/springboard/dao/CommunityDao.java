@@ -2,6 +2,7 @@ package com.bit.springboard.dao;
 
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
+import com.bit.springboard.dto.CommentDto;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -102,6 +103,16 @@ public class CommunityDao {
 
     public List<BoardFileDto> getFreeBoardFileList(int id) {
         return mybatis.selectList("CommunityDao.getFreeBoardFileList", id);
+    }
+
+
+    public void addComment(CommentDto commentDto) {
+        mybatis.insert("CommunityDao.addComment", commentDto);
+    }
+
+    public List<CommentDto> getComments(int boardId) {
+        System.out.println(boardId);
+        return mybatis.selectList("CommunityDao.getComments", boardId);
     }
 }
 
