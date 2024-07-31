@@ -180,6 +180,17 @@
           AND BOARD_ID = #{board_id}
     </delete>
 
+    <select id="getBoardFileList" parameterType="int" resultType="boardFile">
+        SELECT ID
+             , BOARD_ID
+             , FILENAME
+             , FILEORIGINNAME
+             , FILEPATH
+             , FILETYPE
+        FROM QA_FILE
+        WHERE BOARD_ID = #{id}
+    </select>
+
 
 
 
