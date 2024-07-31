@@ -15,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class helpQnaServiceImpl implements BoardService {
@@ -135,17 +132,22 @@ public class helpQnaServiceImpl implements BoardService {
 
     @Override
     public void delete(int id) {
-        HelpQnaDao.delete(id);
+        helpQnaDao.delete(id);
     }
 
     @Override
     public void updateCnt(int id) {
-        HelpQnaDao.updateCnt(id);
+        helpQnaDao.updateCnt(id);
     }
 
     @Override
     public List<BoardDto> getBoardList(Map<String, String> searchMap, Criteria cri) {
-        return List.of();
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("search", searchMap);
+        paramMap.put("cri", cri);
+
+        return helpQnaDao.getBoardList(paramMap);
     }
 
     @Override

@@ -96,12 +96,12 @@ public class HelpQnaDao {
 
         // SqlSessionTemplate의 selectList메소드 사용
         boardDtoList = mybatis.selectList("HelpQnaDao.getBoardList", paramMap);
-
+        System.out.println(boardDtoList);
         System.out.println("HelpQnaDao의 getBoardList 메소드 실행 종료");
         return boardDtoList;
     }
 
-    public static void delete(int id) {
+    public void delete(int id) {
         System.out.println("HelpQnaDao의 delete 메소드 실행");
 
         mybatis.delete("HelpQnaDao.deleteFiles", id);
@@ -123,7 +123,7 @@ public class HelpQnaDao {
         return boardDto;
     }
 
-    public static void updateCnt(int id) {
+    public void updateCnt(int id) {
         mybatis.update("HelpQnaDao.updateCnt", id);
     }
 
