@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CommunityDao">
-    <insert id="write" parameterType="community">
+    <insert id="write" parameterType="board">
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT IFNULL(MAX(ID), 1) FROM COMMUNITY
         </selectKey>
@@ -16,43 +16,43 @@
             #{content},
                 (
                     SELECT U.ID
-                    FROM USER U
-                    WHERE U.NICKNAME = #{nickname}
+                        FROM USER U
+                        WHERE U.USER_ID = #{user_id}
                 )
         )
     </insert>
 
-    <update id="modify" parameterType="community">
+    <update id="modify" parameterType="board">
         UPDATE COMMUNITY
         SET
             TITLE = #{title},
-            CONTENT = #{content},
+            CONTENT = #{content}
         WHERE ID = #{id}
     </update>
 
     <delete id="delete" parameterType="int">
         DELETE FROM COMMUNITY
-        WHERE ID = #{id}
+            WHERE ID = #{id}
     </delete>
 
     <update id="updateCnt" parameterType="int">
         UPDATE COMMUNITY
-        SET
-            CNT = CNT + 1
-        WHERE ID = #{id}
+            SET
+                CNT = CNT + 1
+                WHERE ID = #{id}
     </update>
 
     <select id="getBoardList" parameterType="map" resultType="board">
         SELECT C.ID
-        , C.TITLE
-        , C.CONTENT
-        , C.WRITER_ID
-        , U.NICKNAME
-        , C.DATE
-        , C.CNT
-        FROM COMMUNITY C
-        JOIN USER U
-        ON C.WRITER_ID = U.NICKNAME
+            , C.TITLE
+            , C.CONTENT
+            , C.WRITER_ID
+            , U.NICKNAME
+            , C.DATE
+            , C.CNT
+            FROM COMMUNITY C
+            JOIN USER U
+                ON C.WRITER_ID = U.NICKNAME
         -- mybatis의 동적 쿼리 사용
         WHERE 1=1
         <if test="search.searchKeyword != null and search.searchKeyword != ''">

@@ -37,11 +37,12 @@ public class CommunityController {
             return "redirect:/member/login.do";
         }
 
-        return "community/communityWrite";
+        return "/community/communityWrite";
     }
 
     @PostMapping("/communityWrite.do")
     public String communityWrite(BoardDto boardDto, MultipartFile[] uploadFiles) {
+        // 의존성주입
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
         boardService.post(boardDto, uploadFiles);
@@ -56,12 +57,12 @@ public class CommunityController {
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
-        return "redirect:/community/community.do";
+        return "redirect:/community/communityDetail.do?id=" + boardDto.getId();
     }
 
     @RequestMapping("/community.do")
     public String communityListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
-        boardService = applicationContext.getBean("communitySeviceImpl", BoardService.class);
+        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
         model.addAttribute("communityList", boardService.getBoardList(searchMap, cri));
         model.addAttribute("searchMap", searchMap);
@@ -72,17 +73,17 @@ public class CommunityController {
         // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
         model.addAttribute("page", new PageDto(cri, total));
 
-        return "community/community.do";
+        return "/community/community";
     }
 
-    @RequestMapping("/communityDetail.do")
+    @GetMapping("/communityDetail.do")
     public String communityDetailView(BoardDto boardDto, Model model) {
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
         model.addAttribute("community", boardService.getBoard(boardDto.getId()));
         model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
 
-        return "community/communityDetail";
+        return "/community/communityDetail";
     }
 
     @GetMapping("/delete.do")
@@ -100,7 +101,7 @@ public class CommunityController {
 
         boardService.updateCnt(boardDto.getId());
 
-        return "redirect:/community/community.do?id=" + boardDto.getId();
+        return "redirect:/community/communityDetail.do?id=" + boardDto.getId();
     }
 
 }

@@ -24,7 +24,7 @@ public class CommunityDao {
         System.out.println("CommunityDao의 write 메소드 실행");
 
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
-        mybatis.insert("CommunityDao.communityWrite", boardDto);
+        mybatis.insert("CommunityDao.write", boardDto);
 
         System.out.println("insert 실행 후 id값: " + boardDto.getId());
 
