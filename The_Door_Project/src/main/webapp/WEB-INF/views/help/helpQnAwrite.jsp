@@ -42,10 +42,10 @@
                 <label for="content">내용</label>
                 <textarea id="content" name="content"></textarea>
             </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password">
-            </div>
+<%--            <div class="form-group">--%>
+<%--                <label for="password">비밀번호</label>--%>
+<%--                <input type="password" id="password" name="password">--%>
+<%--            </div>--%>
             <div class="form-group">
                 <label for="uploadFiles">파일 첨부</label>
                 <input type="file" id="uploadFiles" name="uploadFiles">

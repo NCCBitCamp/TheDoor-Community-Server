@@ -13,7 +13,7 @@
     <div class="head_area">
         <p class="head_area_title">QNA</p>
     </div>
-    <form id="search-form" action="/helpboard/qna-list.do" method="post">
+    <form id="search-form" action="/helpboard/help-qna.do" method="post">
     <div class="search_area">
         <select class="form-select" name="searchCondition">
             <option value="title"
@@ -36,24 +36,27 @@
     <div class="content">
         <div class="board">
             <h2></h2>
+            <c:forEach items="${qnaBoardList}" var="qnaBoard">
             <ul class="posts" id="postsList">
                 <!-- 게시글이 여기에 추가됩니다 -->
                 <li>
-                    <c:forEach items="${qnaBoardList}" var="qnaBoard">
-                    <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}&type=qna'">
-                        <h3>${qnaBoard.title}</h3>
-                        <p>${qnaBoard.content}</p>
+
+                    <div class="post-info">
+
+                        <h3 onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}&type=qna'">${qnaBoard.title}</h3>
+                        <p onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}&type=qna'">${qnaBoard.content}</p>
                         <span class="post-date">2024-07-18</span>
                     </div>
                     <div>
-                        <javatime:format value="${freeBoard.regdate}" pattern="yyyy-MM-dd"/>
+                        <javatime:format value="${qnaboard.regdate}" pattern="yyyy-MM-dd"/>
                     </div>
                     <div class="count">
-                        조회수 : ${freeBoard.cnt}
+                        ${qnaboard.cnt}
                     </div>
-                    </c:forEach>
+
                 </li>
             </ul>
+            </c:forEach>
         </div>
         <c:if test="${loginMember ne null}">
             <div class="write-post-button">
