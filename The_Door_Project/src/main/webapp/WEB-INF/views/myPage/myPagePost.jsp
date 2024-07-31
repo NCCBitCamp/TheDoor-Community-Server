@@ -44,7 +44,7 @@
                         <tr>
                             <td>${contents.id}</td>
                             <td><a href="/myPage/info.do" style="color: black">${contents.title}</a></td>
-                            <td>${contents.WRITER_ID}</td>
+                            <td>${contents.writer_id}</td>
                             <td>${contents.cnt}</td>
                         </tr>
                     </c:forEach>
