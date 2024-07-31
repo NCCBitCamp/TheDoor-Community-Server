@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/help/helpQnA.css">
@@ -11,8 +13,9 @@
     <div class="head_area">
         <p class="head_area_title">QNA</p>
     </div>
+    <form id="search-form" action="/helpboard/qna-list.do" method="post">
     <div class="search_area">
-        <select name="searchCondition">
+        <select class="form-select" name="searchCondition">
             <option value="title"
                     <c:if test="${searchMap.searchCondition == 'title'}">
                         selected
@@ -29,6 +32,7 @@
         <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
         <button type="submit" class="search_button">검색</button>
     </div>
+    </form>
     <div class="content">
         <div class="board">
             <h2></h2>
@@ -36,8 +40,7 @@
                 <!-- 게시글이 여기에 추가됩니다 -->
                 <li>
                     <c:forEach items="${qnaBoardList}" var="qnaBoard">
-                    <div class="post-info" onclick="location.href='/board/update-cnt.do?id=${qnaBoard.id}&type=qna'">
-
+                    <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}&type=qna'">
                         <h3>${qnaBoard.title}</h3>
                         <p>${qnaBoard.content}</p>
                         <span class="post-date">2024-07-18</span>
@@ -73,11 +76,11 @@
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
     <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.querySelector('.semi_title').classList.add('fade-in');
-            }, 500); // 0.5초 후 페이드인
-        });
+        // window.addEventListener('load', function() {
+        //     setTimeout(function() {
+        //         document.querySelector('.semi_title').classList.add('fade-in');
+        //     }, 500); // 0.5초 후 페이드인
+        // });
         $(() => {
             $("#search-icon").on("click", (e) => {
                 $("input[name='pageNum']").val(1);
