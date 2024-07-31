@@ -40,6 +40,33 @@
             </c:if>
         </main>
     </div>
+
+    <!-- 기존의 게시글 내용 및 첨부 파일 섹션 -->
+
+    <div class="comment-list mt-5">
+        <h5> [댓글 목록] </h5>
+        <c:forEach items="${commentList}" var="comment">
+            <div class="comment">
+                <p><strong>${comment.writer_id}</strong>: ${comment.content}</p>
+                <p class="text-muted"><small>${comment.date}</small></p>
+            </div>
+        </c:forEach>
+    </div>
+
+    <c:if test="${loginMember ne null}">
+        <div class="comment-form mt-5" id="commentFrom">
+            <form action="${pageContext.request.contextPath}/community/addComment.do" method="post">
+                <input type="hidden" name="board_id" value="${community.id}">
+                <div class="mb-3">
+                    <textarea class="form-control" name="content" rows="3" placeholder="댓글을 입력하세요" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">댓글 작성</button>
+            </form>
+        </div>
+    </c:if>
+    <c:if test="${loginMember eq null}">
+        <p>댓글을 작성하려면 <a href="${pageContext.request.contextPath}/member/login.do">로그인</a>하세요.</p>
+    </c:if>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 </html>

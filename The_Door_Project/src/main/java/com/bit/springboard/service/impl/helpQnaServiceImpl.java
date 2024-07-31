@@ -4,6 +4,7 @@ import com.bit.springboard.common.FileUtils;
 import com.bit.springboard.dao.HelpQnaDao;
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
+import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -163,5 +164,15 @@ public class helpQnaServiceImpl implements BoardService {
     @Override
     public List<BoardFileDto> getBoardFileList(int id) {
         return helpQnaDao.getBoardFileList(id);
+    }
+
+    @Override
+    public void addComment(CommentDto commentDto) {
+
+    }
+
+    @Override
+    public List<CommentDto> getComments(int boardId) {
+        return List.of();
     }
 }
