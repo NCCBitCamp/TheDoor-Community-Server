@@ -43,8 +43,8 @@
                 <tbody>
                 <c:forEach var="comment" items="${getComments}" varStatus="status">
                     <tr>
-                        <td><a href="/myPage/info.do">${comment.title}</a></td>
-                        <td><a href="/myPage/info.do">${comment.content}</a></td>
+                        <td><a href="/myPage/info.do" style="color: black">${comment.title}</a></td>
+                        <td><a href="/myPage/info.do" style="color: black">${comment.content}</a></td>
                         <td>${comment.WRITER_ID}</td>
                         <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>
                     </tr>
@@ -64,7 +64,7 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#" >1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item"><a class="page-link" href="#">4</a></li>

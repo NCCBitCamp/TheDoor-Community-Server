@@ -39,11 +39,11 @@
                     <th style="width: 10%;">조회수</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="table-content">
                     <c:forEach var="contents" items="${myWrite}">
                         <tr>
                             <td>${contents.id}</td>
-                            <td><a href="/myPage/info.do">${contents.title}</a></td>
+                            <td><a href="/myPage/info.do" style="color: black">${contents.title}</a></td>
                             <td>${contents.WRITER_ID}</td>
                             <td>${contents.cnt}</td>
                         </tr>
@@ -56,26 +56,22 @@
 
         <div>
             <!-- 페이지네이션 -->
-            <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation" id="custom-pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                        <a class="page-link" href="${pageContext.request.contextPath}/myPage/post.do?pageNum=1" aria-label="Previous" onclick="fn_go_page(${page.startPage - 1})">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                    <li class="page-item"><a class="page-link" href="#">9</a></li>
-                    <li class="page-item"><a class="page-link" href="#">10</a></li>
+
+                    <c:forEach begin="${page.startPage}" end="${page.endPage}" var="pageNum">
+                        <li class="page-item ${page.cri.pageNum == pageNum ? 'current-page' : ''}">
+                            <a class="page-link" href="${pageContext.request.contextPath}/myPage/post.do?pageNum=${pageNum}">${pageNum}</a>
+                        </li>
+                    </c:forEach>
 
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                        <a class="page-link" href="${pageContext.request.contextPath}/myPage/post.do?pageNum=${page.endPage}" aria-label="Next" onclick="fn_go_page(${page.endPage + 1})">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -91,4 +87,30 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
+
+<script>
+
+    function fn_go_page(pageNum) {
+        $.ajax({
+            url: "/myPage/post.do", // 서버의 엔드포인트 URL
+            type: "post",
+            data: ( pageNum: ${pageNum} ), // pageNum 서버로 전송
+            success: function(response) {
+                // 서버로부터 데이터를 받아서 테이블, 페이지네이션 업데이트
+                var newContent = $(response).find("#table-content").html();
+                $("#table-content").html(newContent);
+
+                var newPagination = $(response).find("#custom-pagination").html();
+                $("#custom-pagination").html(newPagination);
+            },
+            error: (err) => {
+                console.log("err : ");
+                console.log(err);
+            }
+        });
+    }
+
+
+</script>
+
 </html>
