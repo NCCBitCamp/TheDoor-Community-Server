@@ -8,27 +8,23 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <form id="idSearch-form" action="/member/idSearched.do" method="post">
     <div class="content">
-
-        <h1>아이디 찾기</h1>
-        <div id="searchBox">
+        <div class="login-container">
+            <h2>아이디 찾기</h2>
             <div class="inputBox">
-                <label id="nameLabel" for="username">이름</label>
-                <input type="text" class="username" id="username" name="username" required maxlength="30"
-                       autocomplete="off">
+                <label id="nameLabel" for="username">Username</label>
+                <input type="text" class="username" id="username" name="username" required maxlength="30" autocomplete="off">
             </div>
-
             <div class="inputBox">
-                <label id="emailLabel" for="email">이메일</label>
+                <label id="emailLabel" for="email">Email</label>
                 <input type="email" class="email" id="email" name="email" required maxlength="30" autocomplete="off">
             </div>
-
             <div class="search">
-                <button type="submit" class="searchbtn">확인</button>
-                <%--                onclick="location.href='/member/idSearched.do'"--%>
+                <input type="submit" class="searchbtn" value="확인">
             </div>
+            <c:if test="${not empty errorMessage}">
+                <div class="error-message">${errorMessage}</div>
+            </c:if>
         </div>
-
-
     </div>
 </form>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>

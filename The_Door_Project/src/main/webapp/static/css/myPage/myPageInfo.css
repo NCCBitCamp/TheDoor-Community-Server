@@ -48,6 +48,9 @@
     font-size: 25px;
 }
 
+/*러블리 큐티 수정*/
+/*화이티잉*/
+
 #selectArea li a {
     text-decoration: none;
     color: black;
@@ -101,6 +104,9 @@
     line-height: 1.5;
     width: calc(100% - 20px);
 }
+
+/*사룽해><*/
+/*화이팅*/
 
 .fixedUserInfo:focus, .new input:focus {
     border-color: #000000;
