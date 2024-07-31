@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// JDBC Template 사용방식 2
-// JdbcTemplate을 필드로 선언하고 의존성을 주입받아서 사용하는 방식
+
 @Repository
 public class HelpQnaDao {
     private static SqlSessionTemplate mybatis;
@@ -32,7 +31,7 @@ public class HelpQnaDao {
             "                                   , Q.CNT" +
             "                                  FROM QA Q" +
             "                                  JOIN USER U" +
-            "                                    ON Q.WRITER_ID = U.ID";
+            "                                    ON Q.WRITER_ID = U.USER_ID";
 
     // 게시글 삭제
     private final String DELETE = "DELETE FROM QA" +
@@ -50,7 +49,7 @@ public class HelpQnaDao {
             "                                   , Q.CNT" +
             "                                  FROM QA Q" +
             "                                  JOIN USER U" +
-            "                                    ON Q.WRITER_ID = U.ID" +
+            "                                    ON Q.WRITER_ID = U.USER_ID" +
             "                                  WHERE Q.ID = ?";
 
     public void post(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
@@ -128,11 +127,13 @@ public class HelpQnaDao {
     }
 
     public int getBoardTotalCnt(Map<String, String> searchMap) {
+        System.out.println("updateCnt 동작함");
         return mybatis.selectOne("HelpQnaDao.getBoardTotalCnt", searchMap);
     }
 
 
     public List<BoardFileDto> getBoardFileList(int id) {
+
         return mybatis.selectList("HelpQnaDao.getBoardFileList", id);
     }
 }
