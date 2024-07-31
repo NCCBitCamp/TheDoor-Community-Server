@@ -48,9 +48,19 @@ public class CommunityController {
         return "redirect:/community/community.do";
     }
 
+    @GetMapping("/communityModify.do")
+    public String communityModify(BoardDto boardDto, Model model) {
+        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
+
+        model.addAttribute("community", boardService.getBoard(boardDto.getId()));
+        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+
+        return "community/communityModify";
+    }
+
     @PostMapping("/communityModify.do")
     public String communityModify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
-                                      @RequestParam(name = "originFiles", required = false) String originFiles) {
+                                  @RequestParam(name = "originFiles", required = false) String originFiles) {
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
@@ -75,12 +85,11 @@ public class CommunityController {
     }
 
     @GetMapping("/communityDetail.do")
-    public String communityDetailView(@RequestParam("id") int id, Model model) {
-        BoardDto board = boardService.getBoard(id);
-        List<BoardFileDto> fileList = boardService.getBoardFileList(id);
+    public String communityDetailView(BoardDto boardDto, Model model) {
+        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
-        model.addAttribute("community", board);
-        model.addAttribute("fileList", fileList);
+        model.addAttribute("community", boardService.getBoard(boardDto.getId()));
+        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
 
         return "/community/communityDetail";
     }

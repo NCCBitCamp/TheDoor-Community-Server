@@ -33,9 +33,11 @@
                     </c:if>
                 </c:forEach>
             </div>
-            <div class="btn-container mt-4">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/community/communityModify.do?id=${community.id}'">수정하기</button>
-            </div>
+            <c:if test="${loginMember ne null}">
+                <div class="btn-container mt-4">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/community/communityModify.do?id=${community.id}'">수정하기</button>
+                </div>
+            </c:if>
         </main>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
