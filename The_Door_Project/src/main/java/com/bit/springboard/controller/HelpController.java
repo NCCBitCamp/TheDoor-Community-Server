@@ -90,7 +90,7 @@ public class HelpController {
 
         boardService.updateCnt(boardDto.getId());
 
-        return "redirect:/board/help-qna.do?id=" + boardDto.getId();
+        return "redirect:/board/help-qna-display.do?id=" + boardDto.getId();
 
     }
 

@@ -27,7 +27,7 @@
                     </c:if>>제목+내용</option>
         </select>
         <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
-        <button class="search_button">검색</button>
+        <button type="submit" class="search_button">검색</button>
     </div>
     <div class="content">
         <div class="board">
@@ -50,20 +50,25 @@
                     </div>
                     </c:forEach>
                 </li>
-
             </ul>
         </div>
-        <div class="write-post-button">
-            <a href="/helpboard/help-qna-write.do"><button>글쓰기</button></a>
-        </div>
+        <c:if test="${loginMember ne null}">
+            <div class="write-post-button">
+                <button type="button" onclick="location.href='/helpboard/help-qna-write.do'">글쓰기</button>
+            </div>
+        </c:if>
         <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
+            <c:if test="${page.prev}">
+                <a href="${page.cri.pageNum - 1}">&laquo;</a>
+            </c:if>
+            <c:forEach begin="${page.startPage}"
+                       end="${page.endPage}"
+                       var="number">
+                <a href="${number}">${number}</a>
+            </c:forEach>
+            <c:if test="${page.next}">
+                <a href="${page.cri.pageNum + 1}">&raquo;</a>
+            </c:if>
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
@@ -72,6 +77,28 @@
             setTimeout(function() {
                 document.querySelector('.semi_title').classList.add('fade-in');
             }, 500); // 0.5초 후 페이드인
+        });
+        $(() => {
+            $("#search-icon").on("click", (e) => {
+                $("input[name='pageNum']").val(1);
+                $("#search-form").submit();
+            });
+
+            $("input[name='searchKeyword']").on("keypress", (e) => {
+                if(e.key === 'Enter') {
+                    $("input[name='pageNum']").val(1);
+                }
+            });
+
+            $(".pagination a").on("click", (e) => {
+                e.preventDefault();
+
+                // console.log($(e.target).attr("href"));
+
+                $("input[name='pageNum']").val($(e.target).attr("href"));
+
+                $("#search-form").submit();
+            });
         });
     </script>
 </body>
