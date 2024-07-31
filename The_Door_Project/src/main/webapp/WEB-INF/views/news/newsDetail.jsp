@@ -13,15 +13,30 @@
         <!-- 공지사항 상세 내용 -->
         <main class="container mt-5 mb-5">
             <div class="notice-header">
-                <div class="notice-title">공지사항 제목</div>
-                <div class="notice-writer">작성자: 관리자</div>
+                <div class="notice-title">&lt;${news.title}&gt;</div>
+                <div class="notice-writer">작성자: ${news.nickname}</div>
             </div>
             <div class="notice-content">
-                공지사항 내용이 여기에 들어갑니다.
+                ${news.content}
             </div>
-            <div class="btn-container">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/board/news-modify.do'">수정하기</button>
+            <div class="file-list mt-5 mb-5">
+                <h5> [첨부 파일] </h5>
+                <c:forEach var="file" items="${fileList}">
+                    <c:if test="${file.filetype.startsWith('image')}">
+                        <img src="${pageContext.request.contextPath}/upload/${file.filename}" alt="${file.fileoriginname}" style="max-width: 100%; height: auto;">
+                    </c:if>
+                    <c:if test="${!file.filetype.startsWith('image')}">
+                        <a href="${pageContext.request.contextPath}/upload/${file.filename}" download="${file.fileoriginname}">
+                                ${file.fileoriginname}
+                        </a>
+                    </c:if>
+                </c:forEach>
             </div>
+            <c:if test="${loginMember ne null  && loginMember.role == 'ADMIN'}">
+                <div class="btn-container mt-4">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/new/newsModify.do?id=${news.id}'">수정하기</button>
+                </div>
+            </c:if>
         </main>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>

@@ -28,7 +28,7 @@ public class NewsController {
 
     @GetMapping("/newsWrite.do")
     public String newsWriteView(HttpSession session) {
-        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
 
         if(loginMember == null) {
             return "redirect:/member/login.do";
@@ -46,6 +46,16 @@ public class NewsController {
         return "redirect:/news/news.do";
     }
 
+    @GetMapping("/newsModify.do")
+    public String newsModify(BoardDto boardDto, Model model) {
+        boardService = applicationContext.getBean("newsServiceImpl", BoardService.class);
+
+        model.addAttribute("news", boardService.getBoard(boardDto.getId()));
+        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+
+        return "news/newsModify";
+    }
+
     @PostMapping("/newsModify.do")
     public String newsModify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
                              @RequestParam(name = "originFiles", required = false) String originFiles) {
@@ -53,7 +63,7 @@ public class NewsController {
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
-        return "redirect:/news/news.do";
+        return "redirect:/news/newsDetail.do?id=" + boardDto.getId();
     }
 
     @RequestMapping("/news.do")
@@ -97,7 +107,7 @@ public class NewsController {
 
         boardService.updateCnt(boardDto.getId());
 
-        return "redirect:/news/news.do?id=" + boardDto.getId();
+        return "redirect:/news/newsDetail.do?id=" + boardDto.getId();
     }
 
     @PostMapping("/news-ajax.do")
