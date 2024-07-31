@@ -39,13 +39,19 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public List<CommentDto> getComment(MemberDto memberDto) {
-        return myPageDao.getComment(memberDto.getUser_id());
+    public List<CommentDto> getComment(Criteria cri) {
+        cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
+        return myPageDao.getComment(cri);
     }
 
     @Override
     public int getTotalMyPage(MemberDto memberDto){
         return myPageDao.getTotalMyPage(memberDto.getUser_id());
+    }
+
+    @Override
+    public int getCommentsNum(MemberDto loginMember) {
+        return myPageDao.getCommentsNum(loginMember.getUser_id());
     }
 
 }
