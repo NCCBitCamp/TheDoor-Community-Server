@@ -11,7 +11,8 @@
 
         <h1>아이디 찾기</h1>
         <div id="searchBox">
-            <div>
+            <div id="guideBox">
+                <li id="guide">회원님의 아이디를 확인해 주세요.</li>
                 <h2 class="showId">${user_id}</h2>
             </div>
 

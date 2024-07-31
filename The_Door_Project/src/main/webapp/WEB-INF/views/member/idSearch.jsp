@@ -24,7 +24,6 @@
 
             <div class="search">
                 <button type="submit" class="searchbtn">확인</button>
-                <%--                onclick="location.href='/member/idSearched.do'"--%>
             </div>
         </div>
 
@@ -33,25 +32,7 @@
 </form>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 <script>
-    // $(() => {
-    //
-    //     $.ajax({
-    //         url: "/member/idSearch.do",
-    //         type: "post",
-    //         data: $("idSearch-form").serialize(),
-    //         success: (map) => {
-    //             console.log(map);
-    //             console.log("?");
-    //
-    //             //     조회 결과 회원님의 아이디는 (String) 입니다.
-    //
-    //         },
-    //         error: (err) => {
-    //             console.log(err);
-    //         }
-    //     });
-    //
-    // });
+
 </script>
 </body>
 </html>
