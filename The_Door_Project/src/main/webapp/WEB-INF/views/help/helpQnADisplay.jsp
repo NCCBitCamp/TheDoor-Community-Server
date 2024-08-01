@@ -52,7 +52,7 @@
                     <label for="content">내용</label>
                     <div id="contentarea" class="post-content">
                         <textarea class="form-control" id="content" name="content"
-                                  rows="10" required>${qnaboard.content}</textarea>
+                                  rows="10" required style="resize: none">${qnaboard.content}</textarea>
                     </div>
                 </div>
                 <div class="post-group">
