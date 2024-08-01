@@ -40,20 +40,7 @@
     </select>
 
 <!--    내가 쓴 글에 달린 댓글 리스트로 가져오기-->
-<!--    <select id="getComments" parameterType="string" resultType="comment">-->
-<!--        SELECT COMMU.TITLE, C.CONTENT, C.WRITER_ID, C.DATE ,C.ID,C.BOARD_ID-->
-<!--        FROM COMMENT C-->
-<!--                 JOIN-->
-<!--             (SELECT CO.ID, CO.TITLE, CO.WRITER_ID, CO.CNT-->
-<!--              FROM COMMUNITY CO-->
-<!--                       JOIN USER U-->
-<!--                            ON CO.WRITER_ID = U.USER_ID-->
-<!--              WHERE CO.WRITER_ID = #{user_id}-->
-<!--             )AS COMMU-->
-<!--             ON C.BOARD_ID = COMMU.ID-->
-<!--        ORDER BY C.DATE DESC-->
-<!--    </select>-->
-    <select id="getComments" parameterType="cri" resultType="comment">
+    <select id="comments" parameterType="cri" resultType="comment">
         SELECT COMMU.TITLE, C.CONTENT, C.WRITER_ID, C.DATE, C.ID, C.BOARD_ID
         FROM COMMENT C
         JOIN (
@@ -61,15 +48,12 @@
             FROM COMMUNITY CO
             JOIN USER U ON CO.WRITER_ID = U.USER_ID
             WHERE CO.WRITER_ID = #{userId}
-            ) AS COMMU
+        ) AS COMMU
         ON C.BOARD_ID = COMMU.ID
-        WHERE 1=1
-            <if test="lastDate != null and lastId != null">
-                AND ( (C.DATE &lt; #{lastDate}) OR ( (C.DATE = #{lastDate}) AND (C.ID &lt; #{lastId}) ))
-            </if>
         ORDER BY C.DATE DESC, C.ID DESC
-        LIMIT #{amount}
+        LIMIT #{amount} OFFSET #{startNum};
     </select>
+
 
 <!--    내가 쓴 모든 글에 달린 댓글 총 수 가져오기-->
     <select id="getCommentsNum" parameterType="string" resultType="int">
