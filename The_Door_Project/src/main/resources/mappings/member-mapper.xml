@@ -50,4 +50,18 @@
               AND EMAIL = #{email}
     </select>
 
+    <update id="emailChange" parameterType="member">
+        UPDATE USER
+        SET EMAIL = #{email}
+        WHERE USERNAME = #{username}
+          AND BIRTH = #{birth}
+    </update>
+
+    <select id="validateUser" parameterType="member" resultType="member">
+        SELECT *
+            FROM USER
+        WHERE USERNAME = #{username}
+          AND BIRTH = #{birth}
+    </select>
+
 </mapper>

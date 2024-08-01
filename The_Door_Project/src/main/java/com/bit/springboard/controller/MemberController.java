@@ -97,4 +97,26 @@ public class MemberController {
     public String loginHelpView() {
         return "/member/loginHelp";
     }
+
+    @GetMapping("/emailChange.do")
+    public String emailChangeView() { return "member/emailChange"; }
+
+    @PostMapping("/emailChange.do")
+    public String changeEmail(MemberDto memberDto, Model model) {
+        try {
+            if(!memberService.validateUser(memberDto)){
+                model.addAttribute("errorMessage", "존재하는 회원정보가 아닙니다.");
+                return "member/emailChange";
+            }
+            memberService.changeEmail(memberDto);
+            model.addAttribute("successMessage", "이메일이 성공적으로 변경되었습니다.");
+            return "member/emailChange";
+        } catch (Exception e) {
+            System.out.println("An unknown error occurred: " + e);
+            e.printStackTrace();
+            return "member/emailChange";
+        }
+    }
+
+
 }

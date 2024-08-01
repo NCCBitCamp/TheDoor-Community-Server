@@ -1,0 +1,61 @@
+.content {
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/static/images/member/loginBackground.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.login-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #272727;
+}
+.login-container h2 {
+    text-align: center;
+    color: #fff;
+}
+.login-container label, .login-container input {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    color: #C3C3C3;
+    font-size: small;
+}
+.login-container input[type="text"],
+.login-container input[type="email"] {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #3E3E3E;
+    color: #fff;
+    box-sizing: border-box;
+}
+.login-container input[type="submit"] {
+    font-weight: bold;
+    background-color: #FBC70E;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(100% - 20px);
+    margin-top: 20px;
+}
+.error-message {
+    color: red;
+    text-align: center;
+    font-size: small;
+}
+
+.success-message {
+    color: #FBC70E;
+    text-align: center;
+    font-size: small;
+}
