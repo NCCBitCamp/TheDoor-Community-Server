@@ -39,7 +39,7 @@ public class MailServiceImpl implements MailService {
         msgg += "<p>아래 인증코드를 암호변경 페이지에 입력해주세요</p>";
         msgg += "<br><br>";
         msgg += "<div align='center' style='border:1px solid black'>";
-        msgg += "<h3 style='color:blue'>회원가입 인증코드입니다</h3>";
+        msgg += "<h3 style='color:blue'>비밀번호 변경 인증코드입니다</h3>";
         msgg += "<div style='font-size:130%'>";
         msgg += "<strong>" + ePw + "</strong></div><br/>";
         msgg += "</div>";

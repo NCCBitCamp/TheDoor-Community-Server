@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AuthCodeDao">
+    <update id="save" parameterType="member">
+        UPDATE USER SET CODE = #{code}
+        WHERE USER_ID = #{user_id} AND email = #{email}
+    </update>
+
+    <update id="expire" parameterType="member">
+        UPDATE USER SET CODE = NULL
+        WHERE user_id = #{user_id} AND email = #{email}
+    </update>
+
+    <select id="find" parameterType="member" resultType="member">
+        SELECT * FROM USER WHERE user_id = #{user_id} AND email = #{email} AND CODE = #{code}
+    </select>
+</mapper>
