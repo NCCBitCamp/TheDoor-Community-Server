@@ -50,6 +50,12 @@
                         <p onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}'">${qnaBoard.content}</p>
                         <span class="post-date">2024-07-18</span>
                     </div>
+                    <c:if test="${loginMember ne null and loginMember.user_id eq qnaboard.writer_id}">
+                    <div class="post-buttons">
+                        <button>수정</button>
+                        <button>삭제</button>
+                    </div>
+                    </c:if>
                     <div>
                         <javatime:format value="${qnaboard.regdate}" pattern="yyyy-MM-dd"/>
                     </div>

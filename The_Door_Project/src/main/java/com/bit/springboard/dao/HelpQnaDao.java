@@ -53,11 +53,10 @@ public class HelpQnaDao {
             "                                  WHERE Q.ID = ?";
 
     public void post(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
-        System.out.println("QA의 post 메소드 실행");
 
         mybatis.insert(/*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/"HelpQnaDao.post", boardDto);
 
-        System.out.println("insert 실행 후 id값: " + boardDto.getId());
+
 
         if(boardFileDtoList.size() > 0) {
             boardFileDtoList.forEach(boardFileDto -> boardFileDto.setBoard_id(boardDto.getId()));
@@ -65,11 +64,11 @@ public class HelpQnaDao {
             mybatis.insert("HelpQnaDao.uploadFiles", boardFileDtoList);
         }
 
-        System.out.println("HelpQnaDao post 메소드 실행 종료");
+
     }
 
     public void modify(BoardDto boardDto, List<BoardFileDto> uFileList) {
-        System.out.println("HelpQnaDao의 modify 메소드 실행");
+
 
         mybatis.update("HelpQnaDao.modify", boardDto);
 
@@ -85,40 +84,40 @@ public class HelpQnaDao {
             });
         }
 
-        System.out.println("HelpQnaDao의 modify 메소드 실행 종료");
+
     }
 
     public List<BoardDto> getBoardList(Map<String, Object> paramMap) {
-        System.out.println("HelpQnaDao의 getBoardList 메소드 실행");
+
 
         List<BoardDto> boardDtoList = new ArrayList<>();
 
         // SqlSessionTemplate의 selectList메소드 사용
         boardDtoList = mybatis.selectList("HelpQnaDao.getBoardList", paramMap);
         System.out.println(boardDtoList);
-        System.out.println("HelpQnaDao의 getBoardList 메소드 실행 종료");
+
         return boardDtoList;
     }
 
     public void delete(int id) {
-        System.out.println("HelpQnaDao의 delete 메소드 실행");
+
 
         mybatis.delete("HelpQnaDao.deleteFiles", id);
 
         mybatis.delete("HelpQnaDao.delete", id);
 
-        System.out.println("HelpQnaDao의 delete 메소드 실행 종료");
+
     }
 
     public BoardDto getBoard(int id) {
-        System.out.println("HelpQnaDao의 getBoard 메소드 실행");
+
 
         BoardDto boardDto = new BoardDto();
 
         // SqlSessionTemplate의 selectOne메소드 사용
         boardDto = mybatis.selectOne("HelpQnaDao.getBoard", id);
 
-        System.out.println("HelpQnaDao의 getBoard 메소드 실행 종료");
+
         return boardDto;
     }
 
@@ -127,7 +126,7 @@ public class HelpQnaDao {
     }
 
     public int getBoardTotalCnt(Map<String, String> searchMap) {
-        System.out.println("updateCnt 동작함");
+
         return mybatis.selectOne("HelpQnaDao.getBoardTotalCnt", searchMap);
     }
 
