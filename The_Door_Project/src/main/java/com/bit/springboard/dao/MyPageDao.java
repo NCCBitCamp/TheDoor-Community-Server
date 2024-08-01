@@ -2,6 +2,7 @@ package com.bit.springboard.dao;
 
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.CommentDto;
+import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.MemberDto;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,19 @@ public class MyPageDao {
         mybatis.update("MyPageDao.modifyInfo",memberDto);
     }
 
-    public List<BoardDto> myWrite(String userId){
-        return mybatis.selectList("MyPageDao.myWrite", userId);
+    public List<BoardDto> myWrite(Criteria cri){
+        return mybatis.selectList("MyPageDao.myWrite", cri);
     }
 
-    public List<CommentDto> getComment(String userId){
-        return mybatis.selectList("MyPageDao.getComments",userId);
+    public List<CommentDto> comments(Criteria cri){
+        return mybatis.selectList("MyPageDao.comments",cri);
     }
 
+    public int getTotalMyPage(String userId){
+        return mybatis.selectOne("MyPageDao.myWriteNum", userId);
+    }
 
+    public int getCommentsNum(String userId) {
+        return mybatis.selectOne("MyPageDao.getCommentsNum", userId);
+    }
 }

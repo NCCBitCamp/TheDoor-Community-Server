@@ -20,8 +20,14 @@
                    alias="member"/>
         <typeAlias type="com.bit.springboard.dto.BoardDto"
                    alias="board"/>
+        <typeAlias type="com.bit.springboard.dto.NewsDto"
+                   alias="news"/>
+        <typeAlias type="com.bit.springboard.dto.BoardFileDto"
+                   alias="boardFile"/>
         <typeAlias type="com.bit.springboard.dto.CommentDto"
                    alias="comment"/>
+        <typeAlias type="com.bit.springboard.dto.QnaDto"
+                   alias="qna"/>
     </typeAliases>
 
     <!--사용할 Sql Mapper 등록-->
@@ -29,6 +35,9 @@
         <mapper resource="mappings/ranking-mapper.xml"/>
         <mapper resource="mappings/member-mapper.xml"/>
         <mapper resource="mappings/mypage-mapper.xml"/>
-
+        <mapper resource="mappings/community-mapper.xml"/>
+        <mapper resource="mappings/news-mapper.xml"/>
+        <mapper resource="mappings/qna-mapper.xml"/>
+        <mapper resource="mappings/authcode-mapper.xml"/>
     </mappers>
 </configuration>

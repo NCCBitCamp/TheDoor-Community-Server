@@ -6,7 +6,7 @@ public class NewsDto {
     private int id;
     private String title;
     private String content;
-    private int WRITER_ID;
+    private String writer_id;
     private String nickname;
     private LocalDateTime date;
     private int cnt;
@@ -35,12 +35,12 @@ public class NewsDto {
         this.content = content;
     }
 
-    public int getWRITER_ID() {
-        return WRITER_ID;
+    public String getWriter_id() {
+        return writer_id;
     }
 
-    public void setWRITER_ID(int WRITER_ID) {
-        this.WRITER_ID = WRITER_ID;
+    public void setWriter_id(String writer_id) {
+        this.writer_id = writer_id;
     }
 
     public LocalDateTime getDate() {
@@ -73,7 +73,7 @@ public class NewsDto {
                 ", id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", WRITER_ID=" + WRITER_ID +
+                ", writer_id=" + writer_id +
                 ", nickname='" + nickname + '\'' +
                 ", date=" + date +
                 ", cnt=" + cnt +

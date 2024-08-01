@@ -9,10 +9,11 @@
 <form id="idSearched-form" action="/member/idSearched.do" method="post">
     <div class="content">
 
-        <h1>아이디 찾기</h1>
+
         <div id="searchBox">
-            <div>
-                <h2 class="showId">${user_id}</h2>
+            <h2>아이디 찾기</h2>
+            <div class="showBox">
+                <h5>${user_id}</h5>
             </div>
 
             <div class="loginBox">
@@ -20,7 +21,7 @@
             </div>
 
             <div class="pwSearchBox">
-                <button type="button" class="pwSearchBtn" onclick="location.href='#'">비밀번호 찾기</button>
+                <button type="button" class="pwSearchBtn" onclick="location.href='/member/passwordSearch.do'">비밀번호 찾기</button>
             </div>
         </div>
 

@@ -23,9 +23,6 @@ public class NewsDao {
     public void write(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
         mybatis.insert("NewsDao.write", boardDto);
-
-        System.out.println("insert 실행 후 id값: " + boardDto.getId());
-
         if(boardFileDtoList.size() > 0) {
             boardFileDtoList.forEach(boardFileDto -> boardFileDto.setBoard_id(boardDto.getId()));
 
@@ -35,8 +32,6 @@ public class NewsDao {
 
     // 게시글 수정하기
     public void modify(BoardDto boardDto, List<BoardFileDto> uFileList) {
-        System.out.println("NewsDao의 modify 메소드 실행");
-
         mybatis.update("NewsDao.modify", boardDto);
 
         if(uFileList.size() > 0) {
@@ -50,42 +45,21 @@ public class NewsDao {
                 }
             });
         }
-
-        System.out.println("CommunityDao의 modify 메소드 실행 종료");
     }
 
     public List<BoardDto> getBoardList(Map<String, Object> paramMap) {
-        System.out.println("NewsDao의 getBoardList 메소드 실행");
-
         List<BoardDto> boardDtoList = new ArrayList<>();
-
-        // SqlSessionTemplate의 selectList메소드 사용
-        boardDtoList = mybatis.selectList("NewsDao.getBoardList", paramMap);
-
-        System.out.println("NewsDao의 getBoardList 메소드 실행 종료");
-        return boardDtoList;
+        return mybatis.selectList("NewsDao.getBoardList", paramMap);
     }
 
     public void delete(int id) {
-        System.out.println("NewsDao의 delete 메소드 실행");
-
         mybatis.delete("NewsDao.deleteFiles", id);
-
         mybatis.delete("NewsDao.delete", id);
-
-        System.out.println("NewsDao의 delete 메소드 실행 종료");
     }
 
     public BoardDto getBoard(int id) {
-        System.out.println("NewsDao의 getBoard 메소드 실행");
-
         BoardDto boardDto = new BoardDto();
-
-        // SqlSessionTemplate의 selectOne메소드 사용
-        boardDto = mybatis.selectOne("NewsDao.getBoard", id);
-
-        System.out.println("NewsDao의 getBoard 메소드 실행 종료");
-        return boardDto;
+        return mybatis.selectOne("NewsDao.getBoard", id);
     }
 
     public void updateCnt(int id) {
@@ -96,8 +70,8 @@ public class NewsDao {
         return mybatis.selectOne("NewsDao.getBoardTotalCnt", searchMap);
     }
 
-    public List<BoardFileDto> getFreeBoardFileList(int id) {
-        return mybatis.selectList("NewsDao.getFreeBoardFileList", id);
+    public List<BoardFileDto> getBoardFileList(int id) {
+        return mybatis.selectList("NewsDao.getBoardFileList", id);
     }
 
 

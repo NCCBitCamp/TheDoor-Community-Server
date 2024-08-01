@@ -2,6 +2,7 @@ package com.bit.springboard.service;
 
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
+import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,8 @@ public interface BoardService {
     void post(BoardDto boardDto, MultipartFile[] uploadFiles);
 
     void modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, String originFiles);
+
+    void plusCnt(int id);
 
     void delete(int id);
 
@@ -26,4 +29,7 @@ public interface BoardService {
 
     List<BoardFileDto> getBoardFileList(int id);
 
+    void addComment(CommentDto commentDto);
+
+    List<CommentDto> getComments(int boardId);
 }

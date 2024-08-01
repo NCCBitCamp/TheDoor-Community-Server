@@ -6,10 +6,13 @@ public class BoardDto {
     private int id;
     private String title;
     private String content;
-    private String WRITER_ID;
+    private String writer_id;
     private String nickname;
     private LocalDateTime date;
     private int cnt;
+    private LocalDateTime fdate;
+    private String subject;
+    private boolean answer;
 
     public int getId() {
         return id;
@@ -35,12 +38,12 @@ public class BoardDto {
         this.content = content;
     }
 
-    public String getWRITER_ID() {
-        return WRITER_ID;
+    public String getWriter_id() {
+        return writer_id;
     }
 
-    public void setWRITER_ID(String WRITER_ID) {
-        this.WRITER_ID = WRITER_ID;
+    public void setWriter_id(String writer_id) {
+        this.writer_id = writer_id;
     }
 
     public LocalDateTime getDate() {
@@ -67,16 +70,43 @@ public class BoardDto {
         this.nickname = nickname;
     }
 
+    public LocalDateTime getFdate() {
+        return fdate;
+    }
+
+    public void setFdate(LocalDateTime fdate) {
+        this.fdate = fdate;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public boolean isAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(boolean answer) {
+        this.answer = answer;
+    }
+
     @Override
     public String toString() {
         return "BoardDto{" +
-                ", id=" + id +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", WRITER_ID=" + WRITER_ID +
+                ", writer_id='" + writer_id + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", date=" + date +
                 ", cnt=" + cnt +
+                ", fdate=" + fdate +
+                ", subject='" + subject + '\'' +
+                ", answer=" + answer +
                 '}';
     }
 }

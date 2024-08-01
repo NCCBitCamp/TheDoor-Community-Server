@@ -1,16 +1,12 @@
 package com.bit.springboard.controller;
 
-import com.bit.springboard.dto.BoardDto;
-import com.bit.springboard.dto.CommentDto;
-import com.bit.springboard.dto.RankDto;
+import com.bit.springboard.dto.*;
 import com.bit.springboard.service.RankService;
-import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
@@ -68,40 +64,51 @@ public class MyPageController {
     }
 
     @RequestMapping("post.do")
-    public String myPagePostView(HttpSession session, Model model) {
+    public String myPagePostView(HttpSession session, Model model, Criteria cri) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-        model.addAttribute("personalInfo", loginMember);
-
-        List<BoardDto> myWrite = mypageService.getMyWrite(loginMember);
-
-        model.addAttribute("myWrite", myWrite);
 
         if(loginMember == null) {
             return "redirect:/member/login.do";
         }
+
+        model.addAttribute("personalInfo", loginMember);
+        cri.setUserId(loginMember.getUser_id());
+
+        List<BoardDto> myWrite = mypageService.getMyWrite(cri);
+
+        int total = mypageService.getTotalMyPage(loginMember);
+
+        model.addAttribute("page", new PageDto(cri, total));
+        model.addAttribute("myWrite", myWrite);
+
 
         return "myPage/myPagePost";
     }
 
 
     @RequestMapping("alert.do")
-    public String myPageAlertView(HttpSession session, Model model) {
+    public String myPageAlertView(HttpSession session, Model model, Criteria cri) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-        model.addAttribute("personalInfo", loginMember);
-
-        List<CommentDto> getCommentList = mypageService.getComment(loginMember);
-
-        List<Date> dateList = new ArrayList<>();
-        getCommentList.forEach(comment -> {
-            dateList.add(convertToDate(comment.getDate()));
-        });
-        model.addAttribute("convertedTime", dateList);
-
-        model.addAttribute("getComments", getCommentList);
 
         if(loginMember == null) {
             return "redirect:/member/login.do";
         }
+
+        model.addAttribute("personalInfo", loginMember);
+        cri.setUserId(loginMember.getUser_id());
+
+        List<CommentDto> commentList = mypageService.getComment(cri);
+
+        List<Date> dateList = new ArrayList<>();
+        commentList.forEach(comment -> {
+            dateList.add(convertToDate(comment.getDate()));
+        });
+        model.addAttribute("convertedTime", dateList);
+
+        model.addAttribute("comments", commentList);
+
+        int total = mypageService.getCommentsNum(loginMember);
+        model.addAttribute("page", new PageDto(cri, total));
 
         return "myPage/myPageAlert";
     }

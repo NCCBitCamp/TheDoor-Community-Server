@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageAlert.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -37,18 +38,28 @@
                     <th style="width: 10%;">내 글</th>
                     <th style="width: 50%;">댓글 내용</th>
                     <th style="width: 10%;">댓글 작성자</th>
-                    <th style="width: 10%;">시간</th>
+                    <th style="width: 10%;">등록 시간</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="comment" items="${getComments}" varStatus="status">
+                <c:forEach var="comment" items="${comments}" varStatus="status">
                     <tr>
-                        <td><a href="/myPage/info.do">${comment.title}</a></td>
-                        <td><a href="/myPage/info.do">${comment.content}</a></td>
-                        <td>${comment.WRITER_ID}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>
+                        <td id="showMyWrite"><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.title}</a></td>
+                        <td><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.content}</a></td>
+                        <td>${comment.writer_id}</td>
+<%--                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>--%>
+<%--                        <td>--%>
+<%--                            <javatime:format value="${comment.date}" pattern="yyyy-MM-dd hh:mm"/>--%>
+<%--                        </td>--%>
+                        <td data-date="${comment.date}">
+                            <span class="relative-time"></span>
+                        </td>
                     </tr>
                 </c:forEach>
+                <form id="paginationForm" action="${pageContext.request.contextPath}/myPage/alert.do" method="GET">
+                    <input type="hidden" name="lastDate" value="${lastDate}" />
+                    <input type="hidden" name="lastId" value="${lastId}" />
+                </form>
                 </tbody>
             </table>
         </div>
@@ -57,26 +68,22 @@
 
         <div>
             <!-- 페이지네이션 -->
-            <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation" id="custom-pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                        <a class="page-link" href="${pageContext.request.contextPath}/myPage/alert.do?pageNum=1" aria-label="Previous" onclick="fn_go_page(${page.startPage - 1})">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                    <li class="page-item"><a class="page-link" href="#">9</a></li>
-                    <li class="page-item"><a class="page-link" href="#">10</a></li>
+
+                    <c:forEach begin="${page.startPage}" end="${page.endPage}" var="pageNum">
+                        <li class="page-item ${page.cri.pageNum == pageNum ? 'current-page' : ''}">
+                            <a class="page-link" href="${pageContext.request.contextPath}/myPage/alert.do?pageNum=${pageNum}">${pageNum}</a>
+                        </li>
+                    </c:forEach>
 
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                        <a class="page-link" href="${pageContext.request.contextPath}/myPage/alert.do?pageNum=${page.endPage}" aria-label="Next" onclick="fn_go_page(${page.endPage + 1})">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -88,12 +95,64 @@
 
 
     <!-- Bootstrap JS 추가 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     </body>
 <script>
-    <%--console.log(${getComents});--%>
+    // 현재 시간을 JavaScript Date 객체로 생성
+    const now = new Date();
+
+    function calculateRelativeTime(dateString) {
+        const commentDate = new Date(dateString);
+        const diffMs = now - commentDate;
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMinutes / 60);
+        const diffDays = Math.floor(diffHours / 24);
+        const diffMonths = Math.floor(diffDays / 30);
+        const diffYears = Math.floor(diffDays / 365);
+
+
+        if (diffMinutes < 1) return "방금 전";
+        if (diffMinutes < 60) return diffMinutes + "분 전";
+        if (diffHours < 24) return diffHours + "시간 전";
+        if (diffDays === 1) return "어제";
+        if (diffDays < 7) return diffDays + "일 전";
+        if (diffDays < 30) return diffDays / 7 + "주 전";
+        if (diffDays < 365) return diffMonths + "달 전";
+        return diffYears + "년 전";
+    }
+
+    $(document).ready(function() {
+        $('.relative-time').each(function() {
+            const date = $(this).closest('td').data('date');
+            $(this).text(calculateRelativeTime(date));
+        });
+    });
+
+
+
+    function fn_go_page(pageNum) {
+        $.ajax({
+            url: "/myPage/alert.do", // 서버의 엔드포인트 URL
+            type: "GET",
+            data: pageNum, // pageNum 서버로 전송
+            success: function(response) {
+                // 서버로부터 데이터를 받아서 테이블, 페이지네이션 업데이트
+                var $response = $(response);
+                var newContent = $response.find("#alertInfo").html();
+                $("#alertInfo").html(newContent);
+
+                var newPagination = $response.find("#custom-pagination").html();
+                $("#custom-pagination").html(newPagination);
+
+                console.log("pageNum", pageNum);
+            },
+            error: (err) => {
+                console.log("err : ");
+                console.log(err);
+            }
+        });
+    }
 </script>
 </html>

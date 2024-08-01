@@ -13,6 +13,7 @@ public class MemberDto {
     private String username;
     private String birth;
     private String role;
+    private String code;
 
     public int getId() {
         return id;
@@ -78,19 +79,26 @@ public class MemberDto {
         this.role = role;
     }
 
+    public String getCode() {
+        return code;
+    }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     @Override
     public String toString() {
         return "MemberDto{" +
                 "id=" + id +
-                ", userId='" + user_id + '\'' +
-                ", username='" + username + '\'' +
+                ", user_id='" + user_id + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
                 ", birth='" + birth + '\'' +
                 ", role='" + role + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }

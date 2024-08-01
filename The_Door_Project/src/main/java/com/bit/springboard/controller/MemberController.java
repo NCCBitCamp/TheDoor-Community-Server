@@ -30,7 +30,6 @@ public class MemberController {
     @PostMapping("/join.do")
     public String join(MemberDto memberDto) {
         memberService.join(memberDto);
-        System.out.println(memberDto);
         return "member/joinComplete";
     }
 
@@ -47,14 +46,12 @@ public class MemberController {
     @PostMapping("/userIdCheck.do")
     @ResponseBody
     public Map<String, Integer> userIdCheck(MemberDto memberDto) {
-        System.out.println(memberDto);
         return memberService.userIdCheck(memberDto.getUser_id());
     }
 
     @PostMapping("/nicknameCheck.do")
     @ResponseBody
     public Map<String, Integer> nicknameCheck(MemberDto memberDto) {
-        System.out.println(memberDto);
         return memberService.nicknameCheck(memberDto.getNickname());
     }
 
@@ -84,16 +81,57 @@ public class MemberController {
     }
 
     @PostMapping("/idSearched.do")
-    public String idSearchedView(MemberDto memberDto, Model model) {
-        System.out.println(memberDto);
+    @ResponseBody
+    public Map<String, Object> idSearchedView(@ModelAttribute MemberDto memberDto) {
+        Map<String, Object> response = new HashMap<>();
+        String userId = memberService.idSearch(memberDto);
 
-        model.addAttribute("user_id",memberService.idSearch(memberDto));
+        if (userId != null) {
+            response.put("status", "success");
+            response.put("user_id", userId);
+        } else {
+            response.put("status", "error");
+            response.put("message", "일치하는 아이디가 없습니다.");
+        }
 
-        return "member/idSearched";
+        return response;
+    }
+
+    @GetMapping("/idSearched")
+    public String idSearchedResult(@RequestParam("user_id") String userId, Model model) {
+        model.addAttribute("user_id", userId);
+        return "member/idSearched"; // JSP 경로 설정 (예: WEB-INF/views/member/idSearched.jsp)
+    }
+
+    @GetMapping("/passwordSearch.do")
+    public String passwordSearchView() {
+        return "member/passwordSearch";
     }
 
     @RequestMapping("/login-help.do")
     public String loginHelpView() {
         return "/member/loginHelp";
     }
+
+    @GetMapping("/emailChange.do")
+    public String emailChangeView() { return "member/emailChange"; }
+
+    @PostMapping("/emailChange.do")
+    public String changeEmail(MemberDto memberDto, Model model) {
+        try {
+            if(!memberService.validateUser(memberDto)){
+                model.addAttribute("errorMessage", "존재하는 회원정보가 아닙니다.");
+                return "member/emailChange";
+            }
+            memberService.changeEmail(memberDto);
+            model.addAttribute("successMessage", "이메일이 성공적으로 변경되었습니다.");
+            return "member/emailChange";
+        } catch (Exception e) {
+            System.out.println("An unknown error occurred: " + e);
+            e.printStackTrace();
+            return "member/emailChange";
+        }
+    }
+
+
 }

@@ -124,11 +124,10 @@ body {
 .pagination a:hover {
     background-color: #666;
 }
-.footer {
-    background-color: white;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
+.write-post-button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
     width: 100%;
 }
 .footer-content a {

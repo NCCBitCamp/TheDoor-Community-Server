@@ -1,111 +1,65 @@
-/* h1 {
-    width: 193px;
-    height: 76px;
-    margin-bottom: 2rem;
-    margin-top: 0px;
-    position: relative;
-    font-size: 4rem;
-    color: #F9F3F3;
-} */
-
 .content {
-    height: 100vh;
+    color: #fff;
+    font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    background-image: url(/static/images/member/loginBackground.png);
-    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/static/images/member/loginBackground.png");
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 #searchBox {
-    position: relative;
-    width: 19rem;
-    height: 18rem;
-    background-color: #424141;
-    border-radius: 20px;
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #272727;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /*box-shadow: 0px 4px 4px 0px;*/
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    box-sizing: border-box; /* Include padding in the width */
 }
 
-/*.inputBox {*/
-/*    flex-direction: column ; !* 세로 정렬 *!*/
-/*    display : flex;*/
-/*    outline: none;*/
-/*    color: #F9F3F3;*/
-/*    box-shadow: none;*/
-/*    outline: none;*/
-/*}*/
+#searchBox h2 {
+    color: #fff;
+    margin-bottom: 20px;
+}
 
-/*#nameLabel {*/
-/*    font-size: 1.2ch;*/
-/*    padding-bottom: 1ch;*/
-/*    text-align: left;*/
-/*    color: #fff;*/
-/*}*/
-/*#emailLabel {*/
-/*    font-size: 1.1ch;*/
-/*    padding-bottom: 1ch;*/
-/*    text-align: left;*/
-/*}*/
-
-/*.username {*/
-/*    width: 278px;*/
-/*    height: 56px;*/
-/*    background-color: #272727;*/
-/*    border-radius: 10px;*/
-/*    margin-bottom: 1rem;*/
-/*    border: 0px;*/
-/*}*/
-.showId {
-    width: 278px;
-    height: 56px;
-    background-color: #272727;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-    border: none;
+.showBox {
+    font-weight: bold;
+    background-color: #3E3E3E;
     color: white;
-}
-
-/*.showId {*/
-/*    width: 240px;*/
-/*    height: 40px;*/
-/*    padding: 10px;*/
-/*    background-color: #272727;*/
-/*    border-radius: 10px;*/
-/*    margin-bottom: 0.5rem;*/
-/*    font-size: 16px;*/
-/*}*/
-
-.loginBtn{
-    width: 240px;
-    height: 40px;
-    background-color: #FBC70E;
-    border-radius: 10px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
     border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.pwSearchBtn {
-    width: 240px;
-    height: 40px;
-    background-color: #FBC70E;
-    border-radius: 10px;
-    color: #000;
+.showBox h5 {
+    margin: 0; /* Remove any margin */
+    color: #fff;
+}
+
+.loginBox, .pwSearchBox {
+    width: 100%;
+}
+
+.loginBtn, .pwSearchBtn {
     font-weight: bold;
-    cursor: pointer;
+    background-color: #FBC70E;
+    color: #000;
     border: none;
-    margin-top: 1ch;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box; /* Include padding in the width */
 }
-
-/*.email, .username, #searchBox, #searchBtn {*/
-/*    box-shadow: none !important;*/
-/*}*/

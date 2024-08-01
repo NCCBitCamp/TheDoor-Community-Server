@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Member;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class MemberDao {
@@ -39,6 +42,14 @@ public class MemberDao {
     }
 
     public String idSearchDao(MemberDto memberDto) {
-      return sqlSessionTemplate.selectOne("MemberDaoMapper.idSearch", memberDto);
+        return sqlSessionTemplate.selectOne("MemberDaoMapper.idSearch", memberDto);
+    }
+
+    public void updateEmail(MemberDto memberDto) {
+        sqlSessionTemplate.update("MemberDaoMapper.emailChange", memberDto);
+    }
+
+    public MemberDto validateUser(MemberDto memberDto){
+        return sqlSessionTemplate.selectOne("MemberDaoMapper.validateUser", memberDto);
     }
 }
