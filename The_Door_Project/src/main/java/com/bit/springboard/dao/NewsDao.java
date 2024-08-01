@@ -22,17 +22,12 @@ public class NewsDao {
     // 자유게시글 등록
     public void write(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
         /*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/
-        System.out.println("NewsDao의 post 메소드 실행");
         mybatis.insert("NewsDao.write", boardDto);
-
-        System.out.println("insert 실행 후 id값: " + boardDto.getId());
-
         if(boardFileDtoList.size() > 0) {
             boardFileDtoList.forEach(boardFileDto -> boardFileDto.setBoard_id(boardDto.getId()));
 
             mybatis.insert("NewsDao.uploadFiles", boardFileDtoList);
         }
-        System.out.println("NewsDao의 post 메소드 실행 종료");
     }
 
     // 게시글 수정하기
@@ -58,13 +53,8 @@ public class NewsDao {
     }
 
     public void delete(int id) {
-        System.out.println("NewsDao의 delete 메소드 실행");
-
         mybatis.delete("NewsDao.deleteFiles", id);
-
         mybatis.delete("NewsDao.delete", id);
-
-        System.out.println("NewsDao의 delete 메소드 실행 종료");
     }
 
     public BoardDto getBoard(int id) {

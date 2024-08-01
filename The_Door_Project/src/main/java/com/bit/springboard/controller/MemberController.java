@@ -30,7 +30,6 @@ public class MemberController {
     @PostMapping("/join.do")
     public String join(MemberDto memberDto) {
         memberService.join(memberDto);
-        System.out.println(memberDto);
         return "member/joinComplete";
     }
 
@@ -47,14 +46,12 @@ public class MemberController {
     @PostMapping("/userIdCheck.do")
     @ResponseBody
     public Map<String, Integer> userIdCheck(MemberDto memberDto) {
-        System.out.println(memberDto);
         return memberService.userIdCheck(memberDto.getUser_id());
     }
 
     @PostMapping("/nicknameCheck.do")
     @ResponseBody
     public Map<String, Integer> nicknameCheck(MemberDto memberDto) {
-        System.out.println(memberDto);
         return memberService.nicknameCheck(memberDto.getNickname());
     }
 
@@ -85,7 +82,6 @@ public class MemberController {
 
     @PostMapping("/idSearched.do")
     public String idSearchedView(MemberDto memberDto, Model model) {
-        System.out.println(memberDto);
 
         model.addAttribute("user_id",memberService.idSearch(memberDto));
 
