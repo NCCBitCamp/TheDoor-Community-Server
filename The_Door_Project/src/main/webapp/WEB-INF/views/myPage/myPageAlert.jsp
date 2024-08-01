@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageAlert.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <style>
-        /* 내 글 컬럼의 스타일 */
-        .infoTable td a {
-            display: inline-block;
-            max-width: 4em; /* 최대 너비를 글자 수에 따라 조정 */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            vertical-align: middle; /* 텍스트 정렬을 중앙으로 */
-        }
-    </style>
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -55,9 +44,9 @@
                 <tbody>
                 <c:forEach var="comment" items="${comments}" varStatus="status">
                     <tr>
-                        <td><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.title}</a></td>
+                        <td id="showMyWrite"><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.title}</a></td>
                         <td><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.content}</a></td>
-                        <td>${comment.WRITER_ID}</td>
+                        <td>${comment.writer_id}</td>
 <%--                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>--%>
 <%--                        <td>--%>
 <%--                            <javatime:format value="${comment.date}" pattern="yyyy-MM-dd hh:mm"/>--%>
@@ -90,7 +79,6 @@
                     <c:forEach begin="${page.startPage}" end="${page.endPage}" var="pageNum">
                         <li class="page-item ${page.cri.pageNum == pageNum ? 'current-page' : ''}">
                             <a class="page-link" href="${pageContext.request.contextPath}/myPage/alert.do?pageNum=${pageNum}">${pageNum}</a>
-<%--                            <a class="page-link" href="javascript:void(0);" onclick="fn_go_page(${pageNum})">${pageNum}</a>--%>
                         </li>
                     </c:forEach>
 

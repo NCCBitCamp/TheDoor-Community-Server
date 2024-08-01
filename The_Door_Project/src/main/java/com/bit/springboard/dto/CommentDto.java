@@ -9,6 +9,16 @@ public class CommentDto {
     private LocalDateTime date; // 작성 시간
     private String content; // 댓글 내용
 
+    private String title; // 마이페이지 알람으로 가져갈 변수
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public int getId() {
         return id;
     }
