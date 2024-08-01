@@ -8,46 +8,32 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <form id="idSearch-form" action="/member/idSearched.do" method="post">
     <div class="content">
-        <div class="login-container">
-            <h2>아이디 찾기</h2>
+
+        <h1>아이디 찾기</h1>
+        <div id="searchBox">
             <div class="inputBox">
-                <label id="nameLabel" for="username">Username</label>
-                <input type="text" class="username" id="username" name="username" required maxlength="30" autocomplete="off">
+                <label id="nameLabel" for="username">이름</label>
+                <input type="text" class="username" id="username" name="username" required maxlength="30"
+                       autocomplete="off">
             </div>
+
             <div class="inputBox">
-                <label id="emailLabel" for="email">Email</label>
+                <label id="emailLabel" for="email">이메일</label>
                 <input type="email" class="email" id="email" name="email" required maxlength="30" autocomplete="off">
             </div>
+
             <div class="search">
-                <input type="submit" class="searchbtn" value="확인">
+                <button type="submit" class="searchbtn">확인</button>
+                <%--                onclick="location.href='/member/idSearched.do'"--%>
             </div>
-            <c:if test="${not empty errorMessage}">
-                <div class="error-message">${errorMessage}</div>
-            </c:if>
         </div>
+
+
     </div>
 </form>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 <script>
-    // $(() => {
-    //
-    //     $.ajax({
-    //         url: "/member/idSearch.do",
-    //         type: "post",
-    //         data: $("idSearch-form").serialize(),
-    //         success: (map) => {
-    //             console.log(map);
-    //             console.log("?");
-    //
-    //             //     조회 결과 회원님의 아이디는 (String) 입니다.
-    //
-    //         },
-    //         error: (err) => {
-    //             console.log(err);
-    //         }
-    //     });
-    //
-    // });
+
 </script>
 </body>
 </html>

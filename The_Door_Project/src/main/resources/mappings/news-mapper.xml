@@ -8,17 +8,17 @@
             SELECT IFNULL(MAX(ID), 1) FROM NEWS
         </selectKey>
         INSERT INTO NEWS(
-            TITLE,
-            CONTENT,
-            WRITER_ID
+        TITLE,
+        CONTENT,
+        WRITER_ID
         ) VALUES(
-            #{title},
-            #{content},
-            (
-            SELECT U.USER_ID
-                FROM USER U
-                WHERE U.NICKNAME = #{nickname}
-            )
+        #{title},
+        #{content},
+        (
+        SELECT U.USER_ID
+        FROM USER U
+        WHERE U.NICKNAME = #{nickname}
+        )
         )
     </insert>
 
