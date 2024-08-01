@@ -15,42 +15,42 @@
     </div>
     <div class="content-top-gap"></div> <!-- 상단 여백 -->
     <div class="content">
-        <form id="modify-form" action="/helpboard/modify.do" method="post" enctype="multipart/form-data">
+        <form id="modify-form" action="/helpboard/help-qna-display.do?id=${boardDto.getId()}" method="post" enctype="multipart/form-data">
         <div class="post-container">
             <div class="post-title">
-                <input type="text" id="title" name="title" value="${qa.title}" required>
+                <input type="text" id="title" name="title" value="${qnaboard.title}" readonly required>
             </div>
             <div class="post-header">
                 <div class="post-group">
                     <label for="author">작성자</label>
                     <!--원래 input 대신 p가 쓰였다.-->
-                    <input type="text" id="author" name="author" value="${qa.nickname}" readonly>
+                    <input type="text" id="author" name="author" value="${qnaboard.nickname}" readonly>
                 </div>
                 <div class="post-group">
                     <label for="created_date">작성 날짜</label>
                     <input type="text" id="created_date" name="created_date"
-                           value="<javatime:format value="${qa.fdate}" pattern="yyyy-MM-dd"/>" readonly required>
+                       value="<javatime:format value="${qnaboard.fdate}" pattern="yyyy-MM-dd"/>" readonly required>
                 </div>
                 <div class="post-group">
                     <label for="modified_date">수정된 날짜</label>
                     <input type="text" id="modified_date" name="modified_date"
-                           value="<javatime:format value="${qa.date}" pattern="yyyy-MM-dd"/>" readonly required>
+                       value="<javatime:format value="${qnaboard.date}" pattern="yyyy-MM-dd"/>" readonly required>
                 </div>
                 <div class="post-group">
                     <label for="answered">답변 완료 여부</label>
                     <input type="text" id="answered" name="answered"
-                           value="<javatime:format value="${qa.answer}"/>">
+                       value="${qnaboard.answer}">
                 </div>
                 <div class="post-group">
                     <label for="views">조회수</label>
-                    <input type="text" class="form-control" id="views" name="views" value="${qa.cnt}" readonly required>
+                    <input type="text" class="form-control" id="views" name="views" value="${qnaboard.cnt}" readonly required>
                 </div>
             </div>
             <div class="post-group">
                 <label for="content">내용</label>
                 <div id="contentarea" class="post-content">
                     <textarea class="form-control" id="content" name="content"
-                              rows="10" required>${qa.content}</textarea>
+                              rows="10" required>${qnaboard.content}</textarea>
                 </div>
             </div>
             <div class="post-group">
@@ -102,9 +102,9 @@
             </div>
             <div class="post-buttons">
                 <a href="/helpboard/help-qna.do"><button type="button" onclick="window.history.back();">뒤로가기</button></a>
-                <c:if test="${loginMember ne null and loginMember.id eq qa.WRITER_ID}">
+                <c:if test="${loginMember ne null and loginMember.user_id eq qnaboard.writer_id}">
                         <button type="submit" id="btn-update" >수정</button>
-                        <button type="button" id="btn-delete" onclick="location.href='/helpboard/delete.do?id=${qa.id}'">삭제</button>
+                        <button type="button" id="btn-delete" onclick="location.href='/helpboard/delete.do?id=${qnaboard.id}'">삭제</button>
                 </c:if>
             </div>
         </div>
