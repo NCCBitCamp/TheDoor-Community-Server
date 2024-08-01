@@ -19,12 +19,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void expire(MemberDto memberDto) {
-        authCodeDao.expire(memberDto);
+    public boolean find(MemberDto memberDto) {
+        return authCodeDao.find(memberDto) != null;
     }
 
     @Override
-    public boolean find(MemberDto memberDto) {
-        return authCodeDao.find(memberDto) != null;
+    public void expire(MemberDto memberDto) {
+        authCodeDao.expire(memberDto);
     }
 }

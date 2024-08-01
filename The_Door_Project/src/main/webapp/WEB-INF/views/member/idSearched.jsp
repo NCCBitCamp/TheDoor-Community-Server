@@ -21,7 +21,7 @@
             </div>
 
             <div class="pwSearchBox">
-                <button type="button" class="pwSearchBtn" onclick="location.href='#'">비밀번호 찾기</button>
+                <button type="button" class="pwSearchBtn" onclick="location.href='/member/passwordSearch.do'">비밀번호 찾기</button>
             </div>
         </div>
 
