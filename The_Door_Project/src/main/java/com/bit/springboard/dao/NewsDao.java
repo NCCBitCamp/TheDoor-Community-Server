@@ -37,8 +37,6 @@ public class NewsDao {
 
     // 게시글 수정하기
     public void modify(BoardDto boardDto, List<BoardFileDto> uFileList) {
-        System.out.println("NewsDao의 modify 메소드 실행");
-
         mybatis.update("NewsDao.modify", boardDto);
 
         if(uFileList.size() > 0) {
@@ -52,17 +50,10 @@ public class NewsDao {
                 }
             });
         }
-
-        System.out.println("NewsDao의 modify 메소드 실행 종료");
     }
 
     public List<BoardDto> getBoardList(Map<String, Object> paramMap) {
-        System.out.println("NewsDao의 getBoardList 메소드 실행");
-
         List<BoardDto> boardDtoList = new ArrayList<>();
-
-        System.out.println("NewsDao의 getBoardList 메소드 실행 종료");
-
         return mybatis.selectList("NewsDao.getBoardList", paramMap);
     }
 
@@ -77,11 +68,7 @@ public class NewsDao {
     }
 
     public BoardDto getBoard(int id) {
-        System.out.println("NewsDao의 getBoard 메소드 실행");
-
         BoardDto boardDto = new BoardDto();
-
-        System.out.println("NewsDao의 getBoard 메소드 실행 종료");
         return mybatis.selectOne("NewsDao.getBoard", id);
     }
 

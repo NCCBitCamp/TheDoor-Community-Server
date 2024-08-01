@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/news/newsModify.css">
@@ -12,7 +13,7 @@
         </div>
         <div class="container mt-3">
             <form id="modify-form" action="/news/newsModify.do" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="${community.id}">
+                <input type="hidden" name="id" value="${news.id}">
                 <input type="hidden" name="originFiles" id="originFiles">
                 <div class="form-group">
                     <label for="title">제목</label>

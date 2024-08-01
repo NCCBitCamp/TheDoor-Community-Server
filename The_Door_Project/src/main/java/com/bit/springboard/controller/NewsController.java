@@ -114,7 +114,7 @@ public class NewsController {
     @ResponseBody
     public Map<String, Object> newsListAjax(@RequestParam Map<String, String> searchMap, Criteria cri) {
         boardService = applicationContext.getBean("newsServiceImpl", BoardService.class);
-
+        cri.setAmount(9); // 한 페이지에 보여줄 게시글 수
         List<Map<String, Object>> newsList = new ArrayList<>();
 
         boardService.getBoardList(searchMap, cri).forEach(boardDto -> {

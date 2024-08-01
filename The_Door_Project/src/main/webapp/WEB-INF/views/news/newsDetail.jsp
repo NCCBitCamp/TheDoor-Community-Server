@@ -34,7 +34,7 @@
             </div>
             <c:if test="${loginMember ne null  && loginMember.role == 'ADMIN'}">
                 <div class="btn-container mt-4">
-                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/new/newsModify.do?id=${news.id}'">수정하기</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/news/newsModify.do?id=${news.id}'">수정하기</button>
                 </div>
             </c:if>
         </main>
