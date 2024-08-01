@@ -15,98 +15,107 @@
     </div>
     <div class="content-top-gap"></div> <!-- 상단 여백 -->
     <div class="content">
-        <form id="modify-form" action="/helpboard/help-qna-display.do?id=${boardDto.getId()}" method="post" enctype="multipart/form-data">
-        <div class="post-container">
-            <div class="post-title">
-                <input type="text" id="title" name="title" value="${qnaboard.title}" readonly required>
-            </div>
-            <div class="post-header">
-                <div class="post-group">
-                    <label for="author">작성자</label>
-                    <!--원래 input 대신 p가 쓰였다.-->
-                    <input type="text" id="author" name="author" value="${qnaboard.nickname}" readonly>
-                </div>
-                <div class="post-group">
-                    <label for="created_date">작성 날짜</label>
-                    <input type="text" id="created_date" name="created_date"
-                       value="<javatime:format value="${qnaboard.fdate}" pattern="yyyy-MM-dd"/>" readonly required>
-                </div>
-                <div class="post-group">
-                    <label for="modified_date">수정된 날짜</label>
-                    <input type="text" id="modified_date" name="modified_date"
-                       value="<javatime:format value="${qnaboard.date}" pattern="yyyy-MM-dd"/>" readonly required>
-                </div>
-                <div class="post-group">
-                    <label for="answered">답변 완료 여부</label>
-                    <input type="text" id="answered" name="answered"
-                       value="${qnaboard.answer}">
-                </div>
-                <div class="post-group">
-                    <label for="views">조회수</label>
-                    <input type="text" class="form-control" id="views" name="views" value="${qnaboard.cnt}" readonly required>
-                </div>
-            </div>
-            <div class="post-group">
-                <label for="content">내용</label>
-                <div id="contentarea" class="post-content">
-                    <textarea class="form-control" id="content" name="content"
-                              rows="10" required>${qnaboard.content}</textarea>
-                </div>
-            </div>
-            <div class="post-group">
-                <label for="uploadFiles">첨부된 파일</label>
-                <!--여기는 input이 아니라 p가 들어갔었던 곳이다.-->
-                <input class="form-control" type="file" name="uploadFiles" id="uploadFiles" multiple>
-                <div id="image-preview">
-                    <input type="file" id="changeFiles" name="changeFiles" style="display: none;" multiple>
-                    <div id="preview" class="mt-3 text-center"
-                         data-placeholder="파일을 첨부하려면 파일선택 버튼을 누르세요.">
-                        <c:forEach items="${fileList}" var="file" varStatus="status">
-                            <div class="upload-file-div">
-                                <input type="hidden" id="fileId${status.index}" value="${file.id}">
-                                <input type="hidden" id="filename${status.index}" value="${file.filename}">
-                                <!--밑에 표시된 파일을 클릭했을 때 파일 선택창이 뜨도록 input type="file" 하나 생성-->
-                                <input type="file" id="changeFile${file.id}" name="changeFile${file.id}" style="display: none;"
-                                       onchange="changFile(${file.id}, event)">
-                                <c:if test="${status.last}">
-                                    <input type="hidden" id="filecnt" name="filecnt" value="${status.count}">
-                                </c:if>
-                                <c:choose>
-                                    <c:when test="${file.filetype eq 'image'}">
-                                        <img id="img${file.id}"
-                                             src="/upload/${file.filename}"
-                                             class="upload-file"
-                                             alt="${file.fileoriginname}"
-                                             onclick="fileClick(${file.id})">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img id="img${file.id}"
-                                             src="/static/images/logo.png"
-                                             class="upload-file"
-                                             alt="${file.fileoriginname}"
-                                             onclick="fileClick(${file.id})">
-                                    </c:otherwise>
-                                </c:choose>
-                                <input type="button" value="x"
-                                       deleteFile="${file.id}"
-                                       class="upload-file-delete-btn"
-                                       onclick="deleteFile(event)">
-                                <p id="filename${file.id}"
-                                   class="upload-file-name">
-                                        ${file.fileoriginname}
-                                </p>
-                            </div>
-                        </c:forEach>
+<%--        <form id="modify-form" action="/helpboard/help-qna-display.do?id=${boardDto.getId()}" method="post" enctype="multipart/form-data">--%>
+            <form id="modify-form" action="/helpboard/modify.do?id=${boardDto.getId()}" method="post" enctype="multipart/form-data">
+                <div class="post-container">
+                    <div class="post-title">
+                        <input type="text" id="title" name="title" value="${qnaboard.title}" readonly required>
+
+                    </div>
+                <div class="post-header">
+                    <div class="post-group">
+                        <label for="author">작성자</label>
+                        <!--원래 input 대신 p가 쓰였다.-->
+                        <input type="text" id="author" name="author" value="${qnaboard.nickname}" readonly>
+                    </div>
+                    <div class="post-group">
+                        <label for="created_date">작성 날짜</label>
+                        <input type="text" id="created_date" name="created_date"
+                           value="<javatime:format value="${qnaboard.fdate}" pattern="yyyy-MM-dd"/>" readonly required>
+                    </div>
+                    <div class="post-group">
+                        <label for="modified_date">수정된 날짜</label>
+                        <input type="text" id="modified_date" name="modified_date"
+                           value="<javatime:format value="${qnaboard.date}" pattern="yyyy-MM-dd"/>" readonly required>
+                    </div>
+                    <div class="post-group">
+                        <label for="answered">답변 완료 여부</label>
+                        <input type="text" id="answered" name="answered"
+                           value="${qnaboard.answer}">
+                    </div>
+                    <div class="post-group">
+                        <label for="views">조회수</label>
+                        <input type="text" class="form-control" id="views" name="views" value="${qnaboard.cnt}" readonly required>
                     </div>
                 </div>
-            </div>
-            <div class="post-buttons">
-                <a href="/helpboard/help-qna.do"><button type="button" onclick="window.history.back();">뒤로가기</button></a>
-                <c:if test="${loginMember ne null and loginMember.user_id eq qnaboard.writer_id}">
-                        <button type="submit" id="btn-update" >수정</button>
-                        <button type="button" id="btn-delete" onclick="location.href='/helpboard/delete.do?id=${qnaboard.id}'">삭제</button>
-                </c:if>
-            </div>
+                <div class="post-group">
+                    <label for="content">내용</label>
+                    <div id="contentarea" class="post-content">
+                        <textarea class="form-control" id="content" name="content"
+                                  rows="10" required>${qnaboard.content}</textarea>
+                    </div>
+                </div>
+                <div class="post-group">
+                    <label for="uploadFiles">첨부된 파일</label>
+                    <!--여기는 input이 아니라 p가 들어갔었던 곳이다.-->
+                    <input class="form-control" type="file" name="uploadFiles" id="uploadFiles" multiple>
+                    <div id="image-preview">
+                        <input type="file" id="changeFiles" name="changeFiles" style="display: none;" multiple>
+                        <div id="preview" class="mt-3 text-center"
+                             data-placeholder="파일을 첨부하려면 파일선택 버튼을 누르세요.">
+                            <c:forEach items="${fileList}" var="file" varStatus="status">
+                                <div class="upload-file-div">
+                                    <input type="hidden" id="fileId${status.index}" value="${file.id}">
+                                    <input type="hidden" id="filename${status.index}" value="${file.filename}">
+                                    <!--밑에 표시된 파일을 클릭했을 때 파일 선택창이 뜨도록 input type="file" 하나 생성-->
+                                    <input type="file" id="changeFile${file.id}" name="changeFile${file.id}" style="display: none;"
+                                           onchange="changFile(${file.id}, event)">
+                                    <c:if test="${status.last}">
+                                        <input type="hidden" id="filecnt" name="filecnt" value="${status.count}">
+                                    </c:if>
+                                    <c:choose>
+                                        <c:when test="${file.filetype eq 'image'}">
+                                            <img id="img${file.id}"
+                                                 src="/upload/${file.filename}"
+                                                 class="upload-file"
+                                                 alt="${file.fileoriginname}"
+                                                 onclick="fileClick(${file.id})">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img id="img${file.id}"
+                                                 src="/static/images/logo.png"
+                                                 class="upload-file"
+                                                 alt="${file.fileoriginname}"
+                                                 onclick="fileClick(${file.id})">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <input type="button" value="x"
+                                           deleteFile="${file.id}"
+                                           class="upload-file-delete-btn"
+                                           onclick="deleteFile(event)">
+                                    <p id="filename${file.id}"
+                                       class="upload-file-name">
+                                            ${file.fileoriginname}
+                                    </p>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+<%--            <div class="post-buttons">--%>
+<%--                <a href="/helpboard/help-qna.do"><button type="button" onclick="window.history.back();">뒤로가기</button></a>--%>
+<%--                <c:if test="${loginMember ne null and loginMember.user_id eq qnaboard.writer_id}">--%>
+<%--                        <button type="submit" id="btn-update" >수정</button>--%>
+<%--                        <button type="button" id="btn-delete" onclick="location.href='/helpboard/delete.do?id=${qnaboard.id}'">삭제</button>--%>
+<%--                </c:if>--%>
+<%--            </div>--%>
+                    <div class="post-buttons">
+                        <a href="${pageContext.request.contextPath}/helpboard/help-qna.do"><button type="button">뒤로가기</button></a>
+                        <c:if test="${loginMember ne null and loginMember.user_id eq qnaboard.writer_id}">
+                            <button type="submit" id="btn-update">수정</button>
+                            <button type="button" id="btn-delete" onclick="location.href='${pageContext.request.contextPath}/helpboard/delete.do?id=${qnaboard.id}'">삭제</button>
+                        </c:if>
+                    </div>
         </div>
         </form>
     </div>

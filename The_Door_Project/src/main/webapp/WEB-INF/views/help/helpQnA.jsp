@@ -13,7 +13,8 @@
     <div class="head_area">
         <p class="head_area_title">QNA</p>
     </div>
-    <form id="search-form" action="/helpboard/help-qna.do" method="post">
+<%--    <form id="search-form" action="/helpboard/help-qna.do" method="post">--%>
+    <form id="search-form" action="${pageContext.request.contextPath}/helpboard/help-qna.do" method="post">
     <div class="search_area">
         <select class="form-select" name="searchCondition">
             <option value="title"
@@ -64,17 +65,26 @@
             </div>
         </c:if>
         <div class="pagination">
-            <c:if test="${page.prev}">
-                <a href="${page.cri.pageNum - 1}">&laquo;</a>
-            </c:if>
-            <c:forEach begin="${page.startPage}"
-                       end="${page.endPage}"
-                       var="number">
-                <a href="${number}">${number}</a>
+            <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">
+                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${number}">${number}</a>
             </c:forEach>
-            <c:if test="${page.next}">
-                <a href="${page.cri.pageNum + 1}">&raquo;</a>
+            <c:if test="${page.prev}">
+                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${page.cri.pageNum - 1}">&laquo;</a>
             </c:if>
+            <c:if test="${page.next}">
+                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${page.cri.pageNum + 1}">&raquo;</a>
+            </c:if>
+<%--            <c:if test="${page.prev}">--%>
+<%--                <a href="${page.cri.pageNum - 1}">&laquo;</a>--%>
+<%--            </c:if>--%>
+<%--            <c:forEach begin="${page.startPage}"--%>
+<%--                       end="${page.endPage}"--%>
+<%--                       var="number">--%>
+<%--                <a href="${number}">${number}</a>--%>
+<%--            </c:forEach>--%>
+<%--            <c:if test="${page.next}">--%>
+<%--                <a href="${page.cri.pageNum + 1}">&raquo;</a>--%>
+<%--            </c:if>--%>
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
@@ -96,13 +106,19 @@
                 }
             });
 
+            // $(".pagination a").on("click", (e) => {
+            //     e.preventDefault();
+            //
+            //     // console.log($(e.target).attr("href"));
+            //
+            //     $("input[name='pageNum']").val($(e.target).attr("href"));
+            //
+            //     $("#search-form").submit();
+            // });
             $(".pagination a").on("click", (e) => {
                 e.preventDefault();
-
-                // console.log($(e.target).attr("href"));
-
-                $("input[name='pageNum']").val($(e.target).attr("href"));
-
+                let pageNum = $(e.target).attr("href").split('=')[1];
+                $("input[name='pageNum']").val(pageNum);
                 $("#search-form").submit();
             });
         });
