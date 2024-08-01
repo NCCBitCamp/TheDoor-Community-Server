@@ -59,11 +59,11 @@ public class helpQnaServiceImpl implements BoardService {
         // JSON String 형태의 originFiles를 List<BoardFileDto> 형태로 변환
         List<BoardFileDto> originFileList = new ArrayList<>();
 
-        try {
-            originFileList = new ObjectMapper().readValue(originFiles, new TypeReference<List<BoardFileDto>>() {});
-        } catch(IOException ie) {
-            System.out.println(ie.getMessage());
-        }
+//        try {
+//            originFileList = new ObjectMapper().readValue(originFiles, new TypeReference<List<BoardFileDto>>() {});
+//        } catch(IOException ie) {
+//            System.out.println(ie.getMessage());
+//        }
 
         String attachPath = "C:/tmp/upload/";
 

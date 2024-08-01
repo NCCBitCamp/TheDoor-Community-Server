@@ -99,15 +99,15 @@
         <if test="searchKeyword != null and searchKeyword != ''">
             <if test="searchCondition == 'all'">
                 AND (
-                F.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
-                OR F.CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+                Q.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+                OR Q.CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
                 )
             </if>
             <if test="searchCondition == 'title'">
-                AND F.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+                AND Q.TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
             </if>
             <if test="searchCondition == 'content'">
-                AND F.CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+                AND Q.CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
             </if>
         </if>
     </select>

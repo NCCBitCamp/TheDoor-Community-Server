@@ -134,18 +134,30 @@ public class HelpController {
 
     }
 
+//    @PostMapping("/modify.do")
+//    public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
+//                         @RequestParam(name = "originFiles", required = false) String originFiles) {
+//        System.out.println(originFiles);
+//
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//
+//        boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
+//
+//        return "redirect:/helpboard/help-qna.do";
+//
+//
+//    }
+
     @PostMapping("/modify.do")
-    public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
-                         @RequestParam(name = "originFiles", required = false) String originFiles) {
-        System.out.println(originFiles);
+    public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, @RequestParam(name = "originFiles", required = false) String originFiles) {
+        System.out.println(boardDto);
 
-        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
-
+        if (boardDto.getContent() == null || boardDto.getContent().isEmpty()) {
+            throw new IllegalArgumentException("content cannot be null or empty");
+        }
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
-
         return "redirect:/helpboard/help-qna.do";
-
-
     }
 
     @GetMapping("/delete.do")
