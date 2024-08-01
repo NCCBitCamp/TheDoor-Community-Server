@@ -11,15 +11,9 @@
 
 
         <div id="searchBox">
-<<<<<<< HEAD
-            <div id="guideBox">
-                <li id="guide">회원님의 아이디를 확인해 주세요.</li>
-                <h2 class="showId">${user_id}</h2>
-=======
             <h2>아이디 찾기</h2>
             <div class="showBox">
                 <h5>${user_id}</h5>
->>>>>>> f0b943901eb15496d5643a26797372665cf154c5
             </div>
 
             <div class="loginBox">
