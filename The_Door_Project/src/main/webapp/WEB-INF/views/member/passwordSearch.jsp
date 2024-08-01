@@ -27,7 +27,7 @@
                 <button type="submit" class="searchBtn">인증번호 받기</button>
             </div>
 
-            <div id="proofBox" class="hidden">
+            <div id="proofBox">
                 <div class="authenticationBox">
                     <input type="text" class="authenticationInput" id="authenticationInput" name="authenticationInput"
                            required maxlength="30" autocomplete="off" placeholder=" 인증번호를 입력해 주세요.">
@@ -44,8 +44,24 @@
     </div>
 </form>
 </body>
-ㅣ
 <script>
+    $(() => {
+
+        $.ajax({
+            url:"/mail/confirm.do",
+            type:"post",
+            data: $("#passwordSearch-form").serialize(),
+            success: () => {
+
+
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+
+    });
+
     window.addEventListener("DOMContentLoaded", () => {
         const searchBox = document.getElementById("searchBox");
         const searchBtn = document.getElementsByClassName("searchBtn")[0];
@@ -71,8 +87,6 @@
     });
 </script>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
-<script>
 
-</script>
 </body>
 </html>
