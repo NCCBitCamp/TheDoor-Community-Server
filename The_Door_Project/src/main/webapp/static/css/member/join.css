@@ -1,3 +1,7 @@
+#join-form {
+    margin-bottom: 0;
+}
+
 .content {
     height: 100vh;
     display: flex;
@@ -37,7 +41,10 @@
     justify-content: center;
     display: flex;
 }
-
+#divSubmitBtn:focus {
+    border:none;
+    outline: none;
+}
 #divSubmitBtn {
     color: #272727;
     font-weight: bold;
@@ -48,7 +55,7 @@
     padding: 0px 10px 0px 10px;
     width: 390px;
     height: 36px;
-    margin-top: 1ch;
+    margin-top: 2ch;
     margin-bottom: 1ch;
     background-color: #FBC70E;
     text-align: center;
