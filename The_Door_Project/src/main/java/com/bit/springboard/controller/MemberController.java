@@ -81,11 +81,26 @@ public class MemberController {
     }
 
     @PostMapping("/idSearched.do")
-    public String idSearchedView(MemberDto memberDto, Model model) {
+    @ResponseBody
+    public Map<String, Object> idSearchedView(@ModelAttribute MemberDto memberDto) {
+        Map<String, Object> response = new HashMap<>();
+        String userId = memberService.idSearch(memberDto);
 
-        model.addAttribute("user_id",memberService.idSearch(memberDto));
+        if (userId != null) {
+            response.put("status", "success");
+            response.put("user_id", userId);
+        } else {
+            response.put("status", "error");
+            response.put("message", "일치하는 아이디가 없습니다.");
+        }
 
-        return "member/idSearched";
+        return response;
+    }
+
+    @GetMapping("/idSearched")
+    public String idSearchedResult(@RequestParam("user_id") String userId, Model model) {
+        model.addAttribute("user_id", userId);
+        return "member/idSearched"; // JSP 경로 설정 (예: WEB-INF/views/member/idSearched.jsp)
     }
 
     @GetMapping("/passwordSearch.do")

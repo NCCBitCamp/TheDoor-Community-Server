@@ -5,6 +5,7 @@ import com.bit.springboard.service.AuthService;
 import com.bit.springboard.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,7 +34,11 @@ public class MailController {
 
     // 인증코드가 db에 있는지 검증
     @PostMapping("/verify")
-    public boolean verifyCode(MemberDto memberDto) {
+    public boolean verifyCode(MemberDto memberDto, Model model) {
+        if (memberDto.getCode() == null || memberDto.getCode().isEmpty()) {
+            return false;
+        }
+
         return authService.find(memberDto);
     }
 
