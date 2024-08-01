@@ -31,8 +31,8 @@ public class MyPageDao {
         return mybatis.selectList("MyPageDao.myWrite", cri);
     }
 
-    public List<CommentDto> getComment(Criteria cri){
-        return mybatis.selectList("MyPageDao.getComments",cri);
+    public List<CommentDto> comments(Criteria cri){
+        return mybatis.selectList("MyPageDao.comments",cri);
     }
 
     public int getTotalMyPage(String userId){

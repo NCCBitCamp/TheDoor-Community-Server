@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageAlert.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        /* 내 글 컬럼의 스타일 */
+        .infoTable td a {
+            display: inline-block;
+            max-width: 4em; /* 최대 너비를 글자 수에 따라 조정 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle; /* 텍스트 정렬을 중앙으로 */
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -38,28 +49,24 @@
                     <th style="width: 10%;">내 글</th>
                     <th style="width: 50%;">댓글 내용</th>
                     <th style="width: 10%;">댓글 작성자</th>
-                    <th style="width: 10%;">시간</th>
+                    <th style="width: 10%;">등록 시간</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="comment" items="${getComments}" varStatus="status">
+                <c:forEach var="comment" items="${comments}" varStatus="status">
                     <tr>
-                        <td><a href="/myPage/info.do" style="color: black">${comment.title}</a></td>
-                        <td><a href="/myPage/info.do" style="color: black">${comment.content}</a></td>
+                        <td><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.title}</a></td>
+                        <td><a href="/community/communityDetail.do?id=${comment.board_id}" style="color: black">${comment.content}</a></td>
                         <td>${comment.WRITER_ID}</td>
 <%--                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${convertedTime[status.index]}"/></td>--%>
-                        <td>
-                            <javatime:format value="${comment.date}" pattern="yyyy-MM-dd hh:mm"/>
+<%--                        <td>--%>
+<%--                            <javatime:format value="${comment.date}" pattern="yyyy-MM-dd hh:mm"/>--%>
+<%--                        </td>--%>
+                        <td data-date="${comment.date}">
+                            <span class="relative-time"></span>
                         </td>
                     </tr>
-                    </tr>
-                    <!-- 마지막 요소의 date 값을 lastDate에 저장 -->
-                    <c:if test="${status.last}">
-                        <c:set var="lastDate" value="${comment.date}"/>
-                        <c:set var="lastId" value="${comment.id}"/>
-                    </c:if>
                 </c:forEach>
-                <!-- hidden 필드를 이용해 lastDate와 lastId를 전달 -->
                 <form id="paginationForm" action="${pageContext.request.contextPath}/myPage/alert.do" method="GET">
                     <input type="hidden" name="lastDate" value="${lastDate}" />
                     <input type="hidden" name="lastId" value="${lastId}" />
@@ -82,8 +89,8 @@
 
                     <c:forEach begin="${page.startPage}" end="${page.endPage}" var="pageNum">
                         <li class="page-item ${page.cri.pageNum == pageNum ? 'current-page' : ''}">
-<%--                            <a class="page-link" href="${pageContext.request.contextPath}/myPage/alert.do?pageNum=${pageNum}">${pageNum}</a>--%>
-                            <a class="page-link" href="javascript:void(0);" onclick="fn_go_page(${pageNum})">${pageNum}</a>
+                            <a class="page-link" href="${pageContext.request.contextPath}/myPage/alert.do?pageNum=${pageNum}">${pageNum}</a>
+<%--                            <a class="page-link" href="javascript:void(0);" onclick="fn_go_page(${pageNum})">${pageNum}</a>--%>
                         </li>
                     </c:forEach>
 
@@ -105,26 +112,43 @@
 
     </body>
 <script>
-    // jQuery가 제대로 로드되었는지 확인
-    console.log('jQuery version:', $.fn.jquery);
-    console.log('$.ajax function:', $.ajax);
+    // 현재 시간을 JavaScript Date 객체로 생성
+    const now = new Date();
 
-    // 페이지 로드 시 초기 lastDate와 lastId 설정
-    var lastDate = $("input[name='lastDate']").val() || '';
-    var lastId = $("input[name='lastId']").val() || '';
+    function calculateRelativeTime(dateString) {
+        const commentDate = new Date(dateString);
+        const diffMs = now - commentDate;
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMinutes / 60);
+        const diffDays = Math.floor(diffHours / 24);
+        const diffMonths = Math.floor(diffDays / 30);
+        const diffYears = Math.floor(diffDays / 365);
 
-    console.log("Initial lastDate:", lastDate);
-    console.log("Initial lastId:", lastId);
+
+        if (diffMinutes < 1) return "방금 전";
+        if (diffMinutes < 60) return diffMinutes + "분 전";
+        if (diffHours < 24) return diffHours + "시간 전";
+        if (diffDays === 1) return "어제";
+        if (diffDays < 7) return diffDays + "일 전";
+        if (diffDays < 30) return diffDays / 7 + "주 전";
+        if (diffDays < 365) return diffMonths + "달 전";
+        return diffYears + "년 전";
+    }
+
+    $(document).ready(function() {
+        $('.relative-time').each(function() {
+            const date = $(this).closest('td').data('date');
+            $(this).text(calculateRelativeTime(date));
+        });
+    });
+
+
 
     function fn_go_page(pageNum) {
         $.ajax({
             url: "/myPage/alert.do", // 서버의 엔드포인트 URL
             type: "GET",
-            data: {
-                lastDate: lastDate,
-                lastId: lastId,
-                pageNum: pageNum
-            }, // pageNum 서버로 전송
+            data: pageNum, // pageNum 서버로 전송
             success: function(response) {
                 // 서버로부터 데이터를 받아서 테이블, 페이지네이션 업데이트
                 var $response = $(response);
@@ -134,12 +158,7 @@
                 var newPagination = $response.find("#custom-pagination").html();
                 $("#custom-pagination").html(newPagination);
 
-                // 응답에서 hidden 필드 값 업데이트
-                lastDate = $response.find("input[name='lastDate']").val() || lastDate;
-                lastId = $response.find("input[name='lastId']").val() || lastId;
-
-                console.log("Updated lastDate =", lastDate);
-                console.log("Updated lastId =", lastId);
+                console.log("pageNum", pageNum);
             },
             error: (err) => {
                 console.log("err : ");

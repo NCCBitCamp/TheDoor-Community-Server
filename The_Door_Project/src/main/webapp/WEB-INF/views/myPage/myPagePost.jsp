@@ -43,7 +43,7 @@
                     <c:forEach var="contents" items="${myWrite}">
                         <tr>
                             <td>${contents.id}</td>
-                            <td><a href="/myPage/info.do" style="color: black">${contents.title}</a></td>
+                            <td><a href="/community/communityDetail.do?id=${contents.id}" style="color: black">${contents.title}</a></td>
                             <td>${contents.writer_id}</td>
                             <td>${contents.cnt}</td>
                         </tr>

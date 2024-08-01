@@ -41,7 +41,7 @@ public class MyPageServiceImpl implements MyPageService {
     @Override
     public List<CommentDto> getComment(Criteria cri) {
         cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
-        return myPageDao.getComment(cri);
+        return myPageDao.comments(cri);
     }
 
     @Override
