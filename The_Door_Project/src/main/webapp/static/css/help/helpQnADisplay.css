@@ -139,3 +139,24 @@ background-color: black;
     color: white;
     text-decoration: none;
 }
+
+/* 기본 input 스타일 */
+input[type="text"],
+input[type="file"],
+textarea {
+    background-color: #333; /* 어두운 배경색 */
+    color: white; /* 흰색 텍스트 */
+    border: 1px solid #444; /* 어두운 경계선 */
+    border-radius: 5px; /* 둥근 테두리 */
+    padding: 10px; /* 내부 여백 */
+    box-sizing: border-box; /* 패딩과 경계선을 포함한 너비 계산 */
+}
+
+/* 폼 요소가 포커스 될 때 스타일 */
+input[type="text"]:focus,
+input[type="file"]:focus,
+textarea:focus {
+    border-color: #555; /* 포커스 시 경계선 색상 변경 */
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+    background-color: #444; /* 포커스 시 배경색 변경 */
+}

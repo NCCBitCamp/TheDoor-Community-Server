@@ -143,7 +143,7 @@ public class HelpController {
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
-        return "redirect:/help/help-qna.do";
+        return "redirect:/helpboard/help-qna.do";
 
 
     }
@@ -157,7 +157,7 @@ public class HelpController {
         boardService.delete(boardDto.getId());
 
 
-        return "redirect:/help/help-qna.do";
+        return "redirect:/helpboard/help-qna.do";
 
     }
 }
