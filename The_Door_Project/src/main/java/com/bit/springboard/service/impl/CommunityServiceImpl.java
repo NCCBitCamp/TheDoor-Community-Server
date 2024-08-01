@@ -4,6 +4,7 @@ import com.bit.springboard.common.FileUtils;
 import com.bit.springboard.dao.CommunityDao;
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
+import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -29,6 +30,8 @@ public class CommunityServiceImpl implements BoardService {
     @Override
     public void post(BoardDto boardDto, MultipartFile[] uploadFiles) {
         List<BoardFileDto> boardFileDtoList = new ArrayList<>();
+
+        Arrays.stream(uploadFiles).forEach(multipartFile -> System.out.println(multipartFile.getOriginalFilename()));
 
         if(uploadFiles != null && uploadFiles.length > 0) {
             // 업로드 폴더 지정헤주기
@@ -121,7 +124,6 @@ public class CommunityServiceImpl implements BoardService {
                 }
             });
         }
-        boardDto.setDate(LocalDateTime.now());
         communityDao.modify(boardDto, uFileList);
     }
 
@@ -168,4 +170,18 @@ public class CommunityServiceImpl implements BoardService {
     public void updateCnt(int id) {
         communityDao.updateCnt(id);
     }
+
+     // 댓글 추가
+    @Override
+    public void addComment(CommentDto commentDto) {
+        commentDto.setDate(LocalDateTime.now());
+        communityDao.addComment(commentDto);
+    }
+
+    // 댓글 조회
+    @Override
+    public List<CommentDto> getComments(int boardId) {
+        return communityDao.getComments(boardId);
+    }
+
 }

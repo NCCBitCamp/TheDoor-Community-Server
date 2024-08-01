@@ -17,7 +17,7 @@
             #{content},
             #{subject},
             (
-            SELECT U.ID
+            SELECT U.USER_ID
                 FROM USER U
                 WHERE U.NICKNAME = #{nickname}
             )
@@ -45,7 +45,7 @@
                Q.CNT
         FROM QA Q
         JOIN USER U
-        ON Q.WRITER_ID = U.ID
+        ON Q.WRITER_ID = U.USER_ID
         -- mybatis의 동적 쿼리 사용
         WHERE 1=1
         <if test="search.searchKeyword != null and search.searchKeyword != ''">
@@ -79,7 +79,7 @@
              , Q.CNT
         FROM QA Q
                  JOIN USER U
-                      ON Q.WRITER_ID = U.ID
+                      ON Q.WRITER_ID = U.USER_ID
         WHERE Q.ID = #{id}
     </select>
 
@@ -94,7 +94,7 @@
         SELECT COUNT(*)
         FROM QA Q
         JOIN USER U
-        ON Q.WRITER_ID = U.ID
+        ON Q.WRITER_ID = U.USER_ID
         WHERE 1=1
         <if test="searchKeyword != null and searchKeyword != ''">
             <if test="searchCondition == 'all'">
@@ -179,6 +179,17 @@
         WHERE ID = #{id}
           AND BOARD_ID = #{board_id}
     </delete>
+
+    <select id="getBoardFileList" parameterType="int" resultType="boardFile">
+        SELECT ID
+             , BOARD_ID
+             , FILENAME
+             , FILEORIGINNAME
+             , FILEPATH
+             , FILETYPE
+        FROM QA_FILE
+        WHERE BOARD_ID = #{id}
+    </select>
 
 
 

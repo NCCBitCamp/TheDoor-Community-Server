@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// JDBC Template 사용방식 2
-// JdbcTemplate을 필드로 선언하고 의존성을 주입받아서 사용하는 방식
+
 @Repository
 public class HelpQnaDao {
     private static SqlSessionTemplate mybatis;
@@ -32,7 +31,7 @@ public class HelpQnaDao {
             "                                   , Q.CNT" +
             "                                  FROM QA Q" +
             "                                  JOIN USER U" +
-            "                                    ON Q.WRITER_ID = U.ID";
+            "                                    ON Q.WRITER_ID = U.USER_ID";
 
     // 게시글 삭제
     private final String DELETE = "DELETE FROM QA" +
@@ -50,7 +49,7 @@ public class HelpQnaDao {
             "                                   , Q.CNT" +
             "                                  FROM QA Q" +
             "                                  JOIN USER U" +
-            "                                    ON Q.WRITER_ID = U.ID" +
+            "                                    ON Q.WRITER_ID = U.USER_ID" +
             "                                  WHERE Q.ID = ?";
 
     public void post(BoardDto boardDto, List<BoardFileDto> boardFileDtoList) {
@@ -96,12 +95,12 @@ public class HelpQnaDao {
 
         // SqlSessionTemplate의 selectList메소드 사용
         boardDtoList = mybatis.selectList("HelpQnaDao.getBoardList", paramMap);
-
+        System.out.println(boardDtoList);
         System.out.println("HelpQnaDao의 getBoardList 메소드 실행 종료");
         return boardDtoList;
     }
 
-    public static void delete(int id) {
+    public void delete(int id) {
         System.out.println("HelpQnaDao의 delete 메소드 실행");
 
         mybatis.delete("HelpQnaDao.deleteFiles", id);
@@ -123,16 +122,18 @@ public class HelpQnaDao {
         return boardDto;
     }
 
-    public static void updateCnt(int id) {
+    public void updateCnt(int id) {
         mybatis.update("HelpQnaDao.updateCnt", id);
     }
 
     public int getBoardTotalCnt(Map<String, String> searchMap) {
+        System.out.println("updateCnt 동작함");
         return mybatis.selectOne("HelpQnaDao.getBoardTotalCnt", searchMap);
     }
 
 
     public List<BoardFileDto> getBoardFileList(int id) {
+
         return mybatis.selectList("HelpQnaDao.getBoardFileList", id);
     }
 }

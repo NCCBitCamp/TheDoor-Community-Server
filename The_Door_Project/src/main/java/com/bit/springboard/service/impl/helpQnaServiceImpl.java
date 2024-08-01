@@ -4,6 +4,7 @@ import com.bit.springboard.common.FileUtils;
 import com.bit.springboard.dao.HelpQnaDao;
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
+import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,10 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class helpQnaServiceImpl implements BoardService {
@@ -135,17 +133,22 @@ public class helpQnaServiceImpl implements BoardService {
 
     @Override
     public void delete(int id) {
-        HelpQnaDao.delete(id);
+        helpQnaDao.delete(id);
     }
 
     @Override
     public void updateCnt(int id) {
-        HelpQnaDao.updateCnt(id);
+        helpQnaDao.updateCnt(id);
     }
 
     @Override
     public List<BoardDto> getBoardList(Map<String, String> searchMap, Criteria cri) {
-        return List.of();
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("search", searchMap);
+        paramMap.put("cri", cri);
+
+        return helpQnaDao.getBoardList(paramMap);
     }
 
     @Override
@@ -161,5 +164,15 @@ public class helpQnaServiceImpl implements BoardService {
     @Override
     public List<BoardFileDto> getBoardFileList(int id) {
         return helpQnaDao.getBoardFileList(id);
+    }
+
+    @Override
+    public void addComment(CommentDto commentDto) {
+
+    }
+
+    @Override
+    public List<CommentDto> getComments(int boardId) {
+        return List.of();
     }
 }

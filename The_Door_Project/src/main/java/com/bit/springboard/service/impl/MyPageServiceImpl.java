@@ -3,6 +3,7 @@ package com.bit.springboard.service.impl;
 import com.bit.springboard.dao.MyPageDao;
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.CommentDto;
+import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.BoardService;
 import com.bit.springboard.service.MyPageService;
@@ -32,12 +33,25 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public List<BoardDto> getMyWrite(MemberDto memberDto) {
-        return myPageDao.myWrite(memberDto.getUser_id());
+    public List<BoardDto> getMyWrite(Criteria cri) {
+        cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
+        return myPageDao.myWrite(cri);
     }
 
     @Override
-    public List<CommentDto> getComment(MemberDto memberDto) {
-        return myPageDao.getComment(memberDto.getUser_id());
+    public List<CommentDto> getComment(Criteria cri) {
+        cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
+        return myPageDao.getComment(cri);
     }
+
+    @Override
+    public int getTotalMyPage(MemberDto memberDto){
+        return myPageDao.getTotalMyPage(memberDto.getUser_id());
+    }
+
+    @Override
+    public int getCommentsNum(MemberDto loginMember) {
+        return myPageDao.getCommentsNum(loginMember.getUser_id());
+    }
+
 }

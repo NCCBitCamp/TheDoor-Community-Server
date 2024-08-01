@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -48,10 +46,22 @@ public class CommunityController {
         return "redirect:/community/community.do";
     }
 
+    @GetMapping("/communityModify.do")
+    public String communityModify(BoardDto boardDto, Model model) {
+        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
+
+        model.addAttribute("community", boardService.getBoard(boardDto.getId()));
+        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+
+        return "community/communityModify";
+    }
+
     @PostMapping("/communityModify.do")
     public String communityModify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
-                                      @RequestParam(name = "originFiles", required = false) String originFiles) {
+                                  @RequestParam(name = "originFiles", required = false) String originFiles) {
         boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
+
+        System.out.println(boardDto);
 
         boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
 
@@ -75,15 +85,30 @@ public class CommunityController {
     }
 
     @GetMapping("/communityDetail.do")
-    public String communityDetailView(@RequestParam("id") int id, Model model) {
-        BoardDto board = boardService.getBoard(id);
-        List<BoardFileDto> fileList = boardService.getBoardFileList(id);
+    public String communityDetailView(BoardDto boardDto, Model model) {
+        boardService = applicationContext.getBean("communityServiceImpl", BoardService.class);
 
-        model.addAttribute("community", board);
-        model.addAttribute("fileList", fileList);
+        model.addAttribute("community", boardService.getBoard(boardDto.getId()));
+        model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
+        model.addAttribute("commentList", boardService.getComments(boardDto.getId()));
 
         return "/community/communityDetail";
     }
+
+    @PostMapping("/addComment.do")
+    public String addComment(CommentDto commentDto, HttpSession session) {
+        // 세션에서 loginMember 객체 가져오기
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        commentDto.setBoard_id(commentDto.getBoard_id());
+        commentDto.setDate(LocalDateTime.now());
+        commentDto.setWriter_id(loginMember.getUser_id());
+
+        boardService.addComment(commentDto);
+
+        return "redirect:/community/communityDetail.do?id=" + commentDto.getBoard_id();
+    }
+
 
     @GetMapping("/delete.do")
     public String communityDelete(BoardDto boardDto) {

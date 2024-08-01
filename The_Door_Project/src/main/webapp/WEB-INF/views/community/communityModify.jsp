@@ -15,7 +15,8 @@
             <h4>자유게시글 수정</h4>
         </div>
         <div class="container mt-3">
-            <form id="updateForm" action="/community/communityModify.do" method="post">
+            <form id="modify-form" action="/community/communityModify.do" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="${community.id}">
                 <!--객체 배열 형태의 originFiles 배열을 문자열로 변환하여 input에 담아서 전송-->
                 <input type="hidden" name="originFiles" id="originFiles">
                 <div class="form-group">
@@ -35,10 +36,10 @@
                     <label for="uploadFiles">파일첨부</label>
                     <input class="form-control" type="file" name="uploadFiles" id="uploadFiles" multiple>
 
-                    <div id="filePreview" class="form-text text-danger">
+                    <div id="image-preview" class="form-text text-danger">
                         <input type="file" id="changeFiles" name="changeFiles" style="display: none;"
                                multiple>
-                        <p style="colot: blue;">
+                        <p style="colot: blue; font-size:0.9rem;">
                         파일을 변경하려면 이미지를 클릭하세요. 파일을 다운로드하려면 파일이름을 클릭하세요. 파일을 추가하려면 파일 선택 버튼을 클릭하세요.
                         </p>
                         <!-- 파일 미리보기 영역 -->
@@ -46,14 +47,14 @@
                              data-placeholder="파일을 첨부하세요.">
                             <c:forEach items="${fileList}" var="file" varStatus="status">
                                 <div class="upload-file-div">
-                                <input type="hidden" id="fileId${status.index}" value="${file.id}">
-                                <input type="hidden" id="filename${status.index}" value="${file.filename}">
-                                <!--밑에 표시된 파일을 클릭했을 때 파일 선택창이 뜨도록 input type="file" 하나 생성-->
-                                <input type="file" id="changeFile${file.id}" name="changeFile${file.id}" style="display: none;"
-                                onchange="changFile(${file.id}, event)">
-                                <c:if test="${status.last}">
-                                    <input type="hidden" id="filecnt" name="filecnt" value="${status.count}">
-                                </c:if>
+                                    <input type="hidden" id="fileId${status.index}" value="${file.id}">
+                                    <input type="hidden" id="filename${status.index}" value="${file.filename}">
+                                    <!--밑에 표시된 파일을 클릭했을 때 파일 선택창이 뜨도록 input type="file" 하나 생성-->
+                                    <input type="file" id="changeFile${file.id}" name="changeFile${file.id}" style="display: none;"
+                                    onchange="changFile(${file.id}, event)">
+                                    <c:if test="${status.last}">
+                                        <input type="hidden" id="filecnt" name="filecnt" value="${status.count}">
+                                    </c:if>
                                     <c:choose>
                                         <c:when test="${file.filetype eq 'image'}">
                                             <img id="img${file.id}"
@@ -83,9 +84,9 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${loginMember ne null and loginMember.id eq community.WRITER_ID}">
+                <c:if test="${loginMember ne null and loginMember.user_id eq community.writer_id}">
                     <div class="btn-container mt-3 mb-5">
-                        <button type="submit" id="btn-update" class="btn btn-outline-secondary" onclick="location.href='/community/communityModify.do?id=${community.id}'">수정</button>
+                        <button type="submit" id="btn-update" class="btn btn-outline-secondary">수정</button>
                         <button type="button" id="btn-delete" class="btn btn-outline-secondary ml-2" onclick="location.href='/community/delete.do?id=${community.id}'">삭제</button>
                     </div>
                 </c:if>

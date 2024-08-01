@@ -24,7 +24,7 @@
                     </span>
             </div>
         </div>
-        <div class="helpBox" onclick="location.href='#'">
+        <div class="helpBox" onclick="location.href='/member/passwordSearch.do'">
             <div class="box-content d-flex align-items-center">
                     <span>
                         <img src="${pageContext.request.contextPath}/static/images/member/password.svg" alt="passwordLogo" class="help-logo2">

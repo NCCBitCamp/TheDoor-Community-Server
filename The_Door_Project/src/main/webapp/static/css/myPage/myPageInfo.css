@@ -48,6 +48,9 @@
     font-size: 25px;
 }
 
+/*러블리 큐티 수정*/
+/*화이티잉*/
+
 #selectArea li a {
     text-decoration: none;
     color: black;
@@ -102,6 +105,9 @@
     width: calc(100% - 20px);
 }
 
+/*사룽해><*/
+/*화이팅*/
+
 .fixedUserInfo:focus, .new input:focus {
     border-color: #000000;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -113,8 +119,9 @@
 }
 
 .emphaFont {
-    font-size: 1.25rem;
+    font-size: x-large;
     font-weight: bold;
+    margin-top: 2.2vh;
 }
 
 #submitBtn {

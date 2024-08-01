@@ -41,7 +41,12 @@ public class HelpController {
     }
 
     @RequestMapping("/help-qna.do")
-    public String helpQnAView() {
+    public String helpQnAView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        System.out.println(boardService.getBoardList(searchMap, cri));
+        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri));
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
         return "help/helpQnA";
     }
 
@@ -65,44 +70,42 @@ public class HelpController {
         return "help/helpQnAwrite";
     }
 
-    @RequestMapping("/qna-list.do")
-    public String freeListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
-        System.out.println(cri);
-        // System.out.println(searchMap);
-        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+//    @RequestMapping("/qna-list.do")
+//    public String qnaListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        System.out.println(cri);
+//        // System.out.println(searchMap);
+//        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+//
+//        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("searchMap", searchMap);
+//
+//        // 게시글의 총 개수
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//
+//        // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
+//        model.addAttribute("page", new PageDto(cri, total));
+//
+//        return "/help/helpQnA";
+//    }
 
-        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri));
-        model.addAttribute("searchMap", searchMap);
-
-        // 게시글의 총 개수
-        int total = boardService.getBoardTotalCnt(searchMap);
-
-        // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
-        model.addAttribute("page", new PageDto(cri, total));
-
-        return "board/helpQnA";
-    }
-
-    @GetMapping("update-cnt.do")
+    @GetMapping("/update-cnt.do")
     public String updateCnt(BoardDto boardDto) {
 
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
 
         boardService.updateCnt(boardDto.getId());
 
-        return "redirect:/board/help-qna-display.do?id=" + boardDto.getId();
+        return "redirect:/helpboard/help-qna-display.do?id=" + boardDto.getId();
 
     }
 
     @GetMapping("/help-qna-display.do")
-    public String qnaDetailView(/*HttpServletRequest request*//*@RequestParam("id") int id*/BoardDto boardDto, Model model) {
-//        int id = Integer.valueOf(request.getParameter("id"));
+    public String qnaDetailView(BoardDto boardDto, Model model) {
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-//        boardService.updateCnt(boardDto.getId());
         model.addAttribute("qnaboard", boardService.getBoard(boardDto.getId()));
         model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
-
-        return "board/helpQnADisplay";
+        System.out.println("qnaDetailView 동작함");
+        return "help/helpQnADisplay";
     }
 
 
@@ -126,7 +129,7 @@ public class HelpController {
         boardService.post(boardDto, uploadFiles);
 
 
-        return "redirect:/help/help-qna.do";
+        return "redirect:/helpboard/help-qna.do";
 
 
     }

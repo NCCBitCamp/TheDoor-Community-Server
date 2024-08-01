@@ -92,6 +92,11 @@ public class MemberController {
         return "member/idSearched";
     }
 
+    @GetMapping("/passwordSearch.do")
+    public String passwordSearchView() {
+        return "member/passwordSearch";
+    }
+
     @RequestMapping("/login-help.do")
     public String loginHelpView() {
         return "/member/loginHelp";

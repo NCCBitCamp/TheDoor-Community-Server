@@ -24,6 +24,7 @@
 
             <div class="search">
                 <button type="submit" class="searchbtn">확인</button>
+                <%--                onclick="location.href='/member/idSearched.do'"--%>
             </div>
         </div>
 

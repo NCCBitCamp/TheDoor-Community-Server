@@ -182,4 +182,26 @@
         WHERE ID = #{id}
           AND BOARD_ID = #{board_id}
     </delete>
+
+    <insert id="addComment" parameterType="comment">
+        INSERT INTO COMMENT (
+                BOARD_ID
+              , WRITER_ID
+              , DATE
+              , CONTENT
+        ) VALUES (
+                    #{board_id}
+                  , #{writer_id}
+                  , #{date}
+                  , #{content}
+               )
+    </insert>
+
+    <select id="getComments" parameterType="int" resultType="comment">
+        SELECT ID, BOARD_ID, WRITER_ID, DATE, CONTENT
+            FROM COMMENT
+        WHERE BOARD_ID = #{board_id}
+        ORDER BY DATE DESC
+    </select>
+
 </mapper>

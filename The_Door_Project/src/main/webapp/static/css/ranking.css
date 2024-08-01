@@ -82,7 +82,6 @@ td {
     border-radius: 0;
 }
 
-/* 부트스트랩의 기본 설정을 덮어쓰기 위해 선택자의 우선순위를 높입니다 */
 .current-page .page-link {
     z-index: 3;
     color: #fff;  /* 원하는 텍스트 색상 */

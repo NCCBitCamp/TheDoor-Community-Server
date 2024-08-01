@@ -3,6 +3,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPageInfo.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -133,6 +134,10 @@
 
 
 </script>
+
 <%--ajax써서 json 변환해서 값 받기--%>
+<%--닉네임 중복체크 만들기--%>
+<%--이메일 형식 맞춰받기--%>
+
 </body>
 </html>
