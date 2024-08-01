@@ -102,7 +102,7 @@
                         <c:forEach begin="${page.startPage}"
                                    end="${page.endPage}"
                                    var="number">
-                            <li class="page-item">
+                            <li class="page-item ${page.cri.pageNum == number ? 'current-page' : ''}">
                                 <a class="page-link link-secondary" href="${number}">${number}</a>
                             </li>
                         </c:forEach>
