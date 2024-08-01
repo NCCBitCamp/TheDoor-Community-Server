@@ -1,106 +1,65 @@
-h1 {
-    width: 14rem;
-    height: 60px;
-    margin-bottom: 2rem;
-    margin-top: 0px;
-    position: relative;
-    font-size: 3rem;
-    color: #F9F3F3;
-}
-
 .content {
-    height: 100vh;
+    color: #fff;
+    font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    background-image: url(/static/images/member/loginBackground.png);
-    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/static/images/member/loginBackground.png");
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 #searchBox {
-    position: relative;
-    width: 19rem;
-    height: 18rem;
-    background-color: #424141;
-    border-radius: 20px;
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #272727;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 4px 4px 0px;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    box-sizing: border-box; /* Include padding in the width */
 }
 
-#guide {
-    padding: 0px 5px 5px 10px;
-    margin-top: 1ch;
-    margin-bottom: 2px;
-    color: #FBC70E;
-    font-size: 1.4ch;
+#searchBox h2 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.showBox {
     font-weight: bold;
-    width: 240px;
-    height: 40px;
-    cursor: unset;
-}
-
-#guideBox{
-    width: 240px;
-    height: 40px;
-    background-color: transparent;
-    border-radius: 10px;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#loginBox {
-    margin-top: 80px;
-}
-
-.showId {
-    height: 40px;
-    background-color: transparent;
-    border-radius: 10px;
-    border: none;
+    background-color: #3E3E3E;
     color: white;
-}
-
-
-.loginBtn{
-    width: 240px;
-    height: 40px;
-    background-color: #FBC70E;
-    border-radius: 10px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
     border: none;
-    margin-top: 6rem;
-}
-.loginBtn:focus {
-    border:none;
-    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.pwSearchBtn {
-    width: 240px;
-    height: 40px;
-    background-color: #FBC70E;
-    border-radius: 10px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    margin-top: 1.5ch;
+.showBox h5 {
+    margin: 0; /* Remove any margin */
+    color: #fff;
 }
-.pwSearchBtn:focus {
-    border:none;
-    outline: none;
+
+.loginBox, .pwSearchBox {
+    width: 100%;
+}
+
+.loginBtn, .pwSearchBtn {
+    font-weight: bold;
+    background-color: #FBC70E;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box; /* Include padding in the width */
 }
