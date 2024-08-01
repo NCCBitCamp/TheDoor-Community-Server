@@ -22,7 +22,10 @@ public class MailController {
     // 이메일 보내고 인증코드 db에 저장하기
     @RequestMapping("/confirm.do")
     public void mailConfirm(MemberDto memberDto) throws Exception{
-        registerMail.sendSimpleMessage(memberDto.getEmail());
+        String code = registerMail.sendSimpleMessage(memberDto.getEmail());
+//        System.out.println("사용자에게 발송한 인증코드 ==> " + code);
+
+        memberDto.setCode(code);
 
         // 인증코드를 DB에 저장
         authService.save(memberDto);
