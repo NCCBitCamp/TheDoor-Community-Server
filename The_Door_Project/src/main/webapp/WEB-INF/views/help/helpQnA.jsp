@@ -15,6 +15,8 @@
     </div>
 <%--    <form id="search-form" action="/helpboard/help-qna.do" method="post">--%>
     <form id="search-form" action="${pageContext.request.contextPath}/helpboard/help-qna.do" method="post">
+        <input type="hidden" name="pageNum" value="${page.cri.pageNum}"/>
+        <input type="hidden" name="amount" value="${page.cri.amount}"/>
     <div class="search_area">
         <select class="form-select" name="searchCondition">
             <option value="title"
@@ -65,26 +67,26 @@
             </div>
         </c:if>
         <div class="pagination">
-            <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">
-                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${number}">${number}</a>
-            </c:forEach>
-            <c:if test="${page.prev}">
-                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${page.cri.pageNum - 1}">&laquo;</a>
-            </c:if>
-            <c:if test="${page.next}">
-                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${page.cri.pageNum + 1}">&raquo;</a>
-            </c:if>
-<%--            <c:if test="${page.prev}">--%>
-<%--                <a href="${page.cri.pageNum - 1}">&laquo;</a>--%>
-<%--            </c:if>--%>
-<%--            <c:forEach begin="${page.startPage}"--%>
-<%--                       end="${page.endPage}"--%>
-<%--                       var="number">--%>
-<%--                <a href="${number}">${number}</a>--%>
+<%--            <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">--%>
+<%--                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${number}">${number}</a>--%>
 <%--            </c:forEach>--%>
-<%--            <c:if test="${page.next}">--%>
-<%--                <a href="${page.cri.pageNum + 1}">&raquo;</a>--%>
+<%--            <c:if test="${page.prev}">--%>
+<%--                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${page.cri.pageNum - 1}">&laquo;</a>--%>
 <%--            </c:if>--%>
+<%--            <c:if test="${page.next}">--%>
+<%--                <a href="${pageContext.request.contextPath}/helpboard/help-qna.do?pageNum=${page.cri.pageNum + 1}">&raquo;</a>--%>
+<%--            </c:if>--%>
+            <c:if test="${page.prev}">
+                <a href="${page.cri.pageNum - 1}">&laquo;</a>
+            </c:if>
+            <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">
+                <a href="${number}">${number}</a>
+            </c:forEach>
+            <c:if test="${page.next}">
+                <a href="${page.cri.pageNum + 1}">&raquo;</a>
+            </c:if>
+
+
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
@@ -117,7 +119,7 @@
             // });
             $(".pagination a").on("click", (e) => {
                 e.preventDefault();
-                let pageNum = $(e.target).attr("href").split('=')[1];
+                let pageNum = $(e.target).attr("href");
                 $("input[name='pageNum']").val(pageNum);
                 $("#search-form").submit();
             });

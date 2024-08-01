@@ -15,6 +15,8 @@ public class Criteria {
     private LocalDateTime lastDate;
     private Integer lastId;
 
+
+
     public LocalDateTime getLastDate() {
         return lastDate;
     }

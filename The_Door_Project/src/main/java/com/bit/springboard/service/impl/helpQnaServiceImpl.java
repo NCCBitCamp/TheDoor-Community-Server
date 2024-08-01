@@ -143,6 +143,10 @@ public class helpQnaServiceImpl implements BoardService {
 
     @Override
     public List<BoardDto> getBoardList(Map<String, String> searchMap, Criteria cri) {
+        // Criteria에서 startNum을 자동으로 설정
+//        cri.calculateStartNum();
+        cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
+
         Map<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("search", searchMap);
