@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,5 +102,15 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public String idSearch(MemberDto memberDto) {
         return memberDao.idSearchDao(memberDto);
+    }
+
+    @Override
+    public void changeEmail(MemberDto memberDto) {
+        memberDao.updateEmail(memberDto);
+    }
+
+    @Override
+    public boolean validateUser(MemberDto memberDto) {
+        return memberDao.validateUser(memberDto) != null;
     }
 }

@@ -22,4 +22,8 @@ public interface MemberService {
     MemberDto login(MemberDto memberDto);
 
     String usernameCheck(String username);
+
+    void changeEmail(MemberDto memberDto);
+
+    boolean validateUser(MemberDto memberDto);
 }
