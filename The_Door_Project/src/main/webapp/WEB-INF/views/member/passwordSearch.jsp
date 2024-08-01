@@ -45,13 +45,37 @@
 </form>
 </body>
 <script>
+
+    const authenticationInput = document.getElementById("authenticationInput");
+    const searchBox = document.getElementById("searchBox");
+    const searchBtn = document.getElementsByClassName("searchBtn")[0];
+    const proofBox = document.getElementById("proofBox");
+    const errMsg = document.getElementById("errMsg");
+
     $(() => {
+
+        searchBtn.addEventListener('click', (e) => {
+            // e.preventDefault(); submit 막음
+            proofBox.style.display = "unset";
+            searchBox.style.height = '26rem';
+        });
 
         $.ajax({
             url:"/mail/confirm.do",
             type:"post",
             data: $("#passwordSearch-form").serialize(),
-            success: () => {
+            success: (mailCode) => {
+
+                $(".authenticationBtn").on("click", (e) => {
+
+                    if(mailCode != authenticationInput.val() || authenticationInput.val() === '') {
+                        // 인증코드가 안 맞을 때와 빈칸
+                        errMsg.style.visibility = 'unset';
+                    } else {
+                        // 맞을 때
+                        // 비밀번호를 변경하는 페이지로 이동
+                    }
+                });
 
 
             },
@@ -62,29 +86,7 @@
 
     });
 
-    window.addEventListener("DOMContentLoaded", () => {
-        const searchBox = document.getElementById("searchBox");
-        const searchBtn = document.getElementsByClassName("searchBtn")[0];
-        const proofBox = document.getElementById("proofBox");
-        const errMsg = document.getElementById("errMsg");
-        const authenticationBtn = document.getElementsByClassName("authenticationBtn")[0];
 
-
-        searchBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            proofBox.style.display = "unset";
-            searchBox.style.height = '26rem';
-        });
-
-        authenticationBtn.addEventListener('click', (e) => {
-            // 인증번호 틀리는 조건식 + 기능구현
-            if (!false) {
-                errMsg.style.visibility = 'unset';
-
-            }
-        });
-
-    });
 </script>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 
