@@ -22,7 +22,8 @@ public class MailController {
 
     // 이메일 보내고 인증코드 db에 저장하기
     @RequestMapping("/confirm.do")
-    public void mailConfirm(MemberDto memberDto) throws Exception{
+    public boolean mailConfirm(MemberDto memberDto) throws Exception{
+        System.out.println(memberDto);
         String code = registerMail.sendSimpleMessage(memberDto.getEmail());
 //        System.out.println("사용자에게 발송한 인증코드 ==> " + code);
 
@@ -30,11 +31,13 @@ public class MailController {
 
         // 인증코드를 DB에 저장
         authService.save(memberDto);
+
+        return true;
     }
 
     // 인증코드가 db에 있는지 검증
     @PostMapping("/verify")
-    public boolean verifyCode(MemberDto memberDto, Model model) {
+    public boolean verifyCode(MemberDto memberDto) {
         if (memberDto.getCode() == null || memberDto.getCode().isEmpty()) {
             return false;
         }
@@ -42,10 +45,11 @@ public class MailController {
         return authService.find(memberDto);
     }
 
-    // 인증코드를 폐기(jsp 단에서 제한시간 지나면 실행되도록 구현하기)
+    // 인증코드를 폐기(jsp 단에서 제한시간 지나면 실행되도록 구현하기) // 리턴 값으로 결과 확인
     @PostMapping("/expire")
-    public void expire(MemberDto memberDto) {
+    public boolean expire(MemberDto memberDto) {
         authService.expire(memberDto);
+        return true;
     }
 
 }
