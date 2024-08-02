@@ -88,3 +88,9 @@
 .card {
     box-sizing: border-box;
 }
+.card-body {
+    font-family: 'Cinzel', serif;
+}
+.card-title {
+    font-family: 'Playfair Display', serif;
+}
