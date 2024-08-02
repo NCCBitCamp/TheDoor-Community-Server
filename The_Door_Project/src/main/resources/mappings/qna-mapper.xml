@@ -39,8 +39,8 @@
                Q.CONTENT,
                Q.WRITER_ID,
                U.NICKNAME,
-               Q.DATE,
                Q.FDATE,
+               Q.DATE,
                Q.SUBJECT,
                Q.CNT
         FROM QA Q
@@ -75,6 +75,7 @@
              , Q.CONTENT
              , Q.WRITER_ID
              , U.NICKNAME
+             , Q.FDATE
              , Q.DATE
              , Q.CNT
         FROM QA Q
