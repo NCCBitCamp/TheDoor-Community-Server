@@ -9,6 +9,12 @@
   <h4>팀명: 12기 2조</h4>
   <h4>수행기간: 2024.07.24 - 2024.08.09</h4>
   <br/>
+  <h2>배포 주소</h2>
+  <p>http://61.97.191.118:8082/</p>
+  <br/>
+  <h2>테스트 계정</h2>
+  <p>ID: testuser01 / PW: !hello123 </p>
+  <br/>
   <h2>팀원</h2>
   <a href="https://github.com/Rurouni98" target="_blank">김병주</a> - 웹 프론트, 백엔드 <br/>
   <a href="https://github.com/dodotlm" target="_blank">마태림</a> - 웹 프론트, 백엔드 <br/>
