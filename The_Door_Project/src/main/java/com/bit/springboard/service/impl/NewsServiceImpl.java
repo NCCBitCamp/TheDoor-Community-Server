@@ -2,10 +2,7 @@ package com.bit.springboard.service.impl;
 
 import com.bit.springboard.common.FileUtils;
 import com.bit.springboard.dao.NewsDao;
-import com.bit.springboard.dto.BoardDto;
-import com.bit.springboard.dto.BoardFileDto;
-import com.bit.springboard.dto.CommentDto;
-import com.bit.springboard.dto.Criteria;
+import com.bit.springboard.dto.*;
 import com.bit.springboard.service.BoardService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
