@@ -10,6 +10,7 @@
     <div class="logo_head_between_area_container">
         <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
     </div>
+
     <div class="head_area">
         <p class="head_area_title">계정관리 문제</p>
     </div>
@@ -32,71 +33,18 @@
                         <button>삭제</button>
                     </div>
                 </li>
-                <li>
-                    <div class="post-info">
-                        <h3>제 계정이 중고거래 사이트에 올라갔는데 회수 가능할까요?</h3>
-                        <p>될가요?</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>모르는 계정이 생겼어요!</h3>
-                        <p>ㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋ</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
             </ul>
         </div>
         <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
+            <c:if test="${page.prev}">
+                <a href="${page.cri.pageNum - 1}">&laquo;</a>
+            </c:if>
+            <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">
+                <a href="${number}">${number}</a>
+            </c:forEach>
+            <c:if test="${page.next}">
+                <a href="${page.cri.pageNum + 1}">&raquo;</a>
+            </c:if>
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
@@ -106,6 +54,14 @@
                 document.querySelector('.semi_title').classList.add('fade-in');
             }, 500); // 0.5초 후 페이드인
         });
+
+        $(".pagination a").on("click", (e) => {
+            e.preventDefault();
+            let pageNum = $(e.target).attr("href");
+            $("input[name='pageNum']").val(pageNum);
+            $("#search-form").submit();
+        });
+
     </script>
 </body>
 </html>

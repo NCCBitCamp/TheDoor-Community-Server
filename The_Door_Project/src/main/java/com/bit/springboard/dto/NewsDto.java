@@ -10,6 +10,7 @@ public class NewsDto {
     private String nickname;
     private LocalDateTime date;
     private int cnt;
+    private BoardFileDto file; // 파일 정보를 추가
 
     public int getId() {
         return id;
@@ -67,16 +68,25 @@ public class NewsDto {
         this.nickname = nickname;
     }
 
+    public BoardFileDto getFile() {
+        return file;
+    }
+
+    public void setFile(BoardFileDto file) {
+        this.file = file;
+    }
+
     @Override
     public String toString() {
-        return "BoardDto{" +
-                ", id=" + id +
+        return "NewsDto{" +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", writer_id=" + writer_id +
+                ", writer_id='" + writer_id + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", date=" + date +
                 ", cnt=" + cnt +
+                ", file=" + file +
                 '}';
     }
 }

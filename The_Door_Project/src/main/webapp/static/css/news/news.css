@@ -54,7 +54,7 @@
     align-items: center;
     max-width: 1200px;
     margin: auto;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 .search-container .current-nav {
     margin-bottom: 0;
@@ -70,11 +70,10 @@
     text-align: right;
     width: 100%;
     max-width: 1570px;
-    /*padding: 10px;*/
-    
+    padding-right: 260px;
 }
 .btn {
-    margin: 0px;
+    margin: 20px;
 }
 .current-nav {
     font-weight: bold;
@@ -88,3 +87,7 @@
 .card {
     box-sizing: border-box;
 }
+.card-body {
+    font-family: 'Goyang', serif;
+}
+
