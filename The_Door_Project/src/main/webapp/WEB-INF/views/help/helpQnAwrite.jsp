@@ -13,6 +13,7 @@
     <div class="head_area">
         <p class="head_area_title"><p></p>   </p>
     </div>
+    <div class="content-top-gap">QnA 작성</div> <!-- 상단 여백 -->
     <div class="content">
         <div class="form-container">
             <form id="post-form" action="/helpboard/post.do" method="post" enctype="multipart/form-data">
@@ -35,11 +36,6 @@
                     <input type="text" id="title" name="title">
                 </div>
                 <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="public" name="public"> 공개 여부
-                    </label>
-                </div>
-                <div class="form-group">
                     <label for="content">내용</label>
                     <textarea id="content" name="content"></textarea>
                 </div>
@@ -58,6 +54,7 @@
             </form>
         </div>
     </div>
+    <div class="content-bottom-gap"></div> <!-- 하단 여백 -->
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 </body>
 

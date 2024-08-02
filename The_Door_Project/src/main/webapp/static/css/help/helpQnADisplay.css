@@ -59,10 +59,18 @@ body {
     background-color: #1a1a1a;
 }
 
+
+
 .content-top-gap,
 .content-bottom-gap {
-    background-color: #1a1a1a;
-    height: 20vh;
+    background-color: black;
+    height: 5vh; /* 높이를 10vh로 줄임 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* 텍스트 색상을 흰색으로 변경 */
+    font-weight: bolder;
+    font-size: xx-large;
 }
 
 .post-container {
@@ -258,3 +266,4 @@ input[type="text"][readonly]:focus {
     color: #cccccc;
     text-align: center;
 }
+
