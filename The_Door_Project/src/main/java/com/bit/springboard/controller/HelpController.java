@@ -47,8 +47,14 @@ public class HelpController {
         model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
         int total = boardService.getBoardTotalCnt(searchMap);
         model.addAttribute("page", new PageDto(cri, total));
+<<<<<<< HEAD
         return "help/helpQnA"; //jsp파일 이름
     }
+=======
+        return "help/helpQnA";
+    }
+
+>>>>>>> d2d0fb4ea14698b82bc56cb63dab3dcf26dfe09b
 
     @RequestMapping("/help-faq-account.do")
     public String helpFaQAccountView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
@@ -163,6 +169,18 @@ public class HelpController {
 
     }
 
+<<<<<<< HEAD
+=======
+//    @RequestMapping("/help-faq-list.do")
+//    public String helpFaqListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        List<BoardDto> faqList = boardService.getFaqListBySubject(null); // 모든 항목 가져오기
+//        model.addAttribute("faqList", faqList);
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+//        System.out.println("컨트롤러는 작동함");
+//        return "help/helpFaQ_account";
+//    }
+>>>>>>> d2d0fb4ea14698b82bc56cb63dab3dcf26dfe09b
 
 
 }
