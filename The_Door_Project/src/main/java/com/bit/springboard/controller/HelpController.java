@@ -40,30 +40,72 @@ public class HelpController {
         return "help/helpFaQ";
     }
 
-    @RequestMapping("/help-qna.do")
+    @RequestMapping("/help-qna.do") //부르는 이름
     public String helpQnAView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
         System.out.println(boardService.getBoardList(searchMap, cri));
-        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri));
+        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
         int total = boardService.getBoardTotalCnt(searchMap);
         model.addAttribute("page", new PageDto(cri, total));
-        return "help/helpQnA";
-    }
-
-    @RequestMapping("/help-faq-purchase.do")
-    public String helpFaQPurchaseView() {
-        return "help/helpFaQ_purchase";
+        return "help/helpQnA"; //jsp파일 이름
     }
 
     @RequestMapping("/help-faq-account.do")
-    public String helpFaQAccountView() {
+    public String helpFaQAccountView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//        System.out.println(boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("faqBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        String subject = "account";
+        int minCnt = 10;
+        List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
+        System.out.println(boardList);
+        model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
+
         return "help/helpFaQ_account";
     }
 
+    @RequestMapping("/help-faq-purchase.do")
+    public String helpFaQPurchaseView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//        System.out.println(boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("faqBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        String subject = "payment";
+        int minCnt = 10;
+        List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
+        System.out.println(boardList);
+        model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
+
+        return "help/helpFaQ_purchase";
+    }
+
     @RequestMapping("/help-faq-etc.do")
-    public String helpFaQEtcView() {
+    public String helpFaQEtcView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//        System.out.println(boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("faqBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        String subject = "other";
+        int minCnt = 10;
+        List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
+        System.out.println(boardList);
+        model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
         return "help/helpFaQ_etc";
     }
+
 
     @RequestMapping("/help-qna-write.do")
     public String helpQnAWriteView() {
@@ -121,15 +163,6 @@ public class HelpController {
 
     }
 
-    @RequestMapping("/help-faq-list.do")
-    public String helpFaqListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
-        List<BoardDto> faqList = boardService.getFaqListBySubject(null); // 모든 항목 가져오기
-        model.addAttribute("faqList", faqList);
-        int total = boardService.getBoardTotalCnt(searchMap);
-        model.addAttribute("page", new PageDto(cri, total));
-        System.out.println("컨트롤러는 작동함");
-        return "help/helpFaQ_account";
-    }
 
 
 }

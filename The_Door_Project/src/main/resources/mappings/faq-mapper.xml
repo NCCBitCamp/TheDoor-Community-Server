@@ -39,7 +39,7 @@
         JOIN USER U
         ON Q.WRITER_ID = U.USER_ID
         -- mybatis의 동적 쿼리 사용
-        WHERE 1=1
+        WHERE Q.SUBJECT = #{subject} AND Q.CNT >= #{minCnt}
         <if test="search.searchKeyword != null and search.searchKeyword != ''">
             <if test="search.searchCondition == 'all'">
                 AND (Q.TITLE LIKE CONCAT('%', #{search.searchKeyword}, '%')

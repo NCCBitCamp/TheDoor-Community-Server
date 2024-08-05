@@ -178,7 +178,7 @@ public class helpQnaServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDto> getFaqListBySubject(String subject) {
+    public List<BoardDto> getFaqListBySubject(String subject, int minCnt) {
         return helpQnaDao.getFaqListBySubject(subject);
     }
 }

@@ -1,22 +1,24 @@
 package com.bit.springboard.service.impl;
 
-
 import com.bit.springboard.dao.HelpFaqDao;
 import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.BoardFileDto;
 import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
-public class helpFaqServiceImpl implements BoardService{
+@Service("helpFaqServiceImpl")
+public class helpFaqServiceImpl implements BoardService {
     private HelpFaqDao helpFaqDao;
 
     @Autowired
@@ -44,22 +46,20 @@ public class helpFaqServiceImpl implements BoardService{
     }
 
 
-
     @Override
     public void plusCnt(int id) {
         helpFaqDao.updateCnt(id);
     }
 
-    @Override
+    @Override // 컨트롤러, 매퍼에 이 이름 쓰임
     public List<BoardDto> getBoardList(Map<String, String> searchMap, Criteria cri) {
         cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
 
-        // mybatis에서 parameter를 하나만 받을 수 있다.
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("search", searchMap);
         paramMap.put("cri", cri);
 
-        return helpFaqDao.getFaQABoardList(paramMap);
+        return helpFaqDao.getFaqBoardList(paramMap);
     }
 
     @Override
@@ -74,8 +74,9 @@ public class helpFaqServiceImpl implements BoardService{
 
     @Override
     public List<BoardFileDto> getBoardFileList(int id) {
-        return helpFaqDao.getFaQBoardFileList(id);
+        return helpFaqDao.getBoardFileList(id);
     }
+
 
     @Override
     public void addComment(CommentDto commentDto) {
@@ -89,12 +90,12 @@ public class helpFaqServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardDto> getFaqListBySubject(String subject) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("subject", subject);
-        paramMap.put("minCnt", 1); // 예시로 기본값 1을 설정
-        System.out.println("서비스도 문제 없음");
-        return helpFaqDao.getFaqListBySubject(paramMap);
+    public List<BoardDto> getFaqListBySubject(String subject, int minCnt) {
+        minCnt = 0; // 지금은 실험이니까 0으로 해놓음
+        Map<String, Object> params = new HashMap<>();
+        params.put("subject", subject);
+        params.put("minCnt", minCnt);
+        return helpFaqDao.getFaqListBySubject(params);
     }
 
 

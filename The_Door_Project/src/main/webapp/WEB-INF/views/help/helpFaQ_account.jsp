@@ -19,26 +19,40 @@
     <form id="search-form" action="${pageContext.request.contextPath}/helpboard/help-qna.do" method="post">
         <input type="hidden" name="pageNum" value="${page.cri.pageNum}"/>
         <input type="hidden" name="amount" value="${page.cri.amount}"/>
-    <div class="search_area">
-        <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
-        <button type="submit" class="search_button">검색</button>
-    </div>
+        <div class="search_area">
+            <select class="form-select" name="searchCondition">
+                <option value="title"
+                        <c:if test="${searchMap.searchCondition == 'title'}">
+                            selected
+                        </c:if>>제목</option>
+                <option value="content"
+                        <c:if test="${searchMap.searchCondition == 'content'}">
+                            selected
+                        </c:if>>내용</option>
+                <option value="all"
+                        <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
+                            selected
+                        </c:if>>제목+내용</option>
+            </select>
+            <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
+            <button type="submit" class="search_button">검색</button>
+        </div>
     </form>
     <div class="content">
         <div class="board">
             <h2></h2>
-            <c:forEach var="faq" items="${faqList}">
+            <c:forEach items="${faqBoardList}" var="faqBoard" >
 
                     <ul class="posts" id="postsList">
                         <!-- 게시글이 여기에 추가됩니다 -->
                         <li>
-                            <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${faq.id}'">
-                                <h3 onclick="location.href='/helpboard/update-cnt.do?id=${faq.id}'">${faq.title}</h3>
-                                <p onclick="location.href='/helpboard/update-cnt.do?id=${faq.id}'">${faq.content}</p>
-                                <span class="post-date"><javatime:format value="${faq.date}" pattern="yyyy-MM-dd"/></span>
+                            <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">
+                                <h3 onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.title}</h3>
+                                <p onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.content}</p>
+                                <span class="post-date"><javatime:format value="${faqBoard.date}" pattern="yyyy-MM-dd"/></span>
                             </div>
                             <div class="count">
-                                    ${faq.cnt}
+                                    ${faqBoard.cnt}
                             </div>
                         </li>
                     </ul>

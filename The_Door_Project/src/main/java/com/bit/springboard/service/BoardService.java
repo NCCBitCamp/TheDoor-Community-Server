@@ -33,5 +33,5 @@ public interface BoardService {
 
     List<CommentDto> getComments(int boardId);
 
-    List<BoardDto> getFaqListBySubject(String subject);
+    List<BoardDto> getFaqListBySubject(String subject, int minCnt);
 }

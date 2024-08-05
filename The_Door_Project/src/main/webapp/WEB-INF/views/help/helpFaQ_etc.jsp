@@ -12,7 +12,7 @@
 </div>
 
 <div class="head_area">
-    <p class="head_area_title">계정관리 문제</p>
+    <p class="head_area_title">기타 관리 문제</p>
 </div>
 
 
@@ -20,6 +20,20 @@
     <input type="hidden" name="pageNum" value="${page.cri.pageNum}"/>
     <input type="hidden" name="amount" value="${page.cri.amount}"/>
     <div class="search_area">
+        <select class="form-select" name="searchCondition">
+            <option value="title"
+                    <c:if test="${searchMap.searchCondition == 'title'}">
+                        selected
+                    </c:if>>제목</option>
+            <option value="content"
+                    <c:if test="${searchMap.searchCondition == 'content'}">
+                        selected
+                    </c:if>>내용</option>
+            <option value="all"
+                    <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
+                        selected
+                    </c:if>>제목+내용</option>
+        </select>
         <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
         <button type="submit" class="search_button">검색</button>
     </div>
@@ -27,22 +41,22 @@
 <div class="content">
     <div class="board">
         <h2></h2>
-        <c:forEach items="${qnaBoardList}" var="qnaBoard">
-            <c:if test="${qnaBoard.subject == 'etc' and qnaBoard.cnt >= 10}">
-                <ul class="posts" id="postsList">
-                    <!-- 게시글이 여기에 추가됩니다 -->
-                    <li>
-                        <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}'">
-                            <h3 onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}'">${qnaBoard.title}</h3>
-                            <p onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}'">${qnaBoard.content}</p>
-                            <span class="post-date"><javatime:format value="${qnaBoard.date}" pattern="yyyy-MM-dd"/></span>
-                        </div>
-                        <div class="count">
-                                ${qnaBoard.cnt}
-                        </div>
-                    </li>
-                </ul>
-            </c:if>
+        <c:forEach items="${faqBoardList}" var="faqBoard" >
+
+            <ul class="posts" id="postsList">
+                <!-- 게시글이 여기에 추가됩니다 -->
+                <li>
+                    <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">
+                        <h3 onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.title}</h3>
+                        <p onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.content}</p>
+                        <span class="post-date"><javatime:format value="${faqBoard.date}" pattern="yyyy-MM-dd"/></span>
+                    </div>
+                    <div class="count">
+                            ${faqBoard.cnt}
+                    </div>
+                </li>
+            </ul>
+
         </c:forEach>
     </div>
     <div class="pagination">

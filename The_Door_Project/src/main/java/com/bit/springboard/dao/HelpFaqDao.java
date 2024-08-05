@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,9 @@ public class HelpFaqDao {
             "                                  JOIN USER U" +
             "                                    ON Q.WRITER_ID = U.USER_ID";
 
+    // 게시글 삭제
+    private final String DELETE = "DELETE FROM QA" +
+            "                           WHERE ID = ?";
 
     // 특정 id의 게시글 하나만 조회
     private final String GET_BOARD = "SELECT Q.ID" +
@@ -51,24 +55,59 @@ public class HelpFaqDao {
             "                                  WHERE Q.ID = ?";
 
 
-    // FAQ 전용
-    public List<BoardDto> getFaQABoardList(Map<String, Object> paramMap) {
-        return mybatis.selectList("HelpFaQDao.getFaQABoardList", paramMap);
+
+
+
+    public List<BoardDto> getFaqBoardList(Map<String, Object> paramMap) {
+
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        boardDtoList = mybatis.selectList("HelpQnaDao.getBoardList", paramMap);
+
+        return boardDtoList;
     }
+
+
+    public void delete(int id) {
+
+
+        mybatis.delete("HelpQnaDao.deleteFiles", id);
+
+        mybatis.delete("HelpQnaDao.delete", id);
+
+
+    }
+
     public BoardDto getBoard(int id) {
-        return mybatis.selectOne("HelpFaQDao.getBoard", id);
+
+        BoardDto boardDto = new BoardDto();
+
+        boardDto = mybatis.selectOne("HelpFaqDao.getBoard", id);
+
+        return boardDto;
     }
+
+
     public void updateCnt(int id) {
-        mybatis.update("HelpFaQDao.updateCnt", id);
+        mybatis.update("HelpQnaDao.updateCnt", id);
     }
+
     public int getBoardTotalCnt(Map<String, String> searchMap) {
-        return mybatis.selectOne("HelpFaQDao.getBoardTotalCnt", searchMap);
+
+        return mybatis.selectOne("HelpQnaDao.getBoardTotalCnt", searchMap);
     }
-    public List<BoardFileDto> getFaQBoardFileList(int id) {
-        return mybatis.selectList("HelpFaQDao.getBoardFileList", id);
+
+
+    public List<BoardFileDto> getBoardFileList(int id) {
+
+        return mybatis.selectList("HelpQnaDao.getBoardFileList", id);
     }
-    public List<BoardDto> getFaqListBySubject(Map<String, Object> paramMap) {
-        System.out.println("dao도 작동함");
-        return mybatis.selectList("HelpFaQDao.getFaqListBySubject", paramMap);
+
+    // 조회수(cnt)가 10 이상이고 주제(subject)별로 필터링하는 메소드
+    public List<BoardDto> getFaqListBySubject(Map<String, Object> subject) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("subject", subject);
+        paramMap.put("minCnt", 10);
+        return mybatis.selectList("HelpQnaDao.getFaqListBySubject", paramMap);
     }
 }

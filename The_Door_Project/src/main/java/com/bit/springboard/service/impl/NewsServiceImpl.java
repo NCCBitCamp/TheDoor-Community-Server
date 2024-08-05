@@ -173,7 +173,7 @@ public class NewsServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDto> getFaqListBySubject(String subject) {
+    public List<BoardDto> getFaqListBySubject(String subject, int minCnt) {
         return List.of();
     }
 }
