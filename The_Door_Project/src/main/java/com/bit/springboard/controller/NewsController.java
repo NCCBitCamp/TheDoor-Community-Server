@@ -2,6 +2,7 @@ package com.bit.springboard.controller;
 
 import com.bit.springboard.dto.*;
 import com.bit.springboard.service.BoardService;
+import com.bit.springboard.service.NewsService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,6 +26,8 @@ public class NewsController {
     public NewsController(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
+
+
 
     @GetMapping("/newsWrite.do")
     public String newsWriteView(HttpSession session) {

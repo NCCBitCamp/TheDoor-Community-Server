@@ -182,4 +182,5 @@
         WHERE ID = #{id}
           AND BOARD_ID = #{board_id}
     </delete>
+
 </mapper>
