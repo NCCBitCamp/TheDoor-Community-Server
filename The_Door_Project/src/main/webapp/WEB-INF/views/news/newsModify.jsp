@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/news/newsModify.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
