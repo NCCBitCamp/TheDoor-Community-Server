@@ -23,6 +23,10 @@ public class MyPageDao {
         return mybatis.selectOne("MyPageDao.myInfo",userId);
     }
 
+    public int newNicknameCheck(String nickname){
+       return mybatis.selectOne("MyPageDao.newNicknameCheck", nickname);
+    }
+
     public void modifyInfo(MemberDto memberDto){
         mybatis.update("MyPageDao.modifyInfo",memberDto);
     }
