@@ -4,109 +4,108 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/help/helpFaQ_account.css">
-    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
-    <div class="logo_head_between_area_container">
-        <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
-    </div>
-    <div class="head_area">
-        <p class="head_area_title">기타 문제</p>
-    </div>
+<jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
+<div class="logo_head_between_area_container">
+    <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
+</div>
+
+<div class="head_area">
+    <p class="head_area_title">기타 관리 문제</p>
+</div>
+
+
+<form id="search-form" action="${pageContext.request.contextPath}/helpboard/help-qna.do" method="post">
+    <input type="hidden" name="pageNum" value="${page.cri.pageNum}"/>
+    <input type="hidden" name="amount" value="${page.cri.amount}"/>
     <div class="search_area">
-        <input type="text" placeholder="검색어를 입력하세요"><button class="search_button">검색</button>
+        <select class="form-select" name="searchCondition">
+            <option value="title"
+                    <c:if test="${searchMap.searchCondition == 'title'}">
+                        selected
+                    </c:if>>제목</option>
+            <option value="content"
+                    <c:if test="${searchMap.searchCondition == 'content'}">
+                        selected
+                    </c:if>>내용</option>
+            <option value="all"
+                    <c:if test="${searchMap == null || searchMap.searchCondition == 'all'}">
+                        selected
+                    </c:if>>제목+내용</option>
+        </select>
+        <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
+        <button type="submit" class="search_button">검색</button>
     </div>
-    <div class="content">
-        <div class="board">
-            <h2></h2>
+</form>
+<div class="content">
+    <div class="board">
+        <h2></h2>
+        <c:forEach items="${faqBoardList}" var="faqBoard" >
+
             <ul class="posts" id="postsList">
                 <!-- 게시글이 여기에 추가됩니다 -->
                 <li>
-                    <div class="post-info">
-                        <h3>오랫동안 접속하지 않았더니 계정이 사라졌어요</h3>
-                        <p>다시 만드세요</p>
-                        <span class="post-date">2024-07-18</span>
+                    <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">
+                        <h3 onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.title}</h3>
+                        <p onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.content}</p>
+                        <span class="post-date"><javatime:format value="${faqBoard.date}" pattern="yyyy-MM-dd"/></span>
                     </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>제 계정이 중고거래 사이트에 올라갔는데 회수 가능할까요?</h3>
-                        <p>될가요?</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>모르는 계정이 생겼어요!</h3>
-                        <p>ㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋㅊㅋ</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-                <li>
-                    <div class="post-info">
-                        <h3>계정을 돈으로 주고 살 수 있나요?</h3>
-                        <p>어디계신가요? 바로 가겠습니다</p>
-                        <span class="post-date">2024-07-17</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
+                    <div class="count">
+                            ${faqBoard.cnt}
                     </div>
                 </li>
             </ul>
-        </div>
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
-        </div>
+
+        </c:forEach>
     </div>
-    <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
-    <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.querySelector('.semi_title').classList.add('fade-in');
-            }, 500); // 0.5초 후 페이드인
+    <div class="pagination">
+        <c:if test="${page.prev}">
+            <a href="${page.cri.pageNum - 1}">&laquo;</a>
+        </c:if>
+        <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">
+            <a href="${number}">${number}</a>
+        </c:forEach>
+        <c:if test="${page.next}">
+            <a href="${page.cri.pageNum + 1}">&raquo;</a>
+        </c:if>
+    </div>
+</div>
+<jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
+<script>
+    // window.addEventListener('load', function() {
+    //     setTimeout(function() {
+    //         document.querySelector('.semi_title').classList.add('fade-in');
+    //     }, 500); // 0.5초 후 페이드인
+    // });
+    $(() => {
+        $("#search-icon").on("click", (e) => {
+            $("input[name='pageNum']").val(1);
+            $("#search-form").submit();
         });
-    </script>
+
+        $("input[name='searchKeyword']").on("keypress", (e) => {
+            if(e.key === 'Enter') {
+                $("input[name='pageNum']").val(1);
+            }
+        });
+
+        // $(".pagination a").on("click", (e) => {
+        //     e.preventDefault();
+        //
+        //     // console.log($(e.target).attr("href"));
+        //
+        //     $("input[name='pageNum']").val($(e.target).attr("href"));
+        //
+        //     $("#search-form").submit();
+        // });
+        $(".pagination a").on("click", (e) => {
+            e.preventDefault();
+            let pageNum = $(e.target).attr("href");
+            $("input[name='pageNum']").val(pageNum);
+            $("#search-form").submit();
+        });
+    });
+</script>
 </body>
 </html>
