@@ -32,6 +32,4 @@ public interface BoardService {
     void addComment(CommentDto commentDto);
 
     List<CommentDto> getComments(int boardId);
-
-    List<BoardDto> getFaqListBySubject(String subject);
 }

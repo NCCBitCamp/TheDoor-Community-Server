@@ -18,21 +18,9 @@
         <div class="semi_title">
             <p>자주하는 질문 TOP3</p>
         </div>
-        <div class="commentbox1" style="height: 20vh">
-            <h3 style="margin-top: 2.5vh; display: block">가장 많이 질문된 질문1제목</h3>
-            <h5>작성자 : 안용현포에버 님</h5>
-            <h5>조회수 : </h5>
-        </div>
-        <div class="commentbox2" style="height: 20vh">
-            <h3 style="margin-top: 2.5vh">가장 많이 질문된 질문2제목</h3>
-            <p>작성자 : 기습숭배 님</p>
-            <p>조회수 : </p>
-        </div>
-        <div class="commentbox3" style="height: 20vh">
-            <h3 style="margin-top: 2.5vh">가장 많이 질문된 질문3제목</h3>
-            <p>작성자 : 똥겜판별사 님</p>
-            <p>조회수 : </p>
-        </div>
+        <div class="commentbox1"></div>
+        <div class="commentbox2"></div>
+        <div class="commentbox3"></div>
         <!--이 코멘트 박스들에는 조회수가 가장 높은 FaQ 3개를 올려주는 기능-->
         <div class="button_area">
             <div class="faq_button"><a href="/helpboard/help-faq.do">FAQ 바로가기</a></div>

@@ -192,13 +192,15 @@
         WHERE BOARD_ID = #{id}
     </select>
 
-    <!-- 조회수(cnt)가 10 이상이고 주제(subject)별로 필터링 -->
-    <select id="getFaqListBySubject" parameterType="map" resultType="com.bit.springboard.dto.BoardDto">
-        SELECT *
-        FROM QA
-        WHERE SUBJECT = #{subject}
-          AND CNT >= #{minCnt}
-    </select>
+
+
+
+
+
+
+
+
+
 
 
 

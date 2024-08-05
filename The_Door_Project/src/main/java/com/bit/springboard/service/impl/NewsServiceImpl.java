@@ -171,10 +171,5 @@ public class NewsServiceImpl implements BoardService {
     public List<CommentDto> getComments(int boardId) {
         return List.of();
     }
-
-    @Override
-    public List<BoardDto> getFaqListBySubject(String subject) {
-        return List.of();
-    }
 }
 
