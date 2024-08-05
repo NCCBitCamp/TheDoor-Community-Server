@@ -75,6 +75,9 @@
         SELECT COUNT(NICKNAME)
         FROM USER
         WHERE NICKNAME = #{nickname}
+        <if test="id != null">
+            AND ID != #{id}
+        </if>
     </select>
 
 </mapper>

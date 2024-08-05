@@ -30,5 +30,5 @@ public interface MyPageService {
     int getCommentsNum(MemberDto loginMember);
 
     // 닉네임 중복확인하기
-    Map<String, Integer> newNicknameCheck(String nickname);
+    Map<String, Integer> newNicknameCheck(MemberDto memberDto);
 }
