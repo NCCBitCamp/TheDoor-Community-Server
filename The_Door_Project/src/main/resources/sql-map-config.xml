@@ -39,5 +39,6 @@
         <mapper resource="mappings/news-mapper.xml"/>
         <mapper resource="mappings/qna-mapper.xml"/>
         <mapper resource="mappings/authcode-mapper.xml"/>
+        <mapper resource="mappings/faq-mapper.xml"/>
     </mappers>
 </configuration>

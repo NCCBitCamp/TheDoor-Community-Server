@@ -63,7 +63,7 @@ body {
 
 .content-top-gap,
 .content-bottom-gap {
-    background-color: black;
+    background-color: #1a1a1a;
     height: 5vh; /* 높이를 10vh로 줄임 */
     display: flex;
     justify-content: center;
@@ -110,14 +110,62 @@ body {
     width: 100%;
 }
 
+/*.post-title {*/
+/*    font-size: 1.75rem;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 20px;*/
+/*    padding: 15px;*/
+/*    background-color: #3a3a3a;*/
+/*    border-radius: 8px;*/
+/*    color: #f0f0f0;*/
+/*}*/
+
 .post-title {
-    font-size: 1.75rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding: 15px;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
     background-color: #3a3a3a;
     border-radius: 8px;
     color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.title-container,
+.subject-container {
+    flex: 1; /* 제목과 과목이 동일한 너비를 가지도록 설정 */
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.title-container {
+    margin-right: 15px; /* 제목과 과목 사이의 간격 */
+}
+
+.title-container #title,
+.subject-container #subject {
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.75rem;
+    width: 100%;
+}
+
+.subject-container {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.subject-container .subject {
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.75rem;
+    width: 100%;
+    text-align: center; /* 텍스트 중앙 정렬 */
 }
 
 .post-content textarea {

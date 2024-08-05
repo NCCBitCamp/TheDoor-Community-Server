@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,8 +57,6 @@ public class HelpQnaDao {
 
         mybatis.insert(/*쿼리문의 호출은 Mapper.xml 파일의 namespace값.쿼리문의 id*/"HelpQnaDao.post", boardDto);
 
-
-
         if(boardFileDtoList.size() > 0) {
             boardFileDtoList.forEach(boardFileDto -> boardFileDto.setBoard_id(boardDto.getId()));
 
@@ -68,7 +67,6 @@ public class HelpQnaDao {
     }
 
     public void modify(BoardDto boardDto, List<BoardFileDto> uFileList) {
-
 
         mybatis.update("HelpQnaDao.modify", boardDto);
 
@@ -89,15 +87,13 @@ public class HelpQnaDao {
 
     public List<BoardDto> getBoardList(Map<String, Object> paramMap) {
 
-
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        // SqlSessionTemplate의 selectList메소드 사용
         boardDtoList = mybatis.selectList("HelpQnaDao.getBoardList", paramMap);
-        System.out.println(boardDtoList);
 
         return boardDtoList;
     }
+
 
     public void delete(int id) {
 
@@ -111,15 +107,13 @@ public class HelpQnaDao {
 
     public BoardDto getBoard(int id) {
 
-
         BoardDto boardDto = new BoardDto();
 
-        // SqlSessionTemplate의 selectOne메소드 사용
         boardDto = mybatis.selectOne("HelpQnaDao.getBoard", id);
-
 
         return boardDto;
     }
+
 
     public void updateCnt(int id) {
         mybatis.update("HelpQnaDao.updateCnt", id);
@@ -135,4 +129,13 @@ public class HelpQnaDao {
 
         return mybatis.selectList("HelpQnaDao.getBoardFileList", id);
     }
+
+    // 조회수(cnt)가 10 이상이고 주제(subject)별로 필터링하는 메소드
+    public List<BoardDto> getFaqListBySubject(String subject) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("subject", subject);
+        paramMap.put("minCnt", 10);
+        return mybatis.selectList("HelpQnaDao.getFaqListBySubject", paramMap);
+    }
+
 }

@@ -14,26 +14,36 @@
     <div class="head_area">
         <p class="head_area_title">계정관리 문제</p>
     </div>
+
+
+    <form id="search-form" action="${pageContext.request.contextPath}/helpboard/help-qna.do" method="post">
+        <input type="hidden" name="pageNum" value="${page.cri.pageNum}"/>
+        <input type="hidden" name="amount" value="${page.cri.amount}"/>
     <div class="search_area">
-        <input type="text" placeholder="검색어를 입력하세요"><button class="search_button">검색</button>
+        <input type="text" placeholder="검색어를 입력하세요" name="searchKeyword" value="${searchMap.searchKeyword}">
+        <button type="submit" class="search_button">검색</button>
     </div>
+    </form>
     <div class="content">
         <div class="board">
             <h2></h2>
-            <ul class="posts" id="postsList">
-                <!-- 게시글이 여기에 추가됩니다 -->
-                <li>
-                    <div class="post-info">
-                        <h3>오랫동안 접속하지 않았더니 계정이 사라졌어요</h3>
-                        <p>다시 만드세요</p>
-                        <span class="post-date">2024-07-18</span>
-                    </div>
-                    <div class="post-buttons">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </li>
-            </ul>
+            <c:forEach var="faq" items="${faqList}">
+
+                    <ul class="posts" id="postsList">
+                        <!-- 게시글이 여기에 추가됩니다 -->
+                        <li>
+                            <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${faq.id}'">
+                                <h3 onclick="location.href='/helpboard/update-cnt.do?id=${faq.id}'">${faq.title}</h3>
+                                <p onclick="location.href='/helpboard/update-cnt.do?id=${faq.id}'">${faq.content}</p>
+                                <span class="post-date"><javatime:format value="${faq.date}" pattern="yyyy-MM-dd"/></span>
+                            </div>
+                            <div class="count">
+                                    ${faq.cnt}
+                            </div>
+                        </li>
+                    </ul>
+
+            </c:forEach>
         </div>
         <div class="pagination">
             <c:if test="${page.prev}">
@@ -49,19 +59,39 @@
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
     <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.querySelector('.semi_title').classList.add('fade-in');
-            }, 500); // 0.5초 후 페이드인
-        });
+        // window.addEventListener('load', function() {
+        //     setTimeout(function() {
+        //         document.querySelector('.semi_title').classList.add('fade-in');
+        //     }, 500); // 0.5초 후 페이드인
+        // });
+        $(() => {
+            $("#search-icon").on("click", (e) => {
+                $("input[name='pageNum']").val(1);
+                $("#search-form").submit();
+            });
 
-        $(".pagination a").on("click", (e) => {
-            e.preventDefault();
-            let pageNum = $(e.target).attr("href");
-            $("input[name='pageNum']").val(pageNum);
-            $("#search-form").submit();
-        });
+            $("input[name='searchKeyword']").on("keypress", (e) => {
+                if(e.key === 'Enter') {
+                    $("input[name='pageNum']").val(1);
+                }
+            });
 
+            // $(".pagination a").on("click", (e) => {
+            //     e.preventDefault();
+            //
+            //     // console.log($(e.target).attr("href"));
+            //
+            //     $("input[name='pageNum']").val($(e.target).attr("href"));
+            //
+            //     $("#search-form").submit();
+            // });
+            $(".pagination a").on("click", (e) => {
+                e.preventDefault();
+                let pageNum = $(e.target).attr("href");
+                $("input[name='pageNum']").val(pageNum);
+                $("#search-form").submit();
+            });
+        });
     </script>
 </body>
 </html>

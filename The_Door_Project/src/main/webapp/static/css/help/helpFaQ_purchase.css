@@ -7,13 +7,10 @@ body {
 .navbar {
     /* Your existing navbar styles */
 }
-.logo_head_between_area_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30vh; /* 원하는 높이 설정 */
-    width: 100%; /* 부모 요소가 화면 너비를 가득 채우도록 설정 */
-    background-color: white;
+#extendHeaderImg {
+    width: 100%;
+    height: 30vh;
+    padding: 0;
 }
 .logo_head_between_area {
     width: 100%; /* 이미지의 너비를 100%로 설정 */
@@ -127,11 +124,10 @@ body {
 .pagination a:hover {
     background-color: #666;
 }
-.footer {
-    background-color: white;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
+.write-post-button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
     width: 100%;
 }
 .footer-content a {

@@ -184,4 +184,9 @@ public class CommunityServiceImpl implements BoardService {
         return communityDao.getComments(boardId);
     }
 
+    @Override
+    public List<BoardDto> getFaqListBySubject(String subject) {
+        return List.of();
+    }
+
 }

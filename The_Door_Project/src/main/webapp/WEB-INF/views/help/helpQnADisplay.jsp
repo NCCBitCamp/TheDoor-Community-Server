@@ -18,10 +18,10 @@
 <%--        <form id="modify-form" action="/helpboard/help-qna-display.do?id=${boardDto.getId()}" method="post" enctype="multipart/form-data">--%>
             <form id="modify-form" action="/helpboard/modify.do?id=${boardDto.getId()}" method="post" enctype="multipart/form-data">
                 <div class="post-container">
-                    <div class="post-title">
+                    <div class="title-container">
                         <input type="text" id="title" name="title" value="${qnaboard.title}" readonly required>
-
                     </div>
+
                 <div class="post-header">
                     <div class="post-group">
                         <label for="author">작성자</label>

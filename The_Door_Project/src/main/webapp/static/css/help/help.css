@@ -19,13 +19,13 @@
     margin-top: 10vh; /* 로고 영역과 겹치지 않도록 마진 추가 */
 }
 .content {
-background-color: black;
-background-image: url('/static/images/help/center_professor.png');
-background-repeat: no-repeat;
-background-size: contain;
-background-position: center;
-padding: 20px; /* 여백 추가 */
-margin-bottom: 0; /* 기존 마진 제거 */
+    background-color: black;
+    background-image: url('/static/images/help/center_professor.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 20px; /* 여백 추가 */
+    margin-bottom: 60px; /* 기존 마진 제거 및 버튼과의 간격 조정 */
 }
 .content-footer-gap {
     background-color: black;
@@ -49,19 +49,37 @@ margin-bottom: 0; /* 기존 마진 제거 */
         transform: translateY(0);
     }
 }
+/*.commentbox1, .commentbox2, .commentbox3 {*/
+/*    color: black;*/
+/*    opacity: 0; !* 초기 상태에서 보이지 않게 설정 *!*/
+/*    width: 40vw;*/
+/*    height: 40vh; !* 높이를 2배로 조정 *!*/
+/*    margin-top: 50px;*/
+/*    padding: 20px;*/
+/*    background-color: white;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    text-align: center;*/
+/*    transition: transform 2.0s ease; !* 이미지 확대 전환을 부드럽게 함 *!*/
+/*    border-radius: 2%;*/
+/*}*/
+
 .commentbox1, .commentbox2, .commentbox3 {
     color: black;
     opacity: 0; /* 초기 상태에서 보이지 않게 설정 */
     width: 40vw;
-    height: 10vh;
+    height: 20vh;
     margin-top: 50px;
     padding: 20px;
     background-color: white;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+
     transition: transform 2.0s ease; /* 이미지 확대 전환을 부드럽게 함 */
     border-radius: 2%;
+    overflow: auto; /* 내용이 많아지면 스크롤바 추가 */
 }
 .commentbox1:hover,
 .commentbox2:hover,
