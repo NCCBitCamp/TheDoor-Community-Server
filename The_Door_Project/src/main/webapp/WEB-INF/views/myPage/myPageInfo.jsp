@@ -63,27 +63,27 @@
                     <legend class="emphaFont">회원정보 변경</legend>
                     <hr>
                     <br>
-                    <form action="/myPage/modifyMyInfo.do" method="post">
+                    <form id="alter_form" action="/myPage/modifyMyInfo.do" method="post">
                         <input name="id" value="${personalInfo.id}" type="hidden">
 
                         <div>
                             <label for="newPW">비밀번호</label><br>
-                            <p></p>
-                            <input id="newPW" type="text" name="password">
+                            <p id="password_validate" style="font-size: small"></p>
+                            <input id="newPW" type="password" name="password">
                         </div>
                         <div>
                             <label for="newPWCK">비밀번호 재입력</label><br>
-                            <input id="newPWCK" type="text">
-                            <p id="passwordConfirm"></p>
+                            <p id="password_confirm" style="font-size: small"></p>
+                            <input id="newPWCK" type="password">
                         </div>
                         <div>
-                            <label for="userEmail">이메일</label><br>
-                            <p></p>
+                            <label for="userEmail">이메일</label>
+                            <p id="email_validate" style="font-size: small"></p>
                             <input id="userEmail" type="email" name="email" value="${personalInfo.email}">
                         </div>
                         <div>
                             <label for="userNickName">닉네임</label><br>
-                            <p></p>
+                            <p id="nickname_validate" style="font-size: small"></p>
                             <input id="userNickName" type="text" name="nickname" value="${personalInfo.nickname}">
                         </div>
                         <br>
@@ -101,44 +101,111 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        const newPW = document.getElementById("newPW");
-        const pwRetry = document.getElementById("newPWCK");
-        const passwordConfirm = document.getElementById("passwordConfirm");
         const submitBtn = document.getElementById("submitBtn");
 
-        var passConfirm = false;
+        const newPW = document.getElementById("newPW");
+        const pwRetry = document.getElementById("newPWCK");
+        const password_confirm_text = document.getElementById("password_confirm");
 
-        if (newPW.value === "" || newPW.value === null){
-            submitBtn.disabled = !passConfirm;
+        const password_validate_text = document.getElementById("password_validate");
+
+        const user_email = document.getElementById("userEmail");
+        const email_validate_text = document.getElementById("email_validate");
+
+
+        const userNickName = document.getElementById("userNickName");
+        const nickname_validate_text = document.getElementById("nickname_validate");
+
+
+        let pass_confirm = false;
+        let pass_validate = false;
+        let email_validate = true;
+        let nickname_validate = true;
+
+        const pw_regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+        const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+
+
+        const update_submit_button = () => {
+            submitBtn.disabled = !(pass_validate && pass_confirm && email_validate && nickname_validate);
+        };
+
+        function check_password_validate(){
+            if(pw_regex.test(newPW.value)){
+                password_validate_text.textContent = "유효한 비밀번호 입니다.";
+                password_validate_text.style.color = "green";
+                pass_validate = true;
+            }else{
+                password_validate_text.textContent = "비밀번호는 8~16자의 영문, 숫자, 특수문자를 사용해 주세요.";
+                password_validate_text.style.color = "red";
+                pass_validate = false;
+            }
+            update_submit_button();
         }
 
+
         function checkPasswordMatch() {
-            if (newPW.value === pwRetry.value) {
-                passwordConfirm.textContent = "비밀번호가 일치합니다.";
-                passwordConfirm.style.color = "green";
-                passConfirm = true;
+            if (newPW.value === pwRetry.value && newPW.value !== "") {
+                password_confirm_text.textContent = "비밀번호가 일치합니다.";
+                password_confirm_text.style.color = "green";
+                pass_confirm = true;
             } else {
-                passwordConfirm.textContent = "비밀번호가 일치하지 않습니다.";
-                passwordConfirm.style.color = "red";
-                passConfirm = false;
+                password_confirm_text.textContent = "비밀번호가 일치하지 않습니다.";
+                password_confirm_text.style.color = "red";
+                pass_confirm = false;
             }
-            submitBtn.disabled = !passConfirm;
+            update_submit_button();
+        }
 
 
+        function check_email_validate(){
+            if(email_regex.test(user_email.value)){
+                email_validate_text.textContent = "유효한 이메일 입니다.";
+                email_validate_text.style.color = "green";
+                email_validate = true;
+            }else{
+                email_validate_text.textContent = "유효하지 않은 이메일 입니다.";
+                email_validate_text.style.color = "red";
+                email_validate = false;
+                }
+            update_submit_button();
+        }
+
+
+        function check_nickname_validate(){
+            $.ajax({
+                url: "/myPage/alterNicknameCheck.do",
+                type: "post",
+                data: {nickname: userNickName.value},
+                success: (map) => {
+                    console.log(map); // 예외 확인하고 지우기
+                    if (map.newNicknameCheckNum === 0) {
+                        nickname_validate_text.textContent = "사용 가능한 닉네임 입니다.";
+                        nickname_validate_text.style.color = "green";
+                        nickname_validate = true;
+                    } else {
+                        nickname_validate_text.textContent = "사용 불가능한 닉네임 입니다.";
+                        nickname_validate_text.style.color = "red";
+                        nickname_validate = false;
+                    }
+                    update_submit_button();  // 닉네임 검증 후에도 버튼 상태 업데이트
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            });
         }
 
         newPW.addEventListener('input', checkPasswordMatch);
         pwRetry.addEventListener('input', checkPasswordMatch);
+        newPW.addEventListener('input', check_password_validate);
+        user_email.addEventListener('input', check_email_validate);
+        userNickName.addEventListener('blur', check_nickname_validate);
 
-
+        update_submit_button(); // 초기 상태에서 버튼 비활성화 업데이트
     });
 
-
 </script>
-
-<%--ajax써서 json 변환해서 값 받기--%>
-<%--닉네임 중복체크 만들기--%>
-<%--이메일 형식 맞춰받기--%>
 
 </body>
 </html>
