@@ -108,6 +108,20 @@ public class MemberController {
         return "member/passwordSearch";
     }
 
+    @GetMapping("/passwordChange.do")
+    public String passwordChangeView() { return "member/passwordChange"; }
+
+    @PostMapping("/member/passwordChange.do")
+    public String changePassword(@RequestParam("password") String password, @RequestParam("user_id") String userId, Model model) {
+        if (userId == null) {
+            model.addAttribute("errorMessage", "ID가 없습니다.");
+            return "member/passwordChange";
+        }
+        memberService.changePassword(userId, password);
+        model.addAttribute("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
+        return "member/passwordChange";
+    }
+
     @RequestMapping("/login-help.do")
     public String loginHelpView() {
         return "/member/loginHelp";

@@ -52,4 +52,8 @@ public class MemberDao {
     public MemberDto validateUser(MemberDto memberDto){
         return sqlSessionTemplate.selectOne("MemberDaoMapper.validateUser", memberDto);
     }
+
+    public void updatePassword(MemberDto memberDto) {
+        sqlSessionTemplate.update("MemberDaoMapper.updatePassword", memberDto);
+    }
 }
