@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -124,6 +127,15 @@ public class MyPageController {
 
         return "myPage/myPageAlert";
     }
+
+
+    @PostMapping("uploadProfileImage.do")
+    public String profileUpload(MemberDto memberDto, @RequestParam("uploadImg") MultipartFile uploadImg) {
+        System.out.println("profileUpload Controller 실행");
+        mypageService.uploadProfile(memberDto, uploadImg);
+        return "redirect:/myPage/info.do";
+    }
+
 
 
     private Date convertToDate(LocalDateTime localDateTime) {

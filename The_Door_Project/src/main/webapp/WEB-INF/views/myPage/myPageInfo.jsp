@@ -11,10 +11,8 @@
     <div class="content">
         <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg">
         <div id="profileArea">
-            <img src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg">
-            
-            <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
-            <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
+            <img id="user_profile_image" src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg" style="cursor: pointer;">
+            <input type="file" id="profileImageInput" style="display: none;" accept="image/*">
               
             <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
@@ -204,6 +202,68 @@
         userNickName.addEventListener('blur', check_nickname_validate);
 
         update_submit_button(); // 초기 상태에서 버튼 비활성화 업데이트
+    });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // 프로필 이미지를 클릭하면 파일 입력 요소를 열어 이미지를 선택하도록 함
+        document.getElementById('user_profile_image').addEventListener('click', function() {
+            // 파일 선택 창을 열기 위해 파일 입력 요소를 클릭
+            document.getElementById('profileImageInput').click();
+        });
+
+        // 사용자가 파일을 선택했을 때 실행되는 이벤트 핸들러
+        document.getElementById('profileImageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // 사용자가 선택한 파일을 가져옴
+
+            if (file) {
+                // 허용된 파일 형식 목록 (MIME 타입 기준)
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/bmp'];
+
+                // 사용자가 선택한 파일의 MIME 타입이 허용된 형식인지 확인
+                if (!allowedTypes.includes(file.type)) {
+                    // 파일 형식이 맞지 않으면 경고 메시지를 표시하고 업로드 중단
+                    alert('jpg, jpeg, png, gif, svg, bmp 형식의 이미지 파일만 업로드 가능합니다.');
+                    return; // 업로드 중단
+                }
+
+                // 파일 형식이 유효한 경우, 미리보기 이미지를 업데이트하기 위해 FileReader 사용
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // 이미지 미리보기 영역(src 속성)에 파일의 데이터 URL을 설정하여 이미지 미리보기를 표시
+                    document.getElementById('user_profile_image').src = e.target.result;
+                };
+                reader.readAsDataURL(file); // 파일을 읽어서 데이터 URL 형식으로 변환
+
+                // 선택한 파일을 서버에 업로드
+                uploadProfileImage(file);
+            }
+        });
+
+        // 서버에 프로필 이미지를 업로드하는 함수
+        function uploadProfileImage(file) {
+            const formData = new FormData(); // FormData 객체를 생성하여 파일 데이터를 담음
+            formData.append('profileImage', file); // 서버에 전송할 폼 데이터에 파일을 추가
+
+            // AJAX 요청을 통해 서버로 파일을 업로드
+            $.ajax({
+                url: '/myPage/uploadProfileImage.do', // 서버에서 파일을 처리할 URL
+                type: 'POST', // HTTP 메서드를 POST로 지정하여 파일 업로드
+                data: formData, // 전송할 데이터를 설정 (파일 데이터)
+                processData: false, // 파일 데이터는 이미 처리된 상태이므로 처리하지 않도록 설정
+                contentType: false, // 파일 업로드의 Content-Type을 설정하지 않음 (브라우저가 자동 설정)
+                success: function(response) {
+                    // 서버에서 이미지가 성공적으로 저장되면, 새로운 프로필 이미지 URL을 받아와서 미리보기 이미지를 업데이트
+                    document.getElementById('user_profile_image').src = response.profileImageUrl;
+                },
+                error: function(err) {
+                    // 파일 업로드 실패 시 콘솔에 에러 메시지를 출력
+                    console.error('프로필 이미지 업로드 실패:', err);
+                }
+            });
+        }
     });
 
 </script>

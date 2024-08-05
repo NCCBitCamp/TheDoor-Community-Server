@@ -4,6 +4,7 @@ import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.MemberDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -31,4 +32,7 @@ public interface MyPageService {
 
     // 닉네임 중복확인하기
     Map<String, Integer> newNicknameCheck(MemberDto memberDto);
+
+    // 프사올리기
+    void uploadProfile(MemberDto memberDto, MultipartFile uploadImg);
 }

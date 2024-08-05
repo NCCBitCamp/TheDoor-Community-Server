@@ -80,4 +80,13 @@
         </if>
     </select>
 
+<!--    프로필사진-->
+    <insert id="updateProfileImg" parameterType="BoardFile">
+        INSERT INTO USER_PROFILE_IMG (USER_ID, FILE_NAME, FILE_PATH)
+        VALUES (#{id}, #{fileName}, #{filePath})
+            ON DUPLICATE KEY UPDATE
+            FILE_NAME = VALUES(#{fileName}),
+            FILE_PATH = VALUES(#{filePath})
+    </insert>
+    
 </mapper>
