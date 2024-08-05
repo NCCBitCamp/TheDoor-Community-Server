@@ -50,10 +50,6 @@ public class HelpController {
         return "help/helpQnA";
     }
 
-    @RequestMapping("/help-faq-purchase.do")
-    public String helpFaQPurchaseView() {
-        return "help/helpFaQ_purchase";
-    }
 
     @RequestMapping("/help-faq-account.do")
     public String helpFaQAccountView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
@@ -167,15 +163,15 @@ public class HelpController {
 
     }
 
-    @RequestMapping("/help-faq-list.do")
-    public String helpFaqListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
-        List<BoardDto> faqList = boardService.getFaqListBySubject(null); // 모든 항목 가져오기
-        model.addAttribute("faqList", faqList);
-        int total = boardService.getBoardTotalCnt(searchMap);
-        model.addAttribute("page", new PageDto(cri, total));
-        System.out.println("컨트롤러는 작동함");
-        return "help/helpFaQ_account";
-    }
+//    @RequestMapping("/help-faq-list.do")
+//    public String helpFaqListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        List<BoardDto> faqList = boardService.getFaqListBySubject(null); // 모든 항목 가져오기
+//        model.addAttribute("faqList", faqList);
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+//        System.out.println("컨트롤러는 작동함");
+//        return "help/helpFaQ_account";
+//    }
 
 
 }

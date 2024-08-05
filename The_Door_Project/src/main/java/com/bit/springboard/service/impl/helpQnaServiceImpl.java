@@ -179,6 +179,10 @@ public class helpQnaServiceImpl implements BoardService {
 
     @Override
     public List<BoardDto> getFaqListBySubject(String subject, int minCnt) {
-        return helpQnaDao.getFaqListBySubject(subject);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("subject", subject);
+        paramMap.put("minCnt", minCnt);
+
+        return helpQnaDao.getFaqListBySubject(paramMap);
     }
 }

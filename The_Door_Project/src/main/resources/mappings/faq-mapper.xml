@@ -142,16 +142,7 @@
         WHERE BOARD_ID = #{id}
     </select>
 
-    <!-- 조회수(cnt)가 10 이상이고 주제(subject)별로 필터링 -->
-    <select id="getFaqListBySubject" parameterType="map" resultType="board">
-        SELECT *
-        FROM QA
-        WHERE 1=1
-        <if test="subject != null">
-            AND SUBJECT = #{subject}
-        </if>
-        AND CNT >= #{minCnt}
-    </select>
+
 
 
 
