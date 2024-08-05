@@ -57,8 +57,7 @@ public class MyPageController {
     @RequestMapping("/alterNicknameCheck.do")
     @ResponseBody
     public Map<String, Integer> myPageInfoAlterNickname(MemberDto memberDto){
-//        return mypageService.newNicknameCheck(memberDto.getNickname());
-        return mypageService.newNicknameCheck(memberDto.getNickname());
+        return mypageService.newNicknameCheck(memberDto);
     }
 
   

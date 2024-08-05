@@ -176,7 +176,8 @@
             $.ajax({
                 url: "/myPage/alterNicknameCheck.do",
                 type: "post",
-                data: {nickname: userNickName.value},
+                data: {nickname: userNickName.value,
+                        id: ${personalInfo.id}},
                 success: (map) => {
                     console.log(map); // 예외 확인하고 지우기
                     if (map.newNicknameCheckNum === 0) {

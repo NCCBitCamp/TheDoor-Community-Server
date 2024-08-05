@@ -54,8 +54,8 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public Map<String, Integer> newNicknameCheck(String nickname){
-        int nicknameCheck = myPageDao.newNicknameCheck(nickname);
+    public Map<String, Integer> newNicknameCheck(MemberDto memberDto){
+        int nicknameCheck = myPageDao.newNicknameCheck(memberDto);
         Map<String, Integer> forJsonMap = new HashMap<>();
         forJsonMap.put("newNicknameCheckNum", nicknameCheck);
         return forJsonMap;
