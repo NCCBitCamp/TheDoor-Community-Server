@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/news/newsWrite.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -17,8 +18,8 @@
                     <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="writer">작성자</label>
-                    <input type="text" class="form-control" id="writer" name="writer" placeholder="작성자 이름" value="${loginMember.nickname}" readonly required>
+                    <label for="nickname">작성자</label>
+                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="작성자 이름" value="${loginMember.nickname}" readonly required>
                 </div>
                 <div class="form-group mt-3">
                     <label for="content">내용</label>

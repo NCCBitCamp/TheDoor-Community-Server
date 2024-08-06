@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/help/helpFaQ.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>

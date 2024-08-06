@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPagePost.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -13,9 +14,6 @@
 
         <div id="profileArea">
             <img src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg">
-
-            <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
-            <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
 
             <p class="emphaFont">${personalInfo.nickname}</p>
         </div>

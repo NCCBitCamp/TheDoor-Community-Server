@@ -9,6 +9,7 @@
     <!-- Bootstrap JS 추가 -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -52,30 +53,33 @@
                 </div>
             </form>
         </div>
-
+        <div>
+            <c:if test="${loginMember ne null and loginMember.role eq 'ADMIN'}">
+                <div class="post-container" id="postContainer">
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/news/newsWrite.do'">공지사항 등록</button>
+                </div>
+            </c:if>
+        </div>
         <!-- 게시글 목록 테이블 -->
         <div class="container mt-3 mb-5 w-75 card-wrapper">
             <c:forEach items="${newsList}" var="news">
                 <div class="card" style="width: 18rem;">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title></title>
+                        <image href="${pageContext.request.contextPath}/static/images/newsbanner/notice.jpg" width="100%" height="100%"></image>
+                    </svg>
                     <div class="card-body">
                         <h5 class="card-title">${news.title}</h5>
                         <p class="card-text">작성일:
                             <javatime:format value="${news.date}" pattern="yyyy-MM-dd"/>
                         </p>
+                        <p class="card-writer">
+                            관리자: ${news.nickname}
+                        </p>
                         <a href="/news/updateCnt.do?id=${news.id}" class="btn btn-outline-secondary btn-sm" style="margin: 0px;">자세히 보기</a>
                     </div>
                 </div>
             </c:forEach>
-        </div>
-
-        <c:if test="${loginMember ne null and loginMember.role eq 'ADMIN'}">
-            <div class="post-container" id="postContainer">
-                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/news/newsWrite.do'">공지사항 등록</button>
-            </div>
-        </c:if>
-        <div>
-
         </div>
     </div>
     <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
@@ -104,7 +108,10 @@
                     return `<img class="bd-placeholder-img card-img-top" width="100%" height="180" src="/upload/\${file.filename}" alt=\${file.fileoriginname}>`
                 }
 
-                return `<svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>`;
+                return `<svg class="bd-placeholder-img card-img-top" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title></title>
+                        <image href="${pageContext.request.contextPath}/static/images/newsbanner/notice.jpg" width="100%" height="100%"></image>
+                    </svg>`;
             }
 
             $(window).on("scroll", (e) => {
@@ -116,7 +123,7 @@
                 const documentHeight = document.documentElement.scrollHeight;
 
                 // 스크롤이 바닥에 닿았는지 여부
-                const isBottom = documentHeight <= scrollTop + windowHeight;
+                const isBottom = documentHeight <= scrollTop + windowHeight + 1;
 
                 if(isBottom) {
                     // 현재 페이지의 번호가 마지막 페이지의 번호와 같으면 함수 종료

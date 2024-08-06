@@ -1,12 +1,10 @@
 package com.bit.springboard.dao;
 
-import com.bit.springboard.dto.BoardDto;
-import com.bit.springboard.dto.CommentDto;
-import com.bit.springboard.dto.Criteria;
-import com.bit.springboard.dto.MemberDto;
+import com.bit.springboard.dto.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -21,6 +19,10 @@ public class MyPageDao {
 
     public MemberDto myInfo(String userId){
         return mybatis.selectOne("MyPageDao.myInfo",userId);
+    }
+
+    public int newNicknameCheck(MemberDto memberDto){
+       return mybatis.selectOne("MyPageDao.newNicknameCheck", memberDto);
     }
 
     public void modifyInfo(MemberDto memberDto){
@@ -41,5 +43,9 @@ public class MyPageDao {
 
     public int getCommentsNum(String userId) {
         return mybatis.selectOne("MyPageDao.getCommentsNum", userId);
+    }
+
+    public void uploadProfile(BoardFileDto uploadImg){
+        mybatis.insert("MypageDao.updateProfileImg", uploadImg);
     }
 }

@@ -113,4 +113,12 @@ public class MemberServiceImpl implements MemberService {
     public boolean validateUser(MemberDto memberDto) {
         return memberDao.validateUser(memberDto) != null;
     }
+
+    @Override
+    public void changePassword(String userId, String newPassword) {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setUser_id(userId);
+        memberDto.setPassword(newPassword);
+        memberDao.updatePassword(memberDto);
+    }
 }

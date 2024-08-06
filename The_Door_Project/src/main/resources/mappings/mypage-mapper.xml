@@ -51,7 +51,7 @@
         ) AS COMMU
         ON C.BOARD_ID = COMMU.ID
         ORDER BY C.DATE DESC, C.ID DESC
-        LIMIT #{amount} OFFSET #{startNum};
+        LIMIT #{amount} OFFSET #{startNum}
     </select>
 
 
@@ -70,4 +70,23 @@
         ORDER BY C.DATE DESC
     </select>
 
+<!--    닉네임 중복 수 가져오기-->
+    <select id="newNicknameCheck" parameterType="string" resultType="int">
+        SELECT COUNT(NICKNAME)
+        FROM USER
+        WHERE NICKNAME = #{nickname}
+        <if test="id != null">
+            AND ID != #{id}
+        </if>
+    </select>
+
+<!--    프로필사진-->
+    <insert id="updateProfileImg" parameterType="BoardFile">
+        INSERT INTO USER_PROFILE_IMG (USER_ID, FILE_NAME, FILE_PATH)
+        VALUES (#{id}, #{fileName}, #{filePath})
+            ON DUPLICATE KEY UPDATE
+            FILE_NAME = VALUES(#{fileName}),
+            FILE_PATH = VALUES(#{filePath})
+    </insert>
+    
 </mapper>

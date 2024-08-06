@@ -64,4 +64,10 @@
           AND BIRTH = #{birth}
     </select>
 
+    <update id="updatePassword" parameterType="member">
+        UPDATE USER
+        SET PASSWORD = #{password}
+        WHERE USER_ID = #{user_id}
+    </update>
+
 </mapper>

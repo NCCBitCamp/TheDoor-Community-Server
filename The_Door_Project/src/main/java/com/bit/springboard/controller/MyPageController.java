@@ -1,30 +1,37 @@
 package com.bit.springboard.controller;
 
 import com.bit.springboard.dto.*;
+import com.bit.springboard.service.MemberService;
 import com.bit.springboard.service.RankService;
 import com.bit.springboard.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
-    @Autowired
     private RankService rankService;
-    @Autowired
+
     private MyPageService mypageService;
 
+
     @Autowired
-    public MyPageController(RankService rankService) {
+    public MyPageController(MyPageService myPageService, RankService rankService){
+        this.mypageService = myPageService;
         this.rankService = rankService;
     }
 
@@ -43,10 +50,17 @@ public class MyPageController {
         return "myPage/myPageInfo";
     }
 
+
     @RequestMapping("/modifyMyInfo.do")
     public String myPageInfoModify(MemberDto newMemberDto){
         mypageService.modifyInfo(newMemberDto);
         return "redirect:/myPage/info.do";
+    }
+
+    @RequestMapping("/alterNicknameCheck.do")
+    @ResponseBody
+    public Map<String, Integer> myPageInfoAlterNickname(MemberDto memberDto){
+        return mypageService.newNicknameCheck(memberDto);
     }
 
   
@@ -62,6 +76,7 @@ public class MyPageController {
         model.addAttribute("myTopRanks", myTopRanks);
         return "myPage/myPageRank";
     }
+
 
     @RequestMapping("post.do")
     public String myPagePostView(HttpSession session, Model model, Criteria cri) {
@@ -112,6 +127,15 @@ public class MyPageController {
 
         return "myPage/myPageAlert";
     }
+
+
+    @PostMapping("uploadProfileImage.do")
+    public String profileUpload(MemberDto memberDto, @RequestParam("uploadImg") MultipartFile uploadImg) {
+        System.out.println("profileUpload Controller 실행");
+        mypageService.uploadProfile(memberDto, uploadImg);
+        return "redirect:/myPage/info.do";
+    }
+
 
 
     private Date convertToDate(LocalDateTime localDateTime) {

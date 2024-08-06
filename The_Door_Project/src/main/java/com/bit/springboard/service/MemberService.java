@@ -26,4 +26,6 @@ public interface MemberService {
     void changeEmail(MemberDto memberDto);
 
     boolean validateUser(MemberDto memberDto);
+
+    void changePassword(String userId, String newPassword);
 }

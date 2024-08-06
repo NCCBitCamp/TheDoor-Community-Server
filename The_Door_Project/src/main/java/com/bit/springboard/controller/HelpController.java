@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -26,7 +27,6 @@ public class HelpController {
 
     @Autowired
     public HelpController(ApplicationContext applicationContext) {
-
         this.applicationContext = applicationContext;
     }
 
@@ -50,18 +50,60 @@ public class HelpController {
         return "help/helpQnA";
     }
 
-    @RequestMapping("/help-faq-purchase.do")
-    public String helpFaQPurchaseView() {
-        return "help/helpFaQ_purchase";
-    }
 
     @RequestMapping("/help-faq-account.do")
-    public String helpFaQAccountView() {
+    public String helpFaQAccountView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//        System.out.println(boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("faqBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        String subject = "account";
+        int minCnt = 10;
+        List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
+        System.out.println(boardList);
+        model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
+
         return "help/helpFaQ_account";
     }
 
+    @RequestMapping("/help-faq-purchase.do")
+    public String helpFaQPurchaseView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//        System.out.println(boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("faqBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        String subject = "payment";
+        int minCnt = 10;
+        List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
+        System.out.println(boardList);
+        model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
+
+        return "help/helpFaQ_purchase";
+    }
+
     @RequestMapping("/help-faq-etc.do")
-    public String helpFaQEtcView() {
+    public String helpFaQEtcView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
+//        System.out.println(boardService.getBoardList(searchMap, cri));
+//        model.addAttribute("faqBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
+        String subject = "other";
+        int minCnt = 10;
+        List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
+        System.out.println(boardList);
+        model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
+        int total = boardService.getBoardTotalCnt(searchMap);
+        model.addAttribute("page", new PageDto(cri, total));
         return "help/helpFaQ_etc";
     }
 
@@ -70,31 +112,10 @@ public class HelpController {
         return "help/helpQnAwrite";
     }
 
-//    @RequestMapping("/qna-list.do")
-//    public String qnaListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
-//        System.out.println(cri);
-//        // System.out.println(searchMap);
-//        boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-//
-//        model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri));
-//        model.addAttribute("searchMap", searchMap);
-//
-//        // 게시글의 총 개수
-//        int total = boardService.getBoardTotalCnt(searchMap);
-//
-//        // 화면에서 페이지 표시를 하기 위해 PageDto객체 화면에 전달
-//        model.addAttribute("page", new PageDto(cri, total));
-//
-//        return "/help/helpQnA";
-//    }
-
     @GetMapping("/update-cnt.do")
     public String updateCnt(BoardDto boardDto) {
-
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-
         boardService.updateCnt(boardDto.getId());
-
         return "redirect:/helpboard/help-qna-display.do?id=" + boardDto.getId();
 
     }
@@ -104,7 +125,6 @@ public class HelpController {
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
         model.addAttribute("qnaboard", boardService.getBoard(boardDto.getId()));
         model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
-        System.out.println("qnaDetailView 동작함");
         return "help/helpQnADisplay";
     }
 
@@ -112,46 +132,21 @@ public class HelpController {
     @GetMapping("/post.do")
     public String postView(HttpSession session) {
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-
         if(loginMember == null) {
             return "redirect:/member/login.do";
         }
-
         return "helpboard/post";
     }
 
     @PostMapping("/post.do")
     public String post(BoardDto boardDto, MultipartFile[] uploadFiles) {
-
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-
-
         boardService.post(boardDto, uploadFiles);
-
-
         return "redirect:/helpboard/help-qna.do";
-
-
     }
-
-//    @PostMapping("/modify.do")
-//    public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles,
-//                         @RequestParam(name = "originFiles", required = false) String originFiles) {
-//        System.out.println(originFiles);
-//
-//        boardService = applicationContext.getBean("helpFaqServiceImpl", BoardService.class);
-//
-//        boardService.modify(boardDto, uploadFiles, changeFiles, originFiles);
-//
-//        return "redirect:/helpboard/help-qna.do";
-//
-//
-//    }
 
     @PostMapping("/modify.do")
     public String modify(BoardDto boardDto, MultipartFile[] uploadFiles, MultipartFile[] changeFiles, @RequestParam(name = "originFiles", required = false) String originFiles) {
-        System.out.println(boardDto);
-
         if (boardDto.getContent() == null || boardDto.getContent().isEmpty()) {
             throw new IllegalArgumentException("content cannot be null or empty");
         }
@@ -162,14 +157,22 @@ public class HelpController {
 
     @GetMapping("/delete.do")
     public String delete(BoardDto boardDto) {
-
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-
-
         boardService.delete(boardDto.getId());
-
-
         return "redirect:/helpboard/help-qna.do";
 
     }
+
+//    @RequestMapping("/help-faq-list.do")
+//    public String helpFaqListView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
+//        List<BoardDto> faqList = boardService.getFaqListBySubject(null); // 모든 항목 가져오기
+//        model.addAttribute("faqList", faqList);
+//        int total = boardService.getBoardTotalCnt(searchMap);
+//        model.addAttribute("page", new PageDto(cri, total));
+//        System.out.println("컨트롤러는 작동함");
+//        return "help/helpFaQ_account";
+//    }
+
+
 }
+

@@ -74,5 +74,4 @@ public class NewsDao {
         return mybatis.selectList("NewsDao.getBoardFileList", id);
     }
 
-
 }

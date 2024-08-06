@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/help/helpQnA.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -45,7 +46,6 @@
                 <li>
 
                     <div class="post-info">
-
                         <h3 onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}'">${qnaBoard.title}</h3>
                         <p onclick="location.href='/helpboard/update-cnt.do?id=${qnaBoard.id}'">${qnaBoard.content}</p>
                         <span class="post-date">2024-07-18</span>
@@ -62,7 +62,6 @@
                     <div class="count">
                         ${qnaboard.cnt}
                     </div>
-
                 </li>
             </ul>
             </c:forEach>

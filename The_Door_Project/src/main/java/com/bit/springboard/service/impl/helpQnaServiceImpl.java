@@ -7,14 +7,11 @@ import com.bit.springboard.dto.BoardFileDto;
 import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -178,5 +175,14 @@ public class helpQnaServiceImpl implements BoardService {
     @Override
     public List<CommentDto> getComments(int boardId) {
         return List.of();
+    }
+
+    @Override
+    public List<BoardDto> getFaqListBySubject(String subject, int minCnt) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("subject", subject);
+        paramMap.put("minCnt", minCnt);
+
+        return helpQnaDao.getFaqListBySubject(paramMap);
     }
 }
