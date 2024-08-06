@@ -136,7 +136,12 @@ public class HelpQnaDao {
         return mybatis.selectList("HelpQnaDao.getBoardFileList", id);
     }
 
+<<<<<<< HEAD
+    public List<BoardDto> getFaqListBySubject(String subject) {
+            return mybatis.selectList("HelpQnaDao.getFaqListBySubject", subject);
+=======
     public List<BoardDto> getFaqListBySubject(Map<String, Object> paramMap) {
         return mybatis.selectList("HelpQnaDao.getFaqListBySubject", paramMap);
+>>>>>>> d2d0fb4ea14698b82bc56cb63dab3dcf26dfe09b
     }
 }
