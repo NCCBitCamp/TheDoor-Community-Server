@@ -95,7 +95,7 @@ public class helpFaqServiceImpl implements BoardService {
         Map<String, Object> params = new HashMap<>();
         params.put("subject", subject);
         params.put("minCnt", minCnt);
-        return helpFaqDao.getFaqListBySubject(params);
+        return helpFaqDao.getFaqListBySubject(params, minCnt);
     }
 
 
