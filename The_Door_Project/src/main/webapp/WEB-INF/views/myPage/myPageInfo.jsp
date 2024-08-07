@@ -21,16 +21,17 @@
         <div id="profileArea">
             <c:choose>
                 <c:when test="${not empty profileImg.id}">
-                    <img id="user_profile_image" src="/upload/${profileImg.filename}" alt="${profileImg.filename}" class="profileImg" style="cursor: pointer;">
+                    <img id="user_profile_image" src="/upload/${profileImg.filename}" alt="${profileImg.filename}" class="profileImg" style="cursor: pointer; margin-bottom: 0">
                 </c:when>
                 <c:otherwise>
-                    <img id="user_profile_image" src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" alt="defaultImg" class="profileImg" style="cursor: pointer;">
+                    <img id="user_profile_image" src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" alt="defaultImg" class="profileImg" style="cursor: pointer; margin-bottom: 0">
                 </c:otherwise>
             </c:choose>
 <%--            이미지 업로드 시 자동으로 js로 폼 제출하기--%>
-            <form id="profileImageForm" action="/myPage/uploadProfileImage.do" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="${personalInfo.id}">
-                <input type="file" id="profileImageInput" name="uploadImg" style="display: none;" accept="image/*">
+            <form id="profileImageForm" action="/myPage/uploadProfileImage.do" method="post" enctype="multipart/form-data" style="margin-top: -7px">
+<%--                <p style="color: #6c757d">프로필 사진은 본 화면에서만 가능하세요.</p>--%>
+                <input type="hidden" name="id" value="${personalInfo.id}" style="margin: 0; padding: 0">
+                <input type="file" id="profileImageInput" name="uploadImg" style="display: none; margin: 0; padding: 0" accept="image/*">
             </form>
 
             <p class="emphaFont">${personalInfo.nickname}</p>
