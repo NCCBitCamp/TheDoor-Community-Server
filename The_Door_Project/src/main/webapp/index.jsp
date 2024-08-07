@@ -40,7 +40,7 @@
                 <img src="${pageContext.request.contextPath}/static/images/index/communityBtn.png" alt="Image 2">
                 <div class="overlay"></div>
             </a>
-            <a href="/board/help-main.do" class="button">
+            <a href="/helpboard/help-main.do" class="button">
                 <img src="${pageContext.request.contextPath}/static/images/index/helpBtn.png" alt="Image 3">
                 <div class="overlay"></div>
             </a>
