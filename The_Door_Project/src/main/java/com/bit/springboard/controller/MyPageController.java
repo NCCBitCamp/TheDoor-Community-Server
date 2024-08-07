@@ -1,7 +1,6 @@
 package com.bit.springboard.controller;
 
 import com.bit.springboard.dto.*;
-import com.bit.springboard.service.MemberService;
 import com.bit.springboard.service.RankService;
 import com.bit.springboard.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
@@ -44,9 +43,6 @@ public class MyPageController {
         MemberDto personalInfo = mypageService.getInfo(loginMember);
         model.addAttribute("personalInfo", personalInfo);
 
-        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
-        model.addAttribute("profileImg",profileInfo);
-
         return "myPage/myPageInfo";
     }
 
@@ -79,9 +75,6 @@ public class MyPageController {
         MemberDto personalInfo = mypageService.getInfo(loginMember);
         model.addAttribute("personalInfo", personalInfo);
 
-        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
-        model.addAttribute("profileImg",profileInfo);
-
         return "myPage/myPageRank";
     }
 
@@ -103,12 +96,6 @@ public class MyPageController {
 
         model.addAttribute("page", new PageDto(cri, total));
         model.addAttribute("myWrite", myWrite);
-
-        MemberDto personalInfo = mypageService.getInfo(loginMember);
-        model.addAttribute("personalInfo", personalInfo);
-
-        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
-        model.addAttribute("profileImg",profileInfo);
 
         return "myPage/myPagePost";
     }
@@ -137,13 +124,6 @@ public class MyPageController {
 
         int total = mypageService.getCommentsNum(loginMember);
         model.addAttribute("page", new PageDto(cri, total));
-
-
-        MemberDto personalInfo = mypageService.getInfo(loginMember);
-        model.addAttribute("personalInfo", personalInfo);
-
-        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
-        model.addAttribute("profileImg",profileInfo);
 
         return "myPage/myPageAlert";
     }
