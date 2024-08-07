@@ -5,6 +5,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/myPage/myPagePost.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/x-icon">
+    <style>
+        #user_profile_image {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%; /* 이미지를 동그랗게 자릅니다 */
+            object-fit: cover; /* 이미지를 영역에 맞게 잘라줍니다 */
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
@@ -13,10 +21,14 @@
         <div> <img src="${pageContext.request.contextPath}/static/images/extendHeaderImg.png" alt="theDoor" id="extendHeaderImg"></div>
 
         <div id="profileArea">
-            <img src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" class="profileImg">
-
-            <!-- profileAlertImg 이미지변경 함수처리가 안되고 알람있으면, 빨간불 들어오게 만들기 -->
-            <!-- 이미지 사용자가 변경할 수 있도록 만들기 -->
+            <c:choose>
+                <c:when test="${not empty profileImg.id}">
+                    <img id="user_profile_image" src="/upload/${profileImg.filename}" alt="${profileImg.filename}" class="profileImg" style="cursor: pointer;">
+                </c:when>
+                <c:otherwise>
+                    <img id="user_profile_image" src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" alt="defaultImg" class="profileImg" style="cursor: pointer;">
+                </c:otherwise>
+            </c:choose>
 
             <p class="emphaFont">${personalInfo.nickname}</p>
         </div>
