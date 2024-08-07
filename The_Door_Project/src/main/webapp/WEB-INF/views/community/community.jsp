@@ -139,8 +139,6 @@
             $(".pagination a").on("click", (e) => {
                 e.preventDefault();
 
-                // console.log($(e.target).attr("href"));
-
                 $("input[name='pageNum']").val($(e.target).attr("href"));
 
                 $("#search-form").submit();

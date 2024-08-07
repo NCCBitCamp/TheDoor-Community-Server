@@ -4,7 +4,6 @@ import com.bit.springboard.common.FileUtils;
 import com.bit.springboard.dao.NewsDao;
 import com.bit.springboard.dto.*;
 import com.bit.springboard.service.BoardService;
-import com.bit.springboard.service.NewsService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -204,8 +204,14 @@
     </select>
 
 
+    <!--각 분야 별로 조회수가 가장 많은 글을 필터링-->
 
-
+    <select id="mostCntList" parameterType="map" resultType="board">
+        SELECT SUBJECT
+             , MAX(CNT)
+        FROM QA
+        GROUP BY SUBJECT;
+    </select>
 
 
 

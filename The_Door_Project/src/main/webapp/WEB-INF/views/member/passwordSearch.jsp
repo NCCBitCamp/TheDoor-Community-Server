@@ -121,7 +121,19 @@
                 data: $('#passwordSearch-form').serialize(),
                 success: (response) => {
                     if (response) {
+                        // Expire 컨트롤러 추가하기
                         clearInterval(timer);
+                        $.ajax({
+                            url: "/mail/expire",
+                            type: "post",
+                            data: $('#passwordSearch-form').serialize(),
+                            success: (response) => {
+                                if (response) console.log('Authentication numbers are expired');
+                            },
+                            error: (err) => {
+                                console.log(err);
+                            }
+                        });
                         window.location.href = "${pageContext.request.contextPath}/member/passwordChange.do?user_id=" + $('#user_id').val();
                     } else {
                         $('#errMsg').text('인증번호를 다시 확인해주세요.');

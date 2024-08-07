@@ -23,7 +23,6 @@ public class MailController {
     // 이메일 보내고 인증코드 db에 저장하기
     @RequestMapping("/confirm.do")
     public boolean mailConfirm(MemberDto memberDto) throws Exception{
-        System.out.println(memberDto);
         String code = registerMail.sendSimpleMessage(memberDto.getEmail());
 //        System.out.println("사용자에게 발송한 인증코드 ==> " + code);
 

@@ -10,7 +10,7 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 <div class="content">
     <form id="login-form" action="/member/login.do" method="post">
-
+        <input type="hidden" name="loginFailMsg" id="loginFailMsg" value="${loginFailMsg}">
         <h1>LOGIN</h1>
         <div id="loginBox">
             <div class="inputBox">
