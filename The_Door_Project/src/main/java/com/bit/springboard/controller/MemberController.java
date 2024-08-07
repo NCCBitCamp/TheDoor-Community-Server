@@ -62,9 +62,11 @@ public class MemberController {
             loginMember.setPassword("");
             session.setAttribute("loginMember", loginMember);
             return "redirect:/";
+
         } catch (Exception e) {
             model.addAttribute("loginFailMsg", e.getMessage());
-            return "redirect:/";
+//            return "redirect:/member/login.do";
+            return "member/login";
         }
     }
 

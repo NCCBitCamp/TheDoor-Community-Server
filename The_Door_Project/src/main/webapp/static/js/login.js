@@ -28,3 +28,11 @@ eyeBtn.addEventListener('click', (e) => {
         eyeKey = false;
     }
 });
+
+$(() => {
+    if($("#loginFailMsg").val() === 'idNotExist') {
+        alert("가입되지 않은 사용자입니다.");
+    } else if($("#loginFailMsg").val() === 'wrongPassword') {
+        alert("잘못된 비밀번호입니다.");
+    }
+});

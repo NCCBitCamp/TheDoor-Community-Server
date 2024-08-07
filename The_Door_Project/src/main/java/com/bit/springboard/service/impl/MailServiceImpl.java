@@ -61,7 +61,7 @@ public class MailServiceImpl implements MailService {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-        logger.debug(() -> "생성된 랜덤 인증코드: " + key);
+//        logger.debug(() -> "생성된 랜덤 인증코드: " + key);
         return key;
     }
 
