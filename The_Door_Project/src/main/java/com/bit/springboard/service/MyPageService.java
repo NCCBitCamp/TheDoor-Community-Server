@@ -6,6 +6,7 @@ import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.MemberDto;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface MyPageService {
@@ -27,4 +28,7 @@ public interface MyPageService {
 
     // 댓글 달린거 가져오기
     int getCommentsNum(MemberDto loginMember);
+
+    // 닉네임 중복확인하기
+    Map<String, Integer> newNicknameCheck(MemberDto memberDto);
 }

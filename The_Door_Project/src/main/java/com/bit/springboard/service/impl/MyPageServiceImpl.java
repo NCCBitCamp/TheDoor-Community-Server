@@ -5,7 +5,6 @@ import com.bit.springboard.dto.BoardDto;
 import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.dto.MemberDto;
-import com.bit.springboard.service.BoardService;
 import com.bit.springboard.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +51,14 @@ public class MyPageServiceImpl implements MyPageService {
     @Override
     public int getCommentsNum(MemberDto loginMember) {
         return myPageDao.getCommentsNum(loginMember.getUser_id());
+    }
+
+    @Override
+    public Map<String, Integer> newNicknameCheck(MemberDto memberDto){
+        int nicknameCheck = myPageDao.newNicknameCheck(memberDto);
+        Map<String, Integer> forJsonMap = new HashMap<>();
+        forJsonMap.put("newNicknameCheckNum", nicknameCheck);
+        return forJsonMap;
     }
 
 }
