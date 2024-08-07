@@ -17,7 +17,7 @@
     <div class="content">
         <div class="title_area">어떤 것이 궁금하신가요?</div>
         <div class="image-container">
-            <a href="/help/help-faq-main.do"><img src="${pageContext.request.contextPath}/static/images/help/gyul_new.png" class="image_button" alt="Gyul Image"></a>
+            <a href="/helpboard/help-faq-purchase.do"><img src="${pageContext.request.contextPath}/static/images/help/gyul_new.png" class="image_button" alt="Gyul Image"></a>
             <a href="/helpboard/help-faq-account.do"><img src="${pageContext.request.contextPath}/static/images/help/gye_new.png" class="image_button" alt="Gye Image"></a>
             <a href="/helpboard/help-faq-etc.do"><img src="${pageContext.request.contextPath}/static/images/help/etc_new.png" class="image_button" alt="Etc Image"></a>
         </div>
