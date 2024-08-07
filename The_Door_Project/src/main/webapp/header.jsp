@@ -37,7 +37,19 @@
                         <a href="/member/login.do">로그인</a> / <a href="/member/join.do">회원가입</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="/myPage/info.do">${loginMember.nickname}</a> / <a href="/member/logout.do">로그아웃</a>
+                        <div class="profile-container">
+                            <c:choose>
+                                <c:when test="${not empty profileImg.id}">
+                                    <img id="user_profile_imageHeader" src="/upload/${profileImg.filename}" alt="${profileImg.filename}" class="profileImgHeader">
+                                </c:when>
+                                <c:otherwise>
+                                    <img id="user_profile_imageHeader" src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" alt="defaultImg" class="profileImgHeader">
+                                </c:otherwise>
+                            </c:choose>
+                            <div class="auth-text">
+                                <a href="/myPage/info.do">${loginMember.nickname}</a> / <a href="/member/logout.do">로그아웃</a>
+                            </div>
+                        </div>
                     </c:otherwise>
                 </c:choose>
             </div>
