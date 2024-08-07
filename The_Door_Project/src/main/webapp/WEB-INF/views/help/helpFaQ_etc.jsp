@@ -49,7 +49,7 @@
                     <div class="post-info" onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">
                         <h3 onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.title}</h3>
                         <p onclick="location.href='/helpboard/update-cnt.do?id=${faqBoard.id}'">${faqBoard.content}</p>
-                        <span class="post-date"><javatime:format value="${faqBoard.date}" pattern="yyyy-MM-dd"/></span>
+                        <span class="post-date" style="color: #999999"><javatime:format value="${faqBoard.date}" pattern="yyyy-MM-dd"/></span>
                     </div>
                     <div class="count">
                             ${faqBoard.cnt}

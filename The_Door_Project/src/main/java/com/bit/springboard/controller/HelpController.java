@@ -43,7 +43,7 @@ public class HelpController {
     @RequestMapping("/help-qna.do") //부르는 이름
     public String helpQnAView(Model model, @RequestParam Map<String, String> searchMap, Criteria cri) {
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
-        System.out.println(boardService.getBoardList(searchMap, cri));
+//        System.out.println(boardService.getBoardList(searchMap, cri));
         model.addAttribute("qnaBoardList", boardService.getBoardList(searchMap, cri)); // jsp에 쓰일 이름
         int total = boardService.getBoardTotalCnt(searchMap);
         model.addAttribute("page", new PageDto(cri, total));
@@ -61,7 +61,7 @@ public class HelpController {
         String subject = "account";
         int minCnt = 10;
         List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
-        System.out.println(boardList);
+//        System.out.println(boardList);
         model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
         int total = boardService.getBoardTotalCnt(searchMap);
         model.addAttribute("page", new PageDto(cri, total));
@@ -80,7 +80,7 @@ public class HelpController {
         String subject = "payment";
         int minCnt = 10;
         List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
-        System.out.println(boardList);
+//        System.out.println(boardList);
         model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
         int total = boardService.getBoardTotalCnt(searchMap);
         model.addAttribute("page", new PageDto(cri, total));
@@ -99,7 +99,7 @@ public class HelpController {
         String subject = "other";
         int minCnt = 10;
         List<BoardDto> boardList = boardService.getFaqListBySubject(subject, minCnt);
-        System.out.println(boardList);
+//        System.out.println(boardList);
         model.addAttribute("faqBoardList", boardList); // jsp에 쓰일 이름
         int total = boardService.getBoardTotalCnt(searchMap);
         model.addAttribute("page", new PageDto(cri, total));
@@ -160,7 +160,6 @@ public class HelpController {
         boardService = applicationContext.getBean("helpQnaServiceImpl", BoardService.class);
         boardService.delete(boardDto.getId());
         return "redirect:/helpboard/help-qna.do";
-
     }
 
 
