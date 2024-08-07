@@ -110,4 +110,5 @@ public class HelpFaqDao {
         paramMap.put("minCnt", 10);
         return mybatis.selectList("HelpQnaDao.getFaqListBySubject", paramMap);
     }
+
 }
