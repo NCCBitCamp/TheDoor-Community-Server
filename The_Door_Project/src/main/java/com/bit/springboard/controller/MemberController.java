@@ -1,7 +1,11 @@
 package com.bit.springboard.controller;
 
+import com.bit.springboard.dao.MyPageDao;
+import com.bit.springboard.dto.BoardFileDto;
 import com.bit.springboard.dto.MemberDto;
 import com.bit.springboard.service.MemberService;
+import com.bit.springboard.service.MyPageService;
+import com.bit.springboard.service.impl.MyPageServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +21,12 @@ import java.util.Map;
 public class MemberController {
     private MemberService memberService;
 
+    private MyPageService myPageService;
+
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, MyPageService myPageService) {
         this.memberService = memberService;
+        this.myPageService = myPageService;
     }
 
     @GetMapping("/join.do")
@@ -61,6 +68,10 @@ public class MemberController {
             MemberDto loginMember = memberService.login(memberDto);
             loginMember.setPassword("");
             session.setAttribute("loginMember", loginMember);
+
+            BoardFileDto profileInfo = myPageService.getProfileImg(loginMember.getId());
+            session.setAttribute("profileImg",profileInfo);
+
             return "redirect:/";
 
         } catch (Exception e) {
