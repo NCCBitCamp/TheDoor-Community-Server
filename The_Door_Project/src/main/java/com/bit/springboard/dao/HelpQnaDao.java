@@ -144,4 +144,5 @@ public class HelpQnaDao {
         return mybatis.selectList("HelpQnaDao.getFaqListBySubject", paramMap);
 >>>>>>> d2d0fb4ea14698b82bc56cb63dab3dcf26dfe09b
     }
+
 }

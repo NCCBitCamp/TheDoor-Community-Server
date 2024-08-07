@@ -6,13 +6,10 @@ import com.bit.springboard.dto.BoardFileDto;
 import com.bit.springboard.dto.CommentDto;
 import com.bit.springboard.dto.Criteria;
 import com.bit.springboard.service.BoardService;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +92,7 @@ public class helpFaqServiceImpl implements BoardService {
         Map<String, Object> params = new HashMap<>();
         params.put("subject", subject);
         params.put("minCnt", minCnt);
-        return helpFaqDao.getFaqListBySubject(params, minCnt);
+        return helpFaqDao.getFaqListBySubject(params);
     }
 
 

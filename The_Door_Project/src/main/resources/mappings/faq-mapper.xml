@@ -142,6 +142,13 @@
         WHERE BOARD_ID = #{id}
     </select>
 
+    <select id="mostCntList" parameterType="map" resultType="board">
+        SELECT SUBJECT
+             , MAX(CNT)
+        FROM QA
+        GROUP BY SUBJECT;
+    </select>
+
 
 
 

@@ -104,10 +104,11 @@ public class HelpFaqDao {
     }
 
     // 조회수(cnt)가 10 이상이고 주제(subject)별로 필터링하는 메소드
-    public List<BoardDto> getFaqListBySubject(Map<String, Object> subject, int minCnt) {
+    public List<BoardDto> getFaqListBySubject(Map<String, Object> subject) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("subject", subject);
         paramMap.put("minCnt", 10);
         return mybatis.selectList("HelpQnaDao.getFaqListBySubject", paramMap);
     }
+
 }
