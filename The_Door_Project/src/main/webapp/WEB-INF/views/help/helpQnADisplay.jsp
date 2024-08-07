@@ -111,7 +111,7 @@
 <%--                </c:if>--%>
 <%--            </div>--%>
                     <div class="post-buttons">
-                        <a href="${pageContext.request.contextPath}/helpboard/help-qna.do"><button type="button">뒤로가기</button></a>
+                        <a href="${pageContext.request.contextPath}/helpboard/help-qna.do"><button type="button">QnA게시판으로</button></a>
                         <c:if test="${loginMember ne null and loginMember.user_id eq qnaboard.writer_id}">
                             <button type="submit" id="btn-update">수정</button>
                             <button type="button" id="btn-delete" onclick="location.href='${pageContext.request.contextPath}/helpboard/delete.do?id=${qnaboard.id}'">삭제</button>
