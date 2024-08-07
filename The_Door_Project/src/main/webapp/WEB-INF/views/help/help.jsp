@@ -19,21 +19,21 @@
         <div class="semi_title">
             <p>자주하는 질문 TOP3</p>
         </div>
-        <div class="commentbox1" style="height: 20vh;">
+        <div class="commentbox1" style="height: 20vh;" onclick="location.href='/helpboard/update-cnt.do?id=41'">
 
             <p style="font-size: large; font-weight: bold">깃파괴자태림  님</p>
             <h3 style="font-weight: bolder">계정을 잃어버렸을 때는 어떻게 해야 하나요?</h3>
             <p>[계정 관리 문제]</p>
             <p style="font-size: small">&nbsp</p>
         </div>
-        <div class="commentbox2" style="height: 20vh;">
+        <div class="commentbox2" style="height: 20vh;" onclick="location.href='/helpboard/update-cnt.do?id=42'">
 
             <p style="font-size: large; font-weight: bold">깃파괴자태림  님</p>
             <h3 style="font-weight: bolder">결제 취소하는 방법은 뭔가요?</h3>
             <p>[결제 관리 문제]</p>
             <p style="font-size: small">&nbsp</p>
         </div>
-        <div class="commentbox3" style="height: 20vh;">
+        <div class="commentbox3" style="height: 20vh;" onclick="location.href='/helpboard/update-cnt.do?id=43'">
 
             <p style="font-size: large; font-weight: bold">깃파괴자태림  님</p>
             <h3 style="font-weight: bolder">게임들의 저작권 라이선스에 대해 질문하고 싶어요</h3>
