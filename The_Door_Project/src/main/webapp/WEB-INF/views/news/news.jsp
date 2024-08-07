@@ -147,6 +147,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title">\${obj.newsList[i].boardDto.title}</h5>
                                                 <p class="card-text">작성일: \${obj.newsList[i].boardDto.date[0]}-\${zeroDate(obj.newsList[i].boardDto.date[1])}-\${zeroDate(obj.newsList[i].boardDto.date[2])}</p>
+                                                <p class="card-writer">관리자: \${obj.newsList[i].boardDto.nickname}</p>
                                                 <a href="/news/newsDetail.do?id=\${obj.newsList[i].boardDto.id}" class="btn btn-outline-secondary btn-sm">자세히 보기</a>
                                             </div>
                                         </div>
