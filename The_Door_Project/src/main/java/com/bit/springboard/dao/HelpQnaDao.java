@@ -94,7 +94,7 @@ public class HelpQnaDao {
 
         // SqlSessionTemplate의 selectList메소드 사용
         boardDtoList = mybatis.selectList("HelpQnaDao.getBoardList", paramMap);
-        System.out.println(boardDtoList);
+//        System.out.println(boardDtoList);
 
         return boardDtoList;
     }
