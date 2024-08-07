@@ -46,6 +46,9 @@ public class MyPageDao {
     }
 
     public void uploadProfile(BoardFileDto uploadImg){
-        mybatis.insert("MypageDao.updateProfileImg", uploadImg);
+        mybatis.insert("MyPageDao.updateProfileImg", uploadImg);
+    }
+    public BoardFileDto getProfileImg(int userId){
+        return mybatis.selectOne("MyPageDao.getProfileImg",userId);
     }
 }

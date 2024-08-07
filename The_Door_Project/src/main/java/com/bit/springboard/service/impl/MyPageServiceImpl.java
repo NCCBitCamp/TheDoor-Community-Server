@@ -1,6 +1,7 @@
 package com.bit.springboard.service.impl;
 
 import com.bit.springboard.common.FileUtils;
+import com.bit.springboard.dao.MemberDao;
 import com.bit.springboard.dao.MyPageDao;
 import com.bit.springboard.dto.*;
 import com.bit.springboard.service.MyPageService;
@@ -62,9 +63,9 @@ public class MyPageServiceImpl implements MyPageService {
 
     @Override
     public void uploadProfile(MemberDto memberDto, MultipartFile uploadImg) {
-        System.out.println("uploadProfile ServiceImpl 실행");
+//        System.out.println("uploadProfile ServiceImpl 실행");
         BoardFileDto boardFileDto = new BoardFileDto();
-        System.out.println("boardFileDto = " + boardFileDto);
+//        System.out.println("boardFileDto = " + boardFileDto);
         if (uploadImg != null && !uploadImg.isEmpty()) {
             // 업로드 폴더 지정
             String attachPath = "C:/tmp/upload/";
@@ -90,12 +91,15 @@ public class MyPageServiceImpl implements MyPageService {
 
             boardFileDto.setFilename(fileName);
             boardFileDto.setFilepath(filePath);
-            System.out.println(boardFileDto);
+//            System.out.println(boardFileDto);
         }
 
         myPageDao.uploadProfile(boardFileDto);
     }
 
-
+    @Override
+    public BoardFileDto getProfileImg(int userId){
+        return myPageDao.getProfileImg(userId);
+    }
 
 }

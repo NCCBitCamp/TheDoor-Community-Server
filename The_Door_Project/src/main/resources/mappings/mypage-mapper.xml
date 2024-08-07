@@ -80,13 +80,19 @@
         </if>
     </select>
 
-<!--    프로필사진-->
-    <insert id="updateProfileImg" parameterType="BoardFile">
+<!--    profileUpload/update-->
+    <insert id="updateProfileImg" parameterType="boardFile">
         INSERT INTO USER_PROFILE_IMG (USER_ID, FILE_NAME, FILE_PATH)
-        VALUES (#{id}, #{fileName}, #{filePath})
+        VALUES (#{id}, #{filename}, #{filepath})
             ON DUPLICATE KEY UPDATE
-            FILE_NAME = VALUES(#{fileName}),
-            FILE_PATH = VALUES(#{filePath})
+            FILE_NAME = #{filename},
+            FILE_PATH = #{filepath}
     </insert>
+
+    <select id="getProfileImg" parameterType="int" resultType="boardFile">
+        SELECT USER_ID as id, FILE_NAME as filename, FILE_PATH as filepath
+        FROM USER_PROFILE_IMG
+        WHERE USER_ID = #{userId}
+    </select>
     
 </mapper>

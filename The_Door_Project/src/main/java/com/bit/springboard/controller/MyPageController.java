@@ -16,10 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/myPage")
@@ -46,6 +43,9 @@ public class MyPageController {
 
         MemberDto personalInfo = mypageService.getInfo(loginMember);
         model.addAttribute("personalInfo", personalInfo);
+
+        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
+        model.addAttribute("profileImg",profileInfo);
 
         return "myPage/myPageInfo";
     }
@@ -74,6 +74,14 @@ public class MyPageController {
 
         List<RankDto> myTopRanks = rankService.getMyTopRank(loginMember.getUser_id());
         model.addAttribute("myTopRanks", myTopRanks);
+
+
+        MemberDto personalInfo = mypageService.getInfo(loginMember);
+        model.addAttribute("personalInfo", personalInfo);
+
+        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
+        model.addAttribute("profileImg",profileInfo);
+
         return "myPage/myPageRank";
     }
 
@@ -96,6 +104,11 @@ public class MyPageController {
         model.addAttribute("page", new PageDto(cri, total));
         model.addAttribute("myWrite", myWrite);
 
+        MemberDto personalInfo = mypageService.getInfo(loginMember);
+        model.addAttribute("personalInfo", personalInfo);
+
+        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
+        model.addAttribute("profileImg",profileInfo);
 
         return "myPage/myPagePost";
     }
@@ -125,15 +138,28 @@ public class MyPageController {
         int total = mypageService.getCommentsNum(loginMember);
         model.addAttribute("page", new PageDto(cri, total));
 
+
+        MemberDto personalInfo = mypageService.getInfo(loginMember);
+        model.addAttribute("personalInfo", personalInfo);
+
+        BoardFileDto profileInfo = mypageService.getProfileImg(personalInfo.getId());
+        model.addAttribute("profileImg",profileInfo);
+
         return "myPage/myPageAlert";
     }
 
 
     @PostMapping("uploadProfileImage.do")
-    public String profileUpload(MemberDto memberDto, @RequestParam("uploadImg") MultipartFile uploadImg) {
-        System.out.println("profileUpload Controller 실행");
+    @ResponseBody
+    public String profileUpload(@RequestParam("uploadImg") MultipartFile uploadImg, HttpSession session) {
+//        System.out.println("profileUpload Controller 실행");
+
+//        String fileName = uploadImg.getOriginalFilename();
+//        시간여유 되면 저장하는 값에 쓰레기값 추가해서 저장해주기
+//        System.out.println(fileName);
+        MemberDto memberDto = (MemberDto)session.getAttribute("loginMember");
         mypageService.uploadProfile(memberDto, uploadImg);
-        return "redirect:/myPage/info.do";
+        return "myPage/myPageInfo";
     }
 
 
