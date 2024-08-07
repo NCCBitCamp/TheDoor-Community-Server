@@ -60,17 +60,17 @@
 
         </c:forEach>
     </div>
-    <div class="pagination">
-        <c:if test="${page.prev}">
-            <a href="${page.cri.pageNum - 1}">&laquo;</a>
-        </c:if>
-        <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">
-            <a href="${number}">${number}</a>
-        </c:forEach>
-        <c:if test="${page.next}">
-            <a href="${page.cri.pageNum + 1}">&raquo;</a>
-        </c:if>
-    </div>
+<%--    <div class="pagination">--%>
+<%--        <c:if test="${page.prev}">--%>
+<%--            <a href="${page.cri.pageNum - 1}">&laquo;</a>--%>
+<%--        </c:if>--%>
+<%--        <c:forEach begin="${page.startPage}" end="${page.endPage}" var="number">--%>
+<%--            <a href="${number}">${number}</a>--%>
+<%--        </c:forEach>--%>
+<%--        <c:if test="${page.next}">--%>
+<%--            <a href="${page.cri.pageNum + 1}">&raquo;</a>--%>
+<%--        </c:if>--%>
+<%--    </div>--%>
 </div>
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"></jsp:include>
 <script>
