@@ -87,7 +87,7 @@ public class CommunityController {
 
         model.addAttribute("community", boardService.getBoard(boardDto.getId()));
         model.addAttribute("fileList", boardService.getBoardFileList(boardDto.getId()));
-        System.out.println(boardService.getComments(boardDto.getId()));
+
         model.addAttribute("commentList", boardService.getComments(boardDto.getId()));
 //        System.out.println("commu controller: "+boardService.getCommenterImages(boardDto.getId()));
 //        model.addAttribute("imgList", boardService.getCommenterImages(boardDto.getId()));
