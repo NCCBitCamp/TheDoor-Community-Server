@@ -81,7 +81,7 @@ public class helpFaqServiceImpl implements BoardService {
     }
 
     @Override
-    public List<CommentDto> getComments(int boardId) {
+    public List<Map<String, Object>> getComments(int boardId) {
         // Implement the getComments method for FAQ
         return null;
     }
@@ -94,6 +94,4 @@ public class helpFaqServiceImpl implements BoardService {
         params.put("minCnt", minCnt);
         return helpFaqDao.getFaqListBySubject(params);
     }
-
-
 }

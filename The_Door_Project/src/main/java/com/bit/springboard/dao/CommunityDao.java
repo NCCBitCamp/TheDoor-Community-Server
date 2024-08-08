@@ -87,8 +87,12 @@ public class CommunityDao {
         mybatis.insert("CommunityDao.addComment", commentDto);
     }
 
-    public List<CommentDto> getComments(int boardId) {
+    public List<Map<String, Object>> getComments(int boardId) {
         return mybatis.selectList("CommunityDao.getComments", boardId);
     }
+
+//    public List<BoardFileDto> getCommenterImages(int boardId){
+//        return mybatis.selectList("CommunityDao.getCommenterImages", boardId);
+//    }
 }
 

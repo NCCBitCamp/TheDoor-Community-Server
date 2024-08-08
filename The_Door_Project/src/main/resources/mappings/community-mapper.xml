@@ -197,11 +197,43 @@
                )
     </insert>
 
-    <select id="getComments" parameterType="int" resultType="comment">
-        SELECT ID, BOARD_ID, WRITER_ID, DATE, CONTENT
-            FROM COMMENT
-        WHERE BOARD_ID = #{board_id}
-        ORDER BY DATE DESC
+    <select id="getComments" parameterType="int" resultType="map">
+        SELECT
+            C.ID,
+            C.BOARD_ID,
+            C.WRITER_ID,
+            P.USER_ID,
+            C.CONTENT,
+            C.DATE,
+            P.FILE_NAME,
+            P.FILE_PATH
+        FROM
+            COMMENT C
+                LEFT JOIN
+            USER U ON C.WRITER_ID = U.USER_ID
+                LEFT JOIN
+            USER_PROFILE_IMG P ON U.ID = P.USER_ID
+        WHERE
+            C.BOARD_ID = 42
+        ORDER BY
+            C.DATE DESC
     </select>
+
+<!--    <select id="getCommenterImages" parameterType="int" resultType="map">-->
+<!--        SELECT-->
+<!--            P.USER_ID,-->
+<!--            P.FILE_NAME,-->
+<!--            P.FILE_PATH-->
+<!--        FROM-->
+<!--            COMMENT C-->
+<!--                LEFT JOIN-->
+<!--            USER U ON C.WRITER_ID = U.USER_ID-->
+<!--                LEFT JOIN-->
+<!--            USER_PROFILE_IMG P ON U.ID = P.USER_ID-->
+<!--        WHERE-->
+<!--            C.BOARD_ID = #{board_id}-->
+<!--        ORDER BY-->
+<!--            C.DATE DESC-->
+<!--    </select>-->
 
 </mapper>

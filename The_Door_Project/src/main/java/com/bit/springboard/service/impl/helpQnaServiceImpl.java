@@ -173,7 +173,7 @@ public class helpQnaServiceImpl implements BoardService {
     }
 
     @Override
-    public List<CommentDto> getComments(int boardId) {
+    public List<Map<String, Object>> getComments(int boardId) {
         return List.of();
     }
 
