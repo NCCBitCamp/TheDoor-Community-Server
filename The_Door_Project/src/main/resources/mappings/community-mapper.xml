@@ -214,7 +214,7 @@
                 LEFT JOIN
             USER_PROFILE_IMG P ON U.ID = P.USER_ID
         WHERE
-            C.BOARD_ID = 42
+            C.BOARD_ID = #{board_id}
         ORDER BY
             C.DATE DESC
     </select>
