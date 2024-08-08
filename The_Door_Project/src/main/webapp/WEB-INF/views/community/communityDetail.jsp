@@ -44,8 +44,20 @@
                 <h5> [댓글 목록] </h5>
                 <c:forEach items="${commentList}" var="comment">
                     <div class="comment">
-                        <p><strong>${comment.writer_id}</strong>: ${comment.content}</p>
-                        <p class="text-muted"><small>${comment.date}</small></p>
+                        <div style="display: flex; align-items: center;">
+
+                            <c:choose>
+                                <c:when test="${not empty comment.FILE_NAME}">
+                                    <img id="user_profile_image" src="/upload/${comment.FILE_NAME}" alt="defaultImg" class="profileImg_in_comment" style="margin-right: 10px;">
+                                </c:when>
+                                <c:otherwise>
+                                    <img id="user_profile_image" src="${pageContext.request.contextPath}/static/images/myPage/profileImg.png" alt="defaultImg" class="profileImg_in_comment" style="margin-right: 10px;">
+                                </c:otherwise>
+                            </c:choose>
+
+                            <p><strong>${comment.WRITER_ID}</strong>: ${comment.CONTENT}</p>
+                        </div>
+                        <p class="text-muted"><small>${comment.DATE}</small></p>
                     </div>
                 </c:forEach>
             </div>

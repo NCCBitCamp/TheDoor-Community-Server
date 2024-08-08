@@ -180,7 +180,7 @@ public class CommunityServiceImpl implements BoardService {
 
     // 댓글 조회
     @Override
-    public List<CommentDto> getComments(int boardId) {
+    public List<Map<String, Object>> getComments(int boardId) {
         return communityDao.getComments(boardId);
     }
 
@@ -189,4 +189,10 @@ public class CommunityServiceImpl implements BoardService {
         return List.of();
     }
 
+//    @Override
+//    public List<BoardFileDto> getCommenterImages(int boardId) {
+//        System.out.println(boardId);
+//        System.out.println(communityDao.getCommenterImages(boardId));
+//        return communityDao.getCommenterImages(boardId);
+//    }
 }
